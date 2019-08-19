@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/view_main"
+    tools:context=".ui.main.activity.MainActivity">
+
+    <!--<com.hlxyedu.putonghualearningsystem.weight.actionbar.MainTopBar
+        android:id="@+id/main_topbar"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/bar_height"
+        app:isShowLeft_x="false"
+        app:isShowRight_x="false"
+        app:middleText_x="@string/nk_APEC"
+        />-->
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <FrameLayout
+            android:id="@+id/fl_tab_container"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingBottom="@dimen/bottombar_height"
+            >
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/gray3E3"
+                android:layout_gravity="bottom"/>
+
+        </FrameLayout>
+
+        <com.hlxyedu.putonghualearningsystem.weight.bottombar.BottomBar
+            android:id="@+id/bottomBar"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/bottombar_height"
+            android:layout_gravity="bottom"
+            />
+
+    </FrameLayout>
+
+</RelativeLayout>

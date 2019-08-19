@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!--topbar 样式 -->
+    <declare-styleable name="XBaseTopBar">
+        <attr name="isShowRight_x" format="boolean" />
+        <attr name="isShowLeft_x" format="boolean" />
+        <attr name="middleText_x" format="string" />
+        <attr name="isShowMiddle_x" format="boolean" />
+        <attr name="rightView" format="reference" />
+    </declare-styleable>
+
+    <!--bottombar 样式 -->
+    <declare-styleable name="BottomBarItem">
+        <attr name="icon_Normal" format="reference" />
+        <attr name="icon_Selected" format="reference" />
+        <attr name="icon_Text" format="string" />
+    </declare-styleable>
+</resources>

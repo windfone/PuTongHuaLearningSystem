@@ -1,0 +1,6 @@
+<resources>
+    <string name="app_name">Record</string>
+
+    <string name="english_training">英语听说训练</string>
+    <string name="read_aloud">短文朗读</string>
+</resources>

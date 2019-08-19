@@ -1,0 +1,173 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="QMUI.Compat"><!--Theme.AppCompat.Light.DarkActionBar-->
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+    </style>
+
+    <style name="main_menu_animstyle">
+        <item name="android:windowEnterAnimation">@anim/anim_enter_from_bottom</item>
+        <item name="android:windowExitAnimation">@anim/anim_exit_from_bottom</item>
+    </style>
+
+    <!-- 评论弹出框 -->
+    <style name="dialog_center" parent="Theme.AppCompat.Dialog.Alert">
+        <!-- 去黑边 -->
+        <item name="android:windowFrame">@null</item>
+        <item name="android:screenOrientation">portrait</item>
+        <!-- 设置是否可滑动 -->
+        <item name="android:windowIsFloating">true</item>
+        <!-- 背景 -->
+        <item name="android:windowBackground">@color/transparent</item>
+        <!-- 是否变暗 -->
+        <item name="android:backgroundDimEnabled">true</item>
+        <!-- 点击空白部分activity消失 -->
+        <item name="android:windowCloseOnTouchOutside">true</item>
+    </style>
+
+    <!-- 字体从大到小排列 -->
+    <style name="textSize_black353_30">
+        <item name="android:textColor">@color/black353</item>
+        <item name="android:textSize">@dimen/textsize_sp_30</item>
+    </style>
+
+    <style name="textSize_blackE3E_20">
+        <item name="android:textColor">@color/blackE3E</item>
+        <item name="android:textSize">@dimen/textsize_sp_20</item>
+    </style>
+
+    <style name="textSize_black353_20">
+        <item name="android:textColor">@color/black353</item>
+        <item name="android:textSize">@dimen/textsize_sp_20</item>
+    </style>
+
+    <style name="textSize_blackE3E_17">
+        <item name="android:textColor">@color/blackE3E</item>
+        <item name="android:textSize">@dimen/textsize_sp_17</item>
+    </style>
+
+    <style name="textSize_whitefff_17">
+        <item name="android:textColor">@color/whitefff</item>
+        <item name="android:textSize">@dimen/textsize_sp_17</item>
+    </style>
+
+    <style name="textSize_whitefff_16">
+        <item name="android:textColor">@color/whitefff</item>
+        <item name="android:textSize">@dimen/textsize_sp_16</item>
+    </style>
+
+    <style name="textSize_blue0DF_16">
+        <item name="android:textColor">@color/blue0DF</item>
+        <item name="android:textSize">@dimen/textsize_sp_16</item>
+    </style>
+
+    <style name="textSize_graya9a_16">
+        <item name="android:textColor">@color/graya9a</item>
+        <item name="android:textSize">@dimen/textsize_sp_16</item>
+    </style>
+
+    <style name="textSize_black333_16">
+        <item name="android:textColor">@color/black333</item>
+        <item name="android:textSize">@dimen/textsize_sp_16</item>
+    </style>
+
+    <style name="textSize_black353_16">
+        <item name="android:textColor">@color/black353</item>
+        <item name="android:textSize">@dimen/textsize_sp_16</item>
+    </style>
+
+    <style name="textSize_blackE3E_14">
+        <item name="android:textColor">@color/blackE3E</item>
+        <item name="android:textSize">@dimen/textsize_sp_14</item>
+    </style>
+
+    <style name="textSize_black333_14">
+        <item name="android:textColor">@color/black333</item>
+        <item name="android:textSize">@dimen/textsize_sp_14</item>
+    </style>
+
+    <style name="textSize_gray868_14">
+        <item name="android:textColor">@color/gray868</item>
+        <item name="android:textSize">@dimen/textsize_sp_14</item>
+    </style>
+
+    <style name="textSize_black353_14">
+        <item name="android:textColor">@color/black353</item>
+        <item name="android:textSize">@dimen/textsize_sp_14</item>
+    </style>
+
+    <style name="textSize_gray070_14">
+        <item name="android:textColor">@color/gray070</item>
+        <item name="android:textSize">@dimen/textsize_sp_14</item>
+    </style>
+
+    <style name="textSize_gray4B4_14">
+        <item name="android:textColor">@color/gray4B4</item>
+        <item name="android:textSize">@dimen/textsize_sp_14</item>
+    </style>
+
+    <style name="textSize_blackB5B_14">
+        <item name="android:textColor">@color/blackB5B</item>
+        <item name="android:textSize">@dimen/textsize_sp_14</item>
+    </style>
+
+    <style name="textSize_black353_13">
+        <item name="android:textColor">@color/black353</item>
+        <item name="android:textSize">@dimen/textsize_sp_13</item>
+    </style>
+
+    <style name="textSize_blue0DF_13">
+        <item name="android:textColor">@color/blue0DF</item>
+        <item name="android:textSize">@dimen/textsize_sp_13</item>
+    </style>
+
+    <style name="textSize_gray070_13">
+        <item name="android:textColor">@color/gray070</item>
+        <item name="android:textSize">@dimen/textsize_sp_13</item>
+    </style>
+
+    <style name="textSize_whitefff_13">
+        <item name="android:textColor">@color/whitefff</item>
+        <item name="android:textSize">@dimen/textsize_sp_13</item>
+    </style>
+
+    <style name="textSize_graya9a_12">
+        <item name="android:textColor">@color/graya9a</item>
+        <item name="android:textSize">@dimen/textsize_sp_12</item>
+    </style>
+
+    <style name="textSize_blackB5B_12">
+        <item name="android:textColor">@color/blackB5B</item>
+        <item name="android:textSize">@dimen/textsize_sp_12</item>
+    </style>
+
+    <style name="textSize_blue0DF_12">
+        <item name="android:textColor">@color/blue0DF</item>
+        <item name="android:textSize">@dimen/textsize_sp_12</item>
+    </style>
+
+
+    <style name="textSize_gray389_10">
+        <item name="android:textColor">@color/gray389</item>
+        <item name="android:textSize">@dimen/textsize_sp_10</item>
+    </style>
+
+    <style name="textSize_black353_10">
+        <item name="android:textColor">@color/black353</item>
+        <item name="android:textSize">@dimen/textsize_sp_10</item>
+    </style>
+
+    <style name="textSize_graya9a_10">
+        <item name="android:textColor">@color/graya9a</item>
+        <item name="android:textSize">@dimen/textsize_sp_10</item>
+    </style>
+
+    <style name="textSize_gray1d1_10">
+        <item name="android:textColor">@color/gray1d1</item>
+        <item name="android:textSize">@dimen/textsize_sp_10</item>
+    </style>
+
+</resources>

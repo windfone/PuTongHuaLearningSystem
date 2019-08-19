@@ -1,0 +1,292 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/whitefff"
+    android:focusable="true"
+    android:focusableInTouchMode="true"
+    tools:context=".ui.personal.activity.PersonalInfoActivity">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:background="@drawable/icon_online_learn_top_bg">
+
+        <ImageView
+            android:id="@+id/back_iv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_marginStart="21dp"
+            android:layout_marginBottom="17dp"
+            android:src="@drawable/icon_back"
+            />
+
+        <TextView
+            style="@style/textSize_whitefff_16"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="18dp"
+            android:text="@string/personal_info"
+            />
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="@color/gray5F5"
+        android:paddingBottom="13dp">
+
+        <ImageView
+            android:id="@+id/headportrait_iv"
+            android:layout_width="88dp"
+            android:layout_height="88dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="12dp"
+            android:src="@drawable/icon_headportrait"
+            />
+
+        <TextView
+            android:id="@+id/name_tv"
+            style="@style/textSize_black353_14"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="5dp"
+            android:text="@string/upload_avatar"
+            />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <TextView
+            style="@style/textSize_black353_14"
+            android:layout_width="74dp"
+            android:layout_height="wrap_content"
+            android:text="@string/name"
+            android:layout_marginStart="28dp"
+            />
+
+        <EditText
+            android:id="@+id/input_name_edit"
+            style="@style/textSize_gray4B4_14"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginEnd="28dp"
+            android:background="@null"
+            android:gravity="center_vertical"
+            android:hint="请输入姓名"
+            />
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/gray3E3"
+        />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:orientation="horizontal"
+        android:gravity="center_vertical">
+
+        <TextView
+            style="@style/textSize_black353_14"
+            android:layout_width="74dp"
+            android:layout_height="wrap_content"
+            android:text="@string/sex"
+            android:layout_marginStart="28dp"
+            />
+
+        <RadioGroup
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <RadioButton
+                android:id="@+id/man_rb"
+                style="@style/textSize_black353_14"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/man"
+                />
+
+            <RadioButton
+                android:id="@+id/woman_rb"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="40dp"
+                style="@style/textSize_black353_14"
+                android:text="@string/woman"
+                />
+
+        </RadioGroup>
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/gray3E3"
+        />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <TextView
+            style="@style/textSize_black353_14"
+            android:layout_width="74dp"
+            android:layout_height="wrap_content"
+            android:text="@string/date_of_birth"
+            android:layout_marginStart="28dp"
+            />
+
+        <TextView
+            android:id="@+id/date_of_birth_tv"
+            style="@style/textSize_gray4B4_14"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginEnd="28dp"
+            android:gravity="center_vertical"
+            android:text="哈哈"
+            />
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/gray3E3"
+        />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <TextView
+            style="@style/textSize_black353_14"
+            android:layout_width="74dp"
+            android:layout_height="wrap_content"
+            android:text="@string/district"
+            android:layout_marginStart="28dp"
+            />
+
+        <TextView
+            android:id="@+id/district_tv"
+            style="@style/textSize_gray4B4_14"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginEnd="28dp"
+            android:gravity="center_vertical"
+            android:text="新疆乌鲁木齐"
+            />
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/gray3E3"
+        />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <TextView
+            style="@style/textSize_black353_14"
+            android:layout_width="74dp"
+            android:layout_height="wrap_content"
+            android:text="@string/area"
+            android:layout_marginStart="28dp"
+            />
+
+        <EditText
+            android:id="@+id/area_edit"
+            style="@style/textSize_gray4B4_14"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginEnd="28dp"
+            android:background="@null"
+            android:gravity="center_vertical"
+            android:hint="大同镇4-3-301"
+            />
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/gray3E3"
+        />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <TextView
+            style="@style/textSize_black353_14"
+            android:layout_width="74dp"
+            android:layout_height="wrap_content"
+            android:text="@string/affiliation"
+            android:layout_marginStart="28dp"
+            />
+
+        <EditText
+            android:id="@+id/affiliation_edit"
+            style="@style/textSize_gray4B4_14"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginEnd="28dp"
+            android:background="@null"
+            android:gravity="center_vertical"
+            android:hint="无"
+            />
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/gray3E3"
+        />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        />
+
+    <Button
+        android:id="@+id/save_btn"
+        style="@style/textSize_black353_14"
+        android:layout_width="match_parent"
+        android:layout_height="49dp"
+        android:background="@color/grayADA"
+        android:gravity="center"
+        android:text="@string/save"
+        />
+
+</LinearLayout>

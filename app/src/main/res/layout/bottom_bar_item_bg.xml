@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:layout_gravity="center_horizontal"
+    >
+
+    <FrameLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+        <ImageView
+            android:id="@+id/mIcon"
+            android:layout_width="24dp"
+            android:layout_height="21dp"
+            />
+        <TextView
+            android:layout_marginStart="10dp"
+            android:id="@+id/unMsg_tv"
+            android:layout_width="30px"
+            android:layout_height="30px"
+            android:textSize="@dimen/textsize_sp_10"
+            android:textColor="@color/whitefff"
+            android:gravity="center"
+            android:background="@drawable/bottom_circle_bg"
+            android:text="1"
+            />
+    </FrameLayout>
+
+    <TextView
+        android:layout_marginTop="4dp"
+        android:id="@+id/mTvTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        style="@style/textSize_black353_10"
+        />
+
+</LinearLayout>

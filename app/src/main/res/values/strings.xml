@@ -1,0 +1,83 @@
+<resources>
+    <string name="app_name">普通话学习系统</string>
+
+
+    <!-- activity_essaylist -->
+    <string name="short_essay">短文跟读</string>
+    <string name="record">录音</string>
+    <string name="pause">暂停</string>
+    <string name="play">播放</string>
+
+    <!-- dialog_logout -->
+    <string name="notice">提示</string>
+    <string name="cancel">取消</string>
+    <string name="confirm">确定</string>
+    <string-array name="request_permission_reason">
+        <item>为了您更好的使用播放语音、录制音频等功能，需要您同意以下这些权限：</item>
+        <item>1. 访问您设备上的内容和文件</item>
+        <item>2. 允许访问麦克风</item>
+        <item>3. 获取手机状态信息</item>
+    </string-array>
+    <string name="permission">为了您能够使用录音功能，需要您同意录音、读取手机存储等权限</string>
+
+    <!-- activity_main -->
+    <string name="online_learning">在线学习</string>
+    <string name="exam_center">模考中心</string>
+    <string name="classroom_for_famous_teachers">名师课堂</string>
+    <string name="personal_center">个人中心</string>
+
+    <!-- activity_login-->
+    <string name="login">登录</string>
+    <string name="please_input_user_name">请输入用户名</string>
+    <string name="please_input_pwd">请输入密码</string>
+    <string name="other_login">其它方式登录</string>
+    <string name="get_votify_code">获取验证码</string>
+
+    <!-- fragment_personal_center-->
+    <string name="personal_tongji">个人统计</string>
+    <string name="learning_progress">学习进度</string>
+    <string name="general_purpose">通用</string>
+
+    <!-- activity_personal_info-->
+    <string name="personal_info">个人信息</string>
+    <string name="upload_avatar">上传头像</string>
+    <string name="name">姓名</string>
+    <string name="sex">性别</string>
+    <string name="date_of_birth">出生年月</string>
+    <string name="man">男</string>
+    <string name="woman">女</string>
+    <string name="district">所属区县</string>
+    <string name="area">地址</string>
+    <string name="affiliation">所属机构</string>
+    <string name="save">保存</string>
+
+    <!-- activity_general_purpose-->
+    <string name="current_version">当前版本</string>
+    <string name="clear_cache">清除缓存</string>
+    <string name="feedback">意见反馈</string>
+    <string name="about_us">关于我们</string>
+    <string name="enter_us">加入我们</string>
+
+    <!-- activity_about_us-->
+
+    <!-- activity_feedback-->
+    <string name="commit">提交</string>
+
+    <!-- fragment_exercise-->
+    <string name="sort_reading_volume">阅读量排序</string>
+    <string name="sort_upload_date">上传日期排序</string>
+    <string name="sort">排序</string>
+
+    <!-- activity_exercise_detail-->
+    <string name="all_comment">全部评论</string>
+    <string name="publish">发表</string>
+    <string name="share">分享</string>
+    <string name="comment">评论</string>
+
+    <!--activity_detail_play-->
+    <string name="time_zero">00:00</string>
+
+    <!--item_all-->
+    <string name="all">全部</string>
+
+</resources>

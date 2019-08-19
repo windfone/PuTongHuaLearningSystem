@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".ui.onlinelearning.activity.OnLineLearnDetailsActivity">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:background="@drawable/icon_online_learn_top_bg">
+
+        <ImageView
+            android:id="@+id/back_iv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_marginStart="21dp"
+            android:layout_marginBottom="17dp"
+            android:src="@drawable/icon_back"
+            tools:ignore="ContentDescription" />
+
+        <TextView
+            android:id="@+id/title_tv"
+            style="@style/textSize_whitefff_16"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="18dp" />
+
+    </RelativeLayout>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="94dp"
+                app:cardBackgroundColor="@color/whitefff"
+                app:cardCornerRadius="0dp"
+                app:cardElevation="10dp">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:paddingStart="16dp"
+                    android:paddingTop="14dp"
+                    android:paddingEnd="16dp">
+
+                    <TextView
+                        android:id="@+id/time_progress_tv"
+                        style="@style/textSize_gray1d1_10"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/time_zero" />
+
+                    <TextView
+                        android:id="@+id/time_total_tv"
+                        style="@style/textSize_gray1d1_10"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true" />
+
+                    <ProgressBar
+                        android:id="@+id/progressBar"
+                        style="?android:attr/progressBarStyleHorizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="6dp"
+                        android:layout_below="@+id/time_progress_tv"
+                        android:layout_marginTop="3dp"
+                        android:max="100"
+                        android:progressDrawable="@drawable/progress_test" />
+
+                    <ImageView
+                        android:id="@+id/top_play_iv"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/progressBar"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginTop="7dp"
+                        android:src="@drawable/icon_pause" />
+
+                    <ImageView
+                        android:id="@+id/pre_iv"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/progressBar"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginTop="16dp"
+                        android:layout_marginEnd="25dp"
+                        android:layout_toLeftOf="@+id/top_play_iv"
+                        android:src="@drawable/icon_pre" />
+
+                    <ImageView
+                        android:id="@+id/next_iv"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/progressBar"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginStart="25dp"
+                        android:layout_marginTop="16dp"
+                        android:layout_toRightOf="@+id/top_play_iv"
+                        android:src="@drawable/icon_next" />
+
+                </RelativeLayout>
+
+            </android.support.v7.widget.CardView>
+
+            <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="70dp"
+                android:layout_alignParentBottom="true"
+                app:cardBackgroundColor="@color/whitefff"
+                app:cardCornerRadius="7dp">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <RelativeLayout
+                        android:id="@+id/record_ll"
+                        android:layout_width="140dp"
+                        android:layout_height="45dp"
+                        android:layout_centerVertical="true"
+                        android:layout_marginStart="24dp"
+                        android:background="@drawable/shape_bg_blue_4dp">
+
+                        <ImageView
+                            android:id="@+id/record_iv"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerInParent="true"
+                            android:src="@drawable/icon_record"
+                            android:visibility="gone" />
+
+                        <TextView
+                            android:id="@+id/record_tv"
+                            style="@style/textSize_whitefff_16"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerInParent="true"
+                            android:text="@string/record" />
+
+                    </RelativeLayout>
+
+
+                    <TextView
+                        android:id="@+id/record_play_tv"
+                        style="@style/textSize_graya9a_16"
+                        android:layout_width="140dp"
+                        android:layout_height="45dp"
+                        android:layout_alignParentEnd="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginEnd="25dp"
+                        android:background="@drawable/shape_bg_gray_4dp"
+                        android:gravity="center"
+                        android:text="@string/play" />
+
+
+                </RelativeLayout>
+
+            </android.support.v7.widget.CardView>
+
+        </RelativeLayout>
+        <!--<FrameLayout
+            android:id="@+id/play_container"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/whitefff" />-->
+
+        <FrameLayout
+            android:id="@+id/content_container"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="94dp"
+            android:layout_marginBottom="70dp" />
+
+    </FrameLayout>
+
+</LinearLayout>

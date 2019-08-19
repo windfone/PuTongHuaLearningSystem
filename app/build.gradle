@@ -1,0 +1,188 @@
+apply plugin: 'com.android.application'
+apply plugin: 'walle'
+apply plugin: 'com.jakewharton.butterknife'
+//   执行打包命令  ./gradlew clean assembleReleaseChannels
+
+android {
+    compileSdkVersion rootProject.ext.android.compileSdkVersion
+    defaultConfig {
+        applicationId rootProject.ext.android.applicationId
+        minSdkVersion rootProject.ext.android.minSdkVersion
+        targetSdkVersion rootProject.ext.android.targetSdkVersion
+        versionCode rootProject.ext.android.versionCode
+        versionName rootProject.ext.android.versionName
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        multiDexEnabled true
+        vectorDrawables.useSupportLibrary = true
+        ndk {
+            abiFilters "armeabi-v7a"  // 指定要ndk需要兼容的架构(这样其他依赖包里mips,x86,armeabi,arm-v8之类的so会被过滤掉)
+        }
+    }
+
+    sourceSets {
+        main {
+            manifest.srcFile 'src/main/AndroidManifest.xml'
+            java.srcDirs = ['src/main/java']
+            aidl.srcDirs = ['src/main/aidl']
+            renderscript.srcDirs = ['src/main']
+            res.srcDirs = ['src/main/res']
+            assets.srcDirs = ['src/main/assets']
+            jniLibs.srcDir 'src/main/jniLibs'
+        }
+
+        // Move the tests to tests/java, tests/res, etc...
+        androidTest.setRoot('tests')
+
+        // Move the build types to build-types/<type>
+        // For instance, build-types/debug/java, build-types/debug/AndroidManifest.xml, ...
+        // This moves them out of them default location under src/<type>/... which would
+        // conflict with src/ being used by the main source set.
+        // Adding new build types or product flavors should be accompanied
+        // by a similar customization.
+
+        debug.setRoot('build-types/debug')
+        release.setRoot('build-types/release')
+    }
+
+    dexOptions {
+        jumboMode true
+    }
+
+    //程序在buid的时候，会执行lint检查，有任何的错误或者警告提示，都会终止构建，我们可以将其关掉
+    lintOptions {
+        abortOnError false
+        htmlReport true
+    }
+    packagingOptions {
+        exclude 'LICENSE.txt'
+        exclude 'META-INF/rxjava.properties'
+    }
+
+    //签名
+    signingConfigs {
+        debug {
+            //这样写就得把demo.jk文件放在项目目录
+            storeFile file("C:/asconfig/key.jks")
+            storePassword "123456"
+            keyAlias "hello"
+            keyPassword "123456"
+            v2SigningEnabled true
+        }
+        release {
+            //这样写就得把demo.jk文件放在项目目录
+            storeFile file("C:/asconfig/key.jks")
+            storePassword "123456"
+            keyAlias "hello"
+            keyPassword "123456"
+            v2SigningEnabled true
+        }
+    }
+
+    buildTypes {
+        debug {
+            // 显示Log
+            buildConfigField "boolean", "LOG_DEBUG", "true"
+
+            versionNameSuffix "-debug"
+            minifyEnabled false
+            zipAlignEnabled false
+            shrinkResources false
+            multiDexEnabled true
+
+//            // 不显示Log
+//            buildConfigField "boolean", "LOG_DEBUG", "true"
+//            //混淆
+//            minifyEnabled true
+//            //Zipalign优化
+//            zipAlignEnabled true
+//
+//            multiDexEnabled true
+//            //注：Gradle2.0以上的版本minifyEnabled字段为true时已经包含了shrinkResources,在代码优化时会自动去掉多余资源，
+//            //所以在打正式包时也不需要设置shrinkResources字段。
+//            //移除无用的resource文件
+//            shrinkResources true
+//            //前一部分代表系统默认的android程序的混淆文件，该文件已经包含了基本的混淆声明
+//            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+//            //签名
+//            signingConfig signingConfigs.release
+
+        }
+
+        release {
+
+            // 显示Log
+            buildConfigField "boolean", "LOG_DEBUG", "true"
+
+            minifyEnabled false
+            zipAlignEnabled false
+            shrinkResources false
+            multiDexEnabled true
+
+//            // 不显示Log
+//            buildConfigField "boolean", "LOG_DEBUG", "false"
+//            //混淆
+//            minifyEnabled true
+//            //Zipalign优化
+//            zipAlignEnabled true
+//
+//            multiDexEnabled true
+//            //注：Gradle2.0以上的版本minifyEnabled字段为true时已经包含了shrinkResources,在代码优化时会自动去掉多余资源，
+//            //所以在打正式包时也不需要设置shrinkResources字段。
+//            //移除无用的resource文件
+//            shrinkResources true
+            //前一部分代表系统默认的android程序的混淆文件，该文件已经包含了基本的混淆声明
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            //签名
+            signingConfig signingConfigs.release
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    //base
+    implementation rootProject.ext.dependencies["appcompat-v7"]
+    implementation rootProject.ext.dependencies["cardview-v7"]
+    implementation rootProject.ext.dependencies["recyclerview"]
+    implementation rootProject.ext.dependencies["constraint"]
+    testImplementation rootProject.ext.dependencies["junit"]
+    androidTestImplementation rootProject.ext.dependencies["runner"]
+    androidTestImplementation rootProject.ext.dependencies["espresso"]
+    implementation project(path: ':rxqwelibrary')
+    implementation project(path: ':record')
+
+    implementation rootProject.ext.dependencies["wlmedia"]
+
+    // online play audio
+    implementation 'com.lzx:StarrySkyJava:2.1.9'
+    //video
+    implementation rootProject.ext.dependencies["jiaozivideoplayer"]
+
+    //di
+    implementation rootProject.ext.dependencies["butterknife"]
+    annotationProcessor rootProject.ext.dependencies["butterknife-compiler"]
+    implementation rootProject.ext.dependencies["dagger"]
+    annotationProcessor rootProject.ext.dependencies["dagger-compiler"]
+
+    //other
+    implementation rootProject.ext.dependencies["walle"]
+    //ui
+    implementation 'com.github.hackware1993:MagicIndicator:1.5.0'
+//    implementation rootProject.ext.dependencies["bgaBanner"]
+    implementation rootProject.ext.dependencies["qmui"]
+}
+
+walle {
+    // 指定渠道包的输出路径
+    apkOutputFolder = new File(project.rootProject.buildDir, "myapks")
+    // 定制渠道包的APK的文件名称
+//    apkFileNameFormat = '${appName}-${packageName}-${channel}-${buildType}-v${versionName}-${versionCode}-${buildTime}.apk'
+    apkFileNameFormat = 'pth-${buildTime}.apk'
+    // 渠道配置文件
+    channelFile = new File("${project.getProjectDir()}/channel")
+}

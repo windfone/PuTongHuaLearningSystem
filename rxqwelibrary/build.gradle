@@ -1,0 +1,94 @@
+apply plugin: 'com.android.library'
+apply plugin: 'com.jakewharton.butterknife'
+
+android {
+    compileSdkVersion rootProject.ext.android.compileSdkVersion
+
+    defaultConfig {
+        minSdkVersion rootProject.ext.android.minSdkVersion
+        targetSdkVersion rootProject.ext.android.targetSdkVersion
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    //base
+    implementation rootProject.ext.dependencies["appcompat-v7"]
+    //test
+    testImplementation rootProject.ext.dependencies["junit"]
+    androidTestImplementation rootProject.ext.dependencies["runner"]
+    androidTestImplementation rootProject.ext.dependencies["espresso"]
+
+    //canary
+    debugImplementation (rootProject.ext.dependencies["leakcanary-android"]) {
+        exclude group: 'com.android.support'
+    }
+    releaseImplementation (rootProject.ext.dependencies["leakcanary-android-no-op"]) {
+        exclude group: 'com.android.support'
+    }
+    testImplementation (rootProject.ext.dependencies["leakcanary-android-no-op"]) {
+        exclude group: 'com.android.support'
+    }
+
+    //other
+    api rootProject.ext.dependencies["utilcodex"]
+    api rootProject.ext.dependencies["logger"]
+    api rootProject.ext.dependencies["dialogplus"]
+//    api rootProject.ext.dependencies["android-pickers"]
+//    api rootProject.ext.dependencies["checkVersionLib"]
+
+    //今日头像适配方案
+    api rootProject.ext.dependencies["autosize"]
+    api rootProject.ext.dependencies["glide"]
+    annotationProcessor rootProject.ext.dependencies["glide_compiler"]
+
+    //fragment 管控
+    //https://github.com/YoKeyword/Fragmentation/blob/master/README_CN.md
+    api rootProject.ext.dependencies["fragmentation"]
+
+    //di
+    implementation rootProject.ext.dependencies["butterknife"]
+    annotationProcessor rootProject.ext.dependencies["butterknife-compiler"]
+    implementation rootProject.ext.dependencies["dagger"]
+    annotationProcessor rootProject.ext.dependencies["dagger-compiler"]
+
+
+//    implementation rootProject.ext.dependencies["glide"]
+    //retrofit和rxjava
+    api rootProject.ext.dependencies["retrofit"]
+    api rootProject.ext.dependencies["okhttp"]
+    api rootProject.ext.dependencies["logging-interceptor"]
+    api rootProject.ext.dependencies["rxandroid"]
+    api rootProject.ext.dependencies["rxjava"]
+    api rootProject.ext.dependencies["converter-gson"]
+    api rootProject.ext.dependencies["converter-fastjson-android"]
+    api rootProject.ext.dependencies["adapter-rxjava2"]
+    api rootProject.ext.dependencies["rxpermissions"]
+    api rootProject.ext.dependencies["rxbinding"]
+    //cook持久化管理
+    api rootProject.ext.dependencies["PersistentCookieJar"]
+
+    //adapter
+    api rootProject.ext.dependencies["BaseRecyclerViewAdapterHelper"]
+    //友盟
+//    api files('libs/umeng-analytics-8.0.2.jar')
+//    api files('libs/umeng-common-2.0.2.jar')
+}

@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@android:color/transparent"
+    >
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/bottombar_height"
+        android:background="@color/grayDFD"
+        android:layout_alignParentBottom="true"
+        />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        android:background="@android:color/transparent"
+        >
+
+        <com.hlxyedu.putonghualearningsystem.weight.bottombar.BottomBarItem
+            android:id="@+id/bottom_bar_online_learning"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/bottombar_height"
+            android:layout_weight="1"
+            android:layout_gravity="bottom"
+            app:icon_Normal="@drawable/icon_bar_online_learn_normal"
+            app:icon_Selected="@drawable/icon_bar_online_learn_select"
+            app:icon_Text="@string/online_learning"
+            />
+        <!--app:icon_Normal="@drawable/icon_bar_home_normal"-->
+
+        <com.hlxyedu.putonghualearningsystem.weight.bottombar.BottomBarItem
+            android:id="@+id/bottom_bar_exam_center"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/bottombar_height"
+            android:layout_weight="1"
+            android:layout_gravity="bottom"
+            app:icon_Normal="@drawable/icon_bar_exam_center_normal"
+            app:icon_Selected="@drawable/icon_bar_exam_center_select"
+            app:icon_Text="@string/exam_center"
+            />
+
+        <com.hlxyedu.putonghualearningsystem.weight.bottombar.BottomBarItem
+            android:id="@+id/bottom_bar_famous_classroom"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/bottombar_height"
+            android:layout_weight="1"
+            android:layout_gravity="bottom"
+            app:icon_Normal="@drawable/icon_bar_famous_classroom_normal"
+            app:icon_Selected="@drawable/icon_bar_famous_classroom_select"
+            app:icon_Text="@string/classroom_for_famous_teachers"
+            />
+
+        <com.hlxyedu.putonghualearningsystem.weight.bottombar.BottomBarItem
+            android:id="@+id/bottom_bar_personal_center"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/bottombar_height"
+            android:layout_weight="1"
+            android:layout_gravity="bottom"
+            app:icon_Normal="@drawable/icon_bar_personal_center_normal"
+            app:icon_Selected="@drawable/icon_bar_personal_center_select"
+            app:icon_Text="@string/personal_center"
+            />
+
+    </LinearLayout>
+
+
+</RelativeLayout>

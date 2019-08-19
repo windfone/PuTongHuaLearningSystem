@@ -2,25 +2,23 @@ package com.hlxyedu.putonghualearningsystem.ui.personal.activity;
 
 import android.content.Context;
 import android.content.Intent;
-import android.os.Bundle;
-import android.widget.ImageView;
 
 import com.hlxyedu.putonghualearningsystem.R;
 import com.hlxyedu.putonghualearningsystem.base.RootActivity;
 import com.hlxyedu.putonghualearningsystem.ui.personal.contract.AboutUsContract;
 import com.hlxyedu.putonghualearningsystem.ui.personal.presenter.AboutUsPresenter;
+import com.hlxyedu.putonghualearningsystem.weight.actionbar.XBaseTopBar;
+import com.hlxyedu.putonghualearningsystem.weight.actionbar.XBaseTopBarImp;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.OnClick;
 
 /**
  * Created by zhangguihua
  */
-public class AboutUsActivity extends RootActivity<AboutUsPresenter> implements AboutUsContract.View {
+public class AboutUsActivity extends RootActivity<AboutUsPresenter> implements AboutUsContract.View, XBaseTopBarImp {
 
-    @BindView(R.id.back_iv)
-    ImageView backIv;
+    @BindView(R.id.xbase_topbar)
+    XBaseTopBar xbase_topbar;
 
     /**
      * 打开新Activity
@@ -45,7 +43,7 @@ public class AboutUsActivity extends RootActivity<AboutUsPresenter> implements A
 
     @Override
     protected void initEventAndData() {
-
+        xbase_topbar.setxBaseTopBarImp(this);
     }
 
     @Override
@@ -53,9 +51,13 @@ public class AboutUsActivity extends RootActivity<AboutUsPresenter> implements A
 
     }
 
-    @OnClick(R.id.back_iv)
-    public void onViewClicked() {
+    @Override
+    public void left() {
         finish();
     }
 
+    @Override
+    public void right() {
+
+    }
 }

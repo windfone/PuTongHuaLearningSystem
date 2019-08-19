@@ -3,14 +3,14 @@ package com.hlxyedu.putonghualearningsystem.ui.personal.activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.Button;
-import android.widget.ImageView;
 
 import com.hlxyedu.putonghualearningsystem.R;
 import com.hlxyedu.putonghualearningsystem.base.RootActivity;
 import com.hlxyedu.putonghualearningsystem.ui.personal.contract.FeedBackContract;
 import com.hlxyedu.putonghualearningsystem.ui.personal.presenter.FeedBackPresenter;
+import com.hlxyedu.putonghualearningsystem.weight.actionbar.XBaseTopBar;
+import com.hlxyedu.putonghualearningsystem.weight.actionbar.XBaseTopBarImp;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -20,10 +20,10 @@ import butterknife.OnClick;
  * Created by zhangguihua
  * 意见反馈
  */
-public class FeedBackActivity extends RootActivity<FeedBackPresenter> implements FeedBackContract.View {
+public class FeedBackActivity extends RootActivity<FeedBackPresenter> implements FeedBackContract.View, XBaseTopBarImp {
 
-    @BindView(R.id.back_iv)
-    ImageView back_iv;
+    @BindView(R.id.xbase_topbar)
+    XBaseTopBar xbase_topbar;
     @BindView(R.id.commit_btn)
     Button commit_btn;
 
@@ -50,7 +50,7 @@ public class FeedBackActivity extends RootActivity<FeedBackPresenter> implements
 
     @Override
     protected void initEventAndData() {
-
+        xbase_topbar.setxBaseTopBarImp(this);
     }
 
     @Override
@@ -58,15 +58,19 @@ public class FeedBackActivity extends RootActivity<FeedBackPresenter> implements
 
     }
 
-    @OnClick({R.id.back_iv, R.id.commit_btn})
-    public void onViewClicked(View view) {
-        switch (view.getId()) {
-            case R.id.back_iv:
-                finish();
-                break;
-            case R.id.commit_btn:
-                break;
-        }
+    @OnClick(R.id.commit_btn)
+    public void onViewClicked() {
+
+    }
+
+    @Override
+    public void left() {
+        finish();
+    }
+
+    @Override
+    public void right() {
+
     }
 
 }

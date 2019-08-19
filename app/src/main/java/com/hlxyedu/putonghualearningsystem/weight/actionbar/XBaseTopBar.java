@@ -31,6 +31,8 @@ public class XBaseTopBar extends RelativeLayout implements View.OnClickListener{
     //右侧组件
     protected ViewStub stub_right;
 
+    private ImageView right_iv;
+
     //要加载的组件id
     protected int rightResId;
 
@@ -50,6 +52,12 @@ public class XBaseTopBar extends RelativeLayout implements View.OnClickListener{
     protected View stubView;
 
     private LinearLayout middle_layout;
+
+    private RightListener rightListener;
+
+    public void setRightListener(RightListener listener){
+        this.rightListener = listener;
+    }
 
     public void setxBaseTopBarImp(XBaseTopBarImp xBaseTopBarImp) {
         this.xBaseTopBarImp = xBaseTopBarImp;
@@ -114,10 +122,21 @@ public class XBaseTopBar extends RelativeLayout implements View.OnClickListener{
             });
         }
 
+        if (rightResId != 0){
+            right_iv = (ImageView) this.findViewById(R.id.right_iv);
+            right_iv.setOnClickListener(this);
+        }
+
     }
 
     public void setMiddleText(String s){
         txt_topbar_name.setText(s);
+    }
+
+    public void setRightIv(Drawable drawable){
+        if (right_iv != null){
+            right_iv.setImageDrawable(drawable);
+        }
     }
 
     //获取通过ViewStub加载的组件view
@@ -141,11 +160,18 @@ public class XBaseTopBar extends RelativeLayout implements View.OnClickListener{
             case R.id.stub_right:
                 xBaseTopBarImp.right();
                 break;
+            case R.id.right_iv:
+                rightListener.right();
+                break;
         }
     }
 
 
     public void setLeftImg(Drawable drawable) {
         img_topbar_left.setImageDrawable(drawable);
+    }
+
+    public interface RightListener{
+        void right();
     }
 }

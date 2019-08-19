@@ -1,9 +1,8 @@
 package com.hlxyedu.putonghualearningsystem.ui.main.fragment;
 
 import android.os.Bundle;
-import android.view.LayoutInflater;
+import android.support.v4.content.ContextCompat;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -14,20 +13,20 @@ import com.hlxyedu.putonghualearningsystem.ui.main.contract.PersonalCenterContra
 import com.hlxyedu.putonghualearningsystem.ui.main.presenter.PersonalCenterPresenter;
 import com.hlxyedu.putonghualearningsystem.ui.personal.activity.GeneralPurposeActivity;
 import com.hlxyedu.putonghualearningsystem.ui.personal.activity.PersonalInfoActivity;
+import com.hlxyedu.putonghualearningsystem.weight.actionbar.XBaseTopBar;
+import com.hlxyedu.putonghualearningsystem.weight.actionbar.XBaseTopBarImp;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
-import butterknife.Unbinder;
 
 /**
  * Created by zhangguihua
  */
-public class PersonalCenterFragment extends RootFragment<PersonalCenterPresenter> implements PersonalCenterContract.View {
+public class PersonalCenterFragment extends RootFragment<PersonalCenterPresenter> implements PersonalCenterContract.View, XBaseTopBarImp {
 
 
-    @BindView(R.id.scan_iv)
-    ImageView scan_iv;
+    @BindView(R.id.xbase_topbar)
+    XBaseTopBar xbase_topbar;
     @BindView(R.id.headportrait_iv)
     ImageView headportrait_iv;
     @BindView(R.id.name_tv)
@@ -59,7 +58,8 @@ public class PersonalCenterFragment extends RootFragment<PersonalCenterPresenter
 
     @Override
     protected void initEventAndData() {
-
+        xbase_topbar.setxBaseTopBarImp(this);
+        xbase_topbar.setLeftImg(ContextCompat.getDrawable(mActivity,R.drawable.icon_scan));
     }
 
     @Override
@@ -72,11 +72,9 @@ public class PersonalCenterFragment extends RootFragment<PersonalCenterPresenter
         super.onSupportVisible();
     }
 
-    @OnClick({R.id.scan_iv, R.id.headportrait_iv, R.id.personal_tongji_rl, R.id.learning_progress_rl, R.id.general_purpose_rl})
+    @OnClick({R.id.headportrait_iv, R.id.personal_tongji_rl, R.id.learning_progress_rl, R.id.general_purpose_rl})
     public void onViewClicked(View view) {
         switch (view.getId()) {
-            case R.id.scan_iv:
-                break;
             case R.id.headportrait_iv:
                 startActivity(PersonalInfoActivity.newInstance(mActivity));
                 break;
@@ -89,4 +87,15 @@ public class PersonalCenterFragment extends RootFragment<PersonalCenterPresenter
                 break;
         }
     }
+
+    @Override
+    public void left() {
+
+    }
+
+    @Override
+    public void right() {
+
+    }
+
 }

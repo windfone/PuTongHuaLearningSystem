@@ -2,9 +2,7 @@ package com.hlxyedu.putonghualearningsystem.ui.personal.activity;
 
 import android.content.Context;
 import android.content.Intent;
-import android.os.Bundle;
 import android.view.View;
-import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -13,6 +11,8 @@ import com.hlxyedu.putonghualearningsystem.R;
 import com.hlxyedu.putonghualearningsystem.base.RootActivity;
 import com.hlxyedu.putonghualearningsystem.ui.personal.contract.GeneralPurposeContract;
 import com.hlxyedu.putonghualearningsystem.ui.personal.presenter.GeneralPurposePresenter;
+import com.hlxyedu.putonghualearningsystem.weight.actionbar.XBaseTopBar;
+import com.hlxyedu.putonghualearningsystem.weight.actionbar.XBaseTopBarImp;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -23,10 +23,10 @@ import butterknife.OnClick;
  * 通用
  */
 
-public class GeneralPurposeActivity extends RootActivity<GeneralPurposePresenter> implements GeneralPurposeContract.View {
+public class GeneralPurposeActivity extends RootActivity<GeneralPurposePresenter> implements GeneralPurposeContract.View, XBaseTopBarImp {
 
-    @BindView(R.id.back_iv)
-    ImageView back_iv;
+    @BindView(R.id.xbase_topbar)
+    XBaseTopBar xbase_topbar;
     @BindView(R.id.version_rl)
     RelativeLayout version_rl;
     @BindView(R.id.version_tv)
@@ -63,6 +63,7 @@ public class GeneralPurposeActivity extends RootActivity<GeneralPurposePresenter
 
     @Override
     protected void initEventAndData() {
+        xbase_topbar.setxBaseTopBarImp(this);
         version_tv.setText("v" + AppUtils.getAppVersionName());
     }
 
@@ -71,12 +72,9 @@ public class GeneralPurposeActivity extends RootActivity<GeneralPurposePresenter
 
     }
 
-    @OnClick({R.id.back_iv, R.id.version_rl, R.id.clear_cache_rl, R.id.ideas_rl, R.id.about_us_rl, R.id.enter_us_rl})
+    @OnClick({R.id.version_rl, R.id.clear_cache_rl, R.id.ideas_rl, R.id.about_us_rl, R.id.enter_us_rl})
     public void onViewClicked(View view) {
         switch (view.getId()) {
-            case R.id.back_iv:
-                finish();
-                break;
             case R.id.version_rl:
                 break;
             case R.id.clear_cache_rl:
@@ -91,5 +89,15 @@ public class GeneralPurposeActivity extends RootActivity<GeneralPurposePresenter
                 startActivity(EnterUsActivity.newInstance(this));
                 break;
         }
+    }
+
+    @Override
+    public void left() {
+        finish();
+    }
+
+    @Override
+    public void right() {
+
     }
 }

@@ -3,12 +3,14 @@ package com.hlxyedu.putonghualearningsystem.ui.teacherclass.activity;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.blankj.utilcode.util.ToastUtils;
 import com.hlxyedu.putonghualearningsystem.R;
 import com.hlxyedu.putonghualearningsystem.base.RootActivity;
 import com.hlxyedu.putonghualearningsystem.model.bean.CommentVO;
@@ -16,6 +18,8 @@ import com.hlxyedu.putonghualearningsystem.ui.teacherclass.adapter.CommentAdapte
 import com.hlxyedu.putonghualearningsystem.ui.teacherclass.contract.ExerciseDetailContract;
 import com.hlxyedu.putonghualearningsystem.ui.teacherclass.presenter.ExerciseDetailPresenter;
 import com.hlxyedu.putonghualearningsystem.utils.JzvdStd;
+import com.hlxyedu.putonghualearningsystem.weight.actionbar.XBaseTopBar;
+import com.hlxyedu.putonghualearningsystem.weight.actionbar.XBaseTopBarImp;
 import com.hlxyedu.putonghualearningsystem.weight.dialog.InputTextMsgDialog;
 
 import java.util.ArrayList;
@@ -28,12 +32,10 @@ import cn.jzvd.Jzvd;
 /**
  * Created by zhangguihua
  */
-public class ExerciseDetailActivity extends RootActivity<ExerciseDetailPresenter> implements ExerciseDetailContract.View {
+public class ExerciseDetailActivity extends RootActivity<ExerciseDetailPresenter> implements ExerciseDetailContract.View, XBaseTopBarImp {
 
-    @BindView(R.id.back_iv)
-    ImageView back_iv;
-    @BindView(R.id.title_tv)
-    TextView title_tv;
+    @BindView(R.id.xbase_topbar)
+    XBaseTopBar xbase_topbar;
    /* @BindView(R.id.play_iv)
     ImageView play_iv;*/
     @BindView(R.id.title_iv)
@@ -91,6 +93,13 @@ public class ExerciseDetailActivity extends RootActivity<ExerciseDetailPresenter
 
     @Override
     protected void initEventAndData() {
+        xbase_topbar.setxBaseTopBarImp(this);
+        xbase_topbar.setMiddleText("");
+        xbase_topbar.setRightIv(ContextCompat.getDrawable(this,R.drawable.share));
+        xbase_topbar.setRightListener(() -> {
+            ToastUtils.showShort("点击分享");
+        });
+
         List<CommentVO> lists = new ArrayList<>();
         lists.add(new CommentVO());
         lists.add(new CommentVO());
@@ -113,12 +122,9 @@ public class ExerciseDetailActivity extends RootActivity<ExerciseDetailPresenter
 
     }
 
-    @OnClick({R.id.back_iv,R.id.comment_tv})
+    @OnClick({R.id.comment_tv})
     public void onViewClicked(View view) {
         switch (view.getId()) {
-            case R.id.back_iv:
-                finish();
-                break;
 //            case R.id.play_iv:
 //                break;
             case R.id.comment_tv:
@@ -133,5 +139,15 @@ public class ExerciseDetailActivity extends RootActivity<ExerciseDetailPresenter
                 msgDialog.show();
                 break;
         }
+    }
+
+    @Override
+    public void left() {
+        finish();
+    }
+
+    @Override
+    public void right() {
+
     }
 }

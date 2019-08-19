@@ -3,36 +3,18 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     tools:context=".ui.main.fragment.PersonalCenterFragment"
     android:background="@color/whitefff">
 
-    <RelativeLayout
+    <com.hlxyedu.putonghualearningsystem.weight.actionbar.XBaseTopBar
+        android:id="@+id/xbase_topbar"
         android:layout_width="match_parent"
-        android:layout_height="70dp"
-        android:background="@drawable/icon_online_learn_top_bg">
-
-        <ImageView
-            android:id="@+id/scan_iv"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_marginStart="21dp"
-            android:layout_marginBottom="17dp"
-            android:src="@drawable/icon_scan"
-            />
-
-        <TextView
-            style="@style/textSize_whitefff_16"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_centerHorizontal="true"
-            android:layout_marginBottom="18dp"
-            android:text="@string/personal_center"
-            />
-
-    </RelativeLayout>
+        android:layout_height="wrap_content"
+        app:isShowLeft_x="true"
+        app:isShowRight_x="false"
+        app:middleText_x="@string/personal_center" />
 
     <ImageView
         android:id="@+id/headportrait_iv"

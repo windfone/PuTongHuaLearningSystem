@@ -4,7 +4,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.widget.ImageView;
 
 import com.hlxyedu.putonghualearningsystem.R;
 import com.hlxyedu.putonghualearningsystem.base.RootActivity;
@@ -12,20 +11,21 @@ import com.hlxyedu.putonghualearningsystem.model.bean.EnterUsVO;
 import com.hlxyedu.putonghualearningsystem.ui.personal.adapter.EnterUsAdapter;
 import com.hlxyedu.putonghualearningsystem.ui.personal.contract.EnterUsContract;
 import com.hlxyedu.putonghualearningsystem.ui.personal.presenter.EnterUsPresenter;
+import com.hlxyedu.putonghualearningsystem.weight.actionbar.XBaseTopBar;
+import com.hlxyedu.putonghualearningsystem.weight.actionbar.XBaseTopBarImp;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
-import butterknife.OnClick;
 
 /**
  * Created by zhangguihua
  */
-public class EnterUsActivity extends RootActivity<EnterUsPresenter> implements EnterUsContract.View {
+public class EnterUsActivity extends RootActivity<EnterUsPresenter> implements EnterUsContract.View, XBaseTopBarImp {
 
-    @BindView(R.id.back_iv)
-    ImageView backIv;
+    @BindView(R.id.xbase_topbar)
+    XBaseTopBar xbase_topbar;
     @BindView(R.id.rcy)
     RecyclerView rcy;
 
@@ -54,6 +54,7 @@ public class EnterUsActivity extends RootActivity<EnterUsPresenter> implements E
 
     @Override
     protected void initEventAndData() {
+        xbase_topbar.setxBaseTopBarImp(this);
         List<EnterUsVO> lists = new ArrayList<>();
 
         EnterUsVO enterUsVO1 = new EnterUsVO();
@@ -82,9 +83,13 @@ public class EnterUsActivity extends RootActivity<EnterUsPresenter> implements E
 
     }
 
-    @OnClick(R.id.back_iv)
-    public void onViewClicked() {
+    @Override
+    public void left() {
         finish();
     }
 
+    @Override
+    public void right() {
+
+    }
 }

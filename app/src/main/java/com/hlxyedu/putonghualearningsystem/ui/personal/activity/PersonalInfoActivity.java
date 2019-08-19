@@ -14,6 +14,8 @@ import com.hlxyedu.putonghualearningsystem.R;
 import com.hlxyedu.putonghualearningsystem.base.RootActivity;
 import com.hlxyedu.putonghualearningsystem.ui.personal.contract.PersonalInfoContract;
 import com.hlxyedu.putonghualearningsystem.ui.personal.presenter.PersonalInfoPresenter;
+import com.hlxyedu.putonghualearningsystem.weight.actionbar.XBaseTopBar;
+import com.hlxyedu.putonghualearningsystem.weight.actionbar.XBaseTopBarImp;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -22,10 +24,11 @@ import butterknife.OnClick;
 /**
  * Created by zhanggihua
  */
-public class PersonalInfoActivity extends RootActivity<PersonalInfoPresenter> implements PersonalInfoContract.View {
+public class PersonalInfoActivity extends RootActivity<PersonalInfoPresenter> implements
+        PersonalInfoContract.View, XBaseTopBarImp {
 
-    @BindView(R.id.back_iv)
-    ImageView back_iv;
+    @BindView(R.id.xbase_topbar)
+    XBaseTopBar xbase_topbar;
     @BindView(R.id.headportrait_iv)
     ImageView headportrait_iv;
     @BindView(R.id.input_name_edit)
@@ -68,7 +71,7 @@ public class PersonalInfoActivity extends RootActivity<PersonalInfoPresenter> im
 
     @Override
     protected void initEventAndData() {
-
+        xbase_topbar.setxBaseTopBarImp(this);
     }
 
     @Override
@@ -76,12 +79,9 @@ public class PersonalInfoActivity extends RootActivity<PersonalInfoPresenter> im
 
     }
 
-    @OnClick({R.id.back_iv, R.id.headportrait_iv, R.id.man_rb, R.id.woman_rb, R.id.date_of_birth_tv, R.id.district_tv, R.id.save_btn})
+    @OnClick({R.id.headportrait_iv, R.id.man_rb, R.id.woman_rb, R.id.date_of_birth_tv, R.id.district_tv, R.id.save_btn})
     public void onViewClicked(View view) {
         switch (view.getId()) {
-            case R.id.back_iv:
-                finish();
-                break;
             case R.id.headportrait_iv:
                 break;
             case R.id.man_rb:
@@ -96,4 +96,15 @@ public class PersonalInfoActivity extends RootActivity<PersonalInfoPresenter> im
                 break;
         }
     }
+
+    @Override
+    public void left() {
+        finish();
+    }
+
+    @Override
+    public void right() {
+
+    }
+
 }

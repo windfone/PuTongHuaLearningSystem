@@ -76,9 +76,18 @@ public class ExerciseDetailActivity extends RootActivity<ExerciseDetailPresenter
     }
 
     @Override
+    public void onResume() {
+        super.onResume();
+        //home back
+        Jzvd.goOnPlayOnResume();
+    }
+
+    @Override
     public void onPause() {
         super.onPause();
-        Jzvd.releaseAllVideos();
+//        Jzvd.releaseAllVideos();
+        //home back
+        Jzvd.goOnPlayOnPause();
     }
 
     @Override
@@ -112,6 +121,7 @@ public class ExerciseDetailActivity extends RootActivity<ExerciseDetailPresenter
         jz_video.setUp("http://jzvd.nathen.cn/c6e3dc12a1154626b3476d9bf3bd7266/6b56c5f0dc31428083757a45764763b0-5287d2089db37e62345123a1be272f8b.mp4"
                 , "饺子闭眼睛");
         // 只是一种描述，也可以使用 glide picasso等加载封面图，根据项目自己需求
+//        Glide.with(this).load(VideoConstant.videoThumbList[0]).into(jz_video.thumbImageView);
         jz_video.thumbImageView.setImageURI(Uri.parse("http://p.qpic.cn/videoyun/0/2449_43b6f696980311e59ed467f22794e792_1/640"));
         // 设置充满全屏
         jz_video.setVideoImageDisplayType(JzvdStd.VIDEO_IMAGE_DISPLAY_TYPE_FILL_SCROP);

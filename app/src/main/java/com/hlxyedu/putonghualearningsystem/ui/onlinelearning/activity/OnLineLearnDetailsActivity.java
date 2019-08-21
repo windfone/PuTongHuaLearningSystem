@@ -37,6 +37,8 @@ import com.hlxyedu.putonghualearningsystem.ui.onlinelearning.presenter.OnLineLea
 import com.hlxyedu.putonghualearningsystem.utils.PermissionRequestUtil;
 import com.hlxyedu.putonghualearningsystem.utils.TUtils;
 import com.hlxyedu.putonghualearningsystem.utils.TimeUtil;
+import com.hlxyedu.putonghualearningsystem.weight.actionbar.XBaseTopBar;
+import com.hlxyedu.putonghualearningsystem.weight.actionbar.XBaseTopBarImp;
 import com.lzx.starrysky.manager.MediaSessionConnection;
 import com.lzx.starrysky.manager.MusicManager;
 import com.lzx.starrysky.manager.OnPlayerEventListener;
@@ -58,7 +60,7 @@ import butterknife.OnClick;
  * 播放音频、录音界面
  */
 public class OnLineLearnDetailsActivity extends RootFragmentActivity<OnLineLearnDetailsPresenter> implements OnLineLearnDetailsContract.View
-        ,OnPlayerEventListener, IRecorderListener {
+        ,OnPlayerEventListener, IRecorderListener, XBaseTopBarImp {
 
     private static final int MSG_START_RECORD = 10;
     private static final int MSG_STOP_RECORD = 11;
@@ -70,10 +72,8 @@ public class OnLineLearnDetailsActivity extends RootFragmentActivity<OnLineLearn
 
     private static final String TAG = OnLineLearnDetailsActivity.class.getSimpleName();
 
-    @BindView(R.id.back_iv)
-    ImageView back_iv;
-    @BindView(R.id.title_tv)
-    TextView title_tv;
+    @BindView(R.id.xbase_topbar)
+    XBaseTopBar xbase_topbar;
     @BindView(R.id.time_progress_tv)
     TextView time_progress_tv;
     @BindView(R.id.time_total_tv)
@@ -107,6 +107,7 @@ public class OnLineLearnDetailsActivity extends RootFragmentActivity<OnLineLearn
 
     private int pos; // 当前展示的是列表的第几行
     private String mTitles; // 当前展示的是列表的第几行
+    private String itemStr; // 点击的列表item 的内容，到详情需要显示出来
     private ArrayList<EssayVO> lists = new ArrayList<>();
     private String audioUrl;// 请求到的音频 URL ，写为全局的
 
@@ -130,13 +131,14 @@ public class OnLineLearnDetailsActivity extends RootFragmentActivity<OnLineLearn
         return intent;
     }
 
-    public static <T> Intent newInstance(Context context, int pos, ArrayList<T> dataVO, String title) {
+    public static <T> Intent newInstance(Context context, int pos, ArrayList<T> dataVO, String title, String itemStr) {
         Intent intent = new Intent(context, OnLineLearnDetailsActivity.class);
 
         Bundle bundle = new Bundle();
         bundle.putParcelableArrayList("essayVOS", (ArrayList<? extends Parcelable>) dataVO);
         bundle.putSerializable("pos", pos);
         bundle.putSerializable("title", title);
+        bundle.putSerializable("itemStr", itemStr);
         intent.putExtras(bundle);
         return intent;
     }
@@ -145,14 +147,15 @@ public class OnLineLearnDetailsActivity extends RootFragmentActivity<OnLineLearn
         lists = getIntent().getParcelableArrayListExtra("essayVOS");
         pos = getIntent().getIntExtra("pos",0);
         mTitles = getIntent().getStringExtra("title");
-        title_tv.setText(mTitles);
+        itemStr = getIntent().getStringExtra("itemStr");
+        xbase_topbar.setMiddleText(mTitles);
     }
 
     private void initTitleAndFragment() {
         switch (mTitles){
             case "短文跟读":
             case "拼音学习":
-                loadRootFragment(R.id.content_container, DetailContentFragment.newInstance());
+                loadRootFragment(R.id.content_container, DetailContentFragment.newInstance(itemStr));
                 break;
             case "单词跟读":
                 loadRootFragment(R.id.content_container, DetailWordFragment.newInstance());
@@ -185,6 +188,7 @@ public class OnLineLearnDetailsActivity extends RootFragmentActivity<OnLineLearn
 
     @Override
     protected void initEventAndData() {
+        xbase_topbar.setxBaseTopBarImp(this);
         getIntentData();
         initTitleAndFragment();
 
@@ -225,7 +229,9 @@ public class OnLineLearnDetailsActivity extends RootFragmentActivity<OnLineLearn
         for (int i = 0; i < essayDetailVO.getTxtData().length; i++) {
             essayTxt += "        " + essayDetailVO.getTxtData()[i] + "\n";
         }
-        RxBus.getDefault().post(new EssayTxtEvent(essayTxt));
+        String title = lists.get(pos).getName();
+        RxBus.getDefault().post(new EssayTxtEvent(essayTxt,
+                "《" + title.substring(0,title.lastIndexOf(".")) + "》示范朗读"));
         audioUrl = essayDetailVO.getAudioUrl();
         audioLength = essayDetailVO.getAudioLength();
         time_total_tv.setText(TimeUtil.getTimeString(audioLength));
@@ -236,13 +242,9 @@ public class OnLineLearnDetailsActivity extends RootFragmentActivity<OnLineLearn
 
     }
 
-    @OnClick({R.id.back_iv,R.id.top_play_iv, R.id.pre_iv, R.id.next_iv, R.id.record_ll, R.id.record_play_tv})
+    @OnClick({R.id.top_play_iv, R.id.pre_iv, R.id.next_iv, R.id.record_ll, R.id.record_play_tv})
     public void onViewClicked(View view) {
         switch (view.getId()) {
-            case R.id.back_iv:
-                MusicManager.getInstance().stopMusic();
-                finish();
-                break;
             case R.id.top_play_iv:
                 if (!mRecorder.isRecording()) {
                     if (MusicManager.getInstance().isPlaying()){
@@ -577,4 +579,14 @@ public class OnLineLearnDetailsActivity extends RootFragmentActivity<OnLineLearn
     }
     // ********************** 录音部分 ************************** //
 
+    @Override
+    public void left() {
+        MusicManager.getInstance().stopMusic();
+        finish();
+    }
+
+    @Override
+    public void right() {
+
+    }
 }

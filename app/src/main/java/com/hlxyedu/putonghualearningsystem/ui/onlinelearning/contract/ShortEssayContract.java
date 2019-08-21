@@ -17,6 +17,7 @@ public interface ShortEssayContract {
         void responeError(String errorMsg);
 
         void onSuccess(List<EssayVO> essayVOS);
+
     }
 
     interface Presenter extends BasePresenter<View> {

@@ -7,16 +7,6 @@ public class PinYinBean implements Parcelable {
 
     private String title;
 
-    private boolean select;
-
-    public boolean isSelect() {
-        return select;
-    }
-
-    public void setSelect(boolean select) {
-        this.select = select;
-    }
-
     public String getTitle() {
         return title;
     }
@@ -24,7 +14,6 @@ public class PinYinBean implements Parcelable {
     public void setTitle(String title) {
         this.title = title;
     }
-
 
     @Override
     public int describeContents() {
@@ -34,7 +23,6 @@ public class PinYinBean implements Parcelable {
     @Override
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeString(this.title);
-        dest.writeByte(this.select ? (byte) 1 : (byte) 0);
     }
 
     public PinYinBean() {
@@ -42,7 +30,6 @@ public class PinYinBean implements Parcelable {
 
     protected PinYinBean(Parcel in) {
         this.title = in.readString();
-        this.select = in.readByte() != 0;
     }
 
     public static final Parcelable.Creator<PinYinBean> CREATOR = new Parcelable.Creator<PinYinBean>() {

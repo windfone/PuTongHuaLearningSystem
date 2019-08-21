@@ -12,7 +12,7 @@ public interface DetailContentContract {
         //返回登陆结果
         void responeError(String errorMsg);
 
-        void setEassyTxt(String txt);
+        void setEassyTxt(String txt,String title);
     }
 
     interface Presenter extends BasePresenter<View> {

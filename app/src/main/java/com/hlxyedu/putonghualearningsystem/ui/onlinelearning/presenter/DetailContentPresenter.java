@@ -32,7 +32,7 @@ public class DetailContentPresenter extends RxPresenter<DetailContentContract.Vi
 
     private void registerEvent() {
 
-        //接收传过来的文字信息
+        //接收传过来的 标题 和 内容文字信息
         addSubscribe(RxBus.getDefault().toFlowable(EssayTxtEvent.class)
                 .compose(RxUtil.<EssayTxtEvent>rxSchedulerHelper())
                 .filter(new Predicate<EssayTxtEvent>() {
@@ -45,7 +45,7 @@ public class DetailContentPresenter extends RxPresenter<DetailContentContract.Vi
                 .subscribeWith(new CommonSubscriber<EssayTxtEvent>(mView) {
                     @Override
                     public void onNext(EssayTxtEvent s) {
-                        mView.setEassyTxt(s.getShortEssayTxt());
+                        mView.setEassyTxt(s.getShortEssayTxt(),s.getItemName());
                     }
 
                     @Override

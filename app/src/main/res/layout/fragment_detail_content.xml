@@ -5,16 +5,36 @@
     android:layout_height="match_parent"
     tools:context=".ui.onlinelearning.fragment.DetailContentFragment">
 
-    <TextView
-        android:id="@+id/essay_tv"
-        style="@style/textSize_black333_16"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginEnd="20dp"
-        android:paddingTop="20dp"
-        android:paddingBottom="20dp"
-        android:lineSpacingExtra="2dp"
-        />
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/title_tv"
+            style="@style/textSize_black333_18"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:lineSpacingExtra="3dp"
+            android:paddingTop="20dp"
+            android:paddingBottom="10dp"
+            />
+
+
+        <TextView
+            android:id="@+id/essay_tv"
+            style="@style/textSize_black333_16"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:paddingTop="20dp"
+            android:paddingBottom="20dp"
+            android:lineSpacingExtra="3dp"
+            />
+    </LinearLayout>
 
 </ScrollView>

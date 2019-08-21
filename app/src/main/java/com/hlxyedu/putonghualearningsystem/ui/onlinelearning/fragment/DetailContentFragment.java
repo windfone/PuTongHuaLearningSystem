@@ -15,12 +15,17 @@ import butterknife.BindView;
  * 拼音学习，短文跟读 详情
  */
 public class DetailContentFragment extends RootFragment<DetailContentPresenter> implements DetailContentContract.View {
+    @BindView(R.id.title_tv)
+    TextView title_tv;
     @BindView(R.id.essay_tv)
     TextView essay_tv;
 
-    public static DetailContentFragment newInstance() {
+    private String itemStr;
+
+    public static DetailContentFragment newInstance(String itemStr) {
         Bundle args = new Bundle();
 
+        args.putString("itemStr",itemStr);
         DetailContentFragment fragment = new DetailContentFragment();
         fragment.setArguments(args);
         return fragment;
@@ -38,7 +43,8 @@ public class DetailContentFragment extends RootFragment<DetailContentPresenter> 
 
     @Override
     protected void initEventAndData() {
-
+        itemStr = getArguments().getString("itemStr");
+        title_tv.setText(itemStr);
     }
 
     @Override
@@ -47,8 +53,9 @@ public class DetailContentFragment extends RootFragment<DetailContentPresenter> 
     }
 
     @Override
-    public void setEassyTxt(String txt) {
+    public void setEassyTxt(String txt,String title) {
         essay_tv.setText(txt);
+        title_tv.setText(title);
     }
 
 }

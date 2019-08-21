@@ -7,31 +7,13 @@
     android:orientation="vertical"
     tools:context=".ui.onlinelearning.activity.OnLineLearnDetailsActivity">
 
-    <RelativeLayout
+    <com.hlxyedu.putonghualearningsystem.weight.actionbar.XBaseTopBar
+        android:id="@+id/xbase_topbar"
         android:layout_width="match_parent"
-        android:layout_height="70dp"
-        android:background="@drawable/icon_online_learn_top_bg">
-
-        <ImageView
-            android:id="@+id/back_iv"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_marginStart="21dp"
-            android:layout_marginBottom="17dp"
-            android:src="@drawable/icon_back"
-            tools:ignore="ContentDescription" />
-
-        <TextView
-            android:id="@+id/title_tv"
-            style="@style/textSize_whitefff_16"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_centerHorizontal="true"
-            android:layout_marginBottom="18dp" />
-
-    </RelativeLayout>
+        android:layout_height="wrap_content"
+        app:isShowLeft_x="true"
+        app:isShowRight_x="false"
+        />
 
     <FrameLayout
         android:layout_width="match_parent"

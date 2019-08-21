@@ -1,9 +1,11 @@
 package com.hlxyedu.putonghualearningsystem.ui.onlinelearning.presenter;
 
 import com.blankj.utilcode.util.ToastUtils;
+import com.hlxyedu.putonghualearningsystem.base.RxBus;
 import com.hlxyedu.putonghualearningsystem.base.RxPresenter;
 import com.hlxyedu.putonghualearningsystem.model.DataManager;
 import com.hlxyedu.putonghualearningsystem.model.bean.EssayVO;
+import com.hlxyedu.putonghualearningsystem.model.event.EssayTxtEvent;
 import com.hlxyedu.putonghualearningsystem.model.http.response.HttpResponseCode;
 import com.hlxyedu.putonghualearningsystem.ui.onlinelearning.contract.ShortEssayContract;
 import com.hlxyedu.putonghualearningsystem.utils.RegUtils;
@@ -14,6 +16,7 @@ import java.util.List;
 
 import javax.inject.Inject;
 
+import io.reactivex.functions.Predicate;
 import retrofit2.adapter.rxjava2.HttpException;
 
 /**

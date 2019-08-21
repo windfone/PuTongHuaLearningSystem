@@ -31,11 +31,12 @@ public class ShortEssayAdapter extends BaseQuickAdapter<EssayVO, BaseViewHolder>
                 (helper.getLayoutPosition()+1) +"" : "0" + (helper.getLayoutPosition()+1);
 
         String name = item.getName().substring(0,item.getName().lastIndexOf("."));
-        helper.setText(R.id.title, "【"+ position + "】  " + "《" + name + "》示范朗读");
+        String txtStr = "【"+ position + "】  " + "《" + name + "》示范朗读";
+        helper.setText(R.id.title, txtStr);
 
         RelativeLayout relativeLayout = (RelativeLayout) helper.itemView;
         relativeLayout.setOnClickListener(view ->
 //                mContext.startActivity(OnLineLearnDetailsActivity.newInstance(mContext)));
-                mContext.startActivity(OnLineLearnDetailsActivity.newInstance(mContext, helper.getLayoutPosition(),datas,title)));
+                mContext.startActivity(OnLineLearnDetailsActivity.newInstance(mContext, helper.getLayoutPosition(),datas,title,txtStr)));
     }
 }

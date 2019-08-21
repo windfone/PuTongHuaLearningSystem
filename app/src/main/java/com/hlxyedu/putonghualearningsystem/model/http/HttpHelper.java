@@ -1,7 +1,7 @@
 package com.hlxyedu.putonghualearningsystem.model.http;
 
+import com.hlxyedu.putonghualearningsystem.model.bean.DataVO;
 import com.hlxyedu.putonghualearningsystem.model.bean.EssayDetailVO;
-import com.hlxyedu.putonghualearningsystem.model.bean.EssayVO;
 import com.hlxyedu.putonghualearningsystem.model.http.response.HttpResponse;
 
 import java.util.List;
@@ -17,7 +17,7 @@ public interface HttpHelper {
 
 //    Flowable<HttpResponse<UserVO>> getLoginBody(String uname, String pwd);
 
-      Flowable<HttpResponse<List<EssayVO>>> getEssayLists();
+    Flowable<HttpResponse<List<DataVO>>> getEssayLists();
 
-      Flowable<HttpResponse<EssayDetailVO>> getEssayDetails(String keys);
+    Flowable<HttpResponse<EssayDetailVO>> getEssayDetails(String keys);
 }

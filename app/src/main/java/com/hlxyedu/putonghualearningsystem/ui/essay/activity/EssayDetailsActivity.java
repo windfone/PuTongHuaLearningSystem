@@ -33,8 +33,8 @@ import com.fifedu.record.recinbox.bl.record.RecordParams;
 import com.fifedu.record.recinbox.bl.record.RecorderManager;
 import com.hlxyedu.putonghualearningsystem.R;
 import com.hlxyedu.putonghualearningsystem.base.RootActivity;
+import com.hlxyedu.putonghualearningsystem.model.bean.DataVO;
 import com.hlxyedu.putonghualearningsystem.model.bean.EssayDetailVO;
-import com.hlxyedu.putonghualearningsystem.model.bean.EssayVO;
 import com.hlxyedu.putonghualearningsystem.model.http.api.ApiConstants;
 import com.hlxyedu.putonghualearningsystem.ui.essay.contract.EssayDetailsContract;
 import com.hlxyedu.putonghualearningsystem.ui.essay.presenter.EssayDetailsPresenter;
@@ -68,7 +68,7 @@ import butterknife.OnClick;
  * Created by zhangguihua
  */
 public class EssayDetailsActivity extends RootActivity<EssayDetailsPresenter> implements EssayDetailsContract.View,
-        XBaseTopBarImp, OnPlayerEventListener , IRecorderListener {
+        XBaseTopBarImp, OnPlayerEventListener, IRecorderListener {
 
     private static final int MSG_START_RECORD = 10;
     private static final int MSG_STOP_RECORD = 11;
@@ -125,20 +125,21 @@ public class EssayDetailsActivity extends RootActivity<EssayDetailsPresenter> im
     private TimerTaskManager timerTaskManager;
 
     private String audioUrl; // 请求到的音频 URL ，写为全局的
-    private ArrayList<EssayVO> lists = new ArrayList<>();
+    private ArrayList<DataVO> lists = new ArrayList<>();
 
-    private boolean isPlayRecord ;
+    private boolean isPlayRecord;
+
     /**
      * 打开新Activity
      *
      * @param context
      * @return
      */
-    public static Intent newInstance(Context context, int pos, ArrayList<EssayVO> essayVOS) {
+    public static Intent newInstance(Context context, int pos, ArrayList<DataVO> dataVOS) {
         Intent intent = new Intent(context, EssayDetailsActivity.class);
 
         Bundle bundle = new Bundle();
-        bundle.putParcelableArrayList("essayVOS", essayVOS);
+        bundle.putParcelableArrayList("dataVOS", dataVOS);
         bundle.putSerializable("pos", pos);
         intent.putExtras(bundle);
         return intent;
@@ -165,7 +166,7 @@ public class EssayDetailsActivity extends RootActivity<EssayDetailsPresenter> im
         mRecordHandler = new RecordHandler(this);
 
         //1.需要创建录音文件夹
-        LogUtils.d(TAG,"创建录音文件夹");
+        LogUtils.d(TAG, "创建录音文件夹");
         FileUtils.createOrExistsDir(AppConstants.RECORD_PATH);
 
         getIntentData();
@@ -204,8 +205,8 @@ public class EssayDetailsActivity extends RootActivity<EssayDetailsPresenter> im
         timerTaskManager.setUpdateProgressTask(new Runnable() {
             @Override
             public void run() {
-                if (!isPlayRecord){
-                    long position =MusicManager.getInstance().getPlayingPosition();
+                if (!isPlayRecord) {
+                    long position = MusicManager.getInstance().getPlayingPosition();
                     play_length_tv.setText(TUtils.formatMusicTime(position));
                 }
             }
@@ -215,13 +216,13 @@ public class EssayDetailsActivity extends RootActivity<EssayDetailsPresenter> im
         mPresenter.getEssayDetails(lists.get(pos).getName());
     }
 
-    private void getIntentData(){
+    private void getIntentData() {
         play_iv.setEnabled(false);
-        lists = getIntent().getParcelableArrayListExtra("essayVOS");
+        lists = getIntent().getParcelableArrayListExtra("dataVOS");
 
-        pos = getIntent().getIntExtra("pos",0);
-        essay_name_tv.setText("《" + lists.get(pos).getName().substring(0,lists.get(pos).getName().lastIndexOf("."))
-                                + "》" + "示范朗读");
+        pos = getIntent().getIntExtra("pos", 0);
+        essay_name_tv.setText("《" + lists.get(pos).getName().substring(0, lists.get(pos).getName().lastIndexOf("."))
+                + "》" + "示范朗读");
     }
 
     @Override
@@ -249,37 +250,6 @@ public class EssayDetailsActivity extends RootActivity<EssayDetailsPresenter> im
         mRecordHandler.sendEmptyMessage(MSG_START_RECORD);
     }
 
-    public static class RecordHandler extends Handler{
-        private EssayDetailsActivity mForm;
-
-        public RecordHandler(EssayDetailsActivity activity) {
-            mForm = activity;
-        }
-        @Override
-        public void dispatchMessage(Message msg) {
-            switch (msg.what) {
-                case MSG_START_RECORD:
-                    mForm.onStartRecord();
-                    break;
-                case MSG_STOP_RECORD:
-                    mForm.onStopRecord("录音停止", true);
-                    break;
-                case MSG_VOLUME:
-//                    mForm.onVolumeUi(msg.arg1);
-                    break;
-                case MSG_FINISH:
-                    mForm.onMsgFinish();
-                    break;
-                case MSG_START_ERROR:
-                    mForm.onMsgError(msg.arg1);
-                    break;
-                case MSG_START_OK:
-                    mForm.onMsgStart((RecordParams) msg.obj);
-                    break;
-            }
-        }
-    }
-
     /**
      * 录音开启
      */
@@ -291,8 +261,10 @@ public class EssayDetailsActivity extends RootActivity<EssayDetailsPresenter> im
             record_tv.setText("结束");
         }
     }
+
     /**
      * 停止录音
+     *
      * @param msg
      * @param isClick
      */
@@ -334,7 +306,7 @@ public class EssayDetailsActivity extends RootActivity<EssayDetailsPresenter> im
             }
             mAacFile = new AacFileWriter();
 //            String file = getAudioFile();
-            recordPath = AppConstants.RECORD_PATH + "audio_"  +  lists.get(pos).getName().substring(0,lists.get(pos).getName().lastIndexOf("."))
+            recordPath = AppConstants.RECORD_PATH + "audio_" + lists.get(pos).getName().substring(0, lists.get(pos).getName().lastIndexOf("."))
                     + AppConstants.AUDIO_FILE_SUFFIX;
             mAacFile.open(recordPath);
             mAacFile.init(params.getSampleRate());
@@ -375,28 +347,30 @@ public class EssayDetailsActivity extends RootActivity<EssayDetailsPresenter> im
         msg.arg1 = errorCode;
         mRecordHandler.sendMessage(msg);
     }
+
     @Override
     public int onRecordData(byte[] data) {
         if (null != mAacFile) {
             mAacFile.appendPcmData(data, data.length);
         }
-        if(null != mSpeexFile)
-        {
+        if (null != mSpeexFile) {
             mSpeexFile.appendPcmData(data, data.length, false);
         }
 
         //add weidingqiang 将byte[] 转成 short[]  类型
-        short[] shorts = new short[data.length/2];
+        short[] shorts = new short[data.length / 2];
         ByteBuffer.wrap(data).order(ByteOrder.LITTLE_ENDIAN).asShortBuffer().get(shorts);
         //进行显示
 //        waveformView.setSamples(shorts);
 
         return data.length;
     }
+
     @Override
     public void onRecordInterrupt() {
 
     }
+
     @Override
     public void onFinished(RecordParams params) {
         if (null != mAacFile) {
@@ -421,72 +395,71 @@ public class EssayDetailsActivity extends RootActivity<EssayDetailsPresenter> im
         Message msg = mRecordHandler.obtainMessage(MSG_FINISH);
         mRecordHandler.sendMessage(msg);
     }
-    // ********************** 录音部分 ************************** //
 
     @OnClick({R.id.pre_iv, R.id.next_iv, R.id.play_iv, R.id.record_ll, R.id.record_play_ll})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.pre_iv:
                 if (!mRecorder.isRecording()) {
-                    if (pos == 0){
+                    if (pos == 0) {
                         ToastUtils.showShort("已经是第一个了");
-                    }else {
+                    } else {
                         pre_iv.setEnabled(false);
                         MusicManager.getInstance().pauseMusic();
                         onPlayerPause();
                         pos--;
-                        essay_name_tv.setText("《" + lists.get(pos).getName().substring(0,lists.get(pos).getName().lastIndexOf("."))
+                        essay_name_tv.setText("《" + lists.get(pos).getName().substring(0, lists.get(pos).getName().lastIndexOf("."))
                                 + "》" + "示范朗读");
                         play_length_tv.setText("00:00");
-                        play_iv.setImageDrawable(ContextCompat.getDrawable(this,R.drawable.icon_pause));
+                        play_iv.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.icon_pause));
 
                         mPresenter.getEssayDetails(lists.get(pos).getName());
                     }
-                }else {
+                } else {
                     ToastUtils.showShort("请先停止录音");
                 }
                 break;
             case R.id.next_iv:
                 if (!mRecorder.isRecording()) {
-                    if (pos == lists.size() - 1){
+                    if (pos == lists.size() - 1) {
                         ToastUtils.showShort("已经是最后一个了");
-                    }else {
+                    } else {
                         next_iv.setEnabled(false);
                         MusicManager.getInstance().pauseMusic();
                         onPlayerPause();
                         pos++;
-                        essay_name_tv.setText("《" + lists.get(pos).getName().substring(0,lists.get(pos).getName().lastIndexOf("."))
+                        essay_name_tv.setText("《" + lists.get(pos).getName().substring(0, lists.get(pos).getName().lastIndexOf("."))
                                 + "》" + "示范朗读");
                         play_length_tv.setText("00:00");
-                        play_iv.setImageDrawable(ContextCompat.getDrawable(this,R.drawable.icon_pause));
+                        play_iv.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.icon_pause));
 
                         mPresenter.getEssayDetails(lists.get(pos).getName());
                     }
-                }else {
+                } else {
                     ToastUtils.showShort("请先停止录音");
                 }
                 break;
             case R.id.play_iv:
                 if (!mRecorder.isRecording()) {
-                    if (MusicManager.getInstance().isPlaying()){
+                    if (MusicManager.getInstance().isPlaying()) {
                         MusicManager.getInstance().pauseMusic();
                         onPlayerPause();
-                        play_iv.setImageDrawable(ContextCompat.getDrawable(this,R.drawable.icon_pause));
-                    }else {
+                        play_iv.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.icon_pause));
+                    } else {
                         playAudio();
-                        play_iv.setImageDrawable(ContextCompat.getDrawable(this,R.drawable.icon_pause));
+                        play_iv.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.icon_pause));
                     }
-                }else {
+                } else {
                     ToastUtils.showShort("正在录音，不能播放");
                 }
                 break;
             case R.id.record_ll:
-                if (MusicManager.getInstance().isPlaying()){
+                if (MusicManager.getInstance().isPlaying()) {
                     ToastUtils.showShort("请先停止播放朗读");
-                }else{
-                    if (mRecorder.isRecording()){
+                } else {
+                    if (mRecorder.isRecording()) {
                         mRecordHandler.sendEmptyMessage(MSG_STOP_RECORD);
-                    }else {
+                    } else {
 //                        checkPermissions();
                         PermissionRequestUtil.getInstance().checkPermissions(this);
                     }
@@ -494,35 +467,36 @@ public class EssayDetailsActivity extends RootActivity<EssayDetailsPresenter> im
                 break;
             case R.id.record_play_ll:
                 if (!mRecorder.isRecording()) {
-                    if (StringUtils.isEmpty(recordPath)){
+                    if (StringUtils.isEmpty(recordPath)) {
                         ToastUtils.showShort("您还没有录制音频");
-                    }else {
-                        if (isPlayRecord){
+                    } else {
+                        if (isPlayRecord) {
                             MusicManager.getInstance().pauseMusic();
-                            record_play_iv.setImageDrawable(ContextCompat.getDrawable(this,R.drawable.icon_record_play));
+                            record_play_iv.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.icon_record_play));
                             record_play_tv.setText("播放");
-                        }else {
+                        } else {
                             playRecordAudio();
-                            record_play_iv.setImageDrawable(ContextCompat.getDrawable(this,R.drawable.icon_record_pause));
+                            record_play_iv.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.icon_record_pause));
                             record_play_tv.setText("暂停");
                         }
                         isPlayRecord = !isPlayRecord;
                     }
-                }else {
+                } else {
                     ToastUtils.showShort("正在录音，不能播放");
                 }
                 break;
         }
     }
+    // ********************** 录音部分 ************************** //
 
-    private void playAudio(){
+    private void playAudio() {
         SongInfo songInfo = new SongInfo();
         songInfo.setSongId(lists.get(pos).getId());
         songInfo.setSongUrl(ApiConstants.HOST + audioUrl);
         MusicManager.getInstance().playMusicByInfo(songInfo);
     }
 
-    private void playRecordAudio(){
+    private void playRecordAudio() {
         SongInfo songInfo = new SongInfo();
         songInfo.setSongId(String.valueOf(UUID.randomUUID()));
         songInfo.setSongUrl(recordPath);
@@ -564,14 +538,14 @@ public class EssayDetailsActivity extends RootActivity<EssayDetailsPresenter> im
     @Override
     public void onPlayCompletion(SongInfo songInfo) {
         // 判断是播放的录音还是 示范朗读，便于设置 图标及 文字
-        if (isPlayRecord){
+        if (isPlayRecord) {
             MusicManager.getInstance().pauseMusic();
-            record_play_iv.setImageDrawable(ContextCompat.getDrawable(this,R.drawable.icon_record_play));
+            record_play_iv.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.icon_record_play));
             record_play_tv.setText("播放");
             isPlayRecord = !isPlayRecord;
-        }else {
+        } else {
             timerTaskManager.stopToUpdateProgress();
-            play_iv.setImageDrawable(ContextCompat.getDrawable(this,R.drawable.icon_pause));
+            play_iv.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.icon_pause));
         }
     }
 
@@ -602,7 +576,7 @@ public class EssayDetailsActivity extends RootActivity<EssayDetailsPresenter> im
     }
 
     @SuppressLint("CheckResult")
-    private void checkPermissions(){
+    private void checkPermissions() {
         RxPermissions rxPermissions = new RxPermissions(this);
         rxPermissions.setLogging(true);
         rxPermissions
@@ -646,9 +620,9 @@ public class EssayDetailsActivity extends RootActivity<EssayDetailsPresenter> im
     }
 
     /**
-     *  拒绝权限后显示请求权限原因并再次申请
+     * 拒绝权限后显示请求权限原因并再次申请
      */
-    private void showRequestReason(){
+    private void showRequestReason() {
         WindowManager windowManager = (WindowManager) this
                 .getSystemService(Context.WINDOW_SERVICE);
         Display display = windowManager.getDefaultDisplay();
@@ -668,7 +642,8 @@ public class EssayDetailsActivity extends RootActivity<EssayDetailsPresenter> im
                             break;
                         case R.id.btn_pos:
 //                            checkPermissions()
-                            PermissionRequestUtil.getInstance().checkPermissions(this);;
+                            PermissionRequestUtil.getInstance().checkPermissions(this);
+                            ;
                             dialog.dismiss();
                             break;
                     }
@@ -676,5 +651,37 @@ public class EssayDetailsActivity extends RootActivity<EssayDetailsPresenter> im
         TextView textView = (TextView) logoutDialog.findViewById(R.id.txt_msg);
         textView.setText(getResources().getString(R.string.permission));
         logoutDialog.show();
+    }
+
+    public static class RecordHandler extends Handler {
+        private EssayDetailsActivity mForm;
+
+        public RecordHandler(EssayDetailsActivity activity) {
+            mForm = activity;
+        }
+
+        @Override
+        public void dispatchMessage(Message msg) {
+            switch (msg.what) {
+                case MSG_START_RECORD:
+                    mForm.onStartRecord();
+                    break;
+                case MSG_STOP_RECORD:
+                    mForm.onStopRecord("录音停止", true);
+                    break;
+                case MSG_VOLUME:
+//                    mForm.onVolumeUi(msg.arg1);
+                    break;
+                case MSG_FINISH:
+                    mForm.onMsgFinish();
+                    break;
+                case MSG_START_ERROR:
+                    mForm.onMsgError(msg.arg1);
+                    break;
+                case MSG_START_OK:
+                    mForm.onMsgStart((RecordParams) msg.obj);
+                    break;
+            }
+        }
     }
 }

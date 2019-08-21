@@ -6,7 +6,7 @@ import android.support.v7.widget.RecyclerView;
 
 import com.hlxyedu.putonghualearningsystem.R;
 import com.hlxyedu.putonghualearningsystem.base.RootFragment;
-import com.hlxyedu.putonghualearningsystem.model.bean.EssayVO;
+import com.hlxyedu.putonghualearningsystem.model.bean.DataVO;
 import com.hlxyedu.putonghualearningsystem.ui.onlinelearning.adapter.ShortEssayAdapter;
 import com.hlxyedu.putonghualearningsystem.ui.onlinelearning.contract.ShortEssayContract;
 import com.hlxyedu.putonghualearningsystem.ui.onlinelearning.presenter.ShortEssayPresenter;
@@ -29,7 +29,7 @@ public class ShortEssayFragment extends RootFragment<ShortEssayPresenter> implem
 
     public static ShortEssayFragment newInstance(String mTitles) {
         Bundle args = new Bundle();
-        args.putString("title",mTitles);
+        args.putString("title", mTitles);
 
         ShortEssayFragment fragment = new ShortEssayFragment();
         fragment.setArguments(args);
@@ -55,15 +55,15 @@ public class ShortEssayFragment extends RootFragment<ShortEssayPresenter> implem
     }
 
     @Override
-    public void onSuccess(List<EssayVO> essayVOS) {
+    public void onSuccess(List<DataVO> essayVOS) {
         stateMain();
         for (int i = 0; i < essayVOS.size(); i++) {
-            essayVOS.get(i).setId(UUID.randomUUID()+"");
+            essayVOS.get(i).setId(UUID.randomUUID() + "");
         }
-        if (essayVOS == null || essayVOS.isEmpty()){
+        if (essayVOS == null || essayVOS.isEmpty()) {
             stateEmpty("暂无内容");
-        }else {
-            mAdapter = new ShortEssayAdapter(R.layout.item_pinyin,essayVOS,getArguments().getString("title"));
+        } else {
+            mAdapter = new ShortEssayAdapter(R.layout.item_pinyin, essayVOS, getArguments().getString("title"));
             rcy.setLayoutManager(new LinearLayoutManager(mActivity));
             rcy.setAdapter(mAdapter);
         }

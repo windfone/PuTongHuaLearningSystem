@@ -1,17 +1,13 @@
 package com.hlxyedu.putonghualearningsystem.model.http.api;
 
+import com.hlxyedu.putonghualearningsystem.model.bean.DataVO;
 import com.hlxyedu.putonghualearningsystem.model.bean.EssayDetailVO;
-import com.hlxyedu.putonghualearningsystem.model.bean.EssayVO;
 import com.hlxyedu.putonghualearningsystem.model.http.response.HttpResponse;
 
 import java.util.List;
 
 import io.reactivex.Flowable;
-import retrofit2.http.Field;
-import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
-import retrofit2.http.POST;
-import retrofit2.http.PUT;
 import retrofit2.http.Query;
 
 /**
@@ -47,7 +43,7 @@ public interface QBaseApis {
 
     // 获取 短文跟读列表
     @GET("Mp3List")
-    Flowable<HttpResponse<List<EssayVO>>> getEssayLists();
+    Flowable<HttpResponse<List<DataVO>>> getEssayLists();
 
     @GET("playUrl")
     Flowable<HttpResponse<EssayDetailVO>> getEssayDetails(@Query("keys") String keys);

@@ -1,7 +1,7 @@
 package com.hlxyedu.putonghualearningsystem.model;
 
+import com.hlxyedu.putonghualearningsystem.model.bean.DataVO;
 import com.hlxyedu.putonghualearningsystem.model.bean.EssayDetailVO;
-import com.hlxyedu.putonghualearningsystem.model.bean.EssayVO;
 import com.hlxyedu.putonghualearningsystem.model.http.HttpHelper;
 import com.hlxyedu.putonghualearningsystem.model.http.response.HttpResponse;
 import com.hlxyedu.putonghualearningsystem.model.prefs.PreferencesHelper;
@@ -27,15 +27,14 @@ public class DataManager implements HttpHelper, PreferencesHelper {
     }
 
     @Override
-    public void setLoginStatus(boolean isLogin) {
-        mPreferencesHelper.setLoginStatus(isLogin);
-    }
-
-    @Override
     public boolean getLoginStatus() {
         return mPreferencesHelper.getLoginStatus();
     }
 
+    @Override
+    public void setLoginStatus(boolean isLogin) {
+        mPreferencesHelper.setLoginStatus(isLogin);
+    }
 
     @Override
     public boolean getNightModeState() {
@@ -48,13 +47,13 @@ public class DataManager implements HttpHelper, PreferencesHelper {
     }
 
     @Override
-    public void setIsFrist(boolean isFrist) {
-        mPreferencesHelper.setIsFrist(isFrist);
+    public boolean getIsFrist() {
+        return mPreferencesHelper.getIsFrist();
     }
 
     @Override
-    public boolean getIsFrist() {
-        return mPreferencesHelper.getIsFrist();
+    public void setIsFrist(boolean isFrist) {
+        mPreferencesHelper.setIsFrist(isFrist);
     }
 
     @Override
@@ -63,13 +62,13 @@ public class DataManager implements HttpHelper, PreferencesHelper {
     }
 
     @Override
-    public void setUserInfo(String userInfo) {
-        mPreferencesHelper.setUserInfo(userInfo);
+    public String getUserInfo() {
+        return mPreferencesHelper.getUserInfo();
     }
 
     @Override
-    public String getUserInfo() {
-        return mPreferencesHelper.getUserInfo();
+    public void setUserInfo(String userInfo) {
+        mPreferencesHelper.setUserInfo(userInfo);
     }
 
     @Override
@@ -78,7 +77,7 @@ public class DataManager implements HttpHelper, PreferencesHelper {
     }
 
     @Override
-    public Flowable<HttpResponse<List<EssayVO>>> getEssayLists() {
+    public Flowable<HttpResponse<List<DataVO>>> getEssayLists() {
         return mHttpHelper.getEssayLists();
     }
 

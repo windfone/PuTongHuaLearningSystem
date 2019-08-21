@@ -1,7 +1,6 @@
 package com.hlxyedu.putonghualearningsystem.ui.onlinelearning.contract;
 
-import com.hlxyedu.putonghualearningsystem.model.bean.EssayVO;
-import com.hlxyedu.putonghualearningsystem.ui.essay.contract.EssayListContract;
+import com.hlxyedu.putonghualearningsystem.model.bean.DataVO;
 import com.skyworth.rxqwelibrary.base.BasePresenter;
 import com.skyworth.rxqwelibrary.base.BaseView;
 
@@ -16,7 +15,7 @@ public interface ShortEssayContract {
         //返回登陆结果
         void responeError(String errorMsg);
 
-        void onSuccess(List<EssayVO> essayVOS);
+        void onSuccess(List<DataVO> essayVOS);
 
     }
 

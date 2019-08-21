@@ -1,16 +1,12 @@
 package com.hlxyedu.putonghualearningsystem.ui.onlinelearning.fragment;
 
 import android.os.Bundle;
-import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
 
 import com.hlxyedu.putonghualearningsystem.R;
 import com.hlxyedu.putonghualearningsystem.base.RootFragment;
-import com.hlxyedu.putonghualearningsystem.model.bean.PinYinBean;
+import com.hlxyedu.putonghualearningsystem.model.bean.DataVO;
 import com.hlxyedu.putonghualearningsystem.ui.onlinelearning.adapter.PinYinAdapter;
 import com.hlxyedu.putonghualearningsystem.ui.onlinelearning.contract.PinYinLearningContract;
 import com.hlxyedu.putonghualearningsystem.ui.onlinelearning.presenter.PinYinLearningPresenter;
@@ -19,8 +15,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.Unbinder;
 
 /**
  * Created by zhangguihua
@@ -35,7 +29,7 @@ public class PinYinLearningFragment extends RootFragment<PinYinLearningPresenter
 
     public static PinYinLearningFragment newInstance(String mTitles) {
         Bundle args = new Bundle();
-        args.putString("title",mTitles);
+        args.putString("title", mTitles);
 
         PinYinLearningFragment fragment = new PinYinLearningFragment();
         fragment.setArguments(args);
@@ -57,14 +51,14 @@ public class PinYinLearningFragment extends RootFragment<PinYinLearningPresenter
         super.initEventAndData();
         stateLoading();
 
-        List<PinYinBean> lists = new ArrayList<>();
-        PinYinBean bean = new PinYinBean();
+        List<DataVO> lists = new ArrayList<>();
+        DataVO bean = new DataVO();
         bean.setTitle("普通话拼音学习教程第一课 a o e");
         for (int i = 0; i < 10; i++) {
             lists.add(bean);
         }
         stateMain();
-        mAdapter = new PinYinAdapter(R.layout.item_pinyin,lists,getArguments().getString("title"));
+        mAdapter = new PinYinAdapter(R.layout.item_pinyin, lists, getArguments().getString("title"));
         rcy.setLayoutManager(
                 new LinearLayoutManager(mActivity));
         rcy.setAdapter(mAdapter);

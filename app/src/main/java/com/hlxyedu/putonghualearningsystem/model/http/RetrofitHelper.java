@@ -1,8 +1,8 @@
 package com.hlxyedu.putonghualearningsystem.model.http;
 
 
+import com.hlxyedu.putonghualearningsystem.model.bean.DataVO;
 import com.hlxyedu.putonghualearningsystem.model.bean.EssayDetailVO;
-import com.hlxyedu.putonghualearningsystem.model.bean.EssayVO;
 import com.hlxyedu.putonghualearningsystem.model.http.api.ManageApis;
 import com.hlxyedu.putonghualearningsystem.model.http.api.QBaseApis;
 import com.hlxyedu.putonghualearningsystem.model.http.response.HttpResponse;
@@ -30,7 +30,7 @@ public class RetrofitHelper implements HttpHelper {
 
 
     @Override
-    public Flowable<HttpResponse<List<EssayVO>>> getEssayLists() {
+    public Flowable<HttpResponse<List<DataVO>>> getEssayLists() {
         return qBaseApis.getEssayLists();
     }
 

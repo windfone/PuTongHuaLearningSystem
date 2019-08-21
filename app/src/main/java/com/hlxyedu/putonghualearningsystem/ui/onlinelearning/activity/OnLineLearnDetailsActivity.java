@@ -26,8 +26,8 @@ import com.fifedu.record.recinbox.bl.record.RecorderManager;
 import com.hlxyedu.putonghualearningsystem.R;
 import com.hlxyedu.putonghualearningsystem.base.RootFragmentActivity;
 import com.hlxyedu.putonghualearningsystem.base.RxBus;
+import com.hlxyedu.putonghualearningsystem.model.bean.DataVO;
 import com.hlxyedu.putonghualearningsystem.model.bean.EssayDetailVO;
-import com.hlxyedu.putonghualearningsystem.model.bean.EssayVO;
 import com.hlxyedu.putonghualearningsystem.model.event.EssayTxtEvent;
 import com.hlxyedu.putonghualearningsystem.model.http.api.ApiConstants;
 import com.hlxyedu.putonghualearningsystem.ui.onlinelearning.contract.OnLineLearnDetailsContract;
@@ -60,7 +60,7 @@ import butterknife.OnClick;
  * 播放音频、录音界面
  */
 public class OnLineLearnDetailsActivity extends RootFragmentActivity<OnLineLearnDetailsPresenter> implements OnLineLearnDetailsContract.View
-        ,OnPlayerEventListener, IRecorderListener, XBaseTopBarImp {
+        , OnPlayerEventListener, IRecorderListener, XBaseTopBarImp {
 
     private static final int MSG_START_RECORD = 10;
     private static final int MSG_STOP_RECORD = 11;
@@ -108,11 +108,11 @@ public class OnLineLearnDetailsActivity extends RootFragmentActivity<OnLineLearn
     private int pos; // 当前展示的是列表的第几行
     private String mTitles; // 当前展示的是列表的第几行
     private String itemStr; // 点击的列表item 的内容，到详情需要显示出来
-    private ArrayList<EssayVO> lists = new ArrayList<>();
+    private ArrayList<DataVO> lists = new ArrayList<>();
     private String audioUrl;// 请求到的音频 URL ，写为全局的
 
     private TimerTaskManager timerTaskManager;
-    private boolean isPlayRecord ;
+    private boolean isPlayRecord;
     private int audioLength;
 
     /**
@@ -143,16 +143,16 @@ public class OnLineLearnDetailsActivity extends RootFragmentActivity<OnLineLearn
         return intent;
     }
 
-    private void getIntentData(){
+    private void getIntentData() {
         lists = getIntent().getParcelableArrayListExtra("essayVOS");
-        pos = getIntent().getIntExtra("pos",0);
+        pos = getIntent().getIntExtra("pos", 0);
         mTitles = getIntent().getStringExtra("title");
         itemStr = getIntent().getStringExtra("itemStr");
         xbase_topbar.setMiddleText(mTitles);
     }
 
     private void initTitleAndFragment() {
-        switch (mTitles){
+        switch (mTitles) {
             case "短文跟读":
             case "拼音学习":
                 loadRootFragment(R.id.content_container, DetailContentFragment.newInstance(itemStr));
@@ -200,16 +200,16 @@ public class OnLineLearnDetailsActivity extends RootFragmentActivity<OnLineLearn
         mRecordHandler = new RecordHandler(this);
 
         //1.需要创建录音文件夹
-        LogUtils.d(TAG,"创建录音文件夹");
+        LogUtils.d(TAG, "创建录音文件夹");
         FileUtils.createOrExistsDir(AppConstants.RECORD_PATH);
 
         timerTaskManager = new TimerTaskManager();
         timerTaskManager.setUpdateProgressTask(new Runnable() {
             @Override
             public void run() {
-                if (!isPlayRecord){
+                if (!isPlayRecord) {
                     long position = MusicManager.getInstance().getPlayingPosition();
-                    progressBar.setProgress((int) (100 * (position / 1000) / audioLength ));
+                    progressBar.setProgress((int) (100 * (position / 1000) / audioLength));
                     time_progress_tv.setText(TUtils.formatMusicTime(position));
                 }
             }
@@ -231,7 +231,7 @@ public class OnLineLearnDetailsActivity extends RootFragmentActivity<OnLineLearn
         }
         String title = lists.get(pos).getName();
         RxBus.getDefault().post(new EssayTxtEvent(essayTxt,
-                "《" + title.substring(0,title.lastIndexOf(".")) + "》示范朗读"));
+                "《" + title.substring(0, title.lastIndexOf(".")) + "》示范朗读"));
         audioUrl = essayDetailVO.getAudioUrl();
         audioLength = essayDetailVO.getAudioLength();
         time_total_tv.setText(TimeUtil.getTimeString(audioLength));
@@ -247,61 +247,61 @@ public class OnLineLearnDetailsActivity extends RootFragmentActivity<OnLineLearn
         switch (view.getId()) {
             case R.id.top_play_iv:
                 if (!mRecorder.isRecording()) {
-                    if (MusicManager.getInstance().isPlaying()){
+                    if (MusicManager.getInstance().isPlaying()) {
                         MusicManager.getInstance().pauseMusic();
                         onPlayerPause();
-                        top_play_iv.setImageDrawable(ContextCompat.getDrawable(this,R.drawable.icon_pause));
-                    }else {
+                        top_play_iv.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.icon_pause));
+                    } else {
                         playAudio();
-                        top_play_iv.setImageDrawable(ContextCompat.getDrawable(this,R.drawable.icon_play));
+                        top_play_iv.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.icon_play));
                     }
-                }else {
+                } else {
                     ToastUtils.showShort("正在录音，不能播放");
                 }
                 break;
             case R.id.pre_iv:
                 if (!mRecorder.isRecording()) {
-                    if (pos == 0){
+                    if (pos == 0) {
                         ToastUtils.showShort("已经是第一个了");
-                    }else {
+                    } else {
                         pre_iv.setEnabled(false);
                         MusicManager.getInstance().pauseMusic();
                         onPlayerPause();
                         pos--;
                         time_progress_tv.setText(getResources().getString(R.string.time_zero));
-                        top_play_iv.setImageDrawable(ContextCompat.getDrawable(this,R.drawable.icon_pause));
+                        top_play_iv.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.icon_pause));
 
                         mPresenter.getEssayDetails(lists.get(pos).getName());
                     }
-                }else {
+                } else {
                     ToastUtils.showShort("请先停止录音");
                 }
                 break;
             case R.id.next_iv:
                 if (!mRecorder.isRecording()) {
-                    if (pos == lists.size() - 1){
+                    if (pos == lists.size() - 1) {
                         ToastUtils.showShort("已经是最后一个了");
-                    }else {
+                    } else {
                         next_iv.setEnabled(false);
                         MusicManager.getInstance().pauseMusic();
                         onPlayerPause();
                         pos++;
                         time_progress_tv.setText(getResources().getString(R.string.time_zero));
-                        top_play_iv.setImageDrawable(ContextCompat.getDrawable(this,R.drawable.icon_pause));
+                        top_play_iv.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.icon_pause));
 
                         mPresenter.getEssayDetails(lists.get(pos).getName());
                     }
-                }else {
+                } else {
                     ToastUtils.showShort("请先停止录音");
                 }
                 break;
             case R.id.record_ll:
-                if (MusicManager.getInstance().isPlaying()){
+                if (MusicManager.getInstance().isPlaying()) {
                     ToastUtils.showShort("请先停止播放朗读");
-                }else{
-                    if (mRecorder.isRecording()){
+                } else {
+                    if (mRecorder.isRecording()) {
                         mRecordHandler.sendEmptyMessage(MSG_STOP_RECORD);
-                    }else {
+                    } else {
 //                        checkPermissions();
                         PermissionRequestUtil.getInstance().checkPermissions(this);
                     }
@@ -309,33 +309,33 @@ public class OnLineLearnDetailsActivity extends RootFragmentActivity<OnLineLearn
                 break;
             case R.id.record_play_tv:
                 if (!mRecorder.isRecording()) {
-                    if (StringUtils.isEmpty(recordPath)){
+                    if (StringUtils.isEmpty(recordPath)) {
                         ToastUtils.showShort("您还没有录制音频");
-                    }else {
-                        if (isPlayRecord){
+                    } else {
+                        if (isPlayRecord) {
                             MusicManager.getInstance().pauseMusic();
                             record_play_tv.setText("播放");
-                        }else {
+                        } else {
                             playRecordAudio();
                             record_play_tv.setText("暂停");
                         }
                         isPlayRecord = !isPlayRecord;
                     }
-                }else {
+                } else {
                     ToastUtils.showShort("正在录音，不能播放");
                 }
                 break;
         }
     }
 
-    private void playAudio(){
+    private void playAudio() {
         SongInfo songInfo = new SongInfo();
         songInfo.setSongId(lists.get(pos).getId());
         songInfo.setSongUrl(ApiConstants.HOST + audioUrl);
         MusicManager.getInstance().playMusicByInfo(songInfo);
     }
 
-    private void playRecordAudio(){
+    private void playRecordAudio() {
         SongInfo songInfo = new SongInfo();
         songInfo.setSongId(String.valueOf(UUID.randomUUID()));
         songInfo.setSongUrl(recordPath);
@@ -366,13 +366,13 @@ public class OnLineLearnDetailsActivity extends RootFragmentActivity<OnLineLearn
     @Override
     public void onPlayCompletion(SongInfo songInfo) {
         // 判断是播放的录音还是 示范朗读，便于设置 图标及 文字
-        if (isPlayRecord){
+        if (isPlayRecord) {
             MusicManager.getInstance().pauseMusic();
             record_play_tv.setText("播放");
             isPlayRecord = !isPlayRecord;
-        }else {
+        } else {
             timerTaskManager.stopToUpdateProgress();
-            top_play_iv.setImageDrawable(ContextCompat.getDrawable(this,R.drawable.icon_pause));
+            top_play_iv.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.icon_pause));
         }
     }
 
@@ -403,37 +403,6 @@ public class OnLineLearnDetailsActivity extends RootFragmentActivity<OnLineLearn
         mRecordHandler.sendEmptyMessage(MSG_START_RECORD);
     }
 
-    public static class RecordHandler extends Handler {
-        private OnLineLearnDetailsActivity mForm;
-
-        public RecordHandler(OnLineLearnDetailsActivity activity) {
-            mForm = activity;
-        }
-        @Override
-        public void dispatchMessage(Message msg) {
-            switch (msg.what) {
-                case MSG_START_RECORD:
-                    mForm.onStartRecord();
-                    break;
-                case MSG_STOP_RECORD:
-                    mForm.onStopRecord("录音停止", true);
-                    break;
-                case MSG_VOLUME:
-//                    mForm.onVolumeUi(msg.arg1);
-                    break;
-                case MSG_FINISH:
-                    mForm.onMsgFinish();
-                    break;
-                case MSG_START_ERROR:
-                    mForm.onMsgError(msg.arg1);
-                    break;
-                case MSG_START_OK:
-                    mForm.onMsgStart((RecordParams) msg.obj);
-                    break;
-            }
-        }
-    }
-
     /**
      * 录音开启
      */
@@ -446,8 +415,10 @@ public class OnLineLearnDetailsActivity extends RootFragmentActivity<OnLineLearn
             record_iv.setVisibility(View.VISIBLE);
         }
     }
+
     /**
      * 停止录音
+     *
      * @param msg
      * @param isClick
      */
@@ -490,7 +461,7 @@ public class OnLineLearnDetailsActivity extends RootFragmentActivity<OnLineLearn
             }
             mAacFile = new AacFileWriter();
 //            String file = getAudioFile();
-            recordPath = AppConstants.RECORD_PATH + "audio_"  +  lists.get(pos).getName().substring(0,lists.get(pos).getName().lastIndexOf("."))
+            recordPath = AppConstants.RECORD_PATH + "audio_" + lists.get(pos).getName().substring(0, lists.get(pos).getName().lastIndexOf("."))
                     + AppConstants.AUDIO_FILE_SUFFIX;
             mAacFile.open(recordPath);
             mAacFile.init(params.getSampleRate());
@@ -531,28 +502,30 @@ public class OnLineLearnDetailsActivity extends RootFragmentActivity<OnLineLearn
         msg.arg1 = errorCode;
         mRecordHandler.sendMessage(msg);
     }
+
     @Override
     public int onRecordData(byte[] data) {
         if (null != mAacFile) {
             mAacFile.appendPcmData(data, data.length);
         }
-        if(null != mSpeexFile)
-        {
+        if (null != mSpeexFile) {
             mSpeexFile.appendPcmData(data, data.length, false);
         }
 
         //add weidingqiang 将byte[] 转成 short[]  类型
-        short[] shorts = new short[data.length/2];
+        short[] shorts = new short[data.length / 2];
         ByteBuffer.wrap(data).order(ByteOrder.LITTLE_ENDIAN).asShortBuffer().get(shorts);
         //进行显示
 //        waveformView.setSamples(shorts);
 
         return data.length;
     }
+
     @Override
     public void onRecordInterrupt() {
 
     }
+
     @Override
     public void onFinished(RecordParams params) {
         if (null != mAacFile) {
@@ -577,16 +550,48 @@ public class OnLineLearnDetailsActivity extends RootFragmentActivity<OnLineLearn
         Message msg = mRecordHandler.obtainMessage(MSG_FINISH);
         mRecordHandler.sendMessage(msg);
     }
-    // ********************** 录音部分 ************************** //
 
     @Override
     public void left() {
         MusicManager.getInstance().stopMusic();
         finish();
     }
+    // ********************** 录音部分 ************************** //
 
     @Override
     public void right() {
 
+    }
+
+    public static class RecordHandler extends Handler {
+        private OnLineLearnDetailsActivity mForm;
+
+        public RecordHandler(OnLineLearnDetailsActivity activity) {
+            mForm = activity;
+        }
+
+        @Override
+        public void dispatchMessage(Message msg) {
+            switch (msg.what) {
+                case MSG_START_RECORD:
+                    mForm.onStartRecord();
+                    break;
+                case MSG_STOP_RECORD:
+                    mForm.onStopRecord("录音停止", true);
+                    break;
+                case MSG_VOLUME:
+//                    mForm.onVolumeUi(msg.arg1);
+                    break;
+                case MSG_FINISH:
+                    mForm.onMsgFinish();
+                    break;
+                case MSG_START_ERROR:
+                    mForm.onMsgError(msg.arg1);
+                    break;
+                case MSG_START_OK:
+                    mForm.onMsgStart((RecordParams) msg.obj);
+                    break;
+            }
+        }
     }
 }

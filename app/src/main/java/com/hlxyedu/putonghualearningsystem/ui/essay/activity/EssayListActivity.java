@@ -14,10 +14,10 @@ import android.widget.TextView;
 
 import com.hlxyedu.putonghualearningsystem.R;
 import com.hlxyedu.putonghualearningsystem.base.RootActivity;
-import com.hlxyedu.putonghualearningsystem.model.bean.EssayVO;
-import com.hlxyedu.putonghualearningsystem.ui.onlinelearning.adapter.ShortEssayAdapter;
+import com.hlxyedu.putonghualearningsystem.model.bean.DataVO;
 import com.hlxyedu.putonghualearningsystem.ui.essay.contract.EssayListContract;
 import com.hlxyedu.putonghualearningsystem.ui.essay.presenter.EssayListPresenter;
+import com.hlxyedu.putonghualearningsystem.ui.onlinelearning.adapter.ShortEssayAdapter;
 import com.orhanobut.dialogplus.DialogPlus;
 import com.orhanobut.dialogplus.ViewHolder;
 import com.tbruyelle.rxpermissions2.RxPermissions;
@@ -72,14 +72,14 @@ public class EssayListActivity extends RootActivity<EssayListPresenter> implemen
     }
 
     @Override
-    public void onSuccess(List<EssayVO> essayVOS) {
+    public void onSuccess(List<DataVO> essayVOS) {
         stateMain();
         for (int i = 0; i < essayVOS.size(); i++) {
-            essayVOS.get(i).setId(UUID.randomUUID()+"");
+            essayVOS.get(i).setId(UUID.randomUUID() + "");
         }
-        if (essayVOS == null || essayVOS.isEmpty()){
+        if (essayVOS == null || essayVOS.isEmpty()) {
             stateEmpty("暂无内容");
-        }else {
+        } else {
 //            mAdapter = new ShortEssayAdapter(R.layout.item_essay,essayVOS);
             rcy.setLayoutManager(new LinearLayoutManager(this));
             rcy.setAdapter(mAdapter);
@@ -87,9 +87,9 @@ public class EssayListActivity extends RootActivity<EssayListPresenter> implemen
     }
 
     /**
-     *  拒绝权限后显示请求权限原因并再次申请
+     * 拒绝权限后显示请求权限原因并再次申请
      */
-    private void showRequestReason(){
+    private void showRequestReason() {
         WindowManager windowManager = (WindowManager) this
                 .getSystemService(Context.WINDOW_SERVICE);
         Display display = windowManager.getDefaultDisplay();
@@ -116,7 +116,7 @@ public class EssayListActivity extends RootActivity<EssayListPresenter> implemen
         String[] reason = getResources().getStringArray(R.array.request_permission_reason);
         String str = "";
         for (int i = 0; i < reason.length; i++) {
-            str += reason[i] + "\n" + "     " ;
+            str += reason[i] + "\n" + "     ";
         }
         TextView textView = (TextView) logoutDialog.findViewById(R.id.txt_msg);
         textView.setText(str);
@@ -124,7 +124,7 @@ public class EssayListActivity extends RootActivity<EssayListPresenter> implemen
     }
 
     @SuppressLint("CheckResult")
-    private void initPermissions(){
+    private void initPermissions() {
         RxPermissions rxPermissions = new RxPermissions(this);
         rxPermissions.setLogging(true);
         rxPermissions

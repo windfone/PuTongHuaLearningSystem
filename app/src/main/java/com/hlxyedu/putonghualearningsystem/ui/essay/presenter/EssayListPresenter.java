@@ -3,7 +3,7 @@ package com.hlxyedu.putonghualearningsystem.ui.essay.presenter;
 import com.blankj.utilcode.util.ToastUtils;
 import com.hlxyedu.putonghualearningsystem.base.RxPresenter;
 import com.hlxyedu.putonghualearningsystem.model.DataManager;
-import com.hlxyedu.putonghualearningsystem.model.bean.EssayVO;
+import com.hlxyedu.putonghualearningsystem.model.bean.DataVO;
 import com.hlxyedu.putonghualearningsystem.model.http.response.HttpResponseCode;
 import com.hlxyedu.putonghualearningsystem.ui.essay.contract.EssayListContract;
 import com.hlxyedu.putonghualearningsystem.utils.RegUtils;
@@ -45,9 +45,9 @@ public class EssayListPresenter extends RxPresenter<EssayListContract.View> impl
                         .compose(RxUtil.rxSchedulerHelper())
                         .compose(RxUtil.handleTestResult())
                         .subscribeWith(
-                                new CommonSubscriber<List<EssayVO>>(mView) {
+                                new CommonSubscriber<List<DataVO>>(mView) {
                                     @Override
-                                    public void onNext(List<EssayVO> list) {
+                                    public void onNext(List<DataVO> list) {
                                         mView.onSuccess(list);
                                     }
 

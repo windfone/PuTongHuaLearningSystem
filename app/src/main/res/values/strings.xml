@@ -80,4 +80,10 @@
     <!--item_all-->
     <string name="all">全部</string>
 
+    <!--activity_exam_detail-->
+    <string name="mandarin_level_test">普通话一级测试</string>
+    <string name="next_question">下一题</string>
+    <string name="next_set_of_papers">下一套试卷</string>
+    <string name="time_fourth_minute">04:00</string>
+
 </resources>

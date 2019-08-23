@@ -88,7 +88,7 @@ public class PermissionRequestUtil {
                 .getSystemService(Context.WINDOW_SERVICE);
         Display display = windowManager.getDefaultDisplay();
 
-        DialogPlus logoutDialog = DialogPlus.newDialog(context)
+        DialogPlus reasonDialog = DialogPlus.newDialog(context)
                 .setGravity(Gravity.CENTER)
                 .setContentHolder(new ViewHolder(R.layout.dialog_logout))
 //                        .setContentBackgroundResource(R.drawable.dialog_write_corner_bg)
@@ -107,9 +107,9 @@ public class PermissionRequestUtil {
                             break;
                     }
                 }).create();
-        TextView textView = (TextView) logoutDialog.findViewById(R.id.txt_msg);
+        TextView textView = (TextView) reasonDialog.findViewById(R.id.txt_msg);
         textView.setText(context.getResources().getString(R.string.permission));
-        logoutDialog.show();
+        reasonDialog.show();
     }
 
 }

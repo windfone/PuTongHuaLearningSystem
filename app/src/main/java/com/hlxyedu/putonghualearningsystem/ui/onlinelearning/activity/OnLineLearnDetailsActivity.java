@@ -551,12 +551,12 @@ public class OnLineLearnDetailsActivity extends RootFragmentActivity<OnLineLearn
         mRecordHandler.sendMessage(msg);
     }
 
+    // ********************** 录音部分 ************************** //
     @Override
     public void left() {
         MusicManager.getInstance().stopMusic();
         finish();
     }
-    // ********************** 录音部分 ************************** //
 
     @Override
     public void right() {

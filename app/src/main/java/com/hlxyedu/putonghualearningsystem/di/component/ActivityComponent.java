@@ -7,6 +7,7 @@ import com.hlxyedu.putonghualearningsystem.di.module.ActivityModule;
 import com.hlxyedu.putonghualearningsystem.di.scope.ActivityScope;
 import com.hlxyedu.putonghualearningsystem.ui.essay.activity.EssayDetailsActivity;
 import com.hlxyedu.putonghualearningsystem.ui.essay.activity.EssayListActivity;
+import com.hlxyedu.putonghualearningsystem.ui.exam.activity.ExamDetailActivity;
 import com.hlxyedu.putonghualearningsystem.ui.login.activity.LoginActivity;
 import com.hlxyedu.putonghualearningsystem.ui.main.activity.MainActivity;
 import com.hlxyedu.putonghualearningsystem.ui.onlinelearning.activity.OnLineLearnDetailsActivity;
@@ -53,4 +54,6 @@ public interface ActivityComponent {
     void inject(ExerciseDetailActivity exerciseDetailActivity);
 
     void inject(OnLineLearnDetailsActivity onLineLearnDetailsActivity);
+
+    void inject(ExamDetailActivity examDetailActivity);
 }

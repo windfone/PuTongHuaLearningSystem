@@ -71,6 +71,9 @@
         <activity android:name=".ui.onlinelearning.activity.OnLineLearnDetailsActivity"
             android:screenOrientation="portrait"/>
 
+        <activity android:name=".ui.exam.activity.ExamDetailActivity"
+            android:screenOrientation="portrait"/>
+
         <!-- 初始化service -->
         <service
             android:name="com.skyworth.rxqwelibrary.service.InitializeService"

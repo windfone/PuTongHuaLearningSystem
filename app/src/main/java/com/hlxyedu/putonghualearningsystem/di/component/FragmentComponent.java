@@ -4,6 +4,11 @@ import android.app.Activity;
 
 import com.hlxyedu.putonghualearningsystem.di.module.FragmentModule;
 import com.hlxyedu.putonghualearningsystem.di.scope.FragmentScope;
+import com.hlxyedu.putonghualearningsystem.ui.exam.fragment.EChineseCharacterFragment;
+import com.hlxyedu.putonghualearningsystem.ui.exam.fragment.EScoreFragment;
+import com.hlxyedu.putonghualearningsystem.ui.exam.fragment.EShortEssayFragment;
+import com.hlxyedu.putonghualearningsystem.ui.exam.fragment.EWordFragment;
+import com.hlxyedu.putonghualearningsystem.ui.exam.fragment.EZuoWenFragment;
 import com.hlxyedu.putonghualearningsystem.ui.main.fragment.FamousClassroomFragment;
 import com.hlxyedu.putonghualearningsystem.ui.main.fragment.OnLineLearningFragment;
 import com.hlxyedu.putonghualearningsystem.ui.main.fragment.ExamCenterFragment;
@@ -58,5 +63,15 @@ public interface FragmentComponent {
     void inject(DetailContentFragment detailContentFragment);
 
     void inject(DetailWordFragment detailWordFragment);
+
+    void inject(EChineseCharacterFragment eChineseCharacterFragment);
+
+    void inject(EWordFragment eWordFragment);
+
+    void inject(EShortEssayFragment eShortEssayFragment);
+
+    void inject(EZuoWenFragment eZuoWenFragment);
+
+    void inject(EScoreFragment eScoreFragment);
 
 }

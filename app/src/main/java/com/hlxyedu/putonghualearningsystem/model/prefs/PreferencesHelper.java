@@ -38,7 +38,7 @@ public interface PreferencesHelper {
     //登录信息
     void setUserInfo(String userInfo);
 
-    String getUserInfo();
+    String getSpUserInfo();
 
     void clearLoginInfo();
 

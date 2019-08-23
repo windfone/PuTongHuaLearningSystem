@@ -27,9 +27,10 @@ public class ChildSoundFragment extends RootFragment<ChildSoundPresenter> implem
 
     private ChildSoundAdapter mAdapter;
 
-    public static ChildSoundFragment newInstance(String mTitles) {
+    public static ChildSoundFragment newInstance(String mTitles,int typeId) {
         Bundle args = new Bundle();
-        args.putString("title",mTitles);
+        args.putString("title", mTitles);
+        args.putInt("typeId", typeId);
 
         ChildSoundFragment fragment = new ChildSoundFragment();
         fragment.setArguments(args);

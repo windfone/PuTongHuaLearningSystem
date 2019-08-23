@@ -2,6 +2,7 @@ package com.hlxyedu.putonghualearningsystem.ui.publics.fragment;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
 import android.util.TypedValue;
@@ -19,6 +20,7 @@ import android.widget.Toast;
 
 import com.hlxyedu.putonghualearningsystem.R;
 import com.hlxyedu.putonghualearningsystem.base.RootFragment;
+import com.hlxyedu.putonghualearningsystem.model.bean.OnLineLearnTitleVO;
 import com.hlxyedu.putonghualearningsystem.ui.publics.adapter.PagerFragmentAdapter;
 import com.hlxyedu.putonghualearningsystem.ui.publics.contract.ViewPagerContract;
 import com.hlxyedu.putonghualearningsystem.ui.publics.presenter.ViewPagerPresenter;
@@ -57,13 +59,24 @@ public class ViewPagerFragment extends RootFragment<ViewPagerPresenter> implemen
     @BindView(R.id.sort_iv)
     ImageView sort_tv;
 
-    private String[] mTitleDataList;
+    private ArrayList<String> mTitleDataList;
+    private List<OnLineLearnTitleVO> lists;
 
     // from == 1 ,在线学习； from == 2，名师课堂
-    public static ViewPagerFragment newInstance(int from, String... titles) {
+    public static ViewPagerFragment newInstance(int from, ArrayList<String> titles,List<OnLineLearnTitleVO> lists) {
         Bundle args = new Bundle();
         args.putInt("from", from);
-        args.putCharSequenceArray("titles", titles);
+        args.putStringArrayList("titles", titles);
+        args.putParcelableArrayList("titleVO", (ArrayList<? extends Parcelable>) lists);
+        ViewPagerFragment fragment = new ViewPagerFragment();
+        fragment.setArguments(args);
+        return fragment;
+    }
+
+    public static ViewPagerFragment newInstance(int from, ArrayList<String> titles) {
+        Bundle args = new Bundle();
+        args.putInt("from", from);
+        args.putStringArrayList("titles", titles);
         ViewPagerFragment fragment = new ViewPagerFragment();
         fragment.setArguments(args);
         return fragment;
@@ -84,7 +97,8 @@ public class ViewPagerFragment extends RootFragment<ViewPagerPresenter> implemen
         int from = -1;
         if (getArguments() != null) {
             from = getArguments().getInt("from");
-            mTitleDataList = (String[]) getArguments().getCharSequenceArray("titles");
+            mTitleDataList = getArguments().getStringArrayList("titles");
+            lists = getArguments().getParcelableArrayList("titleVO");
             if (from == 1) {
                 sort_tv.setVisibility(View.GONE);
             } else if (from == 2) {
@@ -92,7 +106,7 @@ public class ViewPagerFragment extends RootFragment<ViewPagerPresenter> implemen
             }
         }
         initIndicator();
-        view_pager.setAdapter(new PagerFragmentAdapter(getChildFragmentManager(), from, mTitleDataList));
+        view_pager.setAdapter(new PagerFragmentAdapter(getChildFragmentManager(), from, mTitleDataList,lists));
     }
 
     private void initIndicator() {
@@ -101,14 +115,14 @@ public class ViewPagerFragment extends RootFragment<ViewPagerPresenter> implemen
         commonNavigator.setAdapter(new CommonNavigatorAdapter() {
             @Override
             public int getCount() {
-                return mTitleDataList == null ? 0 : mTitleDataList.length;
+                return mTitleDataList == null ? 0 : mTitleDataList.size();
             }
 
             @Override
             public IPagerTitleView getTitleView(Context context, final int index) {
                 SimplePagerTitleView simplePagerTitleView = new ColorFlipPagerTitleView(context);
                 simplePagerTitleView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 13);
-                simplePagerTitleView.setText(mTitleDataList[index]);
+                simplePagerTitleView.setText(mTitleDataList.get(index));
                 simplePagerTitleView.setNormalColor(ContextCompat.getColor(mActivity, R.color.gray9B9));
                 simplePagerTitleView.setSelectedColor(ContextCompat.getColor(mActivity, R.color.whitefff));
                 simplePagerTitleView.setOnClickListener(new View.OnClickListener() {

@@ -27,9 +27,10 @@ public class ShortEssayFragment extends RootFragment<ShortEssayPresenter> implem
 
     private ShortEssayAdapter mAdapter;
 
-    public static ShortEssayFragment newInstance(String mTitles) {
+    public static ShortEssayFragment newInstance(String mTitles,int typeId) {
         Bundle args = new Bundle();
         args.putString("title", mTitles);
+        args.putInt("typeId", typeId);
 
         ShortEssayFragment fragment = new ShortEssayFragment();
         fragment.setArguments(args);

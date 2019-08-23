@@ -2,6 +2,8 @@ package com.hlxyedu.putonghualearningsystem.model.http.api;
 
 import com.hlxyedu.putonghualearningsystem.model.bean.DataVO;
 import com.hlxyedu.putonghualearningsystem.model.bean.EssayDetailVO;
+import com.hlxyedu.putonghualearningsystem.model.bean.OnLineLearnTitleVO;
+import com.hlxyedu.putonghualearningsystem.model.bean.UserVO;
 import com.hlxyedu.putonghualearningsystem.model.http.response.HttpResponse;
 
 import java.util.List;
@@ -41,12 +43,25 @@ public interface QBaseApis {
     Flowable<HttpResponse<UserVO>> putModifyInfo(@Field("id") String id, @Field("pwd") String pwd
             , @Field("tname") String tname, @Field("tel") String tel, @Field("addr") String addr);*/
 
+    // 获取 登录用户信息
+    @GET("user/getUserInfo")
+    Flowable<HttpResponse<UserVO>> getUserInfo(@Query("userId") int userId);
+
+    // 获取 在线学习 头部标题
+    @GET("study/selectType")
+    Flowable<HttpResponse<List<OnLineLearnTitleVO>>> getOnLineLearningTitle();
+
+    // 获取 拼音学习列表
+    @GET("study/getContentTile")
+    Flowable<HttpResponse<List<DataVO>>> getOnLineLearningList(@Query("typeId") int typeId);
+
     // 获取 短文跟读列表
     @GET("Mp3List")
     Flowable<HttpResponse<List<DataVO>>> getEssayLists();
 
     @GET("playUrl")
     Flowable<HttpResponse<EssayDetailVO>> getEssayDetails(@Query("keys") String keys);
+
 }
 
 

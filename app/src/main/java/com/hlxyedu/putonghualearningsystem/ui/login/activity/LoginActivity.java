@@ -75,7 +75,7 @@ public class LoginActivity extends RootActivity<LoginPresenter> implements Login
     @Override
     public void loginSuccess(UserVO userVO) {
         ToastUtils.showShort("登录成功");
-        startActivity(MainActivity.newInstance(LoginActivity.this));
+//        startActivity(MainActivity.newInstance(LoginActivity.this));
         finish();
     }
 

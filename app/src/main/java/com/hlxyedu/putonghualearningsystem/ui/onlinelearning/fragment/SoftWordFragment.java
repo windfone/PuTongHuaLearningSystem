@@ -27,9 +27,10 @@ public class SoftWordFragment extends RootFragment<SoftWordPresenter> implements
 
     private SoftWordAdapter mAdapter;
 
-    public static SoftWordFragment newInstance(String mTitles) {
+    public static SoftWordFragment newInstance(String mTitles,int typeId) {
         Bundle args = new Bundle();
-        args.putString("title",mTitles);
+        args.putString("title", mTitles);
+        args.putInt("typeId", typeId);
 
         SoftWordFragment fragment = new SoftWordFragment();
         fragment.setArguments(args);

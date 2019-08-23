@@ -27,7 +27,7 @@
             android:name="design_height_in_dp"
             android:value="640" />
 
-        <activity android:name=".ui.main.activity.MainActivity"
+        <activity android:name=".ui.activity.SplashActivity"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -37,8 +37,8 @@
             </intent-filter>
         </activity>
 
-        <!--<activity android:name=".ui.main.activity.MainActivity"
-            android:screenOrientation="portrait"/>-->
+        <activity android:name=".ui.main.activity.MainActivity"
+            android:screenOrientation="portrait"/>
 
         <activity android:name=".ui.essay.activity.EssayListActivity"
             android:screenOrientation="portrait"/>

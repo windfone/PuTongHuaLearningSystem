@@ -42,9 +42,10 @@ public class HanZiLearningFragment extends RootFragment<HanZiLearningPresenter> 
     private List<HanZiContentVO> lists;
     private HanZiContentAdapter mContentAdapter;
 
-    public static HanZiLearningFragment newInstance(String mTitles) {
+    public static HanZiLearningFragment newInstance(String mTitles,int typeId) {
         Bundle args = new Bundle();
         args.putString("title", mTitles);
+        args.putInt("typeId", typeId);
 
         HanZiLearningFragment fragment = new HanZiLearningFragment();
         fragment.setArguments(args);

@@ -27,11 +27,11 @@ public class PinYinAdapter extends BaseQuickAdapter<DataVO, BaseViewHolder> {
     protected void convert(BaseViewHolder helper, DataVO item) {
         String position = (helper.getLayoutPosition() + 1) > 9 ?
                 (helper.getLayoutPosition() + 1) + "" : "0" + (helper.getLayoutPosition() + 1);
-        helper.setText(R.id.title, "【" + position + "】  " + item.getTitle());
+        helper.setText(R.id.title, "【" + position + "】  " + item.getConTitle());
 
         RelativeLayout relativeLayout = (RelativeLayout) helper.itemView;
         relativeLayout.setOnClickListener(v -> {
-            mContext.startActivity(OnLineLearnDetailsActivity.newInstance(mContext, helper.getLayoutPosition(), (ArrayList<DataVO>) lists, title, item.getTitle()));
+            mContext.startActivity(OnLineLearnDetailsActivity.newInstance(mContext, helper.getLayoutPosition(), (ArrayList<DataVO>) lists, title, item.getConTitle()));
         });
     }
 

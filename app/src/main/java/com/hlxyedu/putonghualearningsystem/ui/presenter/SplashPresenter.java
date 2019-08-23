@@ -1,13 +1,11 @@
-package com.hlxyedu.putonghualearningsystem.ui.onlinelearning.presenter;
+package com.hlxyedu.putonghualearningsystem.ui.presenter;
 
-import com.blankj.utilcode.util.GsonUtils;
 import com.blankj.utilcode.util.ToastUtils;
 import com.hlxyedu.putonghualearningsystem.base.RxPresenter;
 import com.hlxyedu.putonghualearningsystem.model.DataManager;
-import com.hlxyedu.putonghualearningsystem.model.bean.DataVO;
-import com.hlxyedu.putonghualearningsystem.model.bean.UserVO;
+import com.hlxyedu.putonghualearningsystem.model.bean.OnLineLearnTitleVO;
 import com.hlxyedu.putonghualearningsystem.model.http.response.HttpResponseCode;
-import com.hlxyedu.putonghualearningsystem.ui.onlinelearning.contract.PinYinLearningContract;
+import com.hlxyedu.putonghualearningsystem.ui.contract.SplashContract;
 import com.hlxyedu.putonghualearningsystem.utils.RegUtils;
 import com.hlxyedu.putonghualearningsystem.utils.RxUtil;
 import com.hlxyedu.putonghualearningsystem.weight.CommonSubscriber;
@@ -21,17 +19,17 @@ import retrofit2.adapter.rxjava2.HttpException;
 /**
  * Created by zhangguihua
  */
-public class PinYinLearningPresenter extends RxPresenter<PinYinLearningContract.View> implements PinYinLearningContract.Presenter {
+public class SplashPresenter extends RxPresenter<SplashContract.View> implements SplashContract.Presenter {
     private DataManager mDataManager;
 
     @Inject
-    public PinYinLearningPresenter(DataManager mDataManager) {
+    public SplashPresenter(DataManager mDataManager) {
         super(mDataManager);
         this.mDataManager = mDataManager;
     }
 
     @Override
-    public void attachView(PinYinLearningContract.View view) {
+    public void attachView(SplashContract.View view) {
         super.attachView(view);
         registerEvent();
     }
@@ -41,16 +39,16 @@ public class PinYinLearningPresenter extends RxPresenter<PinYinLearningContract.
     }
 
     @Override
-    public void getLearningList(int typeId) {
+    public void getTopTitle() {
         addSubscribe(
-                mDataManager.getOnLineLearningList(typeId)
+                mDataManager.getOnLineLearningTitle()
                         .compose(RxUtil.rxSchedulerHelper())
                         .compose(RxUtil.handleTestResult())
                         .subscribeWith(
-                                new CommonSubscriber<List<DataVO>>(mView) {
+                                new CommonSubscriber<List<OnLineLearnTitleVO>>(mView) {
                                     @Override
-                                    public void onNext(List<DataVO> dataVOS) {
-                                        mView.onSuccess(dataVOS);
+                                    public void onNext(List<OnLineLearnTitleVO> titleVOS) {
+                                        mView.onTopSuccess(titleVOS);
                                     }
 
                                     @Override
@@ -67,5 +65,4 @@ public class PinYinLearningPresenter extends RxPresenter<PinYinLearningContract.
                         )
         );
     }
-
 }

@@ -1,5 +1,8 @@
 package com.hlxyedu.putonghualearningsystem.utils;
 
+import android.util.Log;
+
+import com.blankj.utilcode.util.StringUtils;
 import com.hlxyedu.putonghualearningsystem.model.http.exception.ApiException;
 import com.hlxyedu.putonghualearningsystem.model.http.response.HttpResponse;
 
@@ -61,7 +64,7 @@ public class RxUtil {
                     @Override
                     public Flowable<T> apply(HttpResponse<T> httpResponse) {
 
-                        if(httpResponse.getStatus() == 0){
+                        if(StringUtils.equals(httpResponse.getResultType(),"success")){
                             return createData(httpResponse.getData());
                         }else {
                             return Flowable.error(new ApiException( httpResponse.getMsg(),httpResponse.getStatus()));

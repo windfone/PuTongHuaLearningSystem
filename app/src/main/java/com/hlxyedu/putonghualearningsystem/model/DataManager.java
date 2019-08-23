@@ -2,6 +2,8 @@ package com.hlxyedu.putonghualearningsystem.model;
 
 import com.hlxyedu.putonghualearningsystem.model.bean.DataVO;
 import com.hlxyedu.putonghualearningsystem.model.bean.EssayDetailVO;
+import com.hlxyedu.putonghualearningsystem.model.bean.OnLineLearnTitleVO;
+import com.hlxyedu.putonghualearningsystem.model.bean.UserVO;
 import com.hlxyedu.putonghualearningsystem.model.http.HttpHelper;
 import com.hlxyedu.putonghualearningsystem.model.http.response.HttpResponse;
 import com.hlxyedu.putonghualearningsystem.model.prefs.PreferencesHelper;
@@ -62,8 +64,8 @@ public class DataManager implements HttpHelper, PreferencesHelper {
     }
 
     @Override
-    public String getUserInfo() {
-        return mPreferencesHelper.getUserInfo();
+    public String getSpUserInfo() {
+        return mPreferencesHelper.getSpUserInfo();
     }
 
     @Override
@@ -84,5 +86,20 @@ public class DataManager implements HttpHelper, PreferencesHelper {
     @Override
     public Flowable<HttpResponse<EssayDetailVO>> getEssayDetails(String keys) {
         return mHttpHelper.getEssayDetails(keys);
+    }
+
+    @Override
+    public Flowable<HttpResponse<UserVO>> getUserInfo(int userId) {
+        return mHttpHelper.getUserInfo(userId);
+    }
+
+    @Override
+    public Flowable<HttpResponse<List<OnLineLearnTitleVO>>> getOnLineLearningTitle() {
+        return mHttpHelper.getOnLineLearningTitle();
+    }
+
+    @Override
+    public Flowable<HttpResponse<List<DataVO>>> getOnLineLearningList(int typeId) {
+        return mHttpHelper.getOnLineLearningList(typeId);
     }
 }

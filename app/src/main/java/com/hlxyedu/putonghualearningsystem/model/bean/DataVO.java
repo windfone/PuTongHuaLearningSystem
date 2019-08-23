@@ -5,7 +5,10 @@ import android.os.Parcelable;
 
 public class DataVO implements Parcelable {
 
+
+
     /**
+     * 短文跟读
      * name : “能吞能吐”的森林.mp3
      */
 
@@ -17,6 +20,14 @@ public class DataVO implements Parcelable {
      * title : 普通话拼音学习教程第一课   a   o   e
      */
     private String title;
+    /**
+     * 普通话拼音学习教程第一课   a   o   e
+     * conId : 4
+     * conTitle : aweq
+     */
+
+    private int conId;
+    private String conTitle;
 
     public String getName() {
         return name;
@@ -42,6 +53,8 @@ public class DataVO implements Parcelable {
         this.title = title;
     }
 
+
+
     @Override
     public int describeContents() {
         return 0;
@@ -52,6 +65,8 @@ public class DataVO implements Parcelable {
         dest.writeString(this.name);
         dest.writeString(this.id);
         dest.writeString(this.title);
+        dest.writeInt(this.conId);
+        dest.writeString(this.conTitle);
     }
 
     public DataVO() {
@@ -61,9 +76,11 @@ public class DataVO implements Parcelable {
         this.name = in.readString();
         this.id = in.readString();
         this.title = in.readString();
+        this.conId = in.readInt();
+        this.conTitle = in.readString();
     }
 
-    public static final Parcelable.Creator<DataVO> CREATOR = new Parcelable.Creator<DataVO>() {
+    public static final Creator<DataVO> CREATOR = new Creator<DataVO>() {
         @Override
         public DataVO createFromParcel(Parcel source) {
             return new DataVO(source);
@@ -74,4 +91,20 @@ public class DataVO implements Parcelable {
             return new DataVO[size];
         }
     };
+
+    public int getConId() {
+        return conId;
+    }
+
+    public void setConId(int conId) {
+        this.conId = conId;
+    }
+
+    public String getConTitle() {
+        return conTitle;
+    }
+
+    public void setConTitle(String conTitle) {
+        this.conTitle = conTitle;
+    }
 }

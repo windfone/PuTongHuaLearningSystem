@@ -9,6 +9,10 @@ import com.hlxyedu.putonghualearningsystem.ui.main.contract.FamousClassroomContr
 import com.hlxyedu.putonghualearningsystem.ui.main.presenter.FamousClassroomPresenter;
 import com.hlxyedu.putonghualearningsystem.ui.publics.fragment.ViewPagerFragment;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 /**
  * Created by zhangguihua
  */
@@ -20,7 +24,8 @@ public class FamousClassroomFragment extends RootFragment<FamousClassroomPresent
 
     private List<Fragment> fragments;    ViewPager view_pager;*/
 
-    private String[] mTitleDataList = {"听力理解","阅读理解","书面表达","口语测试","考试冲刺"};
+    private List<String> top = Arrays.asList("听力理解","阅读理解","书面表达","口语测试","考试冲刺");
+    private ArrayList<String> mTitleDataList = new ArrayList<>(top);
 
     public static FamousClassroomFragment newInstance() {
         Bundle args = new Bundle();

@@ -72,7 +72,7 @@ public class ImplPreferencesHelper implements PreferencesHelper {
     }
 
     @Override
-    public String getUserInfo() {
+    public String getSpUserInfo() {
         return mSPrefs.getString(Constants.USER_INFO, "");
     }
 

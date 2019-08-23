@@ -27,9 +27,10 @@ public class PinYinLearningFragment extends RootFragment<PinYinLearningPresenter
 
     private PinYinAdapter mAdapter;
 
-    public static PinYinLearningFragment newInstance(String mTitles) {
+    public static PinYinLearningFragment newInstance(String mTitles,int typeId) {
         Bundle args = new Bundle();
         args.putString("title", mTitles);
+        args.putInt("typeId", typeId);
 
         PinYinLearningFragment fragment = new PinYinLearningFragment();
         fragment.setArguments(args);
@@ -51,22 +52,26 @@ public class PinYinLearningFragment extends RootFragment<PinYinLearningPresenter
         super.initEventAndData();
         stateLoading();
 
-        List<DataVO> lists = new ArrayList<>();
-        DataVO bean = new DataVO();
-        bean.setTitle("普通话拼音学习教程第一课 a o e");
-        for (int i = 0; i < 10; i++) {
-            lists.add(bean);
-        }
+        mPresenter.getLearningList(getArguments().getInt("typeId"));
+    }
+
+    @Override
+    public void onSuccess(List<DataVO> dataVOS) {
         stateMain();
-        mAdapter = new PinYinAdapter(R.layout.item_pinyin, lists, getArguments().getString("title"));
-        rcy.setLayoutManager(
-                new LinearLayoutManager(mActivity));
-        rcy.setAdapter(mAdapter);
+        if (dataVOS != null && dataVOS.size()> 0){
+            mAdapter = new PinYinAdapter(R.layout.item_pinyin, dataVOS, getArguments().getString("title"));
+            rcy.setLayoutManager(
+                    new LinearLayoutManager(mActivity));
+            rcy.setAdapter(mAdapter);
+        }else {
+            stateEmpty("暂无数据");
+        }
     }
 
     @Override
     public void responeError(String errorMsg) {
         stateError();
     }
+
 
 }

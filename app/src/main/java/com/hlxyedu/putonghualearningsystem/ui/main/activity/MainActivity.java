@@ -4,19 +4,25 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Build;
+import android.os.Parcelable;
 import android.support.v7.app.ActionBar;
 import android.view.KeyEvent;
 import android.view.View;
 
 import com.hlxyedu.putonghualearningsystem.R;
 import com.hlxyedu.putonghualearningsystem.base.RootFragmentActivity;
+import com.hlxyedu.putonghualearningsystem.model.bean.OnLineLearnTitleVO;
 import com.hlxyedu.putonghualearningsystem.ui.main.contract.MainContract;
 import com.hlxyedu.putonghualearningsystem.ui.main.fragment.ExamCenterFragment;
 import com.hlxyedu.putonghualearningsystem.ui.main.fragment.FamousClassroomFragment;
 import com.hlxyedu.putonghualearningsystem.ui.main.fragment.OnLineLearningFragment;
 import com.hlxyedu.putonghualearningsystem.ui.main.fragment.PersonalCenterFragment;
 import com.hlxyedu.putonghualearningsystem.ui.main.presenter.MainPresenter;
+import com.hlxyedu.putonghualearningsystem.ui.publics.fragment.ViewPagerFragment;
 import com.hlxyedu.putonghualearningsystem.weight.bottombar.BottomBar;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.BindView;
 import me.yokeyword.fragmentation.SupportFragment;
@@ -45,8 +51,9 @@ public class MainActivity extends RootFragmentActivity<MainPresenter> implements
      * @param context
      * @return
      */
-    public static Intent newInstance(Context context) {
+    public static Intent newInstance(Context context,List<OnLineLearnTitleVO> lists) {
         Intent intent = new Intent(context, MainActivity.class);
+        intent.putParcelableArrayListExtra("topTitle", (ArrayList<? extends Parcelable>) lists);
         return intent;
     }
 
@@ -64,7 +71,7 @@ public class MainActivity extends RootFragmentActivity<MainPresenter> implements
     protected void initEventAndData() {
         SupportFragment firstFragment = findFragment(OnLineLearningFragment.class);
         if (firstFragment == null) {
-            mFragments[FIRST] = OnLineLearningFragment.newInstance();
+            mFragments[FIRST] = OnLineLearningFragment.newInstance(getIntent().getParcelableArrayListExtra("topTitle"));
             mFragments[SECOND] = ExamCenterFragment.newInstance();
             mFragments[THIRD] = FamousClassroomFragment.newInstance();
             mFragments[FOURTH] = PersonalCenterFragment.newInstance();

@@ -26,9 +26,10 @@ public class WordFollowFragment extends RootFragment<WordFollowPresenter> implem
 
     private WordFollowAdapter mAdapter;
 
-    public static WordFollowFragment newInstance(String mTitles) {
+    public static WordFollowFragment newInstance(String mTitles,int typeId) {
         Bundle args = new Bundle();
-        args.putString("title",mTitles);
+        args.putString("title", mTitles);
+        args.putInt("typeId", typeId);
 
         WordFollowFragment fragment = new WordFollowFragment();
         fragment.setArguments(args);

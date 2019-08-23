@@ -8,6 +8,7 @@ package com.hlxyedu.putonghualearningsystem.model.http.response;
 public class HttpResponse<T> {
 
     private String msg;
+    private String resultType;
     private int status;
     private int code;
     private T data;
@@ -18,6 +19,14 @@ public class HttpResponse<T> {
 
     public void setData(T data) {
         this.data = data;
+    }
+
+    public String getResultType() {
+        return resultType;
+    }
+
+    public void setResultType(String resultType) {
+        this.resultType = resultType;
     }
 
     public String getMsg() {

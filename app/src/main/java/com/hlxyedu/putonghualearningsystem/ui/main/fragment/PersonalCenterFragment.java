@@ -7,8 +7,13 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.resource.bitmap.CircleCrop;
+import com.bumptech.glide.request.RequestOptions;
 import com.hlxyedu.putonghualearningsystem.R;
 import com.hlxyedu.putonghualearningsystem.base.RootFragment;
+import com.hlxyedu.putonghualearningsystem.model.bean.UserVO;
+import com.hlxyedu.putonghualearningsystem.model.http.api.ApiConstants;
 import com.hlxyedu.putonghualearningsystem.ui.main.contract.PersonalCenterContract;
 import com.hlxyedu.putonghualearningsystem.ui.main.presenter.PersonalCenterPresenter;
 import com.hlxyedu.putonghualearningsystem.ui.personal.activity.GeneralPurposeActivity;
@@ -60,11 +65,21 @@ public class PersonalCenterFragment extends RootFragment<PersonalCenterPresenter
     protected void initEventAndData() {
         xbase_topbar.setxBaseTopBarImp(this);
         xbase_topbar.setLeftImg(ContextCompat.getDrawable(mActivity,R.drawable.icon_scan));
+
+        mPresenter.getUserInfo(2);
+
     }
 
     @Override
     public void responeError(String errorMsg) {
 
+    }
+
+    @Override
+    public void onSuccess(UserVO userVO) {
+        Glide.with(mActivity).load(ApiConstants.HOST + "user-info/pic/" + userVO.getHeadImgUrl())
+                .apply(RequestOptions.bitmapTransform(new CircleCrop()).placeholder(R.drawable.icon_headportrait)).into(headportrait_iv);
+        name_tv.setText(userVO.getNickName());
     }
 
     @Override

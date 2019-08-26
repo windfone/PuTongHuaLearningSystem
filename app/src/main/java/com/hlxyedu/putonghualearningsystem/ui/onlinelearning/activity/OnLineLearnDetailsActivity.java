@@ -27,7 +27,7 @@ import com.hlxyedu.putonghualearningsystem.R;
 import com.hlxyedu.putonghualearningsystem.base.RootFragmentActivity;
 import com.hlxyedu.putonghualearningsystem.base.RxBus;
 import com.hlxyedu.putonghualearningsystem.model.bean.DataVO;
-import com.hlxyedu.putonghualearningsystem.model.bean.EssayDetailVO;
+import com.hlxyedu.putonghualearningsystem.model.bean.DetailVO;
 import com.hlxyedu.putonghualearningsystem.model.event.EssayTxtEvent;
 import com.hlxyedu.putonghualearningsystem.model.http.api.ApiConstants;
 import com.hlxyedu.putonghualearningsystem.ui.onlinelearning.contract.OnLineLearnDetailsContract;
@@ -216,24 +216,24 @@ public class OnLineLearnDetailsActivity extends RootFragmentActivity<OnLineLearn
         });
         MusicManager.getInstance().addPlayerEventListener(this);
 
-        mPresenter.getEssayDetails(lists.get(pos).getName());
+        mPresenter.getDetails(lists.get(pos).getName());
 
     }
 
     @Override
-    public void onDetailsSuccess(EssayDetailVO essayDetailVO) {
+    public void onDetailsSuccess(DetailVO detailVO) {
         top_play_iv.setEnabled(true);
         pre_iv.setEnabled(true);
         next_iv.setEnabled(true);
         String essayTxt = "";
-        for (int i = 0; i < essayDetailVO.getTxtData().length; i++) {
-            essayTxt += "        " + essayDetailVO.getTxtData()[i] + "\n";
+        for (int i = 0; i < detailVO.getTxtData().length; i++) {
+            essayTxt += "        " + detailVO.getTxtData()[i] + "\n";
         }
         String title = lists.get(pos).getName();
         RxBus.getDefault().post(new EssayTxtEvent(essayTxt,
                 "《" + title.substring(0, title.lastIndexOf(".")) + "》示范朗读"));
-        audioUrl = essayDetailVO.getAudioUrl();
-        audioLength = essayDetailVO.getAudioLength();
+        audioUrl = detailVO.getAudioUrl();
+        audioLength = detailVO.getAudioLength();
         time_total_tv.setText(TimeUtil.getTimeString(audioLength));
     }
 
@@ -271,7 +271,7 @@ public class OnLineLearnDetailsActivity extends RootFragmentActivity<OnLineLearn
                         time_progress_tv.setText(getResources().getString(R.string.time_zero));
                         top_play_iv.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.icon_pause));
 
-                        mPresenter.getEssayDetails(lists.get(pos).getName());
+                        mPresenter.getDetails(lists.get(pos).getName());
                     }
                 } else {
                     ToastUtils.showShort("请先停止录音");
@@ -289,7 +289,7 @@ public class OnLineLearnDetailsActivity extends RootFragmentActivity<OnLineLearn
                         time_progress_tv.setText(getResources().getString(R.string.time_zero));
                         top_play_iv.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.icon_pause));
 
-                        mPresenter.getEssayDetails(lists.get(pos).getName());
+                        mPresenter.getDetails(lists.get(pos).getName());
                     }
                 } else {
                     ToastUtils.showShort("请先停止录音");

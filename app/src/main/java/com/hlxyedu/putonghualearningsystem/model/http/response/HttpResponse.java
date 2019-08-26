@@ -10,6 +10,7 @@ public class HttpResponse<T> {
     private String msg;
     private String resultType;
     private int status;
+    private boolean success;
     private int code;
     private T data;
 
@@ -23,6 +24,14 @@ public class HttpResponse<T> {
 
     public String getResultType() {
         return resultType;
+    }
+
+    public boolean isSuccess() {
+        return success;
+    }
+
+    public void setSuccess(boolean success) {
+        this.success = success;
     }
 
     public void setResultType(String resultType) {

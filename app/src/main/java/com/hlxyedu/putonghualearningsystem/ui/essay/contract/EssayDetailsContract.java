@@ -1,6 +1,6 @@
 package com.hlxyedu.putonghualearningsystem.ui.essay.contract;
 
-import com.hlxyedu.putonghualearningsystem.model.bean.EssayDetailVO;
+import com.hlxyedu.putonghualearningsystem.model.bean.DetailVO;
 import com.skyworth.rxqwelibrary.base.BasePresenter;
 import com.skyworth.rxqwelibrary.base.BaseView;
 
@@ -13,7 +13,7 @@ public interface EssayDetailsContract {
         //返回登陆结果
         void responeError(String errorMsg);
 
-        void onDetailsSuccess(EssayDetailVO essayDetailVO);
+        void onDetailsSuccess(DetailVO detailVO);
 
     }
 

@@ -20,9 +20,13 @@ public class ActionEvent {
 
     public static final String JUMP = "JUMP";
 
+    public static final String SORT = "SORT";
+
     private String type;
 
     private int second;
+
+    private int sortType;
 
     private String questionNo;
 
@@ -38,6 +42,11 @@ public class ActionEvent {
         this.type = type;
         this.problemTitle = problemTitle;
         this.second = second;
+    }
+
+    public ActionEvent(String type,int sortType){
+        this.type = type;
+        this.sortType = sortType;
     }
 
     public ActionEvent(String type, int second, String questionNo){
@@ -84,7 +93,14 @@ public class ActionEvent {
         this.problemTitle = problemTitle;
     }
 
-    //    public AnswerVO getAnswerVO() {
+    public int getSortType() {
+        return sortType;
+    }
+
+    public void setSortType(int sortType) {
+        this.sortType = sortType;
+    }
+//    public AnswerVO getAnswerVO() {
 //        return answerVO;
 //    }
 //

@@ -29,13 +29,14 @@ public class ShortEssayAdapter extends BaseQuickAdapter<DataVO, BaseViewHolder> 
         String position = (helper.getLayoutPosition() + 1) > 9 ?
                 (helper.getLayoutPosition() + 1) + "" : "0" + (helper.getLayoutPosition() + 1);
 
-        String name = item.getName().substring(0, item.getName().lastIndexOf("."));
-        String txtStr = "【" + position + "】  " + "《" + name + "》示范朗读";
-        helper.setText(R.id.title, txtStr);
+//        String name = item.getName().substring(0, item.getName().lastIndexOf("."));
+//        String txtStr = "【" + position + "】  " + "《" + name + "》示范朗读";
+//        helper.setText(R.id.title, txtStr);
+        helper.setText(R.id.title, item.getConTitle());
 
         RelativeLayout relativeLayout = (RelativeLayout) helper.itemView;
         relativeLayout.setOnClickListener(view ->
 //                mContext.startActivity(OnLineLearnDetailsActivity.newInstance(mContext)));
-                mContext.startActivity(OnLineLearnDetailsActivity.newInstance(mContext, helper.getLayoutPosition(), datas, title, txtStr)));
+                mContext.startActivity(OnLineLearnDetailsActivity.newInstance(mContext, helper.getLayoutPosition(), (ArrayList<DataVO>) datas, title, item.getConTitle())));
     }
 }

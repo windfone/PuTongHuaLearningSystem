@@ -21,4 +21,9 @@ public class Constants {
 
     public static final String USER_INFO = "user_info";
 
+    /**
+     * data format
+     */
+    public static final String SYK_DATA_FORMAT = "application/json";
+
 }

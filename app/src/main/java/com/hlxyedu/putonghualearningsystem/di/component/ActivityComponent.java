@@ -5,7 +5,7 @@ import android.app.Activity;
 
 import com.hlxyedu.putonghualearningsystem.di.module.ActivityModule;
 import com.hlxyedu.putonghualearningsystem.di.scope.ActivityScope;
-import com.hlxyedu.putonghualearningsystem.ui.activity.SplashActivity;
+import com.hlxyedu.putonghualearningsystem.ui.splash.activity.SplashActivity;
 import com.hlxyedu.putonghualearningsystem.ui.essay.activity.EssayDetailsActivity;
 import com.hlxyedu.putonghualearningsystem.ui.essay.activity.EssayListActivity;
 import com.hlxyedu.putonghualearningsystem.ui.exam.activity.ExamDetailActivity;

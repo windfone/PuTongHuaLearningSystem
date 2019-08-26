@@ -11,8 +11,8 @@ import com.hlxyedu.putonghualearningsystem.ui.onlinelearning.adapter.PinYinAdapt
 import com.hlxyedu.putonghualearningsystem.ui.onlinelearning.contract.PinYinLearningContract;
 import com.hlxyedu.putonghualearningsystem.ui.onlinelearning.presenter.PinYinLearningPresenter;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 import butterknife.BindView;
 
@@ -27,7 +27,7 @@ public class PinYinLearningFragment extends RootFragment<PinYinLearningPresenter
 
     private PinYinAdapter mAdapter;
 
-    public static PinYinLearningFragment newInstance(String mTitles,int typeId) {
+    public static PinYinLearningFragment newInstance(String mTitles, int typeId) {
         Bundle args = new Bundle();
         args.putString("title", mTitles);
         args.putInt("typeId", typeId);
@@ -58,13 +58,16 @@ public class PinYinLearningFragment extends RootFragment<PinYinLearningPresenter
     @Override
     public void onSuccess(List<DataVO> dataVOS) {
         stateMain();
-        if (dataVOS != null && dataVOS.size()> 0){
+        for (int i = 0; i < dataVOS.size(); i++) {
+            dataVOS.get(i).setId(UUID.randomUUID() + "");
+        }
+        if (dataVOS == null || dataVOS.isEmpty()) {
+            stateEmpty("暂无内容");
+        } else {
             mAdapter = new PinYinAdapter(R.layout.item_pinyin, dataVOS, getArguments().getString("title"));
             rcy.setLayoutManager(
                     new LinearLayoutManager(mActivity));
             rcy.setAdapter(mAdapter);
-        }else {
-            stateEmpty("暂无数据");
         }
     }
 

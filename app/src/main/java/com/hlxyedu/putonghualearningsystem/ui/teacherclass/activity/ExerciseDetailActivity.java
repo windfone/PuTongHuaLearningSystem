@@ -3,6 +3,7 @@ package com.hlxyedu.putonghualearningsystem.ui.teacherclass.activity;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
+import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -14,6 +15,7 @@ import com.blankj.utilcode.util.ToastUtils;
 import com.hlxyedu.putonghualearningsystem.R;
 import com.hlxyedu.putonghualearningsystem.base.RootActivity;
 import com.hlxyedu.putonghualearningsystem.model.bean.CommentVO;
+import com.hlxyedu.putonghualearningsystem.model.bean.VideoVO;
 import com.hlxyedu.putonghualearningsystem.ui.teacherclass.adapter.CommentAdapter;
 import com.hlxyedu.putonghualearningsystem.ui.teacherclass.contract.ExerciseDetailContract;
 import com.hlxyedu.putonghualearningsystem.ui.teacherclass.presenter.ExerciseDetailPresenter;
@@ -38,8 +40,8 @@ public class ExerciseDetailActivity extends RootActivity<ExerciseDetailPresenter
     XBaseTopBar xbase_topbar;
    /* @BindView(R.id.play_iv)
     ImageView play_iv;*/
-    @BindView(R.id.title_iv)
-    TextView title_iv;
+    @BindView(R.id.title_tv)
+    TextView title_tv;
     @BindView(R.id.headportrait_iv)
     ImageView headportrait_iv;
     @BindView(R.id.teacher_name_tv)
@@ -62,32 +64,11 @@ public class ExerciseDetailActivity extends RootActivity<ExerciseDetailPresenter
      * @param context
      * @return
      */
-    public static Intent newInstance(Context context) {
+    public static Intent newInstance(Context context, String title, VideoVO videoVO) {
         Intent intent = new Intent(context, ExerciseDetailActivity.class);
+        intent.putExtra("title",title);
+        intent.putExtra("item",videoVO);
         return intent;
-    }
-
-    @Override
-    public void onBackPressed() {
-        if (Jzvd.backPress()) {
-            return;
-        }
-        super.onBackPressed();
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-        //home back
-        Jzvd.goOnPlayOnResume();
-    }
-
-    @Override
-    public void onPause() {
-        super.onPause();
-//        Jzvd.releaseAllVideos();
-        //home back
-        Jzvd.goOnPlayOnPause();
     }
 
     @Override
@@ -102,12 +83,16 @@ public class ExerciseDetailActivity extends RootActivity<ExerciseDetailPresenter
 
     @Override
     protected void initEventAndData() {
+//        stateLoading();
         xbase_topbar.setxBaseTopBarImp(this);
-        xbase_topbar.setMiddleText("");
+        xbase_topbar.setMiddleText(getIntent().getStringExtra("title"));
         xbase_topbar.setRightIv(ContextCompat.getDrawable(this,R.drawable.share));
         xbase_topbar.setRightListener(() -> {
             ToastUtils.showShort("点击分享");
         });
+        VideoVO videoVO = getIntent().getParcelableExtra("item");
+        title_tv.setText(videoVO.getTeaTitle());
+        read_num_tv.setText("阅读量：" + videoVO.getBrowseNum());
 
         List<CommentVO> lists = new ArrayList<>();
         lists.add(new CommentVO());
@@ -149,6 +134,29 @@ public class ExerciseDetailActivity extends RootActivity<ExerciseDetailPresenter
                 msgDialog.show();
                 break;
         }
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (Jzvd.backPress()) {
+            return;
+        }
+        super.onBackPressed();
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        //home back
+        Jzvd.goOnPlayOnResume();
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+//        Jzvd.releaseAllVideos();
+        //home back
+        Jzvd.goOnPlayOnPause();
     }
 
     @Override

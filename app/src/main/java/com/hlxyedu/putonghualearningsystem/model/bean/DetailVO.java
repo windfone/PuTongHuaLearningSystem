@@ -1,6 +1,6 @@
 package com.hlxyedu.putonghualearningsystem.model.bean;
 
-public class EssayDetailVO {
+public class DetailVO {
 
     /**
      * imgUrl : resources/img/《“能吞能吐”的森林》.png

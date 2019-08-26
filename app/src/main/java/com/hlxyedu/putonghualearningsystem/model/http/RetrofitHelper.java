@@ -2,9 +2,10 @@ package com.hlxyedu.putonghualearningsystem.model.http;
 
 
 import com.hlxyedu.putonghualearningsystem.model.bean.DataVO;
-import com.hlxyedu.putonghualearningsystem.model.bean.EssayDetailVO;
-import com.hlxyedu.putonghualearningsystem.model.bean.OnLineLearnTitleVO;
+import com.hlxyedu.putonghualearningsystem.model.bean.DetailVO;
+import com.hlxyedu.putonghualearningsystem.model.bean.TopTitleVO;
 import com.hlxyedu.putonghualearningsystem.model.bean.UserVO;
+import com.hlxyedu.putonghualearningsystem.model.bean.VideoVO;
 import com.hlxyedu.putonghualearningsystem.model.http.api.ManageApis;
 import com.hlxyedu.putonghualearningsystem.model.http.api.QBaseApis;
 import com.hlxyedu.putonghualearningsystem.model.http.response.HttpResponse;
@@ -14,6 +15,7 @@ import java.util.List;
 import javax.inject.Inject;
 
 import io.reactivex.Flowable;
+import okhttp3.RequestBody;
 
 /**
  *
@@ -30,6 +32,10 @@ public class RetrofitHelper implements HttpHelper {
         this.manageApis = manageApis;
     }
 
+    @Override
+    public Flowable<HttpResponse<UserVO>> getLoginBody(String username, String password) {
+        return qBaseApis.getLoginBody(username,password);
+    }
 
     @Override
     public Flowable<HttpResponse<List<DataVO>>> getEssayLists() {
@@ -37,7 +43,7 @@ public class RetrofitHelper implements HttpHelper {
     }
 
     @Override
-    public Flowable<HttpResponse<EssayDetailVO>> getEssayDetails(String keys) {
+    public Flowable<HttpResponse<DetailVO>> getEssayDetails(String keys) {
         return qBaseApis.getEssayDetails(keys);
     }
 
@@ -47,12 +53,22 @@ public class RetrofitHelper implements HttpHelper {
     }
 
     @Override
-    public Flowable<HttpResponse<List<OnLineLearnTitleVO>>> getOnLineLearningTitle() {
+    public Flowable<HttpResponse<List<TopTitleVO>>> getOnLineLearningTitle() {
         return qBaseApis.getOnLineLearningTitle();
     }
 
     @Override
     public Flowable<HttpResponse<List<DataVO>>> getOnLineLearningList(int typeId) {
         return qBaseApis.getOnLineLearningList(typeId);
+    }
+
+    @Override
+    public Flowable<HttpResponse<List<TopTitleVO>>> getTeacherClassTitle() {
+        return qBaseApis.getTeacherClassTitle();
+    }
+
+    @Override
+    public Flowable<HttpResponse<List<VideoVO>>> getTeacherClassList(int typeId, int orderBy, int currentPage, int pageSize) {
+        return qBaseApis.getTeacherClassList(typeId,orderBy,currentPage,pageSize);
     }
 }

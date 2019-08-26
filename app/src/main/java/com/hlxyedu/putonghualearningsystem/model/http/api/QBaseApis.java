@@ -1,15 +1,19 @@
 package com.hlxyedu.putonghualearningsystem.model.http.api;
 
 import com.hlxyedu.putonghualearningsystem.model.bean.DataVO;
-import com.hlxyedu.putonghualearningsystem.model.bean.EssayDetailVO;
-import com.hlxyedu.putonghualearningsystem.model.bean.OnLineLearnTitleVO;
+import com.hlxyedu.putonghualearningsystem.model.bean.DetailVO;
+import com.hlxyedu.putonghualearningsystem.model.bean.TopTitleVO;
 import com.hlxyedu.putonghualearningsystem.model.bean.UserVO;
+import com.hlxyedu.putonghualearningsystem.model.bean.VideoVO;
 import com.hlxyedu.putonghualearningsystem.model.http.response.HttpResponse;
 
 import java.util.List;
 
 import io.reactivex.Flowable;
+import okhttp3.RequestBody;
+import retrofit2.http.Body;
 import retrofit2.http.GET;
+import retrofit2.http.POST;
 import retrofit2.http.Query;
 
 /**
@@ -43,13 +47,17 @@ public interface QBaseApis {
     Flowable<HttpResponse<UserVO>> putModifyInfo(@Field("id") String id, @Field("pwd") String pwd
             , @Field("tname") String tname, @Field("tel") String tel, @Field("addr") String addr);*/
 
+    // 用户登录
+    @GET("user/login")
+    Flowable<HttpResponse<UserVO>> getLoginBody(@Query("username") String username,@Query("password") String password);
+
     // 获取 登录用户信息
     @GET("user/getUserInfo")
     Flowable<HttpResponse<UserVO>> getUserInfo(@Query("userId") int userId);
 
     // 获取 在线学习 头部标题
     @GET("study/selectType")
-    Flowable<HttpResponse<List<OnLineLearnTitleVO>>> getOnLineLearningTitle();
+    Flowable<HttpResponse<List<TopTitleVO>>> getOnLineLearningTitle();
 
     // 获取 拼音学习列表
     @GET("study/getContentTile")
@@ -59,9 +67,17 @@ public interface QBaseApis {
     @GET("Mp3List")
     Flowable<HttpResponse<List<DataVO>>> getEssayLists();
 
-    @GET("playUrl")
-    Flowable<HttpResponse<EssayDetailVO>> getEssayDetails(@Query("keys") String keys);
+    @GET("study/getContentDetail")
+    Flowable<HttpResponse<DetailVO>> getEssayDetails(@Query("conId") String conId);
 
+    // 获取 名师课堂 头部标题
+    @GET("browse/getTeacherType")
+    Flowable<HttpResponse<List<TopTitleVO>>> getTeacherClassTitle();
+
+    // 获取 名师课堂 列表
+    @GET("browse/geTeacherTitle")
+    Flowable<HttpResponse<List<VideoVO>>> getTeacherClassList(@Query("typeId") int typeId,@Query("orderBy") int orderBy,
+                                                                @Query("currentPage") int currentPage,@Query("pageSize") int pageSize);
 }
 
 

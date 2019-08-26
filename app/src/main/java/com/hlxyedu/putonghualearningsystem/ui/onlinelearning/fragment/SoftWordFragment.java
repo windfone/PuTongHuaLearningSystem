@@ -6,13 +6,13 @@ import android.support.v7.widget.RecyclerView;
 
 import com.hlxyedu.putonghualearningsystem.R;
 import com.hlxyedu.putonghualearningsystem.base.RootFragment;
-import com.hlxyedu.putonghualearningsystem.model.bean.PinYinBean;
+import com.hlxyedu.putonghualearningsystem.model.bean.DataVO;
 import com.hlxyedu.putonghualearningsystem.ui.onlinelearning.adapter.SoftWordAdapter;
 import com.hlxyedu.putonghualearningsystem.ui.onlinelearning.contract.SoftWordContract;
 import com.hlxyedu.putonghualearningsystem.ui.onlinelearning.presenter.SoftWordPresenter;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 import butterknife.BindView;
 
@@ -27,7 +27,7 @@ public class SoftWordFragment extends RootFragment<SoftWordPresenter> implements
 
     private SoftWordAdapter mAdapter;
 
-    public static SoftWordFragment newInstance(String mTitles,int typeId) {
+    public static SoftWordFragment newInstance(String mTitles, int typeId) {
         Bundle args = new Bundle();
         args.putString("title", mTitles);
         args.putInt("typeId", typeId);
@@ -52,17 +52,23 @@ public class SoftWordFragment extends RootFragment<SoftWordPresenter> implements
         super.initEventAndData();
         stateLoading();
 
-        List<PinYinBean> lists = new ArrayList<>();
-        PinYinBean bean = new PinYinBean();
-        bean.setTitle("普通话拼音学习教程第一课 a o e");
-        for (int i = 0; i < 10; i++) {
-            lists.add(bean);
-        }
+//        mPresenter.getLearningList(getArguments().getInt("typeId"));
+    }
+
+    @Override
+    public void onSuccess(List<DataVO> dataVOS) {
         stateMain();
-        mAdapter = new SoftWordAdapter(R.layout.item_pinyin,lists,getArguments().getString("title"));
-        rcy.setLayoutManager(
-                new LinearLayoutManager(mActivity));
-        rcy.setAdapter(mAdapter);
+        for (int i = 0; i < dataVOS.size(); i++) {
+            dataVOS.get(i).setId(UUID.randomUUID() + "");
+        }
+        if (dataVOS == null || dataVOS.isEmpty()) {
+            stateEmpty("暂无内容");
+        } else {
+            mAdapter = new SoftWordAdapter(R.layout.item_pinyin, dataVOS, getArguments().getString("title"));
+            rcy.setLayoutManager(
+                    new LinearLayoutManager(mActivity));
+            rcy.setAdapter(mAdapter);
+        }
     }
 
     @Override

@@ -5,6 +5,7 @@
     android:layout_height="match_parent"
     android:background="@color/whitefff"
     android:orientation="vertical"
+    android:id="@+id/view_main"
     tools:context=".ui.teacherclass.fragment.ExerciseFragment">
 
     <!--<LinearLayout

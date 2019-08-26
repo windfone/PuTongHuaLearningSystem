@@ -95,6 +95,9 @@ public class HanZiLearningFragment extends RootFragment<HanZiLearningPresenter> 
         mHeaderAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+                if (position == lastSelect){
+                    return;
+                }
                 selectList.set(position, true);
                 selectList.set(lastSelect, false);
                 lastSelect = position;

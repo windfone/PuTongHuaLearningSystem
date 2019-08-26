@@ -1,25 +1,25 @@
-package com.hlxyedu.putonghualearningsystem.ui.main.presenter;
+package com.hlxyedu.putonghualearningsystem.ui.splash.presenter;
 
 import com.hlxyedu.putonghualearningsystem.base.RxPresenter;
 import com.hlxyedu.putonghualearningsystem.model.DataManager;
-import com.hlxyedu.putonghualearningsystem.ui.main.contract.MainContract;
+import com.hlxyedu.putonghualearningsystem.ui.splash.contract.SplashContract;
 
 import javax.inject.Inject;
 
 /**
  * Created by zhangguihua
  */
-public class MainPresenter extends RxPresenter<MainContract.View> implements MainContract.Presenter {
+public class SplashPresenter extends RxPresenter<SplashContract.View> implements SplashContract.Presenter {
     private DataManager mDataManager;
 
     @Inject
-    public MainPresenter(DataManager mDataManager) {
+    public SplashPresenter(DataManager mDataManager) {
         super(mDataManager);
         this.mDataManager = mDataManager;
     }
 
     @Override
-    public void attachView(MainContract.View view) {
+    public void attachView(SplashContract.View view) {
         super.attachView(view);
         registerEvent();
     }

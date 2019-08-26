@@ -4,8 +4,7 @@ import com.blankj.utilcode.util.ToastUtils;
 import com.hlxyedu.putonghualearningsystem.base.RxBus;
 import com.hlxyedu.putonghualearningsystem.base.RxPresenter;
 import com.hlxyedu.putonghualearningsystem.model.DataManager;
-import com.hlxyedu.putonghualearningsystem.model.bean.EssayDetailVO;
-import com.hlxyedu.putonghualearningsystem.model.event.LoginEvent;
+import com.hlxyedu.putonghualearningsystem.model.bean.DetailVO;
 import com.hlxyedu.putonghualearningsystem.model.event.RecordEvent;
 import com.hlxyedu.putonghualearningsystem.model.http.response.HttpResponseCode;
 import com.hlxyedu.putonghualearningsystem.ui.onlinelearning.contract.OnLineLearnDetailsContract;
@@ -62,15 +61,15 @@ public class OnLineLearnDetailsPresenter extends RxPresenter<OnLineLearnDetailsC
     }
 
     @Override
-    public void getEssayDetails(String audioName) {
+    public void getDetails(String audioName) {
         addSubscribe(
                 mDataManager.getEssayDetails(audioName)
                         .compose(RxUtil.rxSchedulerHelper())
                         .compose(RxUtil.handleTestResult())
                         .subscribeWith(
-                                new CommonSubscriber<EssayDetailVO>(mView) {
+                                new CommonSubscriber<DetailVO>(mView) {
                                     @Override
-                                    public void onNext(EssayDetailVO detailVO) {
+                                    public void onNext(DetailVO detailVO) {
                                         mView.onDetailsSuccess(detailVO);
                                     }
 

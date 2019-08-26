@@ -1,16 +1,16 @@
 package com.hlxyedu.putonghualearningsystem.ui.main.presenter;
 
-import com.blankj.utilcode.util.GsonUtils;
 import com.blankj.utilcode.util.ToastUtils;
 import com.hlxyedu.putonghualearningsystem.base.RxPresenter;
 import com.hlxyedu.putonghualearningsystem.model.DataManager;
-import com.hlxyedu.putonghualearningsystem.model.bean.OnLineLearnTitleVO;
-import com.hlxyedu.putonghualearningsystem.model.bean.UserVO;
+import com.hlxyedu.putonghualearningsystem.model.bean.TopTitleVO;
 import com.hlxyedu.putonghualearningsystem.model.http.response.HttpResponseCode;
 import com.hlxyedu.putonghualearningsystem.ui.main.contract.OnLineLearningContract;
 import com.hlxyedu.putonghualearningsystem.utils.RegUtils;
 import com.hlxyedu.putonghualearningsystem.utils.RxUtil;
 import com.hlxyedu.putonghualearningsystem.weight.CommonSubscriber;
+
+import java.util.List;
 
 import javax.inject.Inject;
 
@@ -38,4 +38,31 @@ public class OnLineLearningPresenter extends RxPresenter<OnLineLearningContract.
 
     }
 
+    @Override
+    public void getTopTitle() {
+        addSubscribe(
+                mDataManager.getOnLineLearningTitle()
+                        .compose(RxUtil.rxSchedulerHelper())
+                        .compose(RxUtil.handleTestResult())
+                        .subscribeWith(
+                                new CommonSubscriber<List<TopTitleVO>>(mView) {
+                                    @Override
+                                    public void onNext(List<TopTitleVO> topTitleVOS) {
+                                        mView.onTopSuccess(topTitleVOS);
+                                    }
+
+                                    @Override
+                                    public void onError(Throwable e) {
+                                        //当数据返回为null时 做特殊处理
+                                        if (e instanceof HttpException) {
+                                            HttpResponseCode httpResponseCode = RegUtils
+                                                    .onError((HttpException) e);
+                                            ToastUtils.showShort(httpResponseCode.getMsg());
+                                        }
+                                        mView.responeError("数据请求失败，请检查网络！");
+                                    }
+                                }
+                        )
+        );
+    }
 }

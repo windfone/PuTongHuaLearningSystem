@@ -3,7 +3,7 @@ package com.hlxyedu.putonghualearningsystem.model.bean;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-public class OnLineLearnTitleVO implements Parcelable {
+public class TopTitleVO implements Parcelable {
 
 
     /**
@@ -11,8 +11,21 @@ public class OnLineLearnTitleVO implements Parcelable {
      * typeId : 1
      */
 
+    private String teType;
     private String exType;
     private int typeId;
+
+    public String getTeType() {
+        return teType;
+    }
+
+    public void setTeType(String teType) {
+        this.teType = teType;
+    }
+
+    public static Creator<TopTitleVO> getCREATOR() {
+        return CREATOR;
+    }
 
     public String getExType() {
         return exType;
@@ -41,23 +54,23 @@ public class OnLineLearnTitleVO implements Parcelable {
         dest.writeInt(this.typeId);
     }
 
-    public OnLineLearnTitleVO() {
+    public TopTitleVO() {
     }
 
-    protected OnLineLearnTitleVO(Parcel in) {
+    protected TopTitleVO(Parcel in) {
         this.exType = in.readString();
         this.typeId = in.readInt();
     }
 
-    public static final Parcelable.Creator<OnLineLearnTitleVO> CREATOR = new Parcelable.Creator<OnLineLearnTitleVO>() {
+    public static final Parcelable.Creator<TopTitleVO> CREATOR = new Parcelable.Creator<TopTitleVO>() {
         @Override
-        public OnLineLearnTitleVO createFromParcel(Parcel source) {
-            return new OnLineLearnTitleVO(source);
+        public TopTitleVO createFromParcel(Parcel source) {
+            return new TopTitleVO(source);
         }
 
         @Override
-        public OnLineLearnTitleVO[] newArray(int size) {
-            return new OnLineLearnTitleVO[size];
+        public TopTitleVO[] newArray(int size) {
+            return new TopTitleVO[size];
         }
     };
 }

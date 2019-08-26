@@ -1,9 +1,10 @@
 package com.hlxyedu.putonghualearningsystem.model.http;
 
 import com.hlxyedu.putonghualearningsystem.model.bean.DataVO;
-import com.hlxyedu.putonghualearningsystem.model.bean.EssayDetailVO;
-import com.hlxyedu.putonghualearningsystem.model.bean.OnLineLearnTitleVO;
+import com.hlxyedu.putonghualearningsystem.model.bean.DetailVO;
+import com.hlxyedu.putonghualearningsystem.model.bean.TopTitleVO;
 import com.hlxyedu.putonghualearningsystem.model.bean.UserVO;
+import com.hlxyedu.putonghualearningsystem.model.bean.VideoVO;
 import com.hlxyedu.putonghualearningsystem.model.http.response.HttpResponse;
 
 import java.util.List;
@@ -20,14 +21,21 @@ public interface HttpHelper {
 
 //    Flowable<HttpResponse<UserVO>> getLoginBody(String uname, String pwd);
 
+    Flowable<HttpResponse<UserVO>> getLoginBody(String username,String password);
+
     Flowable<HttpResponse<List<DataVO>>> getEssayLists();
 
-    Flowable<HttpResponse<EssayDetailVO>> getEssayDetails(String keys);
+    Flowable<HttpResponse<DetailVO>> getEssayDetails(String keys);
 
     Flowable<HttpResponse<UserVO>> getUserInfo(int userId);
 
-    Flowable<HttpResponse<List<OnLineLearnTitleVO>>> getOnLineLearningTitle();
+    Flowable<HttpResponse<List<TopTitleVO>>> getOnLineLearningTitle();
 
     Flowable<HttpResponse<List<DataVO>>> getOnLineLearningList(int typeId);
+
+    Flowable<HttpResponse<List<TopTitleVO>>> getTeacherClassTitle();
+
+    Flowable<HttpResponse<List<VideoVO>>> getTeacherClassList(int typeId, int orderBy,
+                                                              int currentPage, int pageSize);
 
 }

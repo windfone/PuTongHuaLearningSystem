@@ -39,16 +39,16 @@ public class ShortEssayPresenter extends RxPresenter<ShortEssayContract.View> im
     }
 
     @Override
-    public void getEssays() {
+    public void getLearningList(int typeId) {
         addSubscribe(
-                mDataManager.getEssayLists()
+                mDataManager.getOnLineLearningList(typeId)
                         .compose(RxUtil.rxSchedulerHelper())
                         .compose(RxUtil.handleTestResult())
                         .subscribeWith(
                                 new CommonSubscriber<List<DataVO>>(mView) {
                                     @Override
-                                    public void onNext(List<DataVO> list) {
-                                        mView.onSuccess(list);
+                                    public void onNext(List<DataVO> dataVOS) {
+                                        mView.onSuccess(dataVOS);
                                     }
 
                                     @Override

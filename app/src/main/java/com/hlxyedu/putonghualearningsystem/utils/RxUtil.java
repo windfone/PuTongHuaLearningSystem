@@ -64,7 +64,7 @@ public class RxUtil {
                     @Override
                     public Flowable<T> apply(HttpResponse<T> httpResponse) {
 
-                        if(StringUtils.equals(httpResponse.getResultType(),"success")){
+                        if(httpResponse.isSuccess()){
                             return createData(httpResponse.getData());
                         }else {
                             return Flowable.error(new ApiException( httpResponse.getMsg(),httpResponse.getStatus()));

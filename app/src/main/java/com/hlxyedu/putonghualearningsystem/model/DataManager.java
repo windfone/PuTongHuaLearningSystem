@@ -1,9 +1,10 @@
 package com.hlxyedu.putonghualearningsystem.model;
 
 import com.hlxyedu.putonghualearningsystem.model.bean.DataVO;
-import com.hlxyedu.putonghualearningsystem.model.bean.EssayDetailVO;
-import com.hlxyedu.putonghualearningsystem.model.bean.OnLineLearnTitleVO;
+import com.hlxyedu.putonghualearningsystem.model.bean.DetailVO;
+import com.hlxyedu.putonghualearningsystem.model.bean.TopTitleVO;
 import com.hlxyedu.putonghualearningsystem.model.bean.UserVO;
+import com.hlxyedu.putonghualearningsystem.model.bean.VideoVO;
 import com.hlxyedu.putonghualearningsystem.model.http.HttpHelper;
 import com.hlxyedu.putonghualearningsystem.model.http.response.HttpResponse;
 import com.hlxyedu.putonghualearningsystem.model.prefs.PreferencesHelper;
@@ -11,6 +12,7 @@ import com.hlxyedu.putonghualearningsystem.model.prefs.PreferencesHelper;
 import java.util.List;
 
 import io.reactivex.Flowable;
+import okhttp3.RequestBody;
 
 /**
  * 作者：skyworth on 2017/7/11 09:55
@@ -79,12 +81,17 @@ public class DataManager implements HttpHelper, PreferencesHelper {
     }
 
     @Override
+    public Flowable<HttpResponse<UserVO>> getLoginBody(String username, String password) {
+        return mHttpHelper.getLoginBody(username,password);
+    }
+
+    @Override
     public Flowable<HttpResponse<List<DataVO>>> getEssayLists() {
         return mHttpHelper.getEssayLists();
     }
 
     @Override
-    public Flowable<HttpResponse<EssayDetailVO>> getEssayDetails(String keys) {
+    public Flowable<HttpResponse<DetailVO>> getEssayDetails(String keys) {
         return mHttpHelper.getEssayDetails(keys);
     }
 
@@ -94,12 +101,22 @@ public class DataManager implements HttpHelper, PreferencesHelper {
     }
 
     @Override
-    public Flowable<HttpResponse<List<OnLineLearnTitleVO>>> getOnLineLearningTitle() {
+    public Flowable<HttpResponse<List<TopTitleVO>>> getOnLineLearningTitle() {
         return mHttpHelper.getOnLineLearningTitle();
     }
 
     @Override
     public Flowable<HttpResponse<List<DataVO>>> getOnLineLearningList(int typeId) {
         return mHttpHelper.getOnLineLearningList(typeId);
+    }
+
+    @Override
+    public Flowable<HttpResponse<List<TopTitleVO>>> getTeacherClassTitle() {
+        return mHttpHelper.getTeacherClassTitle();
+    }
+
+    @Override
+    public Flowable<HttpResponse<List<VideoVO>>> getTeacherClassList(int typeId, int orderBy, int currentPage, int pageSize) {
+        return mHttpHelper.getTeacherClassList(typeId,orderBy,currentPage,pageSize);
     }
 }

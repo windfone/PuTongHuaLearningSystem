@@ -1,4 +1,4 @@
-package com.hlxyedu.putonghualearningsystem.ui.activity;
+package com.hlxyedu.putonghualearningsystem.ui.splash.activity;
 
 import android.content.Context;
 import android.content.Intent;
@@ -6,19 +6,15 @@ import android.view.View;
 
 import com.hlxyedu.putonghualearningsystem.R;
 import com.hlxyedu.putonghualearningsystem.base.RootActivity;
-import com.hlxyedu.putonghualearningsystem.model.bean.OnLineLearnTitleVO;
-import com.hlxyedu.putonghualearningsystem.ui.contract.SplashContract;
-import com.hlxyedu.putonghualearningsystem.ui.main.activity.MainActivity;
-import com.hlxyedu.putonghualearningsystem.ui.presenter.SplashPresenter;
-
-import java.util.List;
+import com.hlxyedu.putonghualearningsystem.ui.login.activity.LoginActivity;
+import com.hlxyedu.putonghualearningsystem.ui.splash.contract.SplashContract;
+import com.hlxyedu.putonghualearningsystem.ui.splash.presenter.SplashPresenter;
 
 /**
  * Created by zhangguihua
  */
 public class SplashActivity extends RootActivity<SplashPresenter> implements SplashContract.View {
 
-    private List<OnLineLearnTitleVO> lists;
     /**
      * 打开新Activity
      *
@@ -46,16 +42,10 @@ public class SplashActivity extends RootActivity<SplashPresenter> implements Spl
         findViewById(R.id.jump_tv).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(MainActivity.newInstance(SplashActivity.this,lists));
+                startActivity(LoginActivity.newInstance(SplashActivity.this));
                 finish();
             }
         });
-        mPresenter.getTopTitle();
-    }
-
-    @Override
-    public void onTopSuccess(List<OnLineLearnTitleVO> onLineLearnTitleVOS) {
-        lists = onLineLearnTitleVOS;
     }
 
     @Override

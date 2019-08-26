@@ -1,10 +1,7 @@
 package com.hlxyedu.putonghualearningsystem.ui.main.contract;
 
-import com.hlxyedu.putonghualearningsystem.model.bean.OnLineLearnTitleVO;
 import com.skyworth.rxqwelibrary.base.BasePresenter;
 import com.skyworth.rxqwelibrary.base.BaseView;
-
-import java.util.List;
 
 /**
  * Created by zhangguihua

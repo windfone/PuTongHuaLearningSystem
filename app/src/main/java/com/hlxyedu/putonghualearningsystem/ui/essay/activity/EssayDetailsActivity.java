@@ -34,7 +34,7 @@ import com.fifedu.record.recinbox.bl.record.RecorderManager;
 import com.hlxyedu.putonghualearningsystem.R;
 import com.hlxyedu.putonghualearningsystem.base.RootActivity;
 import com.hlxyedu.putonghualearningsystem.model.bean.DataVO;
-import com.hlxyedu.putonghualearningsystem.model.bean.EssayDetailVO;
+import com.hlxyedu.putonghualearningsystem.model.bean.DetailVO;
 import com.hlxyedu.putonghualearningsystem.model.http.api.ApiConstants;
 import com.hlxyedu.putonghualearningsystem.ui.essay.contract.EssayDetailsContract;
 import com.hlxyedu.putonghualearningsystem.ui.essay.presenter.EssayDetailsPresenter;
@@ -231,17 +231,17 @@ public class EssayDetailsActivity extends RootActivity<EssayDetailsPresenter> im
     }
 
     @Override
-    public void onDetailsSuccess(EssayDetailVO essayDetailVO) {
+    public void onDetailsSuccess(DetailVO detailVO) {
         play_iv.setEnabled(true);
         pre_iv.setEnabled(true);
         next_iv.setEnabled(true);
         String essayTxt = "";
-        for (int i = 0; i < essayDetailVO.getTxtData().length; i++) {
-            essayTxt += "        " + essayDetailVO.getTxtData()[i] + "\n";
+        for (int i = 0; i < detailVO.getTxtData().length; i++) {
+            essayTxt += "        " + detailVO.getTxtData()[i] + "\n";
         }
         essay_tv.setText(essayTxt);
-        audioUrl = essayDetailVO.getAudioUrl();
-        total_time_tv.setText("/" + TimeUtil.getTimeString(essayDetailVO.getAudioLength()));
+        audioUrl = detailVO.getAudioUrl();
+        total_time_tv.setText("/" + TimeUtil.getTimeString(detailVO.getAudioLength()));
     }
 
     // ********************** 录音部分 ************************** //

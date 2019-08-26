@@ -3,6 +3,7 @@ package com.hlxyedu.putonghualearningsystem.ui.login.activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -32,6 +33,8 @@ public class LoginActivity extends RootActivity<LoginPresenter> implements Login
     EditText code_edit;
     @BindView(R.id.login_rl)
     RelativeLayout login_rl;
+    @BindView(R.id.login_tv)
+    TextView login_tv;
     @BindView(R.id.code_tv)
     TextView code_tv;
     @BindView(R.id.wechat_login_iv)
@@ -69,13 +72,14 @@ public class LoginActivity extends RootActivity<LoginPresenter> implements Login
 
     @Override
     public void responeError(String errorMsg) {
-
+        login_tv.setText(getResources().getString(R.string.login));
+        login_rl.setEnabled(true);
     }
 
     @Override
     public void loginSuccess(UserVO userVO) {
         ToastUtils.showShort("登录成功");
-//        startActivity(MainActivity.newInstance(LoginActivity.this));
+        startActivity(MainActivity.newInstance(LoginActivity.this));
         finish();
     }
 
@@ -86,7 +90,17 @@ public class LoginActivity extends RootActivity<LoginPresenter> implements Login
 
     @OnClick(R.id.login_rl)
     public void onViewClicked() {
-
+        String account = user_name_edit.getText().toString().trim();
+        String password = code_edit.getText().toString().trim();
+        if (TextUtils.isEmpty(account)) {
+            return;
+        }
+        if (TextUtils.isEmpty(password)) {
+            return;
+        }
+        login_tv.setText(getResources().getString(R.string.logining));
+        login_rl.setEnabled(false);
+        mPresenter.login("admin","admin");
     }
 
     @OnClick({R.id.login_rl,R.id.wechat_login_iv, R.id.qq_login_iv, R.id.alipay_login_iv})

@@ -6,7 +6,6 @@ import android.os.Parcelable;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
 import android.util.TypedValue;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.AccelerateInterpolator;
@@ -14,13 +13,12 @@ import android.view.animation.DecelerateInterpolator;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
-import android.widget.PopupWindow;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import com.hlxyedu.putonghualearningsystem.R;
 import com.hlxyedu.putonghualearningsystem.base.RootFragment;
-import com.hlxyedu.putonghualearningsystem.model.bean.OnLineLearnTitleVO;
+import com.hlxyedu.putonghualearningsystem.base.RxBus;
+import com.hlxyedu.putonghualearningsystem.model.bean.TopTitleVO;
+import com.hlxyedu.putonghualearningsystem.model.event.ActionEvent;
 import com.hlxyedu.putonghualearningsystem.ui.publics.adapter.PagerFragmentAdapter;
 import com.hlxyedu.putonghualearningsystem.ui.publics.contract.ViewPagerContract;
 import com.hlxyedu.putonghualearningsystem.ui.publics.presenter.ViewPagerPresenter;
@@ -44,39 +42,29 @@ import java.util.Collections;
 import java.util.List;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
-import butterknife.Unbinder;
 
 /**
  * Created by zhangguihua
  */
 public class ViewPagerFragment extends RootFragment<ViewPagerPresenter> implements ViewPagerContract.View {
+
     @BindView(R.id.top_indicator)
     MagicIndicator top_indicator;
     @BindView(R.id.view_pager)
     ViewPager view_pager;
     @BindView(R.id.sort_iv)
-    ImageView sort_tv;
+    ImageView sort_iv;
 
     private ArrayList<String> mTitleDataList;
-    private List<OnLineLearnTitleVO> lists;
+    private List<TopTitleVO> lists;
 
     // from == 1 ,在线学习； from == 2，名师课堂
-    public static ViewPagerFragment newInstance(int from, ArrayList<String> titles,List<OnLineLearnTitleVO> lists) {
+    public static ViewPagerFragment newInstance(int from, ArrayList<String> titles,List<TopTitleVO> lists) {
         Bundle args = new Bundle();
         args.putInt("from", from);
         args.putStringArrayList("titles", titles);
         args.putParcelableArrayList("titleVO", (ArrayList<? extends Parcelable>) lists);
-        ViewPagerFragment fragment = new ViewPagerFragment();
-        fragment.setArguments(args);
-        return fragment;
-    }
-
-    public static ViewPagerFragment newInstance(int from, ArrayList<String> titles) {
-        Bundle args = new Bundle();
-        args.putInt("from", from);
-        args.putStringArrayList("titles", titles);
         ViewPagerFragment fragment = new ViewPagerFragment();
         fragment.setArguments(args);
         return fragment;
@@ -100,9 +88,9 @@ public class ViewPagerFragment extends RootFragment<ViewPagerPresenter> implemen
             mTitleDataList = getArguments().getStringArrayList("titles");
             lists = getArguments().getParcelableArrayList("titleVO");
             if (from == 1) {
-                sort_tv.setVisibility(View.GONE);
+                sort_iv.setVisibility(View.GONE);
             } else if (from == 2) {
-                sort_tv.setVisibility(View.VISIBLE);
+                sort_iv.setVisibility(View.VISIBLE);
             }
         }
         initIndicator();
@@ -164,7 +152,7 @@ public class ViewPagerFragment extends RootFragment<ViewPagerPresenter> implemen
         initListPopupIfNeed();
         mListPopup.setAnimStyle(QMUIPopup.ANIM_AUTO);
         mListPopup.setPreferredDirection(QMUIPopup.DIRECTION_BOTTOM);
-        mListPopup.show(sort_tv);
+        mListPopup.show(sort_iv);
     }
 
     private void initListPopupIfNeed() {
@@ -187,9 +175,11 @@ public class ViewPagerFragment extends RootFragment<ViewPagerPresenter> implemen
                     switch (i){
                         // 阅读量排序
                         case 0:
+                            RxBus.getDefault().post(new ActionEvent(ActionEvent.SORT,0));
                             break;
                         // 上传日期排序
-                        case 2:
+                        case 1:
+                            RxBus.getDefault().post(new ActionEvent(ActionEvent.SORT,1));
                             break;
                     }
                     mListPopup.dismiss();

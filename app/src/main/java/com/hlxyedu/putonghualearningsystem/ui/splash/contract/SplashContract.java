@@ -16,6 +16,7 @@ public interface SplashContract {
 
     interface Presenter extends BasePresenter<View> {
 
+        boolean isLogin();
 
     }
 }

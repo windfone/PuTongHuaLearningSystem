@@ -2,11 +2,13 @@ package com.hlxyedu.putonghualearningsystem.ui.splash.activity;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Handler;
 import android.view.View;
 
 import com.hlxyedu.putonghualearningsystem.R;
 import com.hlxyedu.putonghualearningsystem.base.RootActivity;
 import com.hlxyedu.putonghualearningsystem.ui.login.activity.LoginActivity;
+import com.hlxyedu.putonghualearningsystem.ui.main.activity.MainActivity;
 import com.hlxyedu.putonghualearningsystem.ui.splash.contract.SplashContract;
 import com.hlxyedu.putonghualearningsystem.ui.splash.presenter.SplashPresenter;
 
@@ -38,14 +40,29 @@ public class SplashActivity extends RootActivity<SplashPresenter> implements Spl
 
     @Override
     protected void initEventAndData() {
+        if ((getIntent().getFlags() & Intent.FLAG_ACTIVITY_BROUGHT_TO_FRONT) != 0) {
+            finish();
+            return;
+        }
 
-        findViewById(R.id.jump_tv).setOnClickListener(new View.OnClickListener() {
+        new Handler().postDelayed(() -> {
+
+            if (mPresenter.isLogin()) {
+                startActivity(MainActivity.newInstance(getBaseContext()));
+            } else {
+                startActivity(LoginActivity.newInstance(getBaseContext()));
+            }
+            finish();
+
+        },1000);
+
+        /*findViewById(R.id.jump_tv).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startActivity(LoginActivity.newInstance(SplashActivity.this));
                 finish();
             }
-        });
+        });*/
     }
 
     @Override

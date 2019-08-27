@@ -28,6 +28,7 @@
 
     <!-- activity_login-->
     <string name="login">登录</string>
+    <string name="jump_login">点击跳过</string>
     <string name="please_input_user_name">请输入用户名</string>
     <string name="please_input_pwd">请输入密码</string>
     <string name="other_login">其它方式登录</string>

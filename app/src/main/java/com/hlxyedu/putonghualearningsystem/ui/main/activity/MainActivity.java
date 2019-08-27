@@ -2,12 +2,10 @@ package com.hlxyedu.putonghualearningsystem.ui.main.activity;
 
 import android.content.Context;
 import android.content.Intent;
-import android.os.Parcelable;
 import android.view.KeyEvent;
 
 import com.hlxyedu.putonghualearningsystem.R;
 import com.hlxyedu.putonghualearningsystem.base.RootFragmentActivity;
-import com.hlxyedu.putonghualearningsystem.model.bean.TopTitleVO;
 import com.hlxyedu.putonghualearningsystem.ui.main.contract.MainContract;
 import com.hlxyedu.putonghualearningsystem.ui.main.fragment.ExamCenterFragment;
 import com.hlxyedu.putonghualearningsystem.ui.main.fragment.FamousClassroomFragment;
@@ -15,9 +13,6 @@ import com.hlxyedu.putonghualearningsystem.ui.main.fragment.OnLineLearningFragme
 import com.hlxyedu.putonghualearningsystem.ui.main.fragment.PersonalCenterFragment;
 import com.hlxyedu.putonghualearningsystem.ui.main.presenter.MainPresenter;
 import com.hlxyedu.putonghualearningsystem.weight.bottombar.BottomBar;
-
-import java.util.ArrayList;
-import java.util.List;
 
 import butterknife.BindView;
 import me.yokeyword.fragmentation.SupportFragment;
@@ -31,11 +26,9 @@ public class MainActivity extends RootFragmentActivity<MainPresenter> implements
     public static final int SECOND = 1;
     public static final int THIRD = 2;
     public static final int FOURTH = 3;
-
-    private SupportFragment[] mFragments = new SupportFragment[4];
-
     @BindView(R.id.bottomBar)
     BottomBar mBottomBar;
+    private SupportFragment[] mFragments = new SupportFragment[4];
 
 //    @BindView(R.id.main_topbar)
 //    MainTopBar main_topbar;
@@ -46,12 +39,6 @@ public class MainActivity extends RootFragmentActivity<MainPresenter> implements
      * @param context
      * @return
      */
-//    public static Intent newInstance(Context context,List<TopTitleVO> lists) {
-//        Intent intent = new Intent(context, MainActivity.class);
-//        intent.putParcelableArrayListExtra("topTitle", (ArrayList<? extends Parcelable>) lists);
-//        return intent;
-//    }
-
     public static Intent newInstance(Context context) {
         Intent intent = new Intent(context, MainActivity.class);
 
@@ -72,14 +59,13 @@ public class MainActivity extends RootFragmentActivity<MainPresenter> implements
     protected void initEventAndData() {
         SupportFragment firstFragment = findFragment(OnLineLearningFragment.class);
         if (firstFragment == null) {
-//            mFragments[FIRST] = OnLineLearningFragment.newInstance(getIntent().getParcelableArrayListExtra("topTitle"));
             mFragments[FIRST] = OnLineLearningFragment.newInstance();
             mFragments[SECOND] = ExamCenterFragment.newInstance();
             mFragments[THIRD] = FamousClassroomFragment.newInstance();
             mFragments[FOURTH] = PersonalCenterFragment.newInstance();
 
             loadMultipleRootFragment(R.id.fl_tab_container, FIRST,
-                    mFragments[FIRST], mFragments[SECOND], mFragments[THIRD],mFragments[FOURTH]);
+                    mFragments[FIRST], mFragments[SECOND], mFragments[THIRD], mFragments[FOURTH]);
         } else {
             // 这里库已经做了Fragment恢复,所有不需要额外的处理了, 不会出现重叠问题
 
@@ -97,7 +83,7 @@ public class MainActivity extends RootFragmentActivity<MainPresenter> implements
     private void initView() {
         mBottomBar.setOnTabSelectedListener((position, prePosition) -> {
             showHideFragment(mFragments[position], mFragments[prePosition]);
-            switch (position){
+            switch (position) {
                 case 0:
 //                    main_topbar.setVisibility(View.VISIBLE);
 //                    main_topbar.setMiddleText(getResources().getString(R.string.home_title));

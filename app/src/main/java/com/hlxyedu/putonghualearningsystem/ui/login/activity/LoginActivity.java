@@ -35,6 +35,8 @@ public class LoginActivity extends RootActivity<LoginPresenter> implements Login
     RelativeLayout login_rl;
     @BindView(R.id.login_tv)
     TextView login_tv;
+    @BindView(R.id.jump_login_tv)
+    TextView jump_login_tv;
     @BindView(R.id.code_tv)
     TextView code_tv;
     @BindView(R.id.wechat_login_iv)
@@ -103,9 +105,13 @@ public class LoginActivity extends RootActivity<LoginPresenter> implements Login
         mPresenter.login("admin","admin");
     }
 
-    @OnClick({R.id.login_rl,R.id.wechat_login_iv, R.id.qq_login_iv, R.id.alipay_login_iv})
+    @OnClick({R.id.login_rl,R.id.wechat_login_iv, R.id.qq_login_iv, R.id.alipay_login_iv, R.id.jump_login_tv})
     public void onViewClicked(View view) {
         switch (view.getId()) {
+            case R.id.jump_login_tv:
+                startActivity(MainActivity.newInstance(getBaseContext()));
+                finish();
+                break;
             case R.id.login_rl:
                 break;
             case R.id.wechat_login_iv:

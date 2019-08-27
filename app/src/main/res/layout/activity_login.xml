@@ -10,10 +10,27 @@
     android:orientation="vertical"
     tools:context=".ui.login.activity.LoginActivity">
 
-    <ImageView
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:src="@drawable/icon_login_top_bg" />
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:src="@drawable/icon_login_top_bg" />
+
+        <TextView
+            android:id="@+id/jump_login_tv"
+            style="@style/textSize_whitefff_17"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="30dp"
+            android:layout_marginEnd="20dp"
+            android:text="@string/jump_login"
+            android:textStyle="bold" />
+
+    </RelativeLayout>
 
     <TextView
         style="@style/textSize_blackE3E_20"

@@ -1,9 +1,11 @@
 package com.hlxyedu.putonghualearningsystem.ui.main.presenter;
 
 import com.blankj.utilcode.util.ToastUtils;
+import com.hlxyedu.putonghualearningsystem.base.RxBus;
 import com.hlxyedu.putonghualearningsystem.base.RxPresenter;
 import com.hlxyedu.putonghualearningsystem.model.DataManager;
 import com.hlxyedu.putonghualearningsystem.model.bean.TopTitleVO;
+import com.hlxyedu.putonghualearningsystem.model.event.LoginEvent;
 import com.hlxyedu.putonghualearningsystem.model.http.response.HttpResponseCode;
 import com.hlxyedu.putonghualearningsystem.ui.main.contract.OnLineLearningContract;
 import com.hlxyedu.putonghualearningsystem.utils.RegUtils;
@@ -14,6 +16,8 @@ import java.util.List;
 
 import javax.inject.Inject;
 
+import io.reactivex.annotations.NonNull;
+import io.reactivex.functions.Predicate;
 import retrofit2.adapter.rxjava2.HttpException;
 
 /**
@@ -35,7 +39,27 @@ public class OnLineLearningPresenter extends RxPresenter<OnLineLearningContract.
     }
 
     private void registerEvent() {
+        // 检查是否登录
+        addSubscribe(RxBus.getDefault().toFlowable(LoginEvent.class)
+                .compose(RxUtil.<LoginEvent>rxSchedulerHelper())
+                .filter(new Predicate<LoginEvent>() {
+                    @Override
+                    public boolean test(@NonNull LoginEvent actionEvent) throws Exception {
+                        return actionEvent.getType().equals(LoginEvent.LOGIN);
+                    }
+                })
+                .subscribeWith(new CommonSubscriber<LoginEvent>(mView) {
+                    @Override
+                    public void onNext(LoginEvent s) {
+                        mView.isLogin(s.getPos(),s.getLists(),s.getTitle(),s.getConTitle());
+                    }
 
+                    @Override
+                    public void onError(Throwable e) {
+                        super.onError(e);
+                    }
+                })
+        );
     }
 
     @Override
@@ -65,4 +89,10 @@ public class OnLineLearningPresenter extends RxPresenter<OnLineLearningContract.
                         )
         );
     }
+
+    @Override
+    public boolean loginStatus() {
+        return mDataManager.getLoginStatus();
+    }
+
 }

@@ -6,7 +6,9 @@ import android.widget.RelativeLayout;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.hlxyedu.putonghualearningsystem.R;
+import com.hlxyedu.putonghualearningsystem.base.RxBus;
 import com.hlxyedu.putonghualearningsystem.model.bean.DataVO;
+import com.hlxyedu.putonghualearningsystem.model.event.LoginEvent;
 import com.hlxyedu.putonghualearningsystem.ui.onlinelearning.activity.OnLineLearnDetailsActivity;
 
 import java.util.ArrayList;
@@ -36,7 +38,7 @@ public class ShortEssayAdapter extends BaseQuickAdapter<DataVO, BaseViewHolder> 
 
         RelativeLayout relativeLayout = (RelativeLayout) helper.itemView;
         relativeLayout.setOnClickListener(view ->
-//                mContext.startActivity(OnLineLearnDetailsActivity.newInstance(mContext)));
-                mContext.startActivity(OnLineLearnDetailsActivity.newInstance(mContext, helper.getLayoutPosition(), (ArrayList<DataVO>) datas, title, item.getConTitle())));
+                RxBus.getDefault().post(new LoginEvent(LoginEvent.LOGIN,helper.getLayoutPosition(), (ArrayList<DataVO>) datas, title, item.getConTitle())));
+//                mContext.startActivity(OnLineLearnDetailsActivity.newInstance(mContext, helper.getLayoutPosition(), (ArrayList<DataVO>) datas, title, item.getConTitle())));
     }
 }

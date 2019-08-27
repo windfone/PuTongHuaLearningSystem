@@ -84,6 +84,11 @@
         <item name="android:textSize">@dimen/textsize_sp_16</item>
     </style>
 
+    <style name="textSize_whitefff_15">
+        <item name="android:textColor">@color/whitefff</item>
+        <item name="android:textSize">@dimen/textsize_sp_15</item>
+    </style>
+
     <style name="textSize_blackE3E_14">
         <item name="android:textColor">@color/blackE3E</item>
         <item name="android:textSize">@dimen/textsize_sp_14</item>

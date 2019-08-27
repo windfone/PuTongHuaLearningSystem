@@ -71,4 +71,9 @@ public class RetrofitHelper implements HttpHelper {
     public Flowable<HttpResponse<List<VideoVO>>> getTeacherClassList(int typeId, int orderBy, int currentPage, int pageSize) {
         return qBaseApis.getTeacherClassList(typeId,orderBy,currentPage,pageSize);
     }
+
+    @Override
+    public Flowable<HttpResponse<List<DataVO>>> getWordLists(String pinYin) {
+        return qBaseApis.getWordLists(pinYin);
+    }
 }

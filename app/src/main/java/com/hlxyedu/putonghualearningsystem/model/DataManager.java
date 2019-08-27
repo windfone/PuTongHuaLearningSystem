@@ -119,4 +119,9 @@ public class DataManager implements HttpHelper, PreferencesHelper {
     public Flowable<HttpResponse<List<VideoVO>>> getTeacherClassList(int typeId, int orderBy, int currentPage, int pageSize) {
         return mHttpHelper.getTeacherClassList(typeId,orderBy,currentPage,pageSize);
     }
+
+    @Override
+    public Flowable<HttpResponse<List<DataVO>>> getWordLists(String pinYin) {
+        return mHttpHelper.getWordLists(pinYin);
+    }
 }

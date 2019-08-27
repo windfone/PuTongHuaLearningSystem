@@ -5,9 +5,11 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
 import com.hlxyedu.putonghualearningsystem.model.bean.TopTitleVO;
+import com.hlxyedu.putonghualearningsystem.ui.onlinelearning.fragment.ChildSoundFragment;
 import com.hlxyedu.putonghualearningsystem.ui.onlinelearning.fragment.HanZiLearningFragment;
 import com.hlxyedu.putonghualearningsystem.ui.onlinelearning.fragment.PinYinLearningFragment;
 import com.hlxyedu.putonghualearningsystem.ui.onlinelearning.fragment.ShortEssayFragment;
+import com.hlxyedu.putonghualearningsystem.ui.onlinelearning.fragment.SoftWordFragment;
 import com.hlxyedu.putonghualearningsystem.ui.onlinelearning.fragment.WordFollowFragment;
 import com.hlxyedu.putonghualearningsystem.ui.teacherclass.fragment.ExerciseFragment;
 

@@ -10,7 +10,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:layout_marginTop="14dp" />
+        android:layout_marginTop="8dp" />
 
     <TextView
         android:id="@+id/cn_tv"
@@ -19,6 +19,7 @@
         android:layout_height="70dp"
         android:layout_gravity="center_horizontal"
         android:background="@drawable/icon_word_bg"
-        android:gravity="center" />
+        android:gravity="center"
+        android:layout_marginBottom="6dp"/>
 
 </LinearLayout>

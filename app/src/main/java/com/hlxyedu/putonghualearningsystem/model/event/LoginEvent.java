@@ -28,6 +28,10 @@ public class LoginEvent {
 
     public LoginEvent(String type,int pos,ArrayList<DataVO> lists,String title,String conTitle){
         this.type = type;
+        this.pos = pos;
+        this.lists = lists;
+        this.title = title;
+        this.conTitle = conTitle;
     }
 
     public int getPos() {

@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.os.Parcelable;
 import android.support.annotation.Nullable;
 
+import com.blankj.utilcode.util.ToastUtils;
 import com.hlxyedu.putonghualearningsystem.R;
 import com.hlxyedu.putonghualearningsystem.base.RootFragment;
 import com.hlxyedu.putonghualearningsystem.model.bean.DataVO;
@@ -72,6 +73,7 @@ public class OnLineLearningFragment extends RootFragment<OnLineLearningPresenter
         if (mPresenter.loginStatus()){
             startActivity(OnLineLearnDetailsActivity.newInstance(mActivity,pos,lists,title,conTitle));
         }else {
+            ToastUtils.showShort("您尚未登录，请先登录");
             startActivity(LoginActivity.newInstance(mActivity));
         }
     }

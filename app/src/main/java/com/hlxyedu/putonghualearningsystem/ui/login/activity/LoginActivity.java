@@ -109,7 +109,7 @@ public class LoginActivity extends RootActivity<LoginPresenter> implements Login
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.jump_login_tv:
-                startActivity(MainActivity.newInstance(getBaseContext()));
+                startActivity(MainActivity.newInstance(this));
                 finish();
                 break;
             case R.id.login_rl:

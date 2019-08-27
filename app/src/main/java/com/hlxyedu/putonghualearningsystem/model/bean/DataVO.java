@@ -29,6 +29,17 @@ public class DataVO implements Parcelable {
     private int conId;
     private String conTitle;
 
+    /**
+     * conDetail :
+     * pinyin : ā
+     * pinYinPng : /C:/Users/Administrator/Desktop/apache-tomcat-7.0.53-xhk/apache-tomcat-7.0.53-xhk/webapps/pthExs/resources/sw/1/1.png
+     */
+
+    private String conDetail;
+    private String pinyin;
+    private String pinYinCN;
+
+
     public String getName() {
         return name;
     }
@@ -54,43 +65,8 @@ public class DataVO implements Parcelable {
     }
 
 
-
-    @Override
-    public int describeContents() {
-        return 0;
-    }
-
-    @Override
-    public void writeToParcel(Parcel dest, int flags) {
-        dest.writeString(this.name);
-        dest.writeString(this.id);
-        dest.writeString(this.title);
-        dest.writeInt(this.conId);
-        dest.writeString(this.conTitle);
-    }
-
     public DataVO() {
     }
-
-    protected DataVO(Parcel in) {
-        this.name = in.readString();
-        this.id = in.readString();
-        this.title = in.readString();
-        this.conId = in.readInt();
-        this.conTitle = in.readString();
-    }
-
-    public static final Creator<DataVO> CREATOR = new Creator<DataVO>() {
-        @Override
-        public DataVO createFromParcel(Parcel source) {
-            return new DataVO(source);
-        }
-
-        @Override
-        public DataVO[] newArray(int size) {
-            return new DataVO[size];
-        }
-    };
 
     public int getConId() {
         return conId;
@@ -107,4 +83,68 @@ public class DataVO implements Parcelable {
     public void setConTitle(String conTitle) {
         this.conTitle = conTitle;
     }
+
+    public String getConDetail() {
+        return conDetail;
+    }
+
+    public void setConDetail(String conDetail) {
+        this.conDetail = conDetail;
+    }
+
+    public String getPinyin() {
+        return pinyin;
+    }
+
+    public void setPinyin(String pinyin) {
+        this.pinyin = pinyin;
+    }
+
+    public String getPinYinCN() {
+        return pinYinCN;
+    }
+
+    public void setPinYinCN(String pinYinCN) {
+        this.pinYinCN = pinYinCN;
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(this.name);
+        dest.writeString(this.id);
+        dest.writeString(this.title);
+        dest.writeInt(this.conId);
+        dest.writeString(this.conTitle);
+        dest.writeString(this.conDetail);
+        dest.writeString(this.pinyin);
+        dest.writeString(this.pinYinCN);
+    }
+
+    protected DataVO(Parcel in) {
+        this.name = in.readString();
+        this.id = in.readString();
+        this.title = in.readString();
+        this.conId = in.readInt();
+        this.conTitle = in.readString();
+        this.conDetail = in.readString();
+        this.pinyin = in.readString();
+        this.pinYinCN = in.readString();
+    }
+
+    public static final Creator<DataVO> CREATOR = new Creator<DataVO>() {
+        @Override
+        public DataVO createFromParcel(Parcel source) {
+            return new DataVO(source);
+        }
+
+        @Override
+        public DataVO[] newArray(int size) {
+            return new DataVO[size];
+        }
+    };
 }

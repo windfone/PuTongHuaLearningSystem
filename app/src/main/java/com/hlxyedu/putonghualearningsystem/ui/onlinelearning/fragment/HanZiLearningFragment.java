@@ -9,11 +9,13 @@ import android.view.View;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.hlxyedu.putonghualearningsystem.R;
 import com.hlxyedu.putonghualearningsystem.base.RootFragment;
+import com.hlxyedu.putonghualearningsystem.model.bean.DataVO;
 import com.hlxyedu.putonghualearningsystem.model.bean.HanZiContentVO;
 import com.hlxyedu.putonghualearningsystem.ui.onlinelearning.adapter.HanZiContentAdapter;
 import com.hlxyedu.putonghualearningsystem.ui.onlinelearning.adapter.HanZiHeaderAdapter;
 import com.hlxyedu.putonghualearningsystem.ui.onlinelearning.contract.HanZiLearningContract;
 import com.hlxyedu.putonghualearningsystem.ui.onlinelearning.presenter.HanZiLearningPresenter;
+import com.hlxyedu.putonghualearningsystem.ui.teacherclass.adapter.ExerciseListAdapter;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -64,19 +66,33 @@ public class HanZiLearningFragment extends RootFragment<HanZiLearningPresenter> 
 
     @Override
     protected void initEventAndData() {
+        super.initEventAndData();
         initTopRcy();
 
-        lists = new ArrayList<>();
-        for (int i = 0; i < 25; i++) {
-            HanZiContentVO bean = new HanZiContentVO();
-            bean.setCn("啊");
-            bean.setPinyin("an");
-            lists.add(bean);
-        }
+        mPresenter.getWordList("");
+//        lists = new ArrayList<>();
+//        for (int i = 0; i < 25; i++) {
+//            HanZiContentVO bean = new HanZiContentVO();
+//            bean.setCn("啊");
+//            bean.setPinyin("an");
+//            lists.add(bean);
+//        }
+//
+//        mContentAdapter = new HanZiContentAdapter(R.layout.item_hanzi_comtent,lists);
+//        list_rcy.setLayoutManager(new GridLayoutManager(mActivity,3));
+//        list_rcy.setAdapter(mContentAdapter);
+    }
 
-        mContentAdapter = new HanZiContentAdapter(R.layout.item_hanzi_comtent,lists);
-        list_rcy.setLayoutManager(new GridLayoutManager(mActivity,3));
-        list_rcy.setAdapter(mContentAdapter);
+    @Override
+    public void onSuccess(List<DataVO> lists) {
+        stateMain();
+        if (lists == null || lists.isEmpty()) {
+            stateEmpty("暂无内容");
+        } else {
+            mContentAdapter = new HanZiContentAdapter(R.layout.item_hanzi_comtent,lists,getArguments().getString("title"));
+            list_rcy.setLayoutManager(new GridLayoutManager(mActivity,3));
+            list_rcy.setAdapter(mContentAdapter);
+        }
     }
 
     private void initTopRcy(){
@@ -102,13 +118,20 @@ public class HanZiLearningFragment extends RootFragment<HanZiLearningPresenter> 
                 selectList.set(lastSelect, false);
                 lastSelect = position;
                 mHeaderAdapter.notifyDataSetChanged();
+                // 根据选中字母查询相关
+                if (position == 0){
+                    // 全部
+                    mPresenter.getWordList("");
+                }else {
+                    mPresenter.getWordList(strs[position]);
+                }
             }
         });
     }
 
     @Override
     public void responeError(String errorMsg) {
-
+        stateError();
     }
 
 }

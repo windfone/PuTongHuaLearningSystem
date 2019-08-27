@@ -38,4 +38,6 @@ public interface HttpHelper {
     Flowable<HttpResponse<List<VideoVO>>> getTeacherClassList(int typeId, int orderBy,
                                                               int currentPage, int pageSize);
 
+    Flowable<HttpResponse<List<DataVO>>> getWordLists(String pinYin);
+
 }

@@ -28,4 +28,5 @@ public interface OnLineLearningContract {
 
         boolean loginStatus();
     }
+
 }

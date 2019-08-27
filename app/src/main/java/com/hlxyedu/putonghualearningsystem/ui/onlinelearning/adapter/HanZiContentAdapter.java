@@ -1,6 +1,7 @@
 package com.hlxyedu.putonghualearningsystem.ui.onlinelearning.adapter;
 
 import android.support.annotation.Nullable;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
@@ -14,20 +15,25 @@ import com.hlxyedu.putonghualearningsystem.model.event.LoginEvent;
 import java.util.ArrayList;
 import java.util.List;
 
-public class HanZiContentAdapter extends BaseQuickAdapter<HanZiContentVO, BaseViewHolder> {
+public class HanZiContentAdapter extends BaseQuickAdapter<DataVO, BaseViewHolder> {
 
-    public HanZiContentAdapter(int layoutResId, @Nullable List<HanZiContentVO> data) {
+    private String title;
+    private List<DataVO> lists;
+
+    public HanZiContentAdapter(int layoutResId, @Nullable List<DataVO> data, String mTitles) {
         super(layoutResId, data);
+        this.lists = data;
+        this.title = mTitles;
     }
 
     @Override
-    protected void convert(BaseViewHolder helper, HanZiContentVO item) {
+    protected void convert(BaseViewHolder helper, DataVO item) {
         helper.setText(R.id.pinyin_tv, item.getPinyin())
-                .setText(R.id.cn_tv, item.getCn());
+                .setText(R.id.cn_tv, item.getPinYinCN());
 
-        RelativeLayout relativeLayout = (RelativeLayout) helper.itemView;
+        LinearLayout relativeLayout = (LinearLayout) helper.itemView;
         relativeLayout.setOnClickListener(v -> {
-//            RxBus.getDefault().post(new LoginEvent(LoginEvent.LOGIN,helper.getLayoutPosition(), (ArrayList<DataVO>) lists, title, item.getConTitle()));
+            RxBus.getDefault().post(new LoginEvent(LoginEvent.LOGIN,helper.getLayoutPosition(), (ArrayList<DataVO>) lists, title, item.getConTitle()));
 //            mContext.startActivity(OnLineLearnDetailsActivity.newInstance(mContext, helper.getLayoutPosition(), (ArrayList<DataVO>) lists, title, item.getConTitle()));
         });
     }

@@ -67,6 +67,11 @@ public interface QBaseApis {
     @GET("Mp3List")
     Flowable<HttpResponse<List<DataVO>>> getEssayLists();
 
+    // 获取 汉字学习 轻声字 儿化音列表
+    @GET("study/selectPinYin")
+    Flowable<HttpResponse<List<DataVO>>> getWordLists(@Query("pinYin") String pinYin);
+
+
     @GET("study/getContentDetail")
     Flowable<HttpResponse<DetailVO>> getEssayDetails(@Query("conId") String conId);
 

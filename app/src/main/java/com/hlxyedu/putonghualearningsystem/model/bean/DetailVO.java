@@ -11,6 +11,9 @@ public class DetailVO {
     private String[] txtData;
     private String audioUrl;
     private int audioLength;
+    private String videoUrl;
+    private String pinyin;
+    private String pinYinCN;
 
     public String[] getTxtData() {
         return txtData;
@@ -34,6 +37,30 @@ public class DetailVO {
 
     public void setAudioLength(int audioLength) {
         this.audioLength = audioLength;
+    }
+
+    public String getVideoUrl() {
+        return videoUrl;
+    }
+
+    public void setVideoUrl(String videoUrl) {
+        this.videoUrl = videoUrl;
+    }
+
+    public String getPinYin() {
+        return pinyin;
+    }
+
+    public void setPinYin(String pinyin) {
+        this.pinyin = pinyin;
+    }
+
+    public String getPinYinCN() {
+        return pinYinCN;
+    }
+
+    public void setPinYinCN(String pinYinCN) {
+        this.pinYinCN = pinYinCN;
     }
 
 }

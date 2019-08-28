@@ -22,6 +22,10 @@ public class ActionEvent {
 
     public static final String SORT = "SORT";
 
+    public static final String PLAYAUDIO = "PLAYAUDIO";
+
+    public static final String INITVIEW = "INITVIEW";
+
     private String type;
 
     private int second;

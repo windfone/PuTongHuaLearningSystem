@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".ui.onlinelearning.fragment.DetailHanZiFragment">
+
+    <TextView
+        android:id="@+id/pinyin_tv"
+        style="@style/textSize_black353_16"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="20dp" />
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="15dp">
+
+        <TextView
+            android:id="@+id/cn_tv"
+            style="@style/textSize_black353_30"
+            android:layout_width="130dp"
+            android:layout_height="130dp"
+            android:layout_gravity="center_horizontal"
+            android:background="@drawable/icon_word_bg"
+            android:gravity="center" />
+
+        <LinearLayout
+            android:id="@+id/video_ll"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:visibility="gone">
+
+            <com.hlxyedu.putonghualearningsystem.utils.JzvdStd
+                android:id="@+id/jz_video"
+                android:layout_width="130dp"
+                android:layout_height="130dp" />
+
+        </LinearLayout>
+
+    </FrameLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:orientation="horizontal">
+
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1">
+
+            <Button
+                android:id="@+id/pinyin_btn"
+                style="@style/textSize_whitefff_13"
+                android:layout_width="80dp"
+                android:layout_height="30dp"
+                android:layout_alignParentEnd="true"
+                android:layout_marginEnd="14dp"
+                android:background="@color/blue0F8"
+                android:text="@string/pinyin" />
+
+        </RelativeLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1">
+
+            <Button
+                android:id="@+id/bishun_btn"
+                style="@style/textSize_whitefff_13"
+                android:layout_width="80dp"
+                android:layout_height="30dp"
+                android:layout_marginStart="14dp"
+                android:background="@color/blue0F8"
+                android:text="@string/bishun" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+</LinearLayout>

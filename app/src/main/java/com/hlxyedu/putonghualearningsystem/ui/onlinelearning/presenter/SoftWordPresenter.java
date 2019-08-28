@@ -39,9 +39,9 @@ public class SoftWordPresenter extends RxPresenter<SoftWordContract.View> implem
     }
 
     @Override
-    public void getLearningList(int typeId) {
+    public void getWordList(int typeId,String pinyin) {
         addSubscribe(
-                mDataManager.getOnLineLearningList(typeId)
+                mDataManager.getWordLists(typeId,pinyin)
                         .compose(RxUtil.rxSchedulerHelper())
                         .compose(RxUtil.handleTestResult())
                         .subscribeWith(

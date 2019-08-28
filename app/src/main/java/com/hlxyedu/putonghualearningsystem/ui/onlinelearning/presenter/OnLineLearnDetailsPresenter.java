@@ -5,6 +5,7 @@ import com.hlxyedu.putonghualearningsystem.base.RxBus;
 import com.hlxyedu.putonghualearningsystem.base.RxPresenter;
 import com.hlxyedu.putonghualearningsystem.model.DataManager;
 import com.hlxyedu.putonghualearningsystem.model.bean.DetailVO;
+import com.hlxyedu.putonghualearningsystem.model.event.ActionEvent;
 import com.hlxyedu.putonghualearningsystem.model.event.RecordEvent;
 import com.hlxyedu.putonghualearningsystem.model.http.response.HttpResponseCode;
 import com.hlxyedu.putonghualearningsystem.ui.onlinelearning.contract.OnLineLearnDetailsContract;
@@ -58,10 +59,37 @@ public class OnLineLearnDetailsPresenter extends RxPresenter<OnLineLearnDetailsC
                     }
                 })
         );
+
+        //播放音频
+        addSubscribe(RxBus.getDefault().toFlowable(ActionEvent.class)
+                .compose(RxUtil.<ActionEvent>rxSchedulerHelper())
+                .filter(new Predicate<ActionEvent>() {
+                    @Override
+                    public boolean test(@NonNull ActionEvent actionEvent) throws Exception {
+                        return actionEvent.getType().equals(ActionEvent.PLAYAUDIO);
+                    }
+                })
+                .subscribeWith(new CommonSubscriber<ActionEvent>(mView) {
+                    @Override
+                    public void onNext(ActionEvent s) {
+                        mView.playAudio();
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        super.onError(e);
+                    }
+                })
+        );
+
     }
 
+    /**
+     * 请求 短文跟读
+     * @param audioName 音频名字
+     */
     @Override
-    public void getDetails(String audioName) {
+    public void getShortEssayDetails(String audioName) {
         addSubscribe(
                 mDataManager.getEssayDetails(audioName)
                         .compose(RxUtil.rxSchedulerHelper())
@@ -70,7 +98,7 @@ public class OnLineLearnDetailsPresenter extends RxPresenter<OnLineLearnDetailsC
                                 new CommonSubscriber<DetailVO>(mView) {
                                     @Override
                                     public void onNext(DetailVO detailVO) {
-                                        mView.onDetailsSuccess(detailVO);
+                                        mView.onShortEssayDetailsSuccess(detailVO);
                                     }
 
                                     @Override
@@ -87,4 +115,38 @@ public class OnLineLearnDetailsPresenter extends RxPresenter<OnLineLearnDetailsC
                         )
         );
     }
+
+    /**
+     * 请求汉字 轻声字 儿化音 详情
+     * @param conId
+     * @param pinYin
+     */
+    @Override
+    public void getHanZiDetails(String conId,String pinYin) {
+        addSubscribe(
+                mDataManager.getHanZiDetails(conId,pinYin)
+                        .compose(RxUtil.rxSchedulerHelper())
+                        .compose(RxUtil.handleTestResult())
+                        .subscribeWith(
+                                new CommonSubscriber<DetailVO>(mView) {
+                                    @Override
+                                    public void onNext(DetailVO detailVO) {
+                                        mView.onHanZiDetailsSuccess(detailVO);
+                                    }
+
+                                    @Override
+                                    public void onError(Throwable e) {
+                                        //当数据返回为null时 做特殊处理
+                                        if (e instanceof HttpException) {
+                                            HttpResponseCode httpResponseCode = RegUtils
+                                                    .onError((HttpException) e);
+                                            ToastUtils.showShort(httpResponseCode.getMsg());
+                                        }
+                                        mView.responeError("数据请求失败，请检查网络！");
+                                    }
+                                }
+                        )
+        );
+    }
+
 }

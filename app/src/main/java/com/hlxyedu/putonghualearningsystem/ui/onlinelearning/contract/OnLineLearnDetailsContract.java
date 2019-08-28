@@ -13,14 +13,20 @@ public interface OnLineLearnDetailsContract {
         //返回登陆结果
         void responeError(String errorMsg);
 
-        void onDetailsSuccess(DetailVO detailVO);
+        void onShortEssayDetailsSuccess(DetailVO detailVO);
+
+        void onHanZiDetailsSuccess(DetailVO detailVO);
 
         void recordSecond();
+
+        void playAudio();
     }
 
     interface Presenter extends BasePresenter<OnLineLearnDetailsContract.View> {
 
-        void getDetails(String audioName);
+        void getShortEssayDetails(String audioName);
+
+        void getHanZiDetails(String conId,String pinYin);
 
     }
 }

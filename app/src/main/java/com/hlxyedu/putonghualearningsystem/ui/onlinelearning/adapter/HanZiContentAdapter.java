@@ -33,7 +33,7 @@ public class HanZiContentAdapter extends BaseQuickAdapter<DataVO, BaseViewHolder
 
         LinearLayout relativeLayout = (LinearLayout) helper.itemView;
         relativeLayout.setOnClickListener(v -> {
-            RxBus.getDefault().post(new LoginEvent(LoginEvent.LOGIN,helper.getLayoutPosition(), (ArrayList<DataVO>) lists, title, item.getConTitle()));
+            RxBus.getDefault().post(new LoginEvent(LoginEvent.LOGIN,helper.getLayoutPosition(), (ArrayList<DataVO>) lists, title, ""));
 //            mContext.startActivity(OnLineLearnDetailsActivity.newInstance(mContext, helper.getLayoutPosition(), (ArrayList<DataVO>) lists, title, item.getConTitle()));
         });
     }

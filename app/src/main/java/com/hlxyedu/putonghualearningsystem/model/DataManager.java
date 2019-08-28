@@ -121,7 +121,12 @@ public class DataManager implements HttpHelper, PreferencesHelper {
     }
 
     @Override
-    public Flowable<HttpResponse<List<DataVO>>> getWordLists(String pinYin) {
-        return mHttpHelper.getWordLists(pinYin);
+    public Flowable<HttpResponse<List<DataVO>>> getWordLists(int typeId,String pinYin) {
+        return mHttpHelper.getWordLists(typeId,pinYin);
+    }
+
+    @Override
+    public Flowable<HttpResponse<DetailVO>> getHanZiDetails(String conId, String pinYin) {
+        return mHttpHelper.getHanZiDetails(conId,pinYin);
     }
 }

@@ -39,9 +39,9 @@ public class HanZiLearningPresenter extends RxPresenter<HanZiLearningContract.Vi
     }
 
     @Override
-    public void getWordList(String pinyin) {
+    public void getWordList(int typeId,String pinyin) {
         addSubscribe(
-                mDataManager.getWordLists(pinyin)
+                mDataManager.getWordLists(typeId,pinyin)
                         .compose(RxUtil.rxSchedulerHelper())
                         .compose(RxUtil.handleTestResult())
                         .subscribeWith(

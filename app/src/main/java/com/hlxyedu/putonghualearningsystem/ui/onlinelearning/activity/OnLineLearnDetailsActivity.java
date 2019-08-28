@@ -28,10 +28,13 @@ import com.hlxyedu.putonghualearningsystem.base.RootFragmentActivity;
 import com.hlxyedu.putonghualearningsystem.base.RxBus;
 import com.hlxyedu.putonghualearningsystem.model.bean.DataVO;
 import com.hlxyedu.putonghualearningsystem.model.bean.DetailVO;
+import com.hlxyedu.putonghualearningsystem.model.event.ActionEvent;
 import com.hlxyedu.putonghualearningsystem.model.event.EssayTxtEvent;
+import com.hlxyedu.putonghualearningsystem.model.event.HanZiEvent;
 import com.hlxyedu.putonghualearningsystem.model.http.api.ApiConstants;
 import com.hlxyedu.putonghualearningsystem.ui.onlinelearning.contract.OnLineLearnDetailsContract;
 import com.hlxyedu.putonghualearningsystem.ui.onlinelearning.fragment.DetailContentFragment;
+import com.hlxyedu.putonghualearningsystem.ui.onlinelearning.fragment.DetailHanZiFragment;
 import com.hlxyedu.putonghualearningsystem.ui.onlinelearning.fragment.DetailWordFragment;
 import com.hlxyedu.putonghualearningsystem.ui.onlinelearning.presenter.OnLineLearnDetailsPresenter;
 import com.hlxyedu.putonghualearningsystem.utils.PermissionRequestUtil;
@@ -54,6 +57,7 @@ import java.util.UUID;
 
 import butterknife.BindView;
 import butterknife.OnClick;
+import cn.jzvd.Jzvd;
 
 /**
  * Created by zhangguihua
@@ -135,7 +139,7 @@ public class OnLineLearnDetailsActivity extends RootFragmentActivity<OnLineLearn
         Intent intent = new Intent(context, OnLineLearnDetailsActivity.class);
 
         Bundle bundle = new Bundle();
-        bundle.putParcelableArrayList("essayVOS", (ArrayList<? extends Parcelable>) dataVO);
+        bundle.putParcelableArrayList("dataVO", (ArrayList<? extends Parcelable>) dataVO);
         bundle.putSerializable("pos", pos);
         bundle.putSerializable("title", title);
         bundle.putSerializable("itemStr", itemStr);
@@ -144,7 +148,7 @@ public class OnLineLearnDetailsActivity extends RootFragmentActivity<OnLineLearn
     }
 
     private void getIntentData() {
-        lists = getIntent().getParcelableArrayListExtra("essayVOS");
+        lists = getIntent().getParcelableArrayListExtra("dataVO");
         pos = getIntent().getIntExtra("pos", 0);
         mTitles = getIntent().getStringExtra("title");
         itemStr = getIntent().getStringExtra("itemStr");
@@ -161,9 +165,9 @@ public class OnLineLearnDetailsActivity extends RootFragmentActivity<OnLineLearn
                 loadRootFragment(R.id.content_container, DetailWordFragment.newInstance());
                 break;
             case "汉字学习":
-                break;
             case "轻声字":
             case "儿化音":
+                loadRootFragment(R.id.content_container, DetailHanZiFragment.newInstance());
                 break;
         }
     }
@@ -216,12 +220,31 @@ public class OnLineLearnDetailsActivity extends RootFragmentActivity<OnLineLearn
         });
         MusicManager.getInstance().addPlayerEventListener(this);
 
-        mPresenter.getDetails(lists.get(pos).getName());
-
+        getNetDatas();
     }
 
+    private void getNetDatas() {
+        switch (mTitles) {
+            case "拼音学习":
+
+                break;
+            case "单词跟读":
+
+                break;
+            case "短文跟读":
+                mPresenter.getShortEssayDetails(lists.get(pos).getName());
+                break;
+            case "汉字学习":
+            case "轻声字":
+            case "儿化音":
+                mPresenter.getHanZiDetails(String.valueOf(lists.get(pos).getConId()),lists.get(pos).getPinyin());
+                break;
+        }
+    }
+
+    // 短文跟读
     @Override
-    public void onDetailsSuccess(DetailVO detailVO) {
+    public void onShortEssayDetailsSuccess(DetailVO detailVO) {
         top_play_iv.setEnabled(true);
         pre_iv.setEnabled(true);
         next_iv.setEnabled(true);
@@ -232,6 +255,18 @@ public class OnLineLearnDetailsActivity extends RootFragmentActivity<OnLineLearn
         String title = lists.get(pos).getName();
         RxBus.getDefault().post(new EssayTxtEvent(essayTxt,
                 "《" + title.substring(0, title.lastIndexOf(".")) + "》示范朗读"));
+        audioUrl = detailVO.getAudioUrl();
+        audioLength = detailVO.getAudioLength();
+        time_total_tv.setText(TimeUtil.getTimeString(audioLength));
+    }
+
+    // 汉字 轻声字 儿化音
+    @Override
+    public void onHanZiDetailsSuccess(DetailVO detailVO) {
+        top_play_iv.setEnabled(true);
+        pre_iv.setEnabled(true);
+        next_iv.setEnabled(true);
+        RxBus.getDefault().post(new HanZiEvent(detailVO.getPinYin(), detailVO.getPinYinCN(),detailVO.getVideoUrl()));
         audioUrl = detailVO.getAudioUrl();
         audioLength = detailVO.getAudioLength();
         time_total_tv.setText(TimeUtil.getTimeString(audioLength));
@@ -271,7 +306,9 @@ public class OnLineLearnDetailsActivity extends RootFragmentActivity<OnLineLearn
                         time_progress_tv.setText(getResources().getString(R.string.time_zero));
                         top_play_iv.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.icon_pause));
 
-                        mPresenter.getDetails(lists.get(pos).getName());
+//                        mPresenter.getShortEssayDetails(lists.get(pos).getName());
+                        getNetDatas();
+                        RxBus.getDefault().post(new ActionEvent(ActionEvent.INITVIEW));
                     }
                 } else {
                     ToastUtils.showShort("请先停止录音");
@@ -289,7 +326,9 @@ public class OnLineLearnDetailsActivity extends RootFragmentActivity<OnLineLearn
                         time_progress_tv.setText(getResources().getString(R.string.time_zero));
                         top_play_iv.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.icon_pause));
 
-                        mPresenter.getDetails(lists.get(pos).getName());
+//                        mPresenter.getShortEssayDetails(lists.get(pos).getName());
+                        getNetDatas();
+                        RxBus.getDefault().post(new ActionEvent(ActionEvent.INITVIEW));
                     }
                 } else {
                     ToastUtils.showShort("请先停止录音");
@@ -328,11 +367,18 @@ public class OnLineLearnDetailsActivity extends RootFragmentActivity<OnLineLearn
         }
     }
 
-    private void playAudio() {
+    @Override
+    public void playAudio() {
         SongInfo songInfo = new SongInfo();
-        songInfo.setSongId(lists.get(pos).getId());
+//        songInfo.setSongId(lists.get(pos).getId());
+        songInfo.setSongId(UUID.randomUUID() + "");
         songInfo.setSongUrl(ApiConstants.HOST + audioUrl);
-        MusicManager.getInstance().playMusicByInfo(songInfo);
+        String url =  ApiConstants.HOST + audioUrl;
+        try {
+            MusicManager.getInstance().playMusicByInfo(songInfo);
+        }catch (IllegalArgumentException e){
+            ToastUtils.showShort("音频链接错误");
+        }
     }
 
     private void playRecordAudio() {
@@ -460,8 +506,10 @@ public class OnLineLearnDetailsActivity extends RootFragmentActivity<OnLineLearn
                 mAacFile.close();
             }
             mAacFile = new AacFileWriter();
-//            String file = getAudioFile();
-            recordPath = AppConstants.RECORD_PATH + "audio_" + lists.get(pos).getName().substring(0, lists.get(pos).getName().lastIndexOf("."))
+//            recordPath = AppConstants.RECORD_PATH + "audio_" + lists.get(pos).getName().substring(0, lists.get(pos).getName().lastIndexOf("."))
+//                    + AppConstants.AUDIO_FILE_SUFFIX;
+            // 这里音频只是练习用，不用保存，所以录音文件可以覆盖
+            recordPath = AppConstants.RECORD_PATH + "audio_" + "learning"
                     + AppConstants.AUDIO_FILE_SUFFIX;
             mAacFile.open(recordPath);
             mAacFile.init(params.getSampleRate());

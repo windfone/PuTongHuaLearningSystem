@@ -20,6 +20,6 @@ public interface HanZiLearningContract {
 
     interface Presenter extends BasePresenter<View> {
 
-        void getWordList(String pinyin);
+        void getWordList(int typeId,String pinyin);
     }
 }

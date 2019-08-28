@@ -69,8 +69,11 @@ public interface QBaseApis {
 
     // 获取 汉字学习 轻声字 儿化音列表
     @GET("study/selectPinYin")
-    Flowable<HttpResponse<List<DataVO>>> getWordLists(@Query("pinYin") String pinYin);
+    Flowable<HttpResponse<List<DataVO>>> getWordLists(@Query("typeId") int typeId,@Query("pinYin") String pinYin);
 
+    // 获取 汉字学习 轻声字 儿化音 详情
+    @GET("study/selectDetail")
+    Flowable<HttpResponse<DetailVO>> getHanZiDetails(@Query("conId") String conId,@Query("pinYin") String pinYin);
 
     @GET("study/getContentDetail")
     Flowable<HttpResponse<DetailVO>> getEssayDetails(@Query("conId") String conId);

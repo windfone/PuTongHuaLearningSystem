@@ -73,7 +73,12 @@ public class RetrofitHelper implements HttpHelper {
     }
 
     @Override
-    public Flowable<HttpResponse<List<DataVO>>> getWordLists(String pinYin) {
-        return qBaseApis.getWordLists(pinYin);
+    public Flowable<HttpResponse<List<DataVO>>> getWordLists(int typeId,String pinYin) {
+        return qBaseApis.getWordLists(typeId,pinYin);
+    }
+
+    @Override
+    public Flowable<HttpResponse<DetailVO>> getHanZiDetails(String conId, String pinYin) {
+        return qBaseApis.getHanZiDetails(conId,pinYin);
     }
 }

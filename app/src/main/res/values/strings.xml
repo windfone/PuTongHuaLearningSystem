@@ -88,4 +88,8 @@
     <string name="next_set_of_papers">下一套试卷</string>
     <string name="time_fourth_minute">04:00</string>
 
+    <!--fragment_detail_hanzi-->
+    <string name="pinyin">拼音</string>
+    <string name="bishun">笔顺</string>
+
 </resources>

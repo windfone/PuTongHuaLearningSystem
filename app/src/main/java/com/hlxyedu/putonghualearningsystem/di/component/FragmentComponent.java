@@ -15,6 +15,7 @@ import com.hlxyedu.putonghualearningsystem.ui.main.fragment.ExamCenterFragment;
 import com.hlxyedu.putonghualearningsystem.ui.main.fragment.PersonalCenterFragment;
 import com.hlxyedu.putonghualearningsystem.ui.onlinelearning.fragment.ChildSoundFragment;
 import com.hlxyedu.putonghualearningsystem.ui.onlinelearning.fragment.DetailContentFragment;
+import com.hlxyedu.putonghualearningsystem.ui.onlinelearning.fragment.DetailHanZiFragment;
 import com.hlxyedu.putonghualearningsystem.ui.onlinelearning.fragment.DetailWordFragment;
 import com.hlxyedu.putonghualearningsystem.ui.onlinelearning.fragment.HanZiLearningFragment;
 import com.hlxyedu.putonghualearningsystem.ui.onlinelearning.fragment.PinYinLearningFragment;
@@ -63,6 +64,8 @@ public interface FragmentComponent {
     void inject(DetailContentFragment detailContentFragment);
 
     void inject(DetailWordFragment detailWordFragment);
+
+    void inject(DetailHanZiFragment detailHanZiFragment);
 
     void inject(EChineseCharacterFragment eChineseCharacterFragment);
 

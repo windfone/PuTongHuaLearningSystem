@@ -43,8 +43,8 @@ public class RetrofitHelper implements HttpHelper {
     }
 
     @Override
-    public Flowable<HttpResponse<DetailVO>> getEssayDetails(String keys) {
-        return qBaseApis.getEssayDetails(keys);
+    public Flowable<HttpResponse<DetailVO>> getEssayDetails(int conId,String pinYinOrder) {
+        return qBaseApis.getEssayDetails(conId,pinYinOrder);
     }
 
     @Override
@@ -58,8 +58,8 @@ public class RetrofitHelper implements HttpHelper {
     }
 
     @Override
-    public Flowable<HttpResponse<List<DataVO>>> getOnLineLearningList(int typeId) {
-        return qBaseApis.getOnLineLearningList(typeId);
+    public Flowable<HttpResponse<List<DataVO>>> getOnLineLearningList(int typeId,int pageSize,int currentPage) {
+        return qBaseApis.getOnLineLearningList(typeId,pageSize,currentPage);
     }
 
     @Override
@@ -78,7 +78,13 @@ public class RetrofitHelper implements HttpHelper {
     }
 
     @Override
-    public Flowable<HttpResponse<DetailVO>> getHanZiDetails(String conId, String pinYin) {
-        return qBaseApis.getHanZiDetails(conId,pinYin);
+    public Flowable<HttpResponse<DetailVO>> getHanZiDetails(int conId, String pinYin,String pinYinOrder) {
+        return qBaseApis.getHanZiDetails(conId,pinYin,pinYinOrder);
     }
+
+    @Override
+    public Flowable<HttpResponse<DetailVO>> getPinYinLearningDetails(int conId, String pinYinOrder) {
+        return qBaseApis.getPinYinLearningDetails(conId,pinYinOrder);
+    }
+
 }

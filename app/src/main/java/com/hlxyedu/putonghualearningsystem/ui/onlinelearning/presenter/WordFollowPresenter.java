@@ -39,9 +39,9 @@ public class WordFollowPresenter extends RxPresenter<WordFollowContract.View> im
     }
 
     @Override
-    public void getLearningList(int typeId) {
+    public void getLearningList(int typeId,int pageSize,int currentPage) {
         addSubscribe(
-                mDataManager.getOnLineLearningList(typeId)
+                mDataManager.getOnLineLearningList(typeId,pageSize,currentPage)
                         .compose(RxUtil.rxSchedulerHelper())
                         .compose(RxUtil.handleTestResult())
                         .subscribeWith(

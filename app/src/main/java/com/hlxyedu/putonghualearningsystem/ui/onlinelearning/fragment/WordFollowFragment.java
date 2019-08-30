@@ -51,7 +51,7 @@ public class WordFollowFragment extends RootFragment<WordFollowPresenter> implem
         super.initEventAndData();
         stateLoading();
 
-        mPresenter.getLearningList(getArguments().getInt("typeId"));
+        mPresenter.getLearningList(getArguments().getInt("typeId"),5,1);
 
     }
 

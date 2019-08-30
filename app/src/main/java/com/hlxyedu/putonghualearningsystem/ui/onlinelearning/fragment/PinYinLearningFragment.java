@@ -52,7 +52,7 @@ public class PinYinLearningFragment extends RootFragment<PinYinLearningPresenter
         super.initEventAndData();
         stateLoading();
 
-        mPresenter.getLearningList(getArguments().getInt("typeId"));
+        mPresenter.getLearningList(getArguments().getInt("typeId"),5,1);
     }
 
     @Override

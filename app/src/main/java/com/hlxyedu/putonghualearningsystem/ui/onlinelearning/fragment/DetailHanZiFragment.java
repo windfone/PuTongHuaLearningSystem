@@ -1,10 +1,7 @@
 package com.hlxyedu.putonghualearningsystem.ui.onlinelearning.fragment;
 
-import android.net.Uri;
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -16,12 +13,10 @@ import com.hlxyedu.putonghualearningsystem.model.event.ActionEvent;
 import com.hlxyedu.putonghualearningsystem.model.http.api.ApiConstants;
 import com.hlxyedu.putonghualearningsystem.ui.onlinelearning.contract.DetailHanZiContract;
 import com.hlxyedu.putonghualearningsystem.ui.onlinelearning.presenter.DetailHanZiPresenter;
-import com.hlxyedu.putonghualearningsystem.utils.JzvdStd;
+import com.hlxyedu.putonghualearningsystem.weight.jzvd.JzvdStd;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
-import butterknife.Unbinder;
 import cn.jzvd.Jzvd;
 
 /**

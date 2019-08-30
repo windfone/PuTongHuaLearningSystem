@@ -5,8 +5,8 @@ import android.widget.TextView;
 
 import com.hlxyedu.putonghualearningsystem.R;
 import com.hlxyedu.putonghualearningsystem.base.RootFragment;
-import com.hlxyedu.putonghualearningsystem.ui.onlinelearning.contract.DetailContentContract;
-import com.hlxyedu.putonghualearningsystem.ui.onlinelearning.presenter.DetailContentPresenter;
+import com.hlxyedu.putonghualearningsystem.ui.onlinelearning.contract.DetailEssayContract;
+import com.hlxyedu.putonghualearningsystem.ui.onlinelearning.presenter.DetailEssayPresenter;
 
 import butterknife.BindView;
 
@@ -14,7 +14,7 @@ import butterknife.BindView;
  * Created by zhangguihua
  * 拼音学习，短文跟读 详情
  */
-public class DetailContentFragment extends RootFragment<DetailContentPresenter> implements DetailContentContract.View {
+public class DetailEssayFragment extends RootFragment<DetailEssayPresenter> implements DetailEssayContract.View {
     @BindView(R.id.title_tv)
     TextView title_tv;
     @BindView(R.id.essay_tv)
@@ -22,11 +22,11 @@ public class DetailContentFragment extends RootFragment<DetailContentPresenter> 
 
     private String itemStr;
 
-    public static DetailContentFragment newInstance(String itemStr) {
+    public static DetailEssayFragment newInstance(String itemStr) {
         Bundle args = new Bundle();
 
         args.putString("itemStr",itemStr);
-        DetailContentFragment fragment = new DetailContentFragment();
+        DetailEssayFragment fragment = new DetailEssayFragment();
         fragment.setArguments(args);
         return fragment;
     }
@@ -38,7 +38,7 @@ public class DetailContentFragment extends RootFragment<DetailContentPresenter> 
 
     @Override
     protected int getLayoutId() {
-        return R.layout.fragment_detail_content;
+        return R.layout.fragment_detail_essay;
     }
 
     @Override

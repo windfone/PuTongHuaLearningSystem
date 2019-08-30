@@ -38,6 +38,7 @@ public class DataVO implements Parcelable {
     private String conDetail;
     private String pinyin;
     private String pinYinCN;
+    private String pinYinOrder;//声调
 
 
     public String getName() {
@@ -108,6 +109,14 @@ public class DataVO implements Parcelable {
         this.pinYinCN = pinYinCN;
     }
 
+    public String getPinYinOrder() {
+        return pinYinOrder;
+    }
+
+    public void setPinYinOrder(String pinYinOrder) {
+        this.pinYinOrder = pinYinOrder;
+    }
+
     @Override
     public int describeContents() {
         return 0;
@@ -123,6 +132,7 @@ public class DataVO implements Parcelable {
         dest.writeString(this.conDetail);
         dest.writeString(this.pinyin);
         dest.writeString(this.pinYinCN);
+        dest.writeString(this.pinYinOrder);
     }
 
     protected DataVO(Parcel in) {
@@ -134,6 +144,7 @@ public class DataVO implements Parcelable {
         this.conDetail = in.readString();
         this.pinyin = in.readString();
         this.pinYinCN = in.readString();
+        this.pinYinOrder = in.readString();
     }
 
     public static final Creator<DataVO> CREATOR = new Creator<DataVO>() {

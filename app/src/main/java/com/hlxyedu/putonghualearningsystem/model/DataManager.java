@@ -91,8 +91,8 @@ public class DataManager implements HttpHelper, PreferencesHelper {
     }
 
     @Override
-    public Flowable<HttpResponse<DetailVO>> getEssayDetails(String keys) {
-        return mHttpHelper.getEssayDetails(keys);
+    public Flowable<HttpResponse<DetailVO>> getEssayDetails(int conId,String pinYinOrder) {
+        return mHttpHelper.getEssayDetails(conId,pinYinOrder);
     }
 
     @Override
@@ -106,8 +106,8 @@ public class DataManager implements HttpHelper, PreferencesHelper {
     }
 
     @Override
-    public Flowable<HttpResponse<List<DataVO>>> getOnLineLearningList(int typeId) {
-        return mHttpHelper.getOnLineLearningList(typeId);
+    public Flowable<HttpResponse<List<DataVO>>> getOnLineLearningList(int typeId,int pageSize,int currentPage) {
+        return mHttpHelper.getOnLineLearningList(typeId,pageSize,currentPage);
     }
 
     @Override
@@ -126,7 +126,13 @@ public class DataManager implements HttpHelper, PreferencesHelper {
     }
 
     @Override
-    public Flowable<HttpResponse<DetailVO>> getHanZiDetails(String conId, String pinYin) {
-        return mHttpHelper.getHanZiDetails(conId,pinYin);
+    public Flowable<HttpResponse<DetailVO>> getHanZiDetails(int conId, String pinYin,String pinYinOrder) {
+        return mHttpHelper.getHanZiDetails(conId,pinYin,pinYinOrder);
     }
+
+    @Override
+    public Flowable<HttpResponse<DetailVO>> getPinYinLearningDetails(int conId, String pinYinOrder) {
+        return mHttpHelper.getPinYinLearningDetails(conId,pinYinOrder);
+    }
+
 }

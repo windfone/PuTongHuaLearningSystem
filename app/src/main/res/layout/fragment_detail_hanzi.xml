@@ -22,8 +22,8 @@
         <TextView
             android:id="@+id/cn_tv"
             style="@style/textSize_black353_30"
-            android:layout_width="130dp"
-            android:layout_height="130dp"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
             android:layout_gravity="center_horizontal"
             android:background="@drawable/icon_word_bg"
             android:gravity="center" />
@@ -35,10 +35,10 @@
             android:layout_gravity="center_horizontal"
             android:visibility="gone">
 
-            <com.hlxyedu.putonghualearningsystem.utils.JzvdStd
+            <com.hlxyedu.putonghualearningsystem.weight.jzvd.CustomUIJzvdStd
                 android:id="@+id/jz_video"
-                android:layout_width="130dp"
-                android:layout_height="130dp" />
+                android:layout_width="150dp"
+                android:layout_height="150dp" />
 
         </LinearLayout>
 

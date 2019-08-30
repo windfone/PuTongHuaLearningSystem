@@ -51,7 +51,7 @@ public class ShortEssayFragment extends RootFragment<ShortEssayPresenter> implem
     protected void initEventAndData() {
         super.initEventAndData();
         stateLoading();
-        mPresenter.getLearningList(getArguments().getInt("typeId"));
+        mPresenter.getLearningList(getArguments().getInt("typeId"),5,1);
 
     }
 

@@ -6,7 +6,7 @@ import com.skyworth.rxqwelibrary.base.BaseView;
 /**
  * Created by zhangguihua
  */
-public interface DetailContentContract {
+public interface DetailEssayContract {
 
     interface View extends BaseView {
         //返回登陆结果

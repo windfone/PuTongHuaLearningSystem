@@ -4,7 +4,7 @@ import com.hlxyedu.putonghualearningsystem.base.RxBus;
 import com.hlxyedu.putonghualearningsystem.base.RxPresenter;
 import com.hlxyedu.putonghualearningsystem.model.DataManager;
 import com.hlxyedu.putonghualearningsystem.model.event.EssayTxtEvent;
-import com.hlxyedu.putonghualearningsystem.ui.onlinelearning.contract.DetailContentContract;
+import com.hlxyedu.putonghualearningsystem.ui.onlinelearning.contract.DetailEssayContract;
 import com.hlxyedu.putonghualearningsystem.utils.RxUtil;
 import com.hlxyedu.putonghualearningsystem.weight.CommonSubscriber;
 
@@ -15,17 +15,17 @@ import io.reactivex.functions.Predicate;
 /**
  * Created by zhangguihua
  */
-public class DetailContentPresenter extends RxPresenter<DetailContentContract.View> implements DetailContentContract.Presenter {
+public class DetailEssayPresenter extends RxPresenter<DetailEssayContract.View> implements DetailEssayContract.Presenter {
     private DataManager mDataManager;
 
     @Inject
-    public DetailContentPresenter(DataManager mDataManager) {
+    public DetailEssayPresenter(DataManager mDataManager) {
         super(mDataManager);
         this.mDataManager = mDataManager;
     }
 
     @Override
-    public void attachView(DetailContentContract.View view) {
+    public void attachView(DetailEssayContract.View view) {
         super.attachView(view);
         registerEvent();
     }

@@ -25,13 +25,13 @@ public interface HttpHelper {
 
     Flowable<HttpResponse<List<DataVO>>> getEssayLists();
 
-    Flowable<HttpResponse<DetailVO>> getEssayDetails(String keys);
+    Flowable<HttpResponse<DetailVO>> getEssayDetails(int conId,String pinYinOrder);
 
     Flowable<HttpResponse<UserVO>> getUserInfo(int userId);
 
     Flowable<HttpResponse<List<TopTitleVO>>> getOnLineLearningTitle();
 
-    Flowable<HttpResponse<List<DataVO>>> getOnLineLearningList(int typeId);
+    Flowable<HttpResponse<List<DataVO>>> getOnLineLearningList(int typeId,int pageSize,int currentPage);
 
     Flowable<HttpResponse<List<TopTitleVO>>> getTeacherClassTitle();
 
@@ -40,6 +40,8 @@ public interface HttpHelper {
 
     Flowable<HttpResponse<List<DataVO>>> getWordLists(int typeId,String pinYin);
 
-    Flowable<HttpResponse<DetailVO>> getHanZiDetails(String conId,String pinYin);
+    Flowable<HttpResponse<DetailVO>> getHanZiDetails(int conId,String pinYin,String pinYinOrder);
+
+    Flowable<HttpResponse<DetailVO>> getPinYinLearningDetails(int conId,String pinYinOrder);
 
 }

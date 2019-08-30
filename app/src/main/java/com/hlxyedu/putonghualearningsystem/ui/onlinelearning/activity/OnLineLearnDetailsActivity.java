@@ -33,7 +33,7 @@ import com.hlxyedu.putonghualearningsystem.model.event.EssayTxtEvent;
 import com.hlxyedu.putonghualearningsystem.model.event.HanZiEvent;
 import com.hlxyedu.putonghualearningsystem.model.http.api.ApiConstants;
 import com.hlxyedu.putonghualearningsystem.ui.onlinelearning.contract.OnLineLearnDetailsContract;
-import com.hlxyedu.putonghualearningsystem.ui.onlinelearning.fragment.DetailContentFragment;
+import com.hlxyedu.putonghualearningsystem.ui.onlinelearning.fragment.DetailEssayFragment;
 import com.hlxyedu.putonghualearningsystem.ui.onlinelearning.fragment.DetailHanZiFragment;
 import com.hlxyedu.putonghualearningsystem.ui.onlinelearning.fragment.DetailWordFragment;
 import com.hlxyedu.putonghualearningsystem.ui.onlinelearning.presenter.OnLineLearnDetailsPresenter;
@@ -57,7 +57,6 @@ import java.util.UUID;
 
 import butterknife.BindView;
 import butterknife.OnClick;
-import cn.jzvd.Jzvd;
 
 /**
  * Created by zhangguihua
@@ -125,16 +124,6 @@ public class OnLineLearnDetailsActivity extends RootFragmentActivity<OnLineLearn
      * @param context
      * @return
      */
-    public static <T> Intent newInstance(Context context, int pos, String title) {
-        Intent intent = new Intent(context, OnLineLearnDetailsActivity.class);
-
-        Bundle bundle = new Bundle();
-        bundle.putSerializable("pos", pos);
-        bundle.putSerializable("title", title);
-        intent.putExtras(bundle);
-        return intent;
-    }
-
     public static <T> Intent newInstance(Context context, int pos, ArrayList<T> dataVO, String title, String itemStr) {
         Intent intent = new Intent(context, OnLineLearnDetailsActivity.class);
 
@@ -159,7 +148,7 @@ public class OnLineLearnDetailsActivity extends RootFragmentActivity<OnLineLearn
         switch (mTitles) {
             case "短文跟读":
             case "拼音学习":
-                loadRootFragment(R.id.content_container, DetailContentFragment.newInstance(itemStr));
+                loadRootFragment(R.id.content_container, DetailEssayFragment.newInstance(itemStr));
                 break;
             case "单词跟读":
                 loadRootFragment(R.id.content_container, DetailWordFragment.newInstance());
@@ -224,22 +213,36 @@ public class OnLineLearnDetailsActivity extends RootFragmentActivity<OnLineLearn
     }
 
     private void getNetDatas() {
+        DataVO dataVO = lists.get(pos);
         switch (mTitles) {
             case "拼音学习":
-
+                mPresenter.getPinYinDetails(dataVO.getConId(),dataVO.getPinYinOrder());
                 break;
             case "单词跟读":
 
                 break;
             case "短文跟读":
-                mPresenter.getShortEssayDetails(lists.get(pos).getName());
+                mPresenter.getShortEssayDetails(dataVO.getConId(),dataVO.getPinYinOrder());
                 break;
             case "汉字学习":
             case "轻声字":
             case "儿化音":
-                mPresenter.getHanZiDetails(String.valueOf(lists.get(pos).getConId()),lists.get(pos).getPinyin());
+                mPresenter.getHanZiDetails(dataVO.getConId(),dataVO.getPinyin(),dataVO.getPinYinOrder());
                 break;
         }
+    }
+
+    // 拼音学习
+    @Override
+    public void onPinYinDetailsSuccess(DetailVO detailVO) {
+        top_play_iv.setEnabled(true);
+        pre_iv.setEnabled(true);
+        next_iv.setEnabled(true);
+        String title = lists.get(pos).getConTitle();
+        RxBus.getDefault().post(new EssayTxtEvent(detailVO.getConDetail(), title));
+        audioUrl = detailVO.getAudioUrl();
+        audioLength = detailVO.getAudioLength();
+        time_total_tv.setText(TimeUtil.getTimeString(audioLength));
     }
 
     // 短文跟读
@@ -252,7 +255,7 @@ public class OnLineLearnDetailsActivity extends RootFragmentActivity<OnLineLearn
         for (int i = 0; i < detailVO.getTxtData().length; i++) {
             essayTxt += "        " + detailVO.getTxtData()[i] + "\n";
         }
-        String title = lists.get(pos).getName();
+        String title = lists.get(pos).getConTitle();
         RxBus.getDefault().post(new EssayTxtEvent(essayTxt,
                 "《" + title.substring(0, title.lastIndexOf(".")) + "》示范朗读"));
         audioUrl = detailVO.getAudioUrl();
@@ -266,7 +269,7 @@ public class OnLineLearnDetailsActivity extends RootFragmentActivity<OnLineLearn
         top_play_iv.setEnabled(true);
         pre_iv.setEnabled(true);
         next_iv.setEnabled(true);
-        RxBus.getDefault().post(new HanZiEvent(detailVO.getPinYin(), detailVO.getPinYinCN(),detailVO.getVideoUrl()));
+        RxBus.getDefault().post(new HanZiEvent(detailVO.getPinyin(), detailVO.getPinYinCN(),detailVO.getVideoUrl()));
         audioUrl = detailVO.getAudioUrl();
         audioLength = detailVO.getAudioLength();
         time_total_tv.setText(TimeUtil.getTimeString(audioLength));

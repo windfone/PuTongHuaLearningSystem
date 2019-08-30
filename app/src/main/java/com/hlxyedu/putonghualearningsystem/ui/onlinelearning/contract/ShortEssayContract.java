@@ -21,6 +21,6 @@ public interface ShortEssayContract {
 
     interface Presenter extends BasePresenter<View> {
 
-        void getLearningList(int typeId);
+        void getLearningList(int typeId,int pageSize,int currentPage);
     }
 }

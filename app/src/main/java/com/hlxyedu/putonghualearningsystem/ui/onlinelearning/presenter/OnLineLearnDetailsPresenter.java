@@ -85,13 +85,14 @@ public class OnLineLearnDetailsPresenter extends RxPresenter<OnLineLearnDetailsC
     }
 
     /**
-     * 请求 短文跟读
-     * @param audioName 音频名字
+     * 请求 短文跟读 详情
+     * @param conId
+     * @param pinYinOrder
      */
     @Override
-    public void getShortEssayDetails(String audioName) {
+    public void getShortEssayDetails(int conId,String pinYinOrder) {
         addSubscribe(
-                mDataManager.getEssayDetails(audioName)
+                mDataManager.getEssayDetails(conId,pinYinOrder)
                         .compose(RxUtil.rxSchedulerHelper())
                         .compose(RxUtil.handleTestResult())
                         .subscribeWith(
@@ -117,14 +118,47 @@ public class OnLineLearnDetailsPresenter extends RxPresenter<OnLineLearnDetailsC
     }
 
     /**
+     *  拼音学习 详情
+     * @param conId
+     * @param pinYinOrder
+     */
+    @Override
+    public void getPinYinDetails(int conId, String pinYinOrder) {
+        addSubscribe(
+                mDataManager.getPinYinLearningDetails(conId,pinYinOrder)
+                        .compose(RxUtil.rxSchedulerHelper())
+                        .compose(RxUtil.handleTestResult())
+                        .subscribeWith(
+                                new CommonSubscriber<DetailVO>(mView) {
+                                    @Override
+                                    public void onNext(DetailVO detailVO) {
+                                        mView.onPinYinDetailsSuccess(detailVO);
+                                    }
+
+                                    @Override
+                                    public void onError(Throwable e) {
+                                        //当数据返回为null时 做特殊处理
+                                        if (e instanceof HttpException) {
+                                            HttpResponseCode httpResponseCode = RegUtils
+                                                    .onError((HttpException) e);
+                                            ToastUtils.showShort(httpResponseCode.getMsg());
+                                        }
+                                        mView.responeError("数据请求失败，请检查网络！");
+                                    }
+                                }
+                        )
+        );
+    }
+
+    /**
      * 请求汉字 轻声字 儿化音 详情
      * @param conId
      * @param pinYin
      */
     @Override
-    public void getHanZiDetails(String conId,String pinYin) {
+    public void getHanZiDetails(int conId,String pinYin,String pinYinOrder) {
         addSubscribe(
-                mDataManager.getHanZiDetails(conId,pinYin)
+                mDataManager.getHanZiDetails(conId,pinYin,pinYinOrder)
                         .compose(RxUtil.rxSchedulerHelper())
                         .compose(RxUtil.handleTestResult())
                         .subscribeWith(

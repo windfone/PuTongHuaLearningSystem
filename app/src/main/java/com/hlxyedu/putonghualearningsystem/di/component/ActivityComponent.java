@@ -6,8 +6,6 @@ import android.app.Activity;
 import com.hlxyedu.putonghualearningsystem.di.module.ActivityModule;
 import com.hlxyedu.putonghualearningsystem.di.scope.ActivityScope;
 import com.hlxyedu.putonghualearningsystem.ui.splash.activity.SplashActivity;
-import com.hlxyedu.putonghualearningsystem.ui.essay.activity.EssayDetailsActivity;
-import com.hlxyedu.putonghualearningsystem.ui.essay.activity.EssayListActivity;
 import com.hlxyedu.putonghualearningsystem.ui.exam.activity.ExamDetailActivity;
 import com.hlxyedu.putonghualearningsystem.ui.login.activity.LoginActivity;
 import com.hlxyedu.putonghualearningsystem.ui.main.activity.MainActivity;
@@ -37,10 +35,6 @@ public interface ActivityComponent {
     void inject(MainActivity mainActivity);
 
     void inject(LoginActivity loginActivity);
-
-    void inject(EssayListActivity essayListActivity);
-
-    void inject(EssayDetailsActivity essayDetailsActivity);
 
     void inject(PersonalStatisticsActivity personalStatisticsActivity);
 

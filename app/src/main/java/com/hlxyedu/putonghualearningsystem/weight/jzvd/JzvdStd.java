@@ -1,4 +1,4 @@
-package com.hlxyedu.putonghualearningsystem.utils;
+package com.hlxyedu.putonghualearningsystem.weight.jzvd;
 
 import android.app.AlertDialog;
 import android.app.Dialog;

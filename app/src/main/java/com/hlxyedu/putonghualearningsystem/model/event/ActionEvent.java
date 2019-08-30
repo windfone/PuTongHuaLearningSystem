@@ -1,6 +1,8 @@
 package com.hlxyedu.putonghualearningsystem.model.event;
 
 
+import com.hlxyedu.putonghualearningsystem.model.bean.DetailVO;
+
 /**
  * 作者：weidingqiang on 2018/1/18 16:05
  * 邮箱：dqwei@iflytek.com
@@ -24,6 +26,8 @@ public class ActionEvent {
 
     public static final String PLAYAUDIO = "PLAYAUDIO";
 
+    public static final String PLAYWORDAUDIO = "PLAYWORDAUDIO";
+
     public static final String INITVIEW = "INITVIEW";
 
     private String type;
@@ -31,6 +35,8 @@ public class ActionEvent {
     private int second;
 
     private int sortType;
+
+    private DetailVO detailVO;
 
     private String questionNo;
 
@@ -40,6 +46,11 @@ public class ActionEvent {
 
     public ActionEvent(String type){
         this.type = type;
+    }
+
+    public ActionEvent(String type,DetailVO detailVO){
+        this.type = type;
+        this.detailVO = detailVO;
     }
 
     public ActionEvent(String type,String problemTitle,int second){
@@ -64,6 +75,14 @@ public class ActionEvent {
 //        this.answerVO = answerVO;
 //    }
 
+
+    public DetailVO getDetailVO() {
+        return detailVO;
+    }
+
+    public void setDetailVO(DetailVO detailVO) {
+        this.detailVO = detailVO;
+    }
 
     public String getType() {
         return type;

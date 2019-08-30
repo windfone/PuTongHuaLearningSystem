@@ -13,6 +13,8 @@ import com.hlxyedu.putonghualearningsystem.utils.RegUtils;
 import com.hlxyedu.putonghualearningsystem.utils.RxUtil;
 import com.hlxyedu.putonghualearningsystem.weight.CommonSubscriber;
 
+import java.util.List;
+
 import javax.inject.Inject;
 
 import io.reactivex.annotations.NonNull;
@@ -73,6 +75,28 @@ public class OnLineLearnDetailsPresenter extends RxPresenter<OnLineLearnDetailsC
                     @Override
                     public void onNext(ActionEvent s) {
                         mView.playAudio();
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        super.onError(e);
+                    }
+                })
+        );
+
+        // 单词跟读 播放音频，由于单词跟读详情是列表形式，需要将数据传回
+        addSubscribe(RxBus.getDefault().toFlowable(ActionEvent.class)
+                .compose(RxUtil.<ActionEvent>rxSchedulerHelper())
+                .filter(new Predicate<ActionEvent>() {
+                    @Override
+                    public boolean test(@NonNull ActionEvent actionEvent) throws Exception {
+                        return actionEvent.getType().equals(ActionEvent.PLAYWORDAUDIO);
+                    }
+                })
+                .subscribeWith(new CommonSubscriber<ActionEvent>(mView) {
+                    @Override
+                    public void onNext(ActionEvent s) {
+                        mView.playWordAudio(s.getDetailVO());
                     }
 
                     @Override
@@ -166,6 +190,38 @@ public class OnLineLearnDetailsPresenter extends RxPresenter<OnLineLearnDetailsC
                                     @Override
                                     public void onNext(DetailVO detailVO) {
                                         mView.onHanZiDetailsSuccess(detailVO);
+                                    }
+
+                                    @Override
+                                    public void onError(Throwable e) {
+                                        //当数据返回为null时 做特殊处理
+                                        if (e instanceof HttpException) {
+                                            HttpResponseCode httpResponseCode = RegUtils
+                                                    .onError((HttpException) e);
+                                            ToastUtils.showShort(httpResponseCode.getMsg());
+                                        }
+                                        mView.responeError("数据请求失败，请检查网络！");
+                                    }
+                                }
+                        )
+        );
+    }
+
+    /**
+     * 单词跟读 详情
+     * @param pinYinOrder
+     */
+    @Override
+    public void getWordFollowDetails(String pinYinOrder) {
+        addSubscribe(
+                mDataManager.getWordFollowDetails(pinYinOrder)
+                        .compose(RxUtil.rxSchedulerHelper())
+                        .compose(RxUtil.handleTestResult())
+                        .subscribeWith(
+                                new CommonSubscriber<List<DetailVO>>(mView) {
+                                    @Override
+                                    public void onNext(List<DetailVO> detailVOS) {
+                                        mView.onWordFollowDetailsSuccess(detailVOS);
                                     }
 
                                     @Override

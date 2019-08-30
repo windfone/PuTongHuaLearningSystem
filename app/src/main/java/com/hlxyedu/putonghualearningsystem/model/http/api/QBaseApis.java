@@ -63,26 +63,25 @@ public interface QBaseApis {
     @GET("study/getContentTile")
     Flowable<HttpResponse<List<DataVO>>> getOnLineLearningList(@Query("typeId") int typeId ,@Query("pageSize") int pageSize,@Query("pageSize") int currentPage);
 
-    // 获取 拼音学习详情
-    @GET("study/selectPinYinStudy")
-    Flowable<HttpResponse<DetailVO>> getPinYinLearningDetails(@Query("conId") int conId,@Query("pinYinOrder") String pinYinOrder);
-
-    // 获取 短文跟读列表
-    @GET("Mp3List")
-    Flowable<HttpResponse<List<DataVO>>> getEssayLists();
-
     // 获取 汉字学习 轻声字 儿化音列表
     @GET("study/selectPinYin")
     Flowable<HttpResponse<List<DataVO>>> getWordLists(@Query("typeId") int typeId,@Query("pinYin") String pinYin);
 
+    // 获取 拼音学习详情
+    @GET("study/selectPinYinStudy")
+    Flowable<HttpResponse<DetailVO>> getPinYinLearningDetails(@Query("conId") int conId,@Query("pinYinOrder") String pinYinOrder);
+
+    // 获取 单词跟读 详情
+    @GET("study/selectWordsRead")
+    Flowable<HttpResponse<List<DetailVO>>> getWordFollowDetails(@Query("pinYinOrder") String pinYinOrder);
+
+    // 获取 短文跟读 详情
+    @GET("study/selectPassageDetail")
+    Flowable<HttpResponse<DetailVO>> getEssayDetails(@Query("conId") int conId,@Query("pinYinOrder") String pinYinOrder);
+
     // 获取 汉字学习 轻声字 儿化音 详情
     @GET("study/selectDetail")
     Flowable<HttpResponse<DetailVO>> getHanZiDetails(@Query("conId") int conId,@Query("pinYin") String pinYin,@Query("pinYinOrder") String pinYinOrder);
-
-    // 获取 拼音学习详情
-//    @GET("study/getContentDetail")
-    @GET("study/selectPinYinStudy")
-    Flowable<HttpResponse<DetailVO>> getEssayDetails(@Query("conId") int conId,@Query("pinYinOrder") String pinYinOrder);
 
     // 获取 名师课堂 头部标题
     @GET("browse/getTeacherType")

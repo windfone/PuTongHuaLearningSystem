@@ -7,29 +7,30 @@ import android.widget.RelativeLayout;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.hlxyedu.putonghualearningsystem.R;
+import com.hlxyedu.putonghualearningsystem.model.bean.DetailVO;
 import com.hlxyedu.putonghualearningsystem.model.bean.PinYinBean;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class WordFollwDetailAdapter extends BaseQuickAdapter<PinYinBean, BaseViewHolder> {
+public class WordFollwDetailAdapter extends BaseQuickAdapter<DetailVO, BaseViewHolder> {
 
-    private ArrayList<PinYinBean> lists;
     private List<Boolean> selectList;
-    private String title;
 
-    public WordFollwDetailAdapter(int layoutResId, @Nullable List<PinYinBean> data, String title,List<Boolean> selects) {
+    public WordFollwDetailAdapter(int layoutResId, @Nullable List<DetailVO> data,List<Boolean> selects) {
         super(layoutResId, data);
-        this.lists = (ArrayList<PinYinBean>) data;
-        this.title = title;
         this.selectList = selects;
     }
 
     @Override
-    protected void convert(BaseViewHolder helper, PinYinBean item) {
-        String position = (helper.getLayoutPosition()+1)> 9 ?
-                (helper.getLayoutPosition()+1) +"" : "0" + (helper.getLayoutPosition()+1);
-        helper.setImageResource(R.id.word_iv,R.mipmap.ic_launcher);
+    protected void convert(BaseViewHolder helper, DetailVO item) {
+        String[] pinyin = item.getPinyin().split("\\|");
+        String[] cn = item.getConDetail().split("\\|");
+        helper.setText(R.id.left_pinyin_tv,pinyin[0])
+                        .setText(R.id.right_pinyin_tv,pinyin[1])
+                        .setText(R.id.left_cn_tv,cn[0])
+                        .setText(R.id.right_cn_tv,cn[1]);
+
         if (selectList.get(helper.getLayoutPosition())){
             helper.itemView.setBackground(ContextCompat.getDrawable(mContext,R.drawable.icon_word_detail_select_bg));
         }else {

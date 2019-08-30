@@ -23,8 +23,6 @@ public interface HttpHelper {
 
     Flowable<HttpResponse<UserVO>> getLoginBody(String username,String password);
 
-    Flowable<HttpResponse<List<DataVO>>> getEssayLists();
-
     Flowable<HttpResponse<DetailVO>> getEssayDetails(int conId,String pinYinOrder);
 
     Flowable<HttpResponse<UserVO>> getUserInfo(int userId);
@@ -43,5 +41,7 @@ public interface HttpHelper {
     Flowable<HttpResponse<DetailVO>> getHanZiDetails(int conId,String pinYin,String pinYinOrder);
 
     Flowable<HttpResponse<DetailVO>> getPinYinLearningDetails(int conId,String pinYinOrder);
+
+    Flowable<HttpResponse<List<DetailVO>>> getWordFollowDetails(String pinYinOrder);
 
 }

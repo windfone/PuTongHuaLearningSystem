@@ -14,7 +14,6 @@
 
     <!--蓝色-->
     <color name="blue0ED">#5CB0ED</color>
-    <color name="blue4FF">#0294FF</color>
     <color name="blue5FC">#58D5FC</color>
     <color name="blue0F8">#4470F8</color>
     <color name="blue0DF">#4340DF</color>
@@ -31,7 +30,6 @@
     <!-- 灰色 -->
     <color name="grayDFD">#FDFDFD</color>
     <color name="gray5F5">#F5F5F5</color>
-    <color name="gray6E6">#E6E6E6</color>
     <color name="grayCEC">#ECECEC</color>
     <color name="gray3E3">#E3E3E3</color>
     <color name="grayFDF">#E1DFDF</color>
@@ -42,9 +40,7 @@
     <color name="gray4B4">#B7B4B4</color>
     <color name="gray9B9">#BBB9B9</color>
     <color name="gray0B0">#B3B0B0</color>
-    <color name="gray1B1">#B1B1B1</color>
     <color name="graya9a">#9a9a9a</color>
-    <color name="gray389">#7F8389</color>
     <color name="gray070">#707070</color>
     <color name="gray868">#696868</color>
 

@@ -31,6 +31,7 @@ import com.hlxyedu.putonghualearningsystem.model.bean.DetailVO;
 import com.hlxyedu.putonghualearningsystem.model.event.ActionEvent;
 import com.hlxyedu.putonghualearningsystem.model.event.EssayTxtEvent;
 import com.hlxyedu.putonghualearningsystem.model.event.HanZiEvent;
+import com.hlxyedu.putonghualearningsystem.model.event.WordFollowEvent;
 import com.hlxyedu.putonghualearningsystem.model.http.api.ApiConstants;
 import com.hlxyedu.putonghualearningsystem.ui.onlinelearning.contract.OnLineLearnDetailsContract;
 import com.hlxyedu.putonghualearningsystem.ui.onlinelearning.fragment.DetailEssayFragment;
@@ -53,6 +54,7 @@ import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 import butterknife.BindView;
@@ -219,7 +221,7 @@ public class OnLineLearnDetailsActivity extends RootFragmentActivity<OnLineLearn
                 mPresenter.getPinYinDetails(dataVO.getConId(),dataVO.getPinYinOrder());
                 break;
             case "单词跟读":
-
+                mPresenter.getWordFollowDetails(dataVO.getPinYinOrder());
                 break;
             case "短文跟读":
                 mPresenter.getShortEssayDetails(dataVO.getConId(),dataVO.getPinYinOrder());
@@ -251,15 +253,31 @@ public class OnLineLearnDetailsActivity extends RootFragmentActivity<OnLineLearn
         top_play_iv.setEnabled(true);
         pre_iv.setEnabled(true);
         next_iv.setEnabled(true);
-        String essayTxt = "";
+        /*String essayTxt = "";
         for (int i = 0; i < detailVO.getTxtData().length; i++) {
             essayTxt += "        " + detailVO.getTxtData()[i] + "\n";
-        }
+        }*/
         String title = lists.get(pos).getConTitle();
-        RxBus.getDefault().post(new EssayTxtEvent(essayTxt,
-                "《" + title.substring(0, title.lastIndexOf(".")) + "》示范朗读"));
+        /*RxBus.getDefault().post(new EssayTxtEvent(detailVO.getConDetail(),
+                "《" + title.substring(0, title.lastIndexOf(".")) + "》示范朗读"));*/
+        RxBus.getDefault().post(new EssayTxtEvent(detailVO.getConDetail(), title + "示范朗读"));
         audioUrl = detailVO.getAudioUrl();
         audioLength = detailVO.getAudioLength();
+        time_total_tv.setText(TimeUtil.getTimeString(audioLength));
+    }
+
+    @Override
+    public void onWordFollowDetailsSuccess(List<DetailVO> detailVOS) {
+        top_play_iv.setEnabled(true);
+        pre_iv.setEnabled(true);
+        next_iv.setEnabled(true);
+        String title = lists.get(pos).getConTitle();
+        /*RxBus.getDefault().post(new EssayTxtEvent(detailVO.getConDetail(),
+                "《" + title.substring(0, title.lastIndexOf(".")) + "》示范朗读"));*/
+        RxBus.getDefault().post(new WordFollowEvent(detailVOS));
+        // 由于详情是多条数据，这里设置默认点击播放第一条选中的
+        audioUrl = detailVOS.get(0).getAudioUrl();
+        audioLength = detailVOS.get(0).getAudioLength();
         time_total_tv.setText(TimeUtil.getTimeString(audioLength));
     }
 
@@ -382,6 +400,16 @@ public class OnLineLearnDetailsActivity extends RootFragmentActivity<OnLineLearn
         }catch (IllegalArgumentException e){
             ToastUtils.showShort("音频链接错误");
         }
+    }
+
+    @Override
+    public void playWordAudio(DetailVO detailVO) {
+        audioUrl = detailVO.getAudioUrl();
+        audioLength = detailVO.getAudioLength();
+        time_total_tv.setText(TimeUtil.getTimeString(audioLength));
+        playAudio();
+        top_play_iv.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.icon_play));
+        progressBar.setProgress(0);
     }
 
     private void playRecordAudio() {

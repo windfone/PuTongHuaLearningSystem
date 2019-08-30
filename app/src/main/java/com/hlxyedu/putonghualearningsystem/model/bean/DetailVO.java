@@ -1,5 +1,7 @@
 package com.hlxyedu.putonghualearningsystem.model.bean;
 
+import com.google.gson.annotations.SerializedName;
+
 public class DetailVO {
 
     /**
@@ -15,6 +17,13 @@ public class DetailVO {
     private String videoUrl;
     private String pinyin;
     private String pinYinCN;
+    /**
+     * conTitle : 普通话单词跟读教程词语表1 第001-100
+     * audioLength : null
+     */
+
+    private String conTitle;
+
 
     public String[] getTxtData() {
         return txtData;
@@ -70,6 +79,14 @@ public class DetailVO {
 
     public void setPinYinCN(String pinYinCN) {
         this.pinYinCN = pinYinCN;
+    }
+
+    public String getConTitle() {
+        return conTitle;
+    }
+
+    public void setConTitle(String conTitle) {
+        this.conTitle = conTitle;
     }
 
 }

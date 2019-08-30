@@ -38,11 +38,6 @@ public class RetrofitHelper implements HttpHelper {
     }
 
     @Override
-    public Flowable<HttpResponse<List<DataVO>>> getEssayLists() {
-        return qBaseApis.getEssayLists();
-    }
-
-    @Override
     public Flowable<HttpResponse<DetailVO>> getEssayDetails(int conId,String pinYinOrder) {
         return qBaseApis.getEssayDetails(conId,pinYinOrder);
     }
@@ -85,6 +80,11 @@ public class RetrofitHelper implements HttpHelper {
     @Override
     public Flowable<HttpResponse<DetailVO>> getPinYinLearningDetails(int conId, String pinYinOrder) {
         return qBaseApis.getPinYinLearningDetails(conId,pinYinOrder);
+    }
+
+    @Override
+    public Flowable<HttpResponse<List<DetailVO>>> getWordFollowDetails(String pinYinOrder) {
+        return qBaseApis.getWordFollowDetails(pinYinOrder);
     }
 
 }

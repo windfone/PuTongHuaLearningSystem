@@ -86,11 +86,6 @@ public class DataManager implements HttpHelper, PreferencesHelper {
     }
 
     @Override
-    public Flowable<HttpResponse<List<DataVO>>> getEssayLists() {
-        return mHttpHelper.getEssayLists();
-    }
-
-    @Override
     public Flowable<HttpResponse<DetailVO>> getEssayDetails(int conId,String pinYinOrder) {
         return mHttpHelper.getEssayDetails(conId,pinYinOrder);
     }
@@ -133,6 +128,11 @@ public class DataManager implements HttpHelper, PreferencesHelper {
     @Override
     public Flowable<HttpResponse<DetailVO>> getPinYinLearningDetails(int conId, String pinYinOrder) {
         return mHttpHelper.getPinYinLearningDetails(conId,pinYinOrder);
+    }
+
+    @Override
+    public Flowable<HttpResponse<List<DetailVO>>> getWordFollowDetails(String pinYinOrder) {
+        return mHttpHelper.getWordFollowDetails(pinYinOrder);
     }
 
 }

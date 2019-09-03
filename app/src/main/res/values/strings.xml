@@ -75,6 +75,7 @@
     <string name="publish">发表</string>
     <string name="share">分享</string>
     <string name="comment">评论</string>
+    <string name="no_comment">当前还没有评论哦~</string>
 
     <!--activity_detail_play-->
     <string name="time_zero">00:00</string>

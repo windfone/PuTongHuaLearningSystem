@@ -1,5 +1,6 @@
 package com.hlxyedu.putonghualearningsystem.model.http.api;
 
+import com.hlxyedu.putonghualearningsystem.model.bean.CommentVO;
 import com.hlxyedu.putonghualearningsystem.model.bean.DataVO;
 import com.hlxyedu.putonghualearningsystem.model.bean.DetailVO;
 import com.hlxyedu.putonghualearningsystem.model.bean.TopTitleVO;
@@ -91,6 +92,14 @@ public interface QBaseApis {
     @GET("browse/geTeacherTitle")
     Flowable<HttpResponse<List<VideoVO>>> getTeacherClassList(@Query("typeId") int typeId,@Query("orderBy") int orderBy,
                                                                 @Query("currentPage") int currentPage,@Query("pageSize") int pageSize);
+
+    // 获取 名师课堂 顶部详情
+    @GET("browse/selectTeacherLectureDetail")
+    Flowable<HttpResponse<VideoVO>> getTeacherClassTopDetails(@Query("browseNum") int browseNum,@Query("teaId") int teaId);
+
+    // 获取 名师课堂详情 评论 列表
+    @GET("comment/selectComment")
+    Flowable<HttpResponse<List<CommentVO>>> getCommentList(@Query("teaId") int browseNum, @Query("currentPage") int currentPage, @Query("pageSize") int pageSize);
 }
 
 

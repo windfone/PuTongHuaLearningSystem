@@ -11,10 +11,13 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.blankj.utilcode.util.ToastUtils;
+import com.bumptech.glide.Glide;
 import com.hlxyedu.putonghualearningsystem.R;
 import com.hlxyedu.putonghualearningsystem.base.RootActivity;
 import com.hlxyedu.putonghualearningsystem.model.bean.CommentVO;
+import com.hlxyedu.putonghualearningsystem.model.bean.DataVO;
 import com.hlxyedu.putonghualearningsystem.model.bean.VideoVO;
+import com.hlxyedu.putonghualearningsystem.model.http.api.ApiConstants;
 import com.hlxyedu.putonghualearningsystem.ui.teacherclass.adapter.CommentAdapter;
 import com.hlxyedu.putonghualearningsystem.ui.teacherclass.contract.ExerciseDetailContract;
 import com.hlxyedu.putonghualearningsystem.ui.teacherclass.presenter.ExerciseDetailPresenter;
@@ -41,6 +44,8 @@ public class ExerciseDetailActivity extends RootActivity<ExerciseDetailPresenter
     ImageView play_iv;*/
     @BindView(R.id.title_tv)
     TextView title_tv;
+    @BindView(R.id.no_comment_tv)
+    TextView no_comment_tv;
     @BindView(R.id.headportrait_iv)
     ImageView headportrait_iv;
     @BindView(R.id.teacher_name_tv)
@@ -57,6 +62,11 @@ public class ExerciseDetailActivity extends RootActivity<ExerciseDetailPresenter
     JzvdStd jz_video;
 
     private CommentAdapter mAdapter;
+
+    private List<CommentVO> commentVOList = new ArrayList<>();
+    private int pageSize = 20;
+    private int count = 1; // 当前页数;
+
     /**
      * 打开新Activity
      *
@@ -82,7 +92,6 @@ public class ExerciseDetailActivity extends RootActivity<ExerciseDetailPresenter
 
     @Override
     protected void initEventAndData() {
-//        stateLoading();
         xbase_topbar.setxBaseTopBarImp(this);
         xbase_topbar.setMiddleText(getIntent().getStringExtra("title"));
         xbase_topbar.setRightIv(ContextCompat.getDrawable(this,R.drawable.share));
@@ -93,20 +102,26 @@ public class ExerciseDetailActivity extends RootActivity<ExerciseDetailPresenter
         title_tv.setText(videoVO.getTeaTitle());
         read_num_tv.setText("阅读量：" + videoVO.getBrowseNum());
 
-        List<CommentVO> lists = new ArrayList<>();
-        lists.add(new CommentVO());
-        lists.add(new CommentVO());
-        lists.add(new CommentVO());
-        lists.add(new CommentVO());
-        mAdapter = new CommentAdapter(R.layout.item_comment,lists);
+        mAdapter = new CommentAdapter(R.layout.item_comment,commentVOList);
         rcy.setLayoutManager(new LinearLayoutManager(this));
         rcy.setAdapter(mAdapter);
 
-        jz_video.setUp("http://jzvd.nathen.cn/c6e3dc12a1154626b3476d9bf3bd7266/6b56c5f0dc31428083757a45764763b0-5287d2089db37e62345123a1be272f8b.mp4"
-                , "饺子闭眼睛");
+        count = 1;
+        if (!commentVOList.isEmpty()) {
+            commentVOList.clear();
+        }
+        mPresenter.getCommentList(videoVO.getTeaId(),count,pageSize);
+
+        mAdapter.setPreLoadNumber(1);
+        mAdapter.setOnLoadMoreListener(() -> {
+            count++;
+            mPresenter.getCommentList(videoVO.getTeaId(),count,pageSize);
+        }, rcy);
+
+        jz_video.setUp(ApiConstants.HOST + videoVO.getTeaVideoUrl(), "");
         // 只是一种描述，也可以使用 glide picasso等加载封面图，根据项目自己需求
-//        Glide.with(this).load(VideoConstant.videoThumbList[0]).into(jz_video.thumbImageView);
-        jz_video.thumbImageView.setImageURI(Uri.parse("http://p.qpic.cn/videoyun/0/2449_43b6f696980311e59ed467f22794e792_1/640"));
+        Glide.with(this).load(Uri.parse("http://p.qpic.cn/videoyun/0/2449_43b6f696980311e59ed467f22794e792_1/640")).into(jz_video.thumbImageView);
+//        jz_video.thumbImageView.setImageURI(Uri.parse("http://p.qpic.cn/videoyun/0/2449_43b6f696980311e59ed467f22794e792_1/640"));
         // 设置充满全屏
         jz_video.setVideoImageDisplayType(JzvdStd.VIDEO_IMAGE_DISPLAY_TYPE_FILL_SCROP);
     }
@@ -114,6 +129,27 @@ public class ExerciseDetailActivity extends RootActivity<ExerciseDetailPresenter
     @Override
     public void responeError(String errorMsg) {
 
+    }
+
+    @Override
+    public void onCommentSuccess(List<CommentVO> commentVOS) {
+        if (!commentVOS.isEmpty()) {
+            no_comment_tv.setVisibility(View.GONE);
+
+            commentVOList.addAll(commentVOS);
+            mAdapter.setNewData(commentVOList);
+            if (commentVOS.size() < pageSize) {
+                mAdapter.loadMoreEnd();
+            } else {
+                mAdapter.loadMoreComplete();
+            }
+        } else {
+            if (count == 1) {
+                no_comment_tv.setVisibility(View.VISIBLE);
+            } else {
+                mAdapter.loadMoreEnd();
+            }
+        }
     }
 
     @OnClick({R.id.comment_tv})

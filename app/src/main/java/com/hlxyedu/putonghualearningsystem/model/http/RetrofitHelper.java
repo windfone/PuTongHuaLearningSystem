@@ -1,6 +1,7 @@
 package com.hlxyedu.putonghualearningsystem.model.http;
 
 
+import com.hlxyedu.putonghualearningsystem.model.bean.CommentVO;
 import com.hlxyedu.putonghualearningsystem.model.bean.DataVO;
 import com.hlxyedu.putonghualearningsystem.model.bean.DetailVO;
 import com.hlxyedu.putonghualearningsystem.model.bean.TopTitleVO;
@@ -85,6 +86,16 @@ public class RetrofitHelper implements HttpHelper {
     @Override
     public Flowable<HttpResponse<List<DetailVO>>> getWordFollowDetails(String pinYinOrder) {
         return qBaseApis.getWordFollowDetails(pinYinOrder);
+    }
+
+    @Override
+    public Flowable<HttpResponse<VideoVO>> getTeacherClassTopDetails(int browseNum, int teaId) {
+        return qBaseApis.getTeacherClassTopDetails(browseNum,teaId);
+    }
+
+    @Override
+    public Flowable<HttpResponse<List<CommentVO>>> getCommentList(int browseNum, int currentPage, int pageSize) {
+        return qBaseApis.getCommentList(browseNum,currentPage,pageSize);
     }
 
 }

@@ -9,7 +9,7 @@ public class ApiConstants {
 
     //配置HOST
 //    public static String HOST = "http://www.hlxyedu.com/pthExs/";
-    public static String HOST = "http://192.168.0.100:8083/pthExs/";
+    public static String HOST = "http://192.168.0.105:8083/pthExs/";
 
 }
 

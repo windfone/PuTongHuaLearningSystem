@@ -1,5 +1,6 @@
 package com.hlxyedu.putonghualearningsystem.model.http;
 
+import com.hlxyedu.putonghualearningsystem.model.bean.CommentVO;
 import com.hlxyedu.putonghualearningsystem.model.bean.DataVO;
 import com.hlxyedu.putonghualearningsystem.model.bean.DetailVO;
 import com.hlxyedu.putonghualearningsystem.model.bean.TopTitleVO;
@@ -43,5 +44,9 @@ public interface HttpHelper {
     Flowable<HttpResponse<DetailVO>> getPinYinLearningDetails(int conId,String pinYinOrder);
 
     Flowable<HttpResponse<List<DetailVO>>> getWordFollowDetails(String pinYinOrder);
+
+    Flowable<HttpResponse<VideoVO>> getTeacherClassTopDetails(int browseNum,int teaId);
+
+    Flowable<HttpResponse<List<CommentVO>>> getCommentList(int browseNum, int currentPage, int pageSize);
 
 }

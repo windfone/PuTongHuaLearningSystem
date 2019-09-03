@@ -1,5 +1,6 @@
 package com.hlxyedu.putonghualearningsystem.model;
 
+import com.hlxyedu.putonghualearningsystem.model.bean.CommentVO;
 import com.hlxyedu.putonghualearningsystem.model.bean.DataVO;
 import com.hlxyedu.putonghualearningsystem.model.bean.DetailVO;
 import com.hlxyedu.putonghualearningsystem.model.bean.TopTitleVO;
@@ -133,6 +134,16 @@ public class DataManager implements HttpHelper, PreferencesHelper {
     @Override
     public Flowable<HttpResponse<List<DetailVO>>> getWordFollowDetails(String pinYinOrder) {
         return mHttpHelper.getWordFollowDetails(pinYinOrder);
+    }
+
+    @Override
+    public Flowable<HttpResponse<VideoVO>> getTeacherClassTopDetails(int browseNum, int teaId) {
+        return mHttpHelper.getTeacherClassTopDetails(browseNum,teaId);
+    }
+
+    @Override
+    public Flowable<HttpResponse<List<CommentVO>>> getCommentList(int browseNum, int currentPage, int pageSize) {
+        return mHttpHelper.getCommentList(browseNum,currentPage,pageSize);
     }
 
 }

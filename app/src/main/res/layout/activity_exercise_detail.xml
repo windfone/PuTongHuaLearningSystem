@@ -62,8 +62,7 @@
                 android:layout_marginEnd="33dp"
                 android:layout_marginBottom="9dp"
                 android:ellipsize="end"
-                android:singleLine="true"
-                android:text="普通话考试听力理解应试技巧" />
+                android:singleLine="true" />
 
             <View
                 android:layout_width="match_parent"
@@ -90,8 +89,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
                     android:layout_marginTop="7dp"
-                    android:layout_toRightOf="@+id/headportrait_iv"
-                    android:text="张小盒老师" />
+                    android:layout_toEndOf="@+id/headportrait_iv" />
 
                 <TextView
                     android:id="@+id/company_tv"
@@ -101,8 +99,7 @@
                     android:layout_below="@+id/teacher_name_tv"
                     android:layout_marginStart="8dp"
                     android:layout_marginTop="5dp"
-                    android:layout_toRightOf="@+id/headportrait_iv"
-                    android:text="新东方" />
+                    android:layout_toEndOf="@+id/headportrait_iv" />
 
                 <TextView
                     android:id="@+id/read_num_tv"
@@ -111,15 +108,14 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentEnd="true"
                     android:layout_marginTop="17dp"
-                    android:layout_marginEnd="16dp"
-                    android:text="阅读量：12345" />
+                    android:layout_marginEnd="16dp" />
 
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="17dp"
                     android:layout_marginEnd="8dp"
-                    android:layout_toLeftOf="@+id/read_num_tv"
+                    android:layout_toStartOf="@+id/read_num_tv"
                     android:src="@drawable/icon_reading_num" />
 
             </RelativeLayout>
@@ -136,11 +132,26 @@
         android:layout_marginTop="8dp"
         android:text="@string/all_comment" />
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/rcy"
+    <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1" />
+        android:layout_weight="1" >
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/rcy"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+        <TextView
+            android:id="@+id/no_comment_tv"
+            style="@style/textSize_black353_16"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="@string/no_comment"
+            android:visibility="gone" />
+
+    </FrameLayout>
 
     <!--android:fitsSystemWindows="true"-->
 
@@ -164,7 +175,8 @@
                 android:background="@null"
                 android:gravity="center_vertical"
                 android:hint="来了就说几句吧"
-                android:paddingStart="16dp" />
+                android:paddingStart="16dp"
+                tools:ignore="RtlSymmetry" />
 
             <View
                 android:layout_width="1dp"

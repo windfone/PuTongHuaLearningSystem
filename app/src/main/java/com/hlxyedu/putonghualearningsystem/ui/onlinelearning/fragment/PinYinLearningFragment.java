@@ -11,6 +11,7 @@ import com.hlxyedu.putonghualearningsystem.ui.onlinelearning.adapter.PinYinAdapt
 import com.hlxyedu.putonghualearningsystem.ui.onlinelearning.contract.PinYinLearningContract;
 import com.hlxyedu.putonghualearningsystem.ui.onlinelearning.presenter.PinYinLearningPresenter;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -26,6 +27,10 @@ public class PinYinLearningFragment extends RootFragment<PinYinLearningPresenter
     RecyclerView rcy;
 
     private PinYinAdapter mAdapter;
+
+    private List<DataVO> dataVOList = new ArrayList<>();
+    private int pageSize = 20;
+    private int count = 1; // 当前页数;
 
     public static PinYinLearningFragment newInstance(String mTitles, int typeId) {
         Bundle args = new Bundle();
@@ -52,22 +57,42 @@ public class PinYinLearningFragment extends RootFragment<PinYinLearningPresenter
         super.initEventAndData();
         stateLoading();
 
-        mPresenter.getLearningList(getArguments().getInt("typeId"),5,1);
+        // 初始化列表
+        mAdapter = new PinYinAdapter(R.layout.item_pinyin, dataVOList, getArguments().getString("title"));
+        rcy.setLayoutManager(
+                new LinearLayoutManager(mActivity));
+        rcy.setAdapter(mAdapter);
+
+        count = 1;
+        if (!dataVOList.isEmpty()) {
+            dataVOList.clear();
+        }
+        mPresenter.getLearningList(getArguments().getInt("typeId"),pageSize,count);
+
+        mAdapter.setPreLoadNumber(1);
+        mAdapter.setOnLoadMoreListener(() -> {
+            count++;
+            mPresenter.getLearningList(getArguments().getInt("typeId"),pageSize,count);
+        }, rcy);
     }
 
     @Override
     public void onSuccess(List<DataVO> dataVOS) {
-        stateMain();
-        for (int i = 0; i < dataVOS.size(); i++) {
-            dataVOS.get(i).setId(UUID.randomUUID() + "");
-        }
-        if (dataVOS == null || dataVOS.isEmpty()) {
-            stateEmpty("暂无内容");
+        if (!dataVOS.isEmpty()) {
+            dataVOList.addAll(dataVOS);
+            mAdapter.setNewData(dataVOList);
+            if (dataVOS.size() < pageSize) {
+                mAdapter.loadMoreEnd();
+            } else {
+                mAdapter.loadMoreComplete();
+            }
+            stateMain();
         } else {
-            mAdapter = new PinYinAdapter(R.layout.item_pinyin, dataVOS, getArguments().getString("title"));
-            rcy.setLayoutManager(
-                    new LinearLayoutManager(mActivity));
-            rcy.setAdapter(mAdapter);
+            if (count == 1) {
+                stateEmpty("暂无内容");
+            } else {
+                mAdapter.loadMoreEnd();
+            }
         }
     }
 

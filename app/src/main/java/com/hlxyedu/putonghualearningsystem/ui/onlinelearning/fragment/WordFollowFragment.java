@@ -11,6 +11,7 @@ import com.hlxyedu.putonghualearningsystem.ui.onlinelearning.adapter.WordFollowA
 import com.hlxyedu.putonghualearningsystem.ui.onlinelearning.contract.WordFollowContract;
 import com.hlxyedu.putonghualearningsystem.ui.onlinelearning.presenter.WordFollowPresenter;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -25,6 +26,10 @@ public class WordFollowFragment extends RootFragment<WordFollowPresenter> implem
     RecyclerView rcy;
 
     private WordFollowAdapter mAdapter;
+
+    private List<DataVO> dataVOList = new ArrayList<>();
+    private int pageSize = 20;
+    private int count = 1; // 当前页数;
 
     public static WordFollowFragment newInstance(String mTitles, int typeId) {
         Bundle args = new Bundle();
@@ -51,8 +56,22 @@ public class WordFollowFragment extends RootFragment<WordFollowPresenter> implem
         super.initEventAndData();
         stateLoading();
 
-        mPresenter.getLearningList(getArguments().getInt("typeId"),5,1);
+        mAdapter = new WordFollowAdapter(R.layout.item_pinyin, dataVOList, getArguments().getString("title"));
+        rcy.setLayoutManager(
+                new LinearLayoutManager(mActivity));
+        rcy.setAdapter(mAdapter);
 
+        count = 1;
+        if (!dataVOList.isEmpty()) {
+            dataVOList.clear();
+        }
+        mPresenter.getLearningList(getArguments().getInt("typeId"),pageSize,count);
+
+        mAdapter.setPreLoadNumber(1);
+        mAdapter.setOnLoadMoreListener(() -> {
+            count++;
+            mPresenter.getLearningList(getArguments().getInt("typeId"),pageSize,count);
+        }, rcy);
     }
 
     @Override
@@ -62,18 +81,21 @@ public class WordFollowFragment extends RootFragment<WordFollowPresenter> implem
 
     @Override
     public void onSuccess(List<DataVO> dataVOS) {
-        stateMain();
-
-        for (int i = 0; i < dataVOS.size(); i++) {
-            dataVOS.get(i).setId(UUID.randomUUID() + "");
-        }
-        if (dataVOS == null || dataVOS.isEmpty()) {
-            stateEmpty("暂无内容");
+        if (!dataVOS.isEmpty()) {
+            dataVOList.addAll(dataVOS);
+            mAdapter.setNewData(dataVOList);
+            if (dataVOS.size() < pageSize) {
+                mAdapter.loadMoreEnd();
+            } else {
+                mAdapter.loadMoreComplete();
+            }
+            stateMain();
         } else {
-            mAdapter = new WordFollowAdapter(R.layout.item_pinyin, dataVOS, getArguments().getString("title"));
-            rcy.setLayoutManager(
-                    new LinearLayoutManager(mActivity));
-            rcy.setAdapter(mAdapter);
+            if (count == 1) {
+                stateEmpty("暂无内容");
+            } else {
+                mAdapter.loadMoreEnd();
+            }
         }
     }
 

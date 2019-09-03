@@ -61,7 +61,7 @@ public interface QBaseApis {
 
     // 获取 拼音学习  单词跟读 短文跟读列表
     @GET("study/getContentTile")
-    Flowable<HttpResponse<List<DataVO>>> getOnLineLearningList(@Query("typeId") int typeId ,@Query("pageSize") int pageSize,@Query("pageSize") int currentPage);
+    Flowable<HttpResponse<List<DataVO>>> getOnLineLearningList(@Query("typeId") int typeId ,@Query("pageSize") int pageSize,@Query("currentPage") int currentPage);
 
     // 获取 汉字学习 轻声字 儿化音列表
     @GET("study/selectPinYin")

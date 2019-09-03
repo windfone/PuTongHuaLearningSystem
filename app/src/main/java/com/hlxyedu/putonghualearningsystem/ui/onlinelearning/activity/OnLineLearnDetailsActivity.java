@@ -392,7 +392,7 @@ public class OnLineLearnDetailsActivity extends RootFragmentActivity<OnLineLearn
     public void playAudio() {
         SongInfo songInfo = new SongInfo();
 //        songInfo.setSongId(lists.get(pos).getId());
-        songInfo.setSongId(UUID.randomUUID() + "");
+        songInfo.setSongId(String.valueOf(UUID.randomUUID()));
         songInfo.setSongUrl(ApiConstants.HOST + audioUrl);
         String url =  ApiConstants.HOST + audioUrl;
         try {

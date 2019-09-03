@@ -11,6 +11,7 @@ import com.hlxyedu.putonghualearningsystem.ui.onlinelearning.adapter.ShortEssayA
 import com.hlxyedu.putonghualearningsystem.ui.onlinelearning.contract.ShortEssayContract;
 import com.hlxyedu.putonghualearningsystem.ui.onlinelearning.presenter.ShortEssayPresenter;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -26,6 +27,10 @@ public class ShortEssayFragment extends RootFragment<ShortEssayPresenter> implem
     RecyclerView rcy;
 
     private ShortEssayAdapter mAdapter;
+
+    private List<DataVO> dataVOList = new ArrayList<>();
+    private int pageSize = 20;
+    private int count = 1; // 当前页数;
 
     public static ShortEssayFragment newInstance(String mTitles,int typeId) {
         Bundle args = new Bundle();
@@ -51,22 +56,42 @@ public class ShortEssayFragment extends RootFragment<ShortEssayPresenter> implem
     protected void initEventAndData() {
         super.initEventAndData();
         stateLoading();
-        mPresenter.getLearningList(getArguments().getInt("typeId"),5,1);
+
+        mAdapter = new ShortEssayAdapter(R.layout.item_pinyin, dataVOList, getArguments().getString("title"));
+        rcy.setLayoutManager(new LinearLayoutManager(mActivity));
+        rcy.setAdapter(mAdapter);
+
+        count = 1;
+        if (!dataVOList.isEmpty()) {
+            dataVOList.clear();
+        }
+        mPresenter.getLearningList(getArguments().getInt("typeId"),pageSize,count);
+
+        mAdapter.setPreLoadNumber(1);
+        mAdapter.setOnLoadMoreListener(() -> {
+            count++;
+            mPresenter.getLearningList(getArguments().getInt("typeId"),pageSize,count);
+        }, rcy);
 
     }
 
     @Override
     public void onSuccess(List<DataVO> essayVOS) {
-        stateMain();
-        for (int i = 0; i < essayVOS.size(); i++) {
-            essayVOS.get(i).setId(UUID.randomUUID() + "");
-        }
-        if (essayVOS == null || essayVOS.isEmpty()) {
-            stateEmpty("暂无内容");
+        if (!essayVOS.isEmpty()) {
+            dataVOList.addAll(essayVOS);
+            mAdapter.setNewData(dataVOList);
+            if (essayVOS.size() < pageSize) {
+                mAdapter.loadMoreEnd();
+            } else {
+                mAdapter.loadMoreComplete();
+            }
+            stateMain();
         } else {
-            mAdapter = new ShortEssayAdapter(R.layout.item_pinyin, essayVOS, getArguments().getString("title"));
-            rcy.setLayoutManager(new LinearLayoutManager(mActivity));
-            rcy.setAdapter(mAdapter);
+            if (count == 1) {
+                stateEmpty("暂无内容");
+            } else {
+                mAdapter.loadMoreEnd();
+            }
         }
     }
 

@@ -1,6 +1,7 @@
 package com.hlxyedu.putonghualearningsystem.ui.teacherclass.fragment;
 
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -29,6 +30,11 @@ public class ExerciseFragment extends RootFragment<ExercisePresenter> implements
 
     private ExerciseListAdapter mAdapter;
 
+    private List<VideoVO> dataVOList = new ArrayList<>();
+    private int pageSize = 5;
+    private int count = 1; // 当前页数;
+    private int orderBy = 0; // 排序方式
+
     public static ExerciseFragment newInstance(String mTitles, int typeId) {
         Bundle args = new Bundle();
         args.putString("title", mTitles);
@@ -53,25 +59,52 @@ public class ExerciseFragment extends RootFragment<ExercisePresenter> implements
     protected void initEventAndData() {
         super.initEventAndData();
         stateLoading();
-        mPresenter.getVideoList(getArguments().getInt("typeId"),0,1,5); // 默认是阅读量排序
+
+        mAdapter = new ExerciseListAdapter(R.layout.item_exercise_list, dataVOList, getArguments().getString("title"));
+        rcy.setLayoutManager(
+                new LinearLayoutManager(mActivity));
+        rcy.setAdapter(mAdapter);
+
+        count = 1;
+        if (!dataVOList.isEmpty()) {
+            dataVOList.clear();
+        }
+        mPresenter.getVideoList(getArguments().getInt("typeId"),orderBy,count,pageSize); // 默认是阅读量排序
+
+        mAdapter.setPreLoadNumber(1);
+        mAdapter.setOnLoadMoreListener(() -> {
+            count++;
+            mPresenter.getVideoList(getArguments().getInt("typeId"),orderBy,count,pageSize); // 默认是阅读量排序
+        }, rcy);
+
 
     }
 
     @Override
     public void orderBy(int orderType) {
-        mPresenter.getVideoList(getArguments().getInt("typeId"),orderType,1,5);
+        orderBy = orderType;
+        dataVOList.clear();
+        count = 1;
+        mPresenter.getVideoList(getArguments().getInt("typeId"),orderBy,count,pageSize);
     }
 
     @Override
     public void onSuccess(List<VideoVO> lists) {
-        stateMain();
-        if (lists == null || lists.isEmpty()) {
-            stateEmpty("暂无内容");
+        if (!lists.isEmpty()) {
+            dataVOList.addAll(lists);
+            mAdapter.setNewData(dataVOList);
+            if (lists.size() < pageSize) {
+                mAdapter.loadMoreEnd();
+            } else {
+                mAdapter.loadMoreComplete();
+            }
+            stateMain();
         } else {
-            mAdapter = new ExerciseListAdapter(R.layout.item_exercise_list, lists, getArguments().getString("title"));
-            rcy.setLayoutManager(
-                    new LinearLayoutManager(mActivity));
-            rcy.setAdapter(mAdapter);
+            if (count == 1) {
+                stateEmpty("暂无内容");
+            } else {
+                mAdapter.loadMoreEnd();
+            }
         }
     }
 

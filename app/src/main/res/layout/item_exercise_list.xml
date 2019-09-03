@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
@@ -28,14 +29,16 @@
                     android:id="@+id/cover_iv"
                     android:layout_width="match_parent"
                     android:layout_height="138dp"
-                    android:background="@mipmap/ic_launcher" />
+                    android:background="@mipmap/ic_launcher"
+                    tools:ignore="ContentDescription" />
 
                 <ImageView
                     android:id="@+id/play_iv"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerInParent="true"
-                    android:src="@drawable/icon_video_play" />
+                    android:src="@drawable/icon_video_play"
+                    tools:ignore="ContentDescription" />
 
             </RelativeLayout>
 
@@ -44,14 +47,14 @@
                 android:layout_height="wrap_content"
                 android:paddingStart="14dp"
                 android:paddingTop="8dp"
-                android:paddingBottom="8dp">
+                android:paddingBottom="8dp"
+                tools:ignore="RtlSymmetry">
 
                 <TextView
                     android:id="@+id/title_tv"
                     style="@style/textSize_blackB5B_12"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="普通话考试听力理解应试技巧" />
+                    android:layout_height="wrap_content" />
 
                 <TextView
                     android:id="@+id/time_tv"
@@ -59,8 +62,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentEnd="true"
-                    android:layout_marginEnd="14dp"
-                    android:text="2019-01-01    12:00:00" />
+                    android:layout_marginEnd="14dp" />
 
             </RelativeLayout>
 
@@ -89,8 +91,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
                     android:layout_marginTop="7dp"
-                    android:layout_toRightOf="@+id/headportrait_iv"
-                    android:text="张小盒老师" />
+                    android:layout_toEndOf="@+id/headportrait_iv" />
 
                 <TextView
                     android:id="@+id/company_tv"
@@ -100,8 +101,7 @@
                     android:layout_below="@+id/teacher_name_tv"
                     android:layout_marginStart="8dp"
                     android:layout_marginTop="5dp"
-                    android:layout_toRightOf="@+id/headportrait_iv"
-                    android:text="新东方" />
+                    android:layout_toEndOf="@+id/headportrait_iv" />
 
                 <TextView
                     android:id="@+id/read_num_tv"
@@ -110,15 +110,14 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentEnd="true"
                     android:layout_marginTop="17dp"
-                    android:layout_marginEnd="16dp"
-                    android:text="阅读量：12345" />
+                    android:layout_marginEnd="16dp" />
 
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="17dp"
                     android:layout_marginEnd="8dp"
-                    android:layout_toLeftOf="@+id/read_num_tv"
+                    android:layout_toStartOf="@+id/read_num_tv"
                     android:src="@drawable/icon_reading_num" />
 
             </RelativeLayout>

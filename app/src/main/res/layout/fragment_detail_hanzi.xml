@@ -8,7 +8,7 @@
 
     <TextView
         android:id="@+id/pinyin_tv"
-        style="@style/textSize_black353_16"
+        style="@style/textSize_black353_20"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
@@ -26,7 +26,8 @@
             android:layout_height="150dp"
             android:layout_gravity="center_horizontal"
             android:background="@drawable/icon_word_bg"
-            android:gravity="center" />
+            android:gravity="center"
+            android:textStyle="bold" />
 
         <LinearLayout
             android:id="@+id/video_ll"

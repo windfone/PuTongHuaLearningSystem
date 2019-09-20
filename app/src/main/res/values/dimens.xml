@@ -32,5 +32,10 @@
     <dimen name="textsize_sp_33">33sp</dimen>
     <dimen name="textsize_sp_34">34sp</dimen>
     <dimen name="textsize_sp_35">35sp</dimen>
+    <dimen name="textsize_sp_36">36sp</dimen>
+    <dimen name="textsize_sp_37">37sp</dimen>
+    <dimen name="textsize_sp_38">38sp</dimen>
+    <dimen name="textsize_sp_39">39sp</dimen>
+    <dimen name="textsize_sp_40">40sp</dimen>
 
 </resources>

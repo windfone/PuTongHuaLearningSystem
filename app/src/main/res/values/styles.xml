@@ -29,6 +29,11 @@
     </style>
 
     <!-- 字体从大到小排列 -->
+    <style name="textSize_black353_40">
+        <item name="android:textColor">@color/black353</item>
+        <item name="android:textSize">@dimen/textsize_sp_40</item>
+    </style>
+
     <style name="textSize_black353_30">
         <item name="android:textColor">@color/black353</item>
         <item name="android:textSize">@dimen/textsize_sp_30</item>

@@ -30,7 +30,7 @@
         android:hint="请输入您的意见..."
         android:padding="5dp"
         />
-    
+
     <Button
         android:id="@+id/commit_btn"
         style="@style/textSize_blackE3E_14"

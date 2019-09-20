@@ -22,8 +22,22 @@ import com.tbruyelle.rxpermissions2.RxPermissions;
 
 public class PermissionRequestUtil {
 
-    private static PermissionRequestUtil instance;
+    private static volatile PermissionRequestUtil instance;
 
+    //构造函数修饰为private防止在其他地方创建该实例
+    private PermissionRequestUtil(){
+
+    }
+
+    /**
+     * 有的代码中会将同步锁synchronized写在方法中，例如：
+     *    public static synchronized PermissionRequestUtil getInstance(){.....}
+     * 造成的弊端就是：多线程每次在调用getInstance()时都会产生一个同步，造成损耗。
+     * 相应的只需要保持同步的代码块仅仅就是：
+     *      singletonMode = new SingletonMode();
+     * 所以只要在该代码处添加同步锁就可以了
+     * @return
+     */
     public static PermissionRequestUtil getInstance(){
         // 对象实例化时与否判断（不使用同步代码块，instance不等于null时，直接返回对象，提高运行效率）
         if (instance == null){

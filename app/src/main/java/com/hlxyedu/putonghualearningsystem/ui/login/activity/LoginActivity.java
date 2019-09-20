@@ -102,7 +102,7 @@ public class LoginActivity extends RootActivity<LoginPresenter> implements Login
         }
         login_tv.setText(getResources().getString(R.string.logining));
         login_rl.setEnabled(false);
-        mPresenter.login("admin","admin");
+        mPresenter.login(account,password);
     }
 
     @OnClick({R.id.login_rl,R.id.wechat_login_iv, R.id.qq_login_iv, R.id.alipay_login_iv, R.id.jump_login_tv})

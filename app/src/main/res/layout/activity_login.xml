@@ -17,7 +17,8 @@
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:src="@drawable/icon_login_top_bg" />
+            android:src="@drawable/icon_login_top_bg"
+            tools:ignore="ContentDescription" />
 
         <TextView
             android:id="@+id/jump_login_tv"
@@ -28,7 +29,8 @@
             android:layout_marginTop="30dp"
             android:layout_marginEnd="20dp"
             android:text="@string/jump_login"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            tools:ignore="RelativeOverlap" />
 
     </RelativeLayout>
 
@@ -56,7 +58,8 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
             android:layout_marginStart="17dp"
-            android:src="@drawable/icon_username" />
+            android:src="@drawable/icon_username"
+            tools:ignore="ContentDescription" />
 
         <EditText
             android:id="@+id/user_name_edit"
@@ -64,10 +67,12 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@null"
-            android:singleLine="true"
+            android:digits="@string/register_name_digits"
             android:gravity="center_vertical"
             android:hint="@string/please_input_user_name"
-            android:paddingStart="47dp" />
+            android:paddingStart="47dp"
+            android:singleLine="true"
+            tools:ignore="RtlSymmetry" />
 
     </android.support.v7.widget.CardView>
 
@@ -103,12 +108,13 @@
                 android:gravity="center_vertical"
                 android:hint="@string/please_input_pwd"
                 android:singleLine="true"
-                android:paddingStart="47dp" />
+                android:paddingStart="47dp"
+                tools:ignore="RtlSymmetry"
+                android:inputType="textPassword" />
 
             <android.support.v7.widget.CardView
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_alignParentEnd="true"
                 android:layout_weight="1"
                 app:cardBackgroundColor="@color/whitefff"
                 app:cardCornerRadius="0dp"

@@ -1,5 +1,6 @@
 package com.hlxyedu.putonghualearningsystem.ui.teacherclass.activity;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
@@ -90,6 +91,7 @@ public class ExerciseDetailActivity extends RootActivity<ExerciseDetailPresenter
         return R.layout.activity_exercise_detail;
     }
 
+    @SuppressLint("SetTextI18n")
     @Override
     protected void initEventAndData() {
         xbase_topbar.setxBaseTopBarImp(this);

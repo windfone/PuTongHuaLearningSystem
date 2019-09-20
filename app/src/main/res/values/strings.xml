@@ -34,6 +34,9 @@
     <string name="other_login">其它方式登录</string>
     <string name="get_votify_code">获取验证码</string>
     <string name="logining">登录中...</string>
+    <string name="register_name_digits">
+        ._@0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLIMNOPQRSTUVWXYZ
+    </string>
 
     <!-- fragment_personal_center-->
     <string name="personal_tongji">个人统计</string>

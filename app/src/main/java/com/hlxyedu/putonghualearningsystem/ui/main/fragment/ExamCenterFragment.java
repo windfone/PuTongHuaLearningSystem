@@ -54,12 +54,12 @@ public class ExamCenterFragment extends RootFragment<ExamCenterPresenter> implem
     protected void initEventAndData() {
 
         List<ExamCenterVO> lists = new ArrayList<>();
-        ExamCenterVO examCenterVO;
+        /*ExamCenterVO examCenterVO;
         for (int i = 0; i < 10; i++) {
             examCenterVO = new ExamCenterVO();
             examCenterVO.setPaperTitle("普通话模拟考试试卷第" + i + "套");
             lists.add(examCenterVO);
-        }
+        }*/
         mAdapter = new ExamCenterAdapter(R.layout.item_pinyin,lists);
         rcy.setLayoutManager(new LinearLayoutManager(mActivity));
         rcy.setAdapter(mAdapter);

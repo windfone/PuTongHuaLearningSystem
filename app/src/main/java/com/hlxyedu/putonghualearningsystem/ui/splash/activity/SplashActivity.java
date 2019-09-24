@@ -2,7 +2,9 @@ package com.hlxyedu.putonghualearningsystem.ui.splash.activity;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Bundle;
 import android.os.Handler;
+import android.support.annotation.Nullable;
 import android.view.View;
 
 import com.hlxyedu.putonghualearningsystem.R;
@@ -31,6 +33,13 @@ public class SplashActivity extends RootActivity<SplashPresenter> implements Spl
     @Override
     protected void initInject() {
         getActivityComponent().inject(this);
+    }
+
+    @Override
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
+        //将window的背景图设置为空
+        getWindow().setBackgroundDrawable(null);
+        super.onCreate(savedInstanceState);
     }
 
     @Override

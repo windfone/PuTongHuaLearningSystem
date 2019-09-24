@@ -5,6 +5,7 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
+    android:background="@color/whitefff"
     tools:context=".ui.personal.activity.EnterUsActivity">
 
     <com.hlxyedu.putonghualearningsystem.weight.actionbar.XBaseTopBar

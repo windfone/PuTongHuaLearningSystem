@@ -3,7 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.splash.activity.SplashActivity">
+    tools:context=".ui.splash.activity.SplashActivity"
+    android:background="@drawable/demo3">
 
 
     <TextView
@@ -12,6 +13,7 @@
         android:layout_height="match_parent"
         android:gravity="center"
         android:text="点击跳转"
-        android:textSize="20sp" />
+        android:textSize="20sp"
+        android:visibility="gone"/>
 
 </RelativeLayout>

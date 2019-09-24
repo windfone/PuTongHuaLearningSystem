@@ -8,6 +8,10 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <style name="Theme.Splash" parent="AppTheme">
+        <item name="android:windowBackground">@drawable/demo3</item>
+    </style>
+
     <style name="main_menu_animstyle">
         <item name="android:windowEnterAnimation">@anim/anim_enter_from_bottom</item>
         <item name="android:windowExitAnimation">@anim/anim_exit_from_bottom</item>

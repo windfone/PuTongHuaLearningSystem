@@ -43,7 +43,7 @@ public interface HttpHelper {
 
     Flowable<HttpResponse<DetailVO>> getPinYinLearningDetails(int conId,String pinYinOrder);
 
-    Flowable<HttpResponse<List<DetailVO>>> getWordFollowDetails(String pinYinOrder);
+    Flowable<HttpResponse<List<DetailVO>>> getWordFollowDetails(int conId,String pinYinOrder);
 
     Flowable<HttpResponse<VideoVO>> getTeacherClassTopDetails(int browseNum,int teaId);
 

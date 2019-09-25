@@ -4,16 +4,16 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ui.splash.activity.SplashActivity"
-    android:background="@drawable/demo3">
+    android:src="@drawable/icon_splash">
 
 
-    <TextView
+  <!--  <TextView
         android:id="@+id/jump_tv"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:gravity="center"
         android:text="点击跳转"
         android:textSize="20sp"
-        android:visibility="gone"/>
+        android:visibility="gone"/>-->
 
 </RelativeLayout>

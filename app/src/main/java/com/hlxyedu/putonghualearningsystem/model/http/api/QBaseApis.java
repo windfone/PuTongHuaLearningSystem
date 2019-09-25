@@ -74,7 +74,7 @@ public interface QBaseApis {
 
     // 获取 单词跟读 详情
     @GET("study/selectWordsRead")
-    Flowable<HttpResponse<List<DetailVO>>> getWordFollowDetails(@Query("pinYinOrder") String pinYinOrder);
+    Flowable<HttpResponse<List<DetailVO>>> getWordFollowDetails(@Query("conId") int conId,@Query("pinYinOrder") String pinYinOrder);
 
     // 获取 短文跟读 详情
     @GET("study/selectPassageDetail")

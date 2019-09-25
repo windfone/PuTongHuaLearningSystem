@@ -212,9 +212,9 @@ public class OnLineLearnDetailsPresenter extends RxPresenter<OnLineLearnDetailsC
      * @param pinYinOrder
      */
     @Override
-    public void getWordFollowDetails(String pinYinOrder) {
+    public void getWordFollowDetails(int conId, String pinYinOrder) {
         addSubscribe(
-                mDataManager.getWordFollowDetails(pinYinOrder)
+                mDataManager.getWordFollowDetails(conId,pinYinOrder)
                         .compose(RxUtil.rxSchedulerHelper())
                         .compose(RxUtil.handleTestResult())
                         .subscribeWith(

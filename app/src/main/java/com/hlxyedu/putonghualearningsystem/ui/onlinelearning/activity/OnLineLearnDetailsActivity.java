@@ -221,7 +221,7 @@ public class OnLineLearnDetailsActivity extends RootFragmentActivity<OnLineLearn
                 mPresenter.getPinYinDetails(dataVO.getConId(),dataVO.getPinYinOrder());
                 break;
             case "单词跟读":
-                mPresenter.getWordFollowDetails(dataVO.getPinYinOrder());
+                mPresenter.getWordFollowDetails(dataVO.getConId(),dataVO.getPinYinOrder());
                 break;
             case "短文跟读":
                 mPresenter.getShortEssayDetails(dataVO.getConId(),dataVO.getPinYinOrder());

@@ -38,7 +38,7 @@ public interface OnLineLearnDetailsContract {
 
         void getHanZiDetails(int conId,String pinYin,String pinYinOrder);
 
-        void getWordFollowDetails(String pinYinOrder);
+        void getWordFollowDetails(int conId, String pinYinOrder);
 
     }
 }

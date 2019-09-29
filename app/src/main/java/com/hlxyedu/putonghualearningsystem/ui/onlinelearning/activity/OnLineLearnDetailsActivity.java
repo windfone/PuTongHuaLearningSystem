@@ -377,7 +377,7 @@ public class OnLineLearnDetailsActivity extends RootFragmentActivity<OnLineLearn
                 break;
             case R.id.record_ll:
                 if (MusicManager.getInstance().isPlaying()) {
-                    ToastUtils.showShort("请先停止播放录音");
+                    ToastUtils.showShort("请先停止播放当前音频");
                 } else {
                     if (mRecorder.isRecording()) {
                         mRecordHandler.sendEmptyMessage(MSG_STOP_RECORD);
@@ -396,10 +396,14 @@ public class OnLineLearnDetailsActivity extends RootFragmentActivity<OnLineLearn
                             MusicManager.getInstance().pauseMusic();
                             record_play_tv.setText("播放");
                         } else {
-                            // 如果点击播放录音的时候 还正在播放 请求的音频，则覆盖播放，改变上面按钮的播放状态
-                            if (MusicManager.getInstance().isPlaying()) {
+                            // 如果点击播放录音的时候 还正在播放 请求的音频，不要覆盖播放，也提示播放完成再播放录音，改变上面按钮的播放状态
+                            /*if (MusicManager.getInstance().isPlaying()) {
                                 time_progress_tv.setText(getResources().getString(R.string.time_zero));
                                 top_play_iv.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.icon_pause));
+                            }*/
+                            if (MusicManager.getInstance().isPlaying()) {
+                                ToastUtils.showShort("请暂停播放学习音频或等待学习音频播放完毕");
+                                return;
                             }
                             playRecordAudio();
                             record_play_tv.setText("暂停");
@@ -428,12 +432,16 @@ public class OnLineLearnDetailsActivity extends RootFragmentActivity<OnLineLearn
 
     @Override
     public void playWordAudio(DetailVO detailVO) {
-        audioUrl = detailVO.getAudioUrl();
-        audioLength = detailVO.getAudioLength();
-        time_total_tv.setText(TimeUtil.getTimeString(audioLength));
-        playAudio();
-        top_play_iv.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.icon_play));
-        progressBar.setProgress(0);
+        if (!mRecorder.isRecording()) {
+            audioUrl = detailVO.getAudioUrl();
+            audioLength = detailVO.getAudioLength();
+            time_total_tv.setText(TimeUtil.getTimeString(audioLength));
+            playAudio();
+            top_play_iv.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.icon_play));
+            progressBar.setProgress(0);
+        } else {
+            ToastUtils.showShort("正在录音，不能播放");
+        }
     }
 
     private void playRecordAudio() {
@@ -567,6 +575,8 @@ public class OnLineLearnDetailsActivity extends RootFragmentActivity<OnLineLearn
 //            recordPath = AppConstants.RECORD_PATH + "audio_" + lists.get(pos).getName().substring(0, lists.get(pos).getName().lastIndexOf("."))
 //                    + AppConstants.AUDIO_FILE_SUFFIX;
             // 这里音频只是练习用，不用保存，所以录音文件可以覆盖
+            // 每次录音前先将上次录的音频删除
+            FileUtils.delete(recordPath);
             recordPath = AppConstants.RECORD_PATH + "audio_" + "learning"
                     + AppConstants.AUDIO_FILE_SUFFIX;
             mAacFile.open(recordPath);

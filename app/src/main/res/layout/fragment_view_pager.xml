@@ -7,6 +7,7 @@
     tools:context=".ui.main.fragment.FamousClassroomFragment">
 
     <RelativeLayout
+        android:id="@+id/top_bar_rl"
         android:layout_width="match_parent"
         android:layout_height="70dp"
         android:background="@drawable/icon_online_learn_top_bg">

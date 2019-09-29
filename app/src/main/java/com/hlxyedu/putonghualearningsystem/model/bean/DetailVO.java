@@ -17,6 +17,7 @@ public class DetailVO {
     private String videoUrl;
     private String pinyin;
     private String pinYinCN;
+    private String wordImg;
     /**
      * conTitle : 普通话单词跟读教程词语表1 第001-100
      * audioLength : null
@@ -89,4 +90,11 @@ public class DetailVO {
         this.conTitle = conTitle;
     }
 
+    public String getWordImg() {
+        return wordImg;
+    }
+
+    public void setWordImg(String wordImg) {
+        this.wordImg = wordImg;
+    }
 }

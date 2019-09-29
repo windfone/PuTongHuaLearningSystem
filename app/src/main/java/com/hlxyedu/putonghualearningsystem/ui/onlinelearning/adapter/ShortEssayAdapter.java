@@ -34,7 +34,7 @@ public class ShortEssayAdapter extends BaseQuickAdapter<DataVO, BaseViewHolder> 
 //        String name = item.getName().substring(0, item.getName().lastIndexOf("."));
 //        String txtStr = "【" + position + "】  " + "《" + name + "》示范朗读";
 //        helper.setText(R.id.title, txtStr);
-        helper.setText(R.id.title, item.getConTitle());
+        helper.setText(R.id.title, "【" + position + "】  " + item.getConTitle());
 
         RelativeLayout relativeLayout = (RelativeLayout) helper.itemView;
         relativeLayout.setOnClickListener(view ->

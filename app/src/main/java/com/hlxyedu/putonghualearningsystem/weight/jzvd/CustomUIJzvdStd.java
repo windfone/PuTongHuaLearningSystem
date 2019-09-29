@@ -8,6 +8,11 @@ import com.hlxyedu.putonghualearningsystem.R;
 
 public class CustomUIJzvdStd extends JzvdStd {
 
+    private JzvdStdImp jzvdStdImp;
+
+    public void setJzvdStdImp(JzvdStdImp jzvdStdImp) {
+        this.jzvdStdImp = jzvdStdImp;
+    }
 
     public CustomUIJzvdStd(Context context) {
         super(context);
@@ -23,6 +28,25 @@ public class CustomUIJzvdStd extends JzvdStd {
 //        shareButton = findViewById(R.id.share);
 //        shareButton.setOnClickListener(this);
 
+    }
+
+   /* @Override
+    public void onStatePause() {
+        super.onStatePause();
+        if(jzvdStdImp != null){
+            jzvdStdImp.videoPause();
+        }
+    }*/
+
+    @Override
+    public void onVideoSizeChanged(int width, int height) {
+//        super.onVideoSizeChanged(width, height);
+        /*if (JZMediaManager.textureView !=null) {
+
+            JZMediaManager.textureView.setVideoSize(textureViewContainer.getWidth(),textureViewContainer.getHeight());//视频大小与控件大小一致
+
+        }*/
+        JzvdStd.setVideoImageDisplayType(JzvdStd.VIDEO_IMAGE_DISPLAY_TYPE_FILL_SCROP);
     }
 
     @Override

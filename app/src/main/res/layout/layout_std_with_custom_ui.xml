@@ -24,15 +24,18 @@
         android:background="#000000"
         android:scaleType="fitCenter" />
 
+    <!-- 开始时间 + 进度条 + 总时长 -->
     <LinearLayout
         android:id="@+id/layout_bottom"
-        android:layout_width="match_parent"
-        android:layout_height="40dp"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         android:layout_alignParentBottom="true"
         android:background="@drawable/jz_bottom_bg"
         android:gravity="center_vertical"
         android:orientation="horizontal"
         android:visibility="invisible">
+        <!--android:layout_width="match_parent"
+        android:layout_height="40dp"-->
 
         <TextView
             android:id="@+id/current"
@@ -90,14 +93,24 @@
             android:visibility="gone"/>
     </LinearLayout>
 
-    <ProgressBar
+    <!-- 底部 红色 进度条 -->
+    <!--<ProgressBar
         android:id="@+id/bottom_progress"
         style="?android:attr/progressBarStyleHorizontal"
         android:layout_width="match_parent"
         android:layout_height="1.5dp"
         android:layout_alignParentBottom="true"
         android:max="100"
-        android:progressDrawable="@drawable/jz_bottom_progress" />
+        android:progressDrawable="@drawable/jz_bottom_progress" />-->
+    <ProgressBar
+        android:id="@+id/bottom_progress"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_alignParentBottom="true"
+        android:max="100"
+        android:progressDrawable="@drawable/jz_bottom_progress"
+        android:visibility="gone"/>
 
     <ImageView
         android:id="@+id/back_tiny"
@@ -189,13 +202,16 @@
         android:indeterminateDrawable="@drawable/jz_loading"
         android:visibility="invisible" />
 
+    <!-- 开始播放按钮 重播-->
     <LinearLayout
         android:id="@+id/start_layout"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
         android:layout_gravity="center_vertical">
+        <!--android:layout_width="wrap_content"
+        android:layout_height="wrap_content"-->
 
         <ImageView
             android:id="@+id/start"
@@ -204,10 +220,11 @@
             android:src="@drawable/jz_click_play_selector" />
     </LinearLayout>
 
+    <!-- 重播 字 -->
     <TextView
         android:id="@+id/replay_text"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         android:layout_below="@+id/start_layout"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="6dp"
@@ -215,6 +232,8 @@
         android:textColor="#ffffff"
         android:textSize="12sp"
         android:visibility="invisible" />
+    <!--android:layout_width="wrap_content"
+        android:layout_height="wrap_content"-->
 
     <LinearLayout
         android:id="@+id/retry_layout"
@@ -228,7 +247,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="视频加载失败"
+            android:text="请检查网络"
             android:textColor="@android:color/white"
             android:textSize="12sp" />
 

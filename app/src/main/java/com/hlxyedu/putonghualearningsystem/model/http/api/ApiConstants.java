@@ -8,9 +8,9 @@ package com.hlxyedu.putonghualearningsystem.model.http.api;
 public class ApiConstants {
 
     //配置HOST
-//    public static String HOST = "http://www.hlxyedu.com/pthExs/";
-//    public static String HOST = "http://192.168.0.139:8083/pthExs/";
-    public static String HOST = "http://secret.cross.echosite.cn/pthExs/";
+    public static String HOST = "http://www.hlxyedu.com/pthExs/";
+//    public static String HOST = "http://192.168.0.139:80/pthExs/";
+//    public static String HOST = "http://secret.cross.echosite.cn/pthExs/";
 
 }
 

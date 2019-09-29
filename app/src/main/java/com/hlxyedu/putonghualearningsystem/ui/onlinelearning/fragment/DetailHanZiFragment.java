@@ -3,9 +3,11 @@ package com.hlxyedu.putonghualearningsystem.ui.onlinelearning.fragment;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.hlxyedu.putonghualearningsystem.R;
 import com.hlxyedu.putonghualearningsystem.base.RootFragment;
 import com.hlxyedu.putonghualearningsystem.base.RxBus;
@@ -13,6 +15,7 @@ import com.hlxyedu.putonghualearningsystem.model.event.ActionEvent;
 import com.hlxyedu.putonghualearningsystem.model.http.api.ApiConstants;
 import com.hlxyedu.putonghualearningsystem.ui.onlinelearning.contract.DetailHanZiContract;
 import com.hlxyedu.putonghualearningsystem.ui.onlinelearning.presenter.DetailHanZiPresenter;
+import com.hlxyedu.putonghualearningsystem.weight.jzvd.CustomUIJzvdStd;
 import com.hlxyedu.putonghualearningsystem.weight.jzvd.JzvdStd;
 
 import butterknife.BindView;
@@ -27,10 +30,12 @@ public class DetailHanZiFragment extends RootFragment<DetailHanZiPresenter> impl
 
     @BindView(R.id.pinyin_tv)
     TextView pinyin_tv;
-    @BindView(R.id.cn_tv)
-    TextView cn_tv;
+    /*@BindView(R.id.cn_tv)
+    TextView cn_tv;*/
+    @BindView(R.id.word_iv)
+    ImageView word_iv;
     @BindView(R.id.jz_video)
-    JzvdStd jz_video;
+    CustomUIJzvdStd jz_video;
     @BindView(R.id.video_ll)
     LinearLayout video_ll;
     @BindView(R.id.pinyin_btn)
@@ -71,16 +76,18 @@ public class DetailHanZiFragment extends RootFragment<DetailHanZiPresenter> impl
     }
 
     @Override
-    public void setContentText(String pinYin, String hanZi,String url) {
+    public void setContentText(String pinYin, String wordImg,String url) {
         pinyin_tv.setText(pinYin);
-        cn_tv.setText(hanZi);
+//        cn_tv.setText(hanZi);
+        Glide.with(this).load(ApiConstants.HOST + wordImg).into(word_iv);
         videoUrl = url;
     }
 
     @Override
     public void switchInitView() {
         video_ll.setVisibility(View.GONE);
-        cn_tv.setVisibility(View.VISIBLE);
+//        cn_tv.setVisibility(View.VISIBLE);
+        word_iv.setVisibility(View.VISIBLE);
         Jzvd.releaseAllVideos();
     }
 
@@ -89,13 +96,15 @@ public class DetailHanZiFragment extends RootFragment<DetailHanZiPresenter> impl
         switch (view.getId()) {
             case R.id.pinyin_btn:
                 video_ll.setVisibility(View.GONE);
-                cn_tv.setVisibility(View.VISIBLE);
+//                cn_tv.setVisibility(View.VISIBLE);
+                word_iv.setVisibility(View.VISIBLE);
                 Jzvd.releaseAllVideos();
                 RxBus.getDefault().post(new ActionEvent(ActionEvent.PLAYAUDIO));
                 break;
             case R.id.bishun_btn:
                 video_ll.setVisibility(View.VISIBLE);
-                cn_tv.setVisibility(View.GONE);
+//                cn_tv.setVisibility(View.GONE);
+                word_iv.setVisibility(View.GONE);
                 jz_video.setUp(ApiConstants.HOST + videoUrl,"");
                 jz_video.startVideo();
                 // 只是一种描述，也可以使用 glide picasso等加载封面图，根据项目自己需求

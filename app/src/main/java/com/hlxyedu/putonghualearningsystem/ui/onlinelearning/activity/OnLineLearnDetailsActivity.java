@@ -7,6 +7,7 @@ import android.os.Handler;
 import android.os.Message;
 import android.os.Parcelable;
 import android.support.v4.content.ContextCompat;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
@@ -204,8 +205,13 @@ public class OnLineLearnDetailsActivity extends RootFragmentActivity<OnLineLearn
             public void run() {
                 if (!isPlayRecord) {
                     long position = MusicManager.getInstance().getPlayingPosition();
-                    progressBar.setProgress((int) (100 * (position / 1000) / audioLength));
-                    time_progress_tv.setText(TUtils.formatMusicTime(position));
+                    try {
+                        // catch 掉 audioLength 分母 = 0 的情况
+                        progressBar.setProgress((int) (100 * (position / 1000) / audioLength));
+                        time_progress_tv.setText(TUtils.formatMusicTime(position));
+                    }catch (ArithmeticException exception){
+//                        ToastUtils.showShort("获取音频时长错误");
+                    }
                 }
             }
         });
@@ -287,7 +293,8 @@ public class OnLineLearnDetailsActivity extends RootFragmentActivity<OnLineLearn
         top_play_iv.setEnabled(true);
         pre_iv.setEnabled(true);
         next_iv.setEnabled(true);
-        RxBus.getDefault().post(new HanZiEvent(detailVO.getPinyin(), detailVO.getPinYinCN(),detailVO.getVideoUrl()));
+//        RxBus.getDefault().post(new HanZiEvent(detailVO.getPinyin(), detailVO.getPinYinCN(),detailVO.getVideoUrl()));
+        RxBus.getDefault().post(new HanZiEvent(detailVO.getPinyin(), detailVO.getWordImg(),detailVO.getVideoUrl()));
         audioUrl = detailVO.getAudioUrl();
         audioLength = detailVO.getAudioLength();
         time_total_tv.setText(TimeUtil.getTimeString(audioLength));
@@ -304,6 +311,11 @@ public class OnLineLearnDetailsActivity extends RootFragmentActivity<OnLineLearn
             case R.id.top_play_iv:
                 if (!mRecorder.isRecording()) {
                     if (MusicManager.getInstance().isPlaying()) {
+                        // 如果正在播放录音，还点击了上边的 接口请求的拼音播放按钮，则 提示暂停播放录音或者 等待 录音播放完成再播放
+                        if (isPlayRecord){
+                            ToastUtils.showShort("请暂停播放录音或等待录音播放完毕");
+                            return;
+                        }
                         MusicManager.getInstance().pauseMusic();
                         onPlayerPause();
                         top_play_iv.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.icon_pause));
@@ -327,6 +339,10 @@ public class OnLineLearnDetailsActivity extends RootFragmentActivity<OnLineLearn
                         time_progress_tv.setText(getResources().getString(R.string.time_zero));
                         top_play_iv.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.icon_pause));
 
+                        recordPath = "";
+                        record_play_tv.setTextColor(getResources().getColor(R.color.graya9a));
+                        record_play_tv.setBackground(getResources().getDrawable(R.drawable.shape_bg_gray_4dp));
+
 //                        mPresenter.getShortEssayDetails(lists.get(pos).getName());
                         getNetDatas();
                         RxBus.getDefault().post(new ActionEvent(ActionEvent.INITVIEW));
@@ -347,6 +363,10 @@ public class OnLineLearnDetailsActivity extends RootFragmentActivity<OnLineLearn
                         time_progress_tv.setText(getResources().getString(R.string.time_zero));
                         top_play_iv.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.icon_pause));
 
+                        recordPath = "";
+                        record_play_tv.setTextColor(getResources().getColor(R.color.graya9a));
+                        record_play_tv.setBackground(getResources().getDrawable(R.drawable.shape_bg_gray_4dp));
+
 //                        mPresenter.getShortEssayDetails(lists.get(pos).getName());
                         getNetDatas();
                         RxBus.getDefault().post(new ActionEvent(ActionEvent.INITVIEW));
@@ -357,7 +377,7 @@ public class OnLineLearnDetailsActivity extends RootFragmentActivity<OnLineLearn
                 break;
             case R.id.record_ll:
                 if (MusicManager.getInstance().isPlaying()) {
-                    ToastUtils.showShort("请先停止播放朗读");
+                    ToastUtils.showShort("请先停止播放录音");
                 } else {
                     if (mRecorder.isRecording()) {
                         mRecordHandler.sendEmptyMessage(MSG_STOP_RECORD);
@@ -376,6 +396,11 @@ public class OnLineLearnDetailsActivity extends RootFragmentActivity<OnLineLearn
                             MusicManager.getInstance().pauseMusic();
                             record_play_tv.setText("播放");
                         } else {
+                            // 如果点击播放录音的时候 还正在播放 请求的音频，则覆盖播放，改变上面按钮的播放状态
+                            if (MusicManager.getInstance().isPlaying()) {
+                                time_progress_tv.setText(getResources().getString(R.string.time_zero));
+                                top_play_iv.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.icon_pause));
+                            }
                             playRecordAudio();
                             record_play_tv.setText("暂停");
                         }
@@ -394,11 +419,10 @@ public class OnLineLearnDetailsActivity extends RootFragmentActivity<OnLineLearn
 //        songInfo.setSongId(lists.get(pos).getId());
         songInfo.setSongId(String.valueOf(UUID.randomUUID()));
         songInfo.setSongUrl(ApiConstants.HOST + audioUrl);
-        String url =  ApiConstants.HOST + audioUrl;
         try {
             MusicManager.getInstance().playMusicByInfo(songInfo);
         }catch (IllegalArgumentException e){
-            ToastUtils.showShort("音频链接错误");
+            ToastUtils.showShort("音频播放错误");
         }
     }
 
@@ -442,7 +466,7 @@ public class OnLineLearnDetailsActivity extends RootFragmentActivity<OnLineLearn
 
     @Override
     public void onPlayCompletion(SongInfo songInfo) {
-        // 判断是播放的录音还是 示范朗读，便于设置 图标及 文字
+        // 判断是播放的录音还是 请求的音频，便于设置 图标及 文字
         if (isPlayRecord) {
             MusicManager.getInstance().pauseMusic();
             record_play_tv.setText("播放");
@@ -505,6 +529,9 @@ public class OnLineLearnDetailsActivity extends RootFragmentActivity<OnLineLearn
             record_iv.setVisibility(View.GONE);
             record_tv.setVisibility(View.VISIBLE);
             ToastUtils.showShort("录音完成");
+
+            record_play_tv.setTextColor(getResources().getColor(R.color.whitefff));
+            record_play_tv.setBackground(getResources().getDrawable(R.drawable.shape_bg_blue_4dp));
         } else {
             mRecorder.stopRecord(null);
         }

@@ -8,18 +8,26 @@
     android:background="@color/whitefff"
     tools:context=".ui.personal.activity.EnterUsActivity">
 
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:src="@drawable/icon_construction"
+        android:scaleType="centerCrop"/>
+
     <com.hlxyedu.putonghualearningsystem.weight.actionbar.XBaseTopBar
         android:id="@+id/xbase_topbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:isShowLeft_x="true"
         app:isShowRight_x="false"
-        app:middleText_x="@string/enter_us" />
+        app:middleText_x="@string/enter_us"
+        android:visibility="gone"/>
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/rcy"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:visibility="gone"
         />
 
 </LinearLayout>

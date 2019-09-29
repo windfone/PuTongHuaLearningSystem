@@ -13,6 +13,7 @@ import android.view.animation.DecelerateInterpolator;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 
 import com.hlxyedu.putonghualearningsystem.R;
 import com.hlxyedu.putonghualearningsystem.base.RootFragment;
@@ -55,6 +56,8 @@ public class ViewPagerFragment extends RootFragment<ViewPagerPresenter> implemen
     ViewPager view_pager;
     @BindView(R.id.sort_iv)
     ImageView sort_iv;
+    @BindView(R.id.top_bar_rl)
+    RelativeLayout top_bar_rl;
 
     private ArrayList<String> mTitleDataList;
     private List<TopTitleVO> lists;
@@ -90,7 +93,8 @@ public class ViewPagerFragment extends RootFragment<ViewPagerPresenter> implemen
             if (from == 1) {
                 sort_iv.setVisibility(View.GONE);
             } else if (from == 2) {
-                sort_iv.setVisibility(View.VISIBLE);
+//                sort_iv.setVisibility(View.VISIBLE);
+                top_bar_rl.setVisibility(View.GONE);
             }
         }
         initIndicator();

@@ -88,11 +88,12 @@ public class LoginPresenter extends RxPresenter<LoginContract.View> implements L
 
                                     @Override
                                     public void onError(Throwable e) {
+                                        ToastUtils.showShort(e.getMessage());
                                         //当数据返回为null时 做特殊处理
                                         if (e instanceof HttpException) {
                                             HttpResponseCode httpResponseCode = RegUtils
                                                     .onError((HttpException) e);
-                                            ToastUtils.showShort(httpResponseCode.getMsg());
+//                                            ToastUtils.showShort(httpResponseCode.getMsg());
                                         }
                                         mView.responeError("数据请求失败，请检查网络！");
                                     }

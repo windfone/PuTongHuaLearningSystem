@@ -16,10 +16,18 @@ public class HanZiEvent {
 
     private String videoUrl; // 视频URL
 
+    private String wordImg; // 带方格背景图片的字
 
-    public HanZiEvent(String pinYin, String pinYinCN,String videoUrl){
+
+   /* public HanZiEvent(String pinYin, String pinYinCN,String videoUrl){
         this.pinYin = pinYin;
         this.pinYinCN = pinYinCN;
+        this.videoUrl = videoUrl;
+    }*/
+
+    public HanZiEvent(String pinYin, String wordImg,String videoUrl){
+        this.pinYin = pinYin;
+        this.wordImg = wordImg;
         this.videoUrl = videoUrl;
     }
 
@@ -53,5 +61,13 @@ public class HanZiEvent {
 
     public void setVideoUrl(String videoUrl) {
         this.videoUrl = videoUrl;
+    }
+
+    public String getWordImg() {
+        return wordImg;
+    }
+
+    public void setWordImg(String wordImg) {
+        this.wordImg = wordImg;
     }
 }

@@ -12,7 +12,8 @@ public interface DetailHanZiContract {
         //返回登陆结果
         void responeError(String errorMsg);
 
-        void setContentText(String pinYin,String hanZi,String videoUrl);
+//        void setContentText(String pinYin,String hanZi,String videoUrl);
+        void setContentText(String pinYin,String wordImg,String videoUrl);
 
         void switchInitView();
     }

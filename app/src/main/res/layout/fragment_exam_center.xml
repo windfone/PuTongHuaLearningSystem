@@ -7,17 +7,25 @@
     android:orientation="vertical"
     tools:context=".ui.main.fragment.ExamCenterFragment">
 
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:src="@drawable/icon_construction"
+        android:scaleType="centerCrop"/>
+
     <com.hlxyedu.putonghualearningsystem.weight.actionbar.XBaseTopBar
         android:id="@+id/xbase_topbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:isShowLeft_x="false"
         app:isShowRight_x="false"
-        app:middleText_x="@string/exam_center" />
+        app:middleText_x="@string/exam_center"
+        android:visibility="gone"/>
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/rcy"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        android:visibility="gone"/>
 
 </LinearLayout>

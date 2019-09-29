@@ -12,14 +12,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:layout_marginTop="20dp" />
+        android:layout_marginTop="40dp" />
 
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingTop="15dp">
+        android:paddingTop="20dp">
 
-        <TextView
+        <!--<TextView
             android:id="@+id/cn_tv"
             style="@style/textSize_black353_30"
             android:layout_width="150dp"
@@ -27,7 +27,13 @@
             android:layout_gravity="center_horizontal"
             android:background="@drawable/icon_word_bg"
             android:gravity="center"
-            android:textStyle="bold" />
+            android:textStyle="bold" />-->
+
+        <ImageView
+            android:id="@+id/word_iv"
+            android:layout_width="wrap_content"
+            android:layout_height="150dp"
+            android:layout_gravity="center_horizontal" />
 
         <LinearLayout
             android:id="@+id/video_ll"

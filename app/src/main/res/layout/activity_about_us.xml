@@ -20,7 +20,6 @@
         style="@style/textSize_black353_14"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="关于我们..."
         android:padding="15dp"
         />
 

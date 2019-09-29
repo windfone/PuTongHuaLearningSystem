@@ -48,7 +48,8 @@ public class DetailHanZiPresenter extends RxPresenter<DetailHanZiContract.View> 
                 .subscribeWith(new CommonSubscriber<HanZiEvent>(mView) {
                     @Override
                     public void onNext(HanZiEvent s) {
-                        mView.setContentText(s.getPinYin(),s.getPinYinCN(),s.getVideoUrl());
+//                        mView.setContentText(s.getPinYin(),s.getPinYinCN(),s.getVideoUrl());
+                        mView.setContentText(s.getPinYin(),s.getWordImg(),s.getVideoUrl());
                     }
 
                     @Override

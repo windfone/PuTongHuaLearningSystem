@@ -42,6 +42,7 @@ import com.hlxyedu.putonghualearningsystem.ui.onlinelearning.presenter.OnLineLea
 import com.hlxyedu.putonghualearningsystem.utils.PermissionRequestUtil;
 import com.hlxyedu.putonghualearningsystem.utils.TUtils;
 import com.hlxyedu.putonghualearningsystem.utils.TimeUtil;
+import com.hlxyedu.putonghualearningsystem.utils.WeakReferenceHandler;
 import com.hlxyedu.putonghualearningsystem.weight.actionbar.XBaseTopBar;
 import com.hlxyedu.putonghualearningsystem.weight.actionbar.XBaseTopBarImp;
 import com.lzx.starrysky.manager.MediaSessionConnection;
@@ -52,6 +53,7 @@ import com.lzx.starrysky.utils.TimerTaskManager;
 import com.skyworth.rxqwelibrary.app.AppConstants;
 
 import java.io.IOException;
+import java.lang.ref.WeakReference;
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 import java.util.ArrayList;
@@ -498,6 +500,7 @@ public class OnLineLearnDetailsActivity extends RootFragmentActivity<OnLineLearn
 
     @Override
     protected void onDestroy() {
+        mRecordHandler.removeCallbacksAndMessages(null);
         super.onDestroy();
         timerTaskManager.removeUpdateProgressTask();
         MusicManager.getInstance().removePlayerEventListener(this);
@@ -679,34 +682,45 @@ public class OnLineLearnDetailsActivity extends RootFragmentActivity<OnLineLearn
 
     }
 
-    public static class RecordHandler extends Handler {
-        private OnLineLearnDetailsActivity mForm;
+    public static class RecordHandler extends WeakReferenceHandler<OnLineLearnDetailsActivity> {
+//        private WeakReference<OnLineLearnDetailsActivity> reference;
 
-        public RecordHandler(OnLineLearnDetailsActivity activity) {
+        public RecordHandler(OnLineLearnDetailsActivity activity) { super(activity); }
+
+       /* public RecordHandler(OnLineLearnDetailsActivity activity) {
             mForm = activity;
-        }
+        } */
+
+        /*public RecordHandler(OnLineLearnDetailsActivity activity) {
+            reference = new WeakReference<>(activity);
+        }*/
 
         @Override
         public void dispatchMessage(Message msg) {
-            switch (msg.what) {
-                case MSG_START_RECORD:
-                    mForm.onStartRecord();
-                    break;
-                case MSG_STOP_RECORD:
-                    mForm.onStopRecord("录音停止", true);
-                    break;
-                case MSG_VOLUME:
+            OnLineLearnDetailsActivity mForm;
+//            mForm = reference.get();
+            mForm = getRef();
+            if (mForm != null){
+                switch (msg.what) {
+                    case MSG_START_RECORD:
+                        mForm.onStartRecord();
+                        break;
+                    case MSG_STOP_RECORD:
+                        mForm.onStopRecord("录音停止", true);
+                        break;
+                    case MSG_VOLUME:
 //                    mForm.onVolumeUi(msg.arg1);
-                    break;
-                case MSG_FINISH:
-                    mForm.onMsgFinish();
-                    break;
-                case MSG_START_ERROR:
-                    mForm.onMsgError(msg.arg1);
-                    break;
-                case MSG_START_OK:
-                    mForm.onMsgStart((RecordParams) msg.obj);
-                    break;
+                        break;
+                    case MSG_FINISH:
+                        mForm.onMsgFinish();
+                        break;
+                    case MSG_START_ERROR:
+                        mForm.onMsgError(msg.arg1);
+                        break;
+                    case MSG_START_OK:
+                        mForm.onMsgStart((RecordParams) msg.obj);
+                        break;
+                }
             }
         }
     }

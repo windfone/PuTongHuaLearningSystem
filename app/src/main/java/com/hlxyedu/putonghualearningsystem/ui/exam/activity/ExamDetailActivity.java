@@ -34,6 +34,7 @@ import com.hlxyedu.putonghualearningsystem.ui.exam.fragment.EZuoWenFragment;
 import com.hlxyedu.putonghualearningsystem.ui.exam.presenter.ExamDetailPresenter;
 import com.hlxyedu.putonghualearningsystem.utils.MyFragmentPagerAdapter;
 import com.hlxyedu.putonghualearningsystem.utils.PermissionRequestUtil;
+import com.hlxyedu.putonghualearningsystem.utils.WeakReferenceHandler;
 import com.hlxyedu.putonghualearningsystem.weight.actionbar.XBaseTopBar;
 import com.hlxyedu.putonghualearningsystem.weight.actionbar.XBaseTopBarImp;
 import com.hlxyedu.putonghualearningsystem.weight.topbar.XTopBar;
@@ -413,15 +414,19 @@ public class ExamDetailActivity extends RootFragmentActivity<ExamDetailPresenter
 
     // ********************** 录音部分 ************************** //
 
-    public static class RecordHandler extends Handler {
-        private ExamDetailActivity mForm;
+    public static class RecordHandler extends WeakReferenceHandler<ExamDetailActivity> {
+
+        public RecordHandler(ExamDetailActivity activity) { super(activity); }
+        /*private ExamDetailActivity mForm;
 
         public RecordHandler(ExamDetailActivity activity) {
             mForm = activity;
-        }
+        }*/
 
         @Override
         public void dispatchMessage(Message msg) {
+            ExamDetailActivity mForm;
+            mForm = getRef();
             switch (msg.what) {
                 case MSG_START_RECORD:
                     mForm.onStartRecord();

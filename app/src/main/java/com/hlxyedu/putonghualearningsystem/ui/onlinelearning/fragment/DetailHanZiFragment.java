@@ -16,7 +16,9 @@ import com.hlxyedu.putonghualearningsystem.model.http.api.ApiConstants;
 import com.hlxyedu.putonghualearningsystem.ui.onlinelearning.contract.DetailHanZiContract;
 import com.hlxyedu.putonghualearningsystem.ui.onlinelearning.presenter.DetailHanZiPresenter;
 import com.hlxyedu.putonghualearningsystem.weight.jzvd.CustomUIJzvdStd;
+import com.hlxyedu.putonghualearningsystem.weight.jzvd.JZMediaExo;
 import com.hlxyedu.putonghualearningsystem.weight.jzvd.JzvdStd;
+import com.hlxyedu.putonghualearningsystem.weight.jzvd.JzvdStdImp;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -25,7 +27,7 @@ import cn.jzvd.Jzvd;
 /**
  * Created by zhangguihau
  */
-public class DetailHanZiFragment extends RootFragment<DetailHanZiPresenter> implements DetailHanZiContract.View {
+public class DetailHanZiFragment extends RootFragment<DetailHanZiPresenter> implements DetailHanZiContract.View, JzvdStdImp {
 
 
     @BindView(R.id.pinyin_tv)
@@ -43,7 +45,7 @@ public class DetailHanZiFragment extends RootFragment<DetailHanZiPresenter> impl
     @BindView(R.id.bishun_btn)
     Button bishun_btn;
 
-    private String videoUrl;
+    private String videoUrl, wordImg;
 
     public static DetailHanZiFragment newInstance() {
         Bundle args = new Bundle();
@@ -65,7 +67,7 @@ public class DetailHanZiFragment extends RootFragment<DetailHanZiPresenter> impl
 
     @Override
     protected void initEventAndData() {
-
+        jz_video.setJzvdStdImp(this);
 
 
     }
@@ -76,11 +78,12 @@ public class DetailHanZiFragment extends RootFragment<DetailHanZiPresenter> impl
     }
 
     @Override
-    public void setContentText(String pinYin, String wordImg,String url) {
+    public void setContentText(String pinYin, String img,String url) {
         pinyin_tv.setText(pinYin);
 //        cn_tv.setText(hanZi);
-        Glide.with(this).load(ApiConstants.HOST + wordImg).into(word_iv);
+        Glide.with(this).load(ApiConstants.HOST + img).into(word_iv);
         videoUrl = url;
+        wordImg = img;
     }
 
     @Override
@@ -105,10 +108,11 @@ public class DetailHanZiFragment extends RootFragment<DetailHanZiPresenter> impl
                 video_ll.setVisibility(View.VISIBLE);
 //                cn_tv.setVisibility(View.GONE);
                 word_iv.setVisibility(View.GONE);
-                jz_video.setUp(ApiConstants.HOST + videoUrl,"");
+//                jz_video.setUp(ApiConstants.HOST + videoUrl,"",JzvdStd.SCREEN_NORMAL, JZMediaIjk.class);
+                jz_video.setUp(ApiConstants.HOST + videoUrl,"", JzvdStd.SCREEN_NORMAL, JZMediaExo.class);
                 jz_video.startVideo();
                 // 只是一种描述，也可以使用 glide picasso等加载封面图，根据项目自己需求
-//        Glide.with(this).load(VideoConstant.videoThumbList[0]).into(jz_video.thumbImageView);
+//                Glide.with(this).load(ApiConstants.HOST + wordImg).into(jz_video.thumbImageView);
 //                jz_video.thumbImageView.setImageURI(Uri.parse("http://p.qpic.cn/videoyun/0/2449_43b6f696980311e59ed467f22794e792_1/640"));
                 // 设置充满全屏
 //                jz_video.setVideoImageDisplayType(JzvdStd.VIDEO_IMAGE_DISPLAY_TYPE_FILL_SCROP);
@@ -131,4 +135,26 @@ public class DetailHanZiFragment extends RootFragment<DetailHanZiPresenter> impl
 //        Jzvd.goOnPlayOnPause();
     }
 
+    @Override
+    public void videoComplete() {
+        video_ll.setVisibility(View.GONE);
+//                cn_tv.setVisibility(View.VISIBLE);
+        word_iv.setVisibility(View.VISIBLE);
+        Jzvd.releaseAllVideos();
+    }
+
+    @Override
+    public void videoError() {
+
+    }
+
+    @Override
+    public void videoBack() {
+
+    }
+
+    @Override
+    public void videoPause() {
+
+    }
 }

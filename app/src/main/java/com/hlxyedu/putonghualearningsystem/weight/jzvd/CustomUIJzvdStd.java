@@ -39,6 +39,14 @@ public class CustomUIJzvdStd extends JzvdStd {
     }*/
 
     @Override
+    public void onAutoCompletion() {
+        super.onAutoCompletion();
+        if(jzvdStdImp != null){
+            jzvdStdImp.videoComplete();
+        }
+    }
+
+    @Override
     public void onVideoSizeChanged(int width, int height) {
 //        super.onVideoSizeChanged(width, height);
         /*if (JZMediaManager.textureView !=null) {

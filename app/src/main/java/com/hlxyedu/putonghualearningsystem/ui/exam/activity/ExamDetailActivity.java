@@ -410,6 +410,36 @@ public class ExamDetailActivity extends RootFragmentActivity<ExamDetailPresenter
         }
         Message msg = mRecordHandler.obtainMessage(MSG_FINISH);
         mRecordHandler.sendMessage(msg);
+        /* 关于屏幕分辨率计算问题
+        1.比如分辨率为320 × 480，则长宽比为1:1.5
+        2.比如屏幕尺寸为3.6”，则根据勾股定理有：
+        高2 + 宽2 = 3.62，
+        又因为，高 = 1.5 × 宽，代入上式，有：
+        宽2 + 2.25 × 宽2 = 12.96，
+        得出，宽 = (12.96/3.25)1/2 = 1.9969
+        3.宽为320px，分布在1.9969”上，因此密度为320 / 1.9969 = 160.2467
+        4.因此此密度约为mdpi的密度
+
+        屏幕密度对应关系是:
+            mdpi    480*320     120dpi ~ 160dpi
+            hdpi    800*400     160dpi ~ 240dpi
+            xhdpi   1280*720    240dpi ~ 320dpi
+            xxhdpi  1920*1280   320dpi ~ 480dpi
+            xxxhdpi 2560*1440   480dpi ~ 640dpi
+            所以图片的放置需要先计算出设计图 给的dpi，选择对应的图片放入对应drawable 文件夹
+
+        现在大多数手机屏幕密度是xxhdpi，所以drawable-xxhdpi文件夹下的图片就是最适合的图片。
+        当你引用这张图时，如果drawable-xxhdpi文件夹下有这张图就会优先被使用，在这种情况下，图片是不会被缩放的。但是，
+        如果drawable-xxhdpi文件夹下没有这张图时， 系统就会自动去其它文件夹下找这张图了，优先会去更高密度的文件夹下找这张图片，
+        比如你放到了drawable-xxxhdpi文件夹，假如3x文件夹里也没有这张图，接下来会尝试再找更高密度的文件夹，发现没有更高密度的了，
+        这个时候会去drawable-nodpi文件夹找这张图，发现也没有，那么就会去更低密度的文件夹下面找，
+        依次是drawable-xhdpi -> drawable-hdpi -> drawable-mdpi -> drawable-ldpi。
+        大概匹配规则就是这吧，比如说现在在drawable-xxxhdpi文件夹下面找到这张图了，它会认为这张图是为更高密度的设备所设计的，
+        如果直接将这张图在当前xxhdpi的设备上使用就会出现像素过高的情况，会自动做一个缩小的操作
+        如果你把这个图放到了mdpi里面，系统会认为这张图是专门为低密度的设备所设计的，如果直接将这张图在当前的高密度设备上使用就有
+        可能会出现像素过低的情况，就会自动做一个放大操作。
+        */
+
     }
 
     // ********************** 录音部分 ************************** //

@@ -2,11 +2,14 @@ package com.hlxyedu.putonghualearningsystem.ui.personal.activity;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Rect;
 import android.os.Bundle;
 import android.view.View;
+import android.view.ViewTreeObserver;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.TextView;
 
@@ -71,6 +74,7 @@ public class PersonalInfoActivity extends RootActivity<PersonalInfoPresenter> im
 
     @Override
     protected void initEventAndData() {
+//        controlKeyboardLayout(mRoot,save_btn);
         xbase_topbar.setxBaseTopBarImp(this);
     }
 
@@ -95,6 +99,23 @@ public class PersonalInfoActivity extends RootActivity<PersonalInfoPresenter> im
             case R.id.save_btn:
                 break;
         }
+    }
+
+    private void controlKeyboardLayout(final View root,final View scrollToView){
+        root.getViewTreeObserver().addOnGlobalLayoutListener(() -> {
+            Rect rect = new Rect();
+            // 获取view 在窗体的可视区域
+            root.getWindowVisibleDisplayFrame(rect);
+            int rootInvisibleHeight = root.getRootView().getHeight() - rect.bottom;
+            if (rootInvisibleHeight > 100){
+                int[] location = new int[2];
+                scrollToView.getLocationInWindow(location);
+                int scrollHeight = (location[1] + scrollToView.getHeight()) - rect.bottom;
+                root.scrollTo(0,scrollHeight);
+            }else {
+                root.scrollTo(0,0);
+            }
+        });
     }
 
     @Override

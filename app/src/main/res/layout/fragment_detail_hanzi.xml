@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     tools:context=".ui.onlinelearning.fragment.DetailHanZiFragment">
 
@@ -29,10 +30,13 @@
             android:gravity="center"
             android:textStyle="bold" />-->
 
+        <!-- 此处宽高不等没设置成正方形的原因是:-->
+        <!-- 图片为非正方形，导致设置Jzvd 播放器的时候 视频封面图片上下不能充满，有黑边-->
         <ImageView
             android:id="@+id/word_iv"
-            android:layout_width="wrap_content"
-            android:layout_height="150dp"
+            android:layout_width="150dp"
+            android:layout_height="142dp"
+            android:scaleType="fitXY"
             android:layout_gravity="center_horizontal" />
 
         <LinearLayout
@@ -45,7 +49,7 @@
             <com.hlxyedu.putonghualearningsystem.weight.jzvd.CustomUIJzvdStd
                 android:id="@+id/jz_video"
                 android:layout_width="150dp"
-                android:layout_height="150dp" />
+                android:layout_height="142dp" />
 
         </LinearLayout>
 
@@ -86,7 +90,8 @@
                 android:layout_height="30dp"
                 android:layout_marginStart="14dp"
                 android:background="@color/blue0F8"
-                android:text="@string/bishun" />
+                android:text="@string/bishun"
+                />
 
         </LinearLayout>
 

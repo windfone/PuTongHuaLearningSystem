@@ -18,6 +18,7 @@ import com.blankj.utilcode.util.FileUtils;
 import com.blankj.utilcode.util.LogUtils;
 import com.blankj.utilcode.util.StringUtils;
 import com.blankj.utilcode.util.ToastUtils;
+import com.bumptech.glide.Glide;
 import com.fifedu.record.media.record.RecordSettingAdapter;
 import com.fifedu.record.recinbox.bl.dal.AacFileWriter;
 import com.fifedu.record.recinbox.bl.dal.SpeexFileWriter;

@@ -6,10 +6,12 @@ import java.security.KeyManagementException;
 import java.security.KeyStore;
 import java.security.KeyStoreException;
 import java.security.NoSuchAlgorithmException;
+import java.security.SecureRandom;
 import java.security.UnrecoverableKeyException;
 import java.security.cert.CertificateException;
 import java.security.cert.CertificateFactory;
 import java.security.cert.X509Certificate;
+import java.util.concurrent.TimeUnit;
 
 import javax.net.ssl.HostnameVerifier;
 import javax.net.ssl.KeyManager;
@@ -20,6 +22,8 @@ import javax.net.ssl.SSLSocketFactory;
 import javax.net.ssl.TrustManager;
 import javax.net.ssl.TrustManagerFactory;
 import javax.net.ssl.X509TrustManager;
+
+import okhttp3.OkHttpClient;
 
 /**
  * 错误备注
@@ -60,6 +64,47 @@ public class HttpsUtils
     {
         public SSLSocketFactory sSLSocketFactory;
         public X509TrustManager trustManager;
+    }
+
+    public static OkHttpClient getUnsafeOkHttpClient() {
+        try
+        {
+            TrustManager[] trustManagers = prepareTrustManager(null);
+            KeyManager[] keyManagers = prepareKeyManager(null, null);
+            SSLContext sslContext = SSLContext.getInstance("TLS");
+            X509TrustManager trustManager = null;
+            if (trustManagers != null)
+            {
+                trustManager = new MyTrustManager(chooseTrustManager(trustManagers));
+            } else
+            {
+                trustManager = new UnSafeTrustManager();
+            }
+            sslContext.init(keyManagers, new TrustManager[]{trustManager},null);
+            OkHttpClient.Builder builder = new OkHttpClient.Builder();
+            builder.sslSocketFactory(sslContext.getSocketFactory(),trustManager);
+            builder.hostnameVerifier(new HostnameVerifier() {
+                @Override
+                public boolean verify(String hostname, SSLSession session) {
+                    return true;
+                }
+            });
+            builder.connectTimeout(20, TimeUnit.SECONDS);
+            builder.readTimeout(20, TimeUnit.SECONDS);
+
+            OkHttpClient okHttpClient = builder.build();
+            return okHttpClient;
+        } catch (NoSuchAlgorithmException e)
+        {
+            throw new AssertionError(e);
+        } catch (KeyManagementException e)
+        {
+            throw new AssertionError(e);
+        } catch (KeyStoreException e)
+        {
+            throw new AssertionError(e);
+        }
+
     }
 
     public static SSLParams getSslSocketFactory(InputStream[] certificates, InputStream bksFile, String password)

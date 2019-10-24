@@ -3,14 +3,9 @@ package com.hlxyedu.putonghualearningsystem.app;
 import android.app.ActivityManager;
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.provider.SyncStateContract;
 import android.support.multidex.MultiDex;
 
-import com.blankj.utilcode.util.LogUtils;
-import com.blankj.utilcode.util.ObjectUtils;
 import com.fifedu.record.recinbox.bl.record.RecorderManager;
-import com.google.gson.Gson;
-import com.google.gson.JsonSyntaxException;
 import com.hlxyedu.putonghualearningsystem.api.Constants;
 import com.hlxyedu.putonghualearningsystem.di.component.AppComponent;
 import com.hlxyedu.putonghualearningsystem.di.component.DaggerAppComponent;
@@ -78,6 +73,8 @@ public class AppContext extends BaseApplication {
 
         SharedPreferences mSPrefs = getSharedPreferences(Constants.BOSS, Context.MODE_PRIVATE);
 //        uid = mSPrefs.getString(Constants.UID, "");
+
+//        Glide.get(this).getRegistry().replace(GlideUrl.class, InputStream.class, new OkHttpUrlLoader.Factory(HttpsUtils.getUnsafeOkHttpClient()));
 
         //初始化崩溃信息
 //        initCrash();

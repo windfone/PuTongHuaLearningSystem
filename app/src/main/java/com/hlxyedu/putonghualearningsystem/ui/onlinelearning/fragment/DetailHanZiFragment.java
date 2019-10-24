@@ -1,6 +1,7 @@
 package com.hlxyedu.putonghualearningsystem.ui.onlinelearning.fragment;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -8,6 +9,8 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.bumptech.glide.request.RequestOptions;
 import com.hlxyedu.putonghualearningsystem.R;
 import com.hlxyedu.putonghualearningsystem.base.RootFragment;
 import com.hlxyedu.putonghualearningsystem.base.RxBus;
@@ -69,7 +72,6 @@ public class DetailHanZiFragment extends RootFragment<DetailHanZiPresenter> impl
     protected void initEventAndData() {
         jz_video.setJzvdStdImp(this);
 
-
     }
 
     @Override
@@ -82,6 +84,7 @@ public class DetailHanZiFragment extends RootFragment<DetailHanZiPresenter> impl
         pinyin_tv.setText(pinYin);
 //        cn_tv.setText(hanZi);
         Glide.with(this).load(ApiConstants.HOST + img).into(word_iv);
+        String s = ApiConstants.HOST + wordImg;
         videoUrl = url;
         wordImg = img;
     }
@@ -112,7 +115,11 @@ public class DetailHanZiFragment extends RootFragment<DetailHanZiPresenter> impl
                 jz_video.setUp(ApiConstants.HOST + videoUrl,"", JzvdStd.SCREEN_NORMAL, JZMediaExo.class);
                 jz_video.startVideo();
                 // 只是一种描述，也可以使用 glide picasso等加载封面图，根据项目自己需求
+                /*RequestOptions options = new RequestOptions()
+                        .diskCacheStrategy(DiskCacheStrategy.NONE)
+                        .skipMemoryCache(true);*/
 //                Glide.with(this).load(ApiConstants.HOST + wordImg).into(jz_video.thumbImageView);
+                Glide.with(this).load(ApiConstants.HOST + wordImg).into(jz_video.thumbImageView);
 //                jz_video.thumbImageView.setImageURI(Uri.parse("http://p.qpic.cn/videoyun/0/2449_43b6f696980311e59ed467f22794e792_1/640"));
                 // 设置充满全屏
 //                jz_video.setVideoImageDisplayType(JzvdStd.VIDEO_IMAGE_DISPLAY_TYPE_FILL_SCROP);

@@ -67,7 +67,6 @@ public class PersonalCenterFragment extends RootFragment<PersonalCenterPresenter
         xbase_topbar.setLeftImg(ContextCompat.getDrawable(mActivity,R.drawable.icon_scan));
 
         mPresenter.getUserInfo(2);
-
     }
 
     @Override

@@ -14,6 +14,7 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Toast;
 
+import com.noober.background.BackgroundLibrary;
 import com.skyworth.rxqwelibrary.managers.AppManagers;
 import com.umeng.analytics.MobclickAgent;
 

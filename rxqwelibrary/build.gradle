@@ -91,4 +91,8 @@ dependencies {
     //友盟
 //    api files('libs/umeng-analytics-8.0.2.jar')
 //    api files('libs/umeng-common-2.0.2.jar')
+
+    // shape selector 框架
+//    implementation 'com.noober.background:core:1.6.0'
+
 }

@@ -27,6 +27,11 @@
             android:name="design_height_in_dp"
             android:value="640" />
 
+        <!--<meta-data
+            android:name="com.hlxyedu.putonghualearningsystem.di.module.OkHttpGlideModule"
+            android:value="AppGlideModule"/>-->
+
+
         <activity android:name=".ui.splash.activity.SplashActivity"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.Splash">

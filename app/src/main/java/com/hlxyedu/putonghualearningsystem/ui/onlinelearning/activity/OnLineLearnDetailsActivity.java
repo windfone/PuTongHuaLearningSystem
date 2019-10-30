@@ -69,7 +69,7 @@ import butterknife.OnClick;
  * 播放音频、录音界面
  */
 public class OnLineLearnDetailsActivity extends RootFragmentActivity<OnLineLearnDetailsPresenter> implements OnLineLearnDetailsContract.View
-        , OnPlayerEventListener, IRecorderListener, XBaseTopBarImp {
+        , OnPlayerEventListener, IRecorderListener, XBaseTopBarImp{
 
     private static final int MSG_START_RECORD = 10;
     private static final int MSG_STOP_RECORD = 11;
@@ -123,6 +123,8 @@ public class OnLineLearnDetailsActivity extends RootFragmentActivity<OnLineLearn
     private TimerTaskManager timerTaskManager;
     private boolean isPlayRecord;
     private int audioLength;
+    private long position;
+    private long progress;// 播放到哪里了
 
     /**
      * 打开新Activity
@@ -207,11 +209,11 @@ public class OnLineLearnDetailsActivity extends RootFragmentActivity<OnLineLearn
             @Override
             public void run() {
                 if (!isPlayRecord) {
-                    long position = MusicManager.getInstance().getPlayingPosition();
+                    position = MusicManager.getInstance().getPlayingPosition();
                     try {
-                        // catch 掉 audioLength 分母 = 0 的情况
                         progressBar.setProgress((int) (100 * (position / 1000) / audioLength));
                         time_progress_tv.setText(TUtils.formatMusicTime(position));
+                        progress = position;
                     }catch (ArithmeticException exception){
 //                        ToastUtils.showShort("获取音频时长错误");
                     }
@@ -426,10 +428,14 @@ public class OnLineLearnDetailsActivity extends RootFragmentActivity<OnLineLearn
 //        songInfo.setSongId(lists.get(pos).getId());
         songInfo.setSongId(String.valueOf(UUID.randomUUID()));
         songInfo.setSongUrl(ApiConstants.HOST + audioUrl);
+
         try {
             MusicManager.getInstance().playMusicByInfo(songInfo);
         }catch (IllegalArgumentException e){
             ToastUtils.showShort("音频播放错误");
+        }
+        if (progress != 0){
+            MusicManager.getInstance().seekTo(progress);
         }
     }
 

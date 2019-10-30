@@ -37,7 +37,7 @@ ext{
             //ui
             "dialogplus"                        : "com.orhanobut:dialogplus:1.11@aar",
             "cptr"                              : "com.chanven.lib:cptr:1.1.0",
-            "android-pickers"                   :"com.github.addappcn:android-pickers:1.0.3",
+            "android-pickers"                   : "com.github.addappcn:android-pickers:1.0.3",
             //https://www.jianshu.com/p/b343fcff51b0
             //https://github.com/CymChad/BaseRecyclerViewAdapterHelper
             //PinnedSectionItemDecoration：一个强大的粘性标签库
@@ -45,7 +45,7 @@ ext{
             //EasySwipeMenuLayout：独立的侧滑删除
             "BaseRecyclerViewAdapterHelper": "com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.21",
             //https://github.com/bingoogolapple/BGABanner-Android
-            "bgaBanner"                         :"cn.bingoogolapple:bga-banner:2.2.5",
+            //"bgaBanner"                         :"cn.bingoogolapple:bga-banner:2.2.5",
             //腾讯组件皮肤
             //https://github.com/Tencent/QMUI_Android   https://qmuiteam.com/android
             "qmui"                              :"com.qmuiteam:qmui:1.4.0",
@@ -65,7 +65,7 @@ ext{
             "matisse"                           : "com.zhihu.android:matisse:0.5.2-beta4",
             //日历 https://github.com/yannecer/NCalendar
             "ncalendar"                         : "com.necer.ncalendar:ncalendar:3.4.5",
-            "wlmedia"                           : "ywl.ywl5320:wlmedia:1.0.0-beta17",
+            //"wlmedia"                           : "ywl.ywl5320:wlmedia:1.0.0-beta17",
 
             //video
             //https://github.com/lipangit/JiaoZiVideoPlayer

@@ -156,7 +156,7 @@ dependencies {
     implementation project(path: ':rxqwelibrary')
     implementation project(path: ':record')
 
-    implementation rootProject.ext.dependencies["wlmedia"]
+//    implementation rootProject.ext.dependencies["wlmedia"]
 
     // online play audio
     implementation 'com.lzx:StarrySkyJava:2.1.9'

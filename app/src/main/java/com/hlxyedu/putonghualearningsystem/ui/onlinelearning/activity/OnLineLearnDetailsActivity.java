@@ -318,15 +318,19 @@ public class OnLineLearnDetailsActivity extends RootFragmentActivity<OnLineLearn
                     if (MusicManager.getInstance().isPlaying()) {
                         // 如果正在播放录音，还点击了上边的 接口请求的拼音播放按钮，则 提示暂停播放录音或者 等待 录音播放完成再播放
                         if (isPlayRecord){
-                            ToastUtils.showShort("请暂停播放录音或等待录音播放完毕");
-                            return;
+                            record_play_tv.setText("播放");
+                            playAudio();
+                            top_play_iv.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.icon_play));
+                            isPlayRecord = false;
+                        }else {
+                            MusicManager.getInstance().pauseMusic();
+                            onPlayerPause();
+                            top_play_iv.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.icon_pause));
                         }
-                        MusicManager.getInstance().pauseMusic();
-                        onPlayerPause();
-                        top_play_iv.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.icon_pause));
                     } else {
                         playAudio();
                         top_play_iv.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.icon_play));
+                        isPlayRecord = false;
                     }
                 } else {
                     ToastUtils.showShort("正在录音，不能播放");
@@ -397,27 +401,27 @@ public class OnLineLearnDetailsActivity extends RootFragmentActivity<OnLineLearn
                     if (StringUtils.isEmpty(recordPath)) {
                         ToastUtils.showShort("您还没有录制音频");
                     } else {
-                        if (isPlayRecord) {
-                            MusicManager.getInstance().pauseMusic();
-                            record_play_tv.setText("播放");
-                        } else {
-                            // 如果点击播放录音的时候 还正在播放 请求的音频，不要覆盖播放，也提示播放完成再播放录音，改变上面按钮的播放状态
-                            /*if (MusicManager.getInstance().isPlaying()) {
-                                time_progress_tv.setText(getResources().getString(R.string.time_zero));
+                        if (MusicManager.getInstance().isPlaying()) {
+                            if (isPlayRecord){
+                                MusicManager.getInstance().pauseMusic();
+                                record_play_tv.setText("播放");
+                            }else {
                                 top_play_iv.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.icon_pause));
-                            }*/
-                            if (MusicManager.getInstance().isPlaying()) {
-                                ToastUtils.showShort("请暂停播放学习音频或等待学习音频播放完毕");
-                                return;
+
+                                playRecordAudio();
+                                record_play_tv.setText("暂停");
+                                isPlayRecord = true;
                             }
+                        } else {
                             playRecordAudio();
                             record_play_tv.setText("暂停");
+                            isPlayRecord = true;
                         }
-                        isPlayRecord = !isPlayRecord;
                     }
                 } else {
                     ToastUtils.showShort("正在录音，不能播放");
                 }
+
                 break;
         }
     }
@@ -487,7 +491,7 @@ public class OnLineLearnDetailsActivity extends RootFragmentActivity<OnLineLearn
         if (isPlayRecord) {
             MusicManager.getInstance().pauseMusic();
             record_play_tv.setText("播放");
-            isPlayRecord = !isPlayRecord;
+            isPlayRecord = false;
         } else {
             timerTaskManager.stopToUpdateProgress();
             top_play_iv.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.icon_pause));

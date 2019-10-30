@@ -202,7 +202,7 @@ public class OnLineLearnDetailsActivity extends RootFragmentActivity<OnLineLearn
 
         //1.需要创建录音文件夹
         LogUtils.d(TAG, "创建录音文件夹");
-        FileUtils.createOrExistsDir(AppConstants.RECORD_PATH);
+        FileUtils.createOrExistsDir(AppConstants.RECORD_PRACTICE_PATH);
 
         timerTaskManager = new TimerTaskManager();
         timerTaskManager.setUpdateProgressTask(new Runnable() {
@@ -586,12 +586,12 @@ public class OnLineLearnDetailsActivity extends RootFragmentActivity<OnLineLearn
                 mAacFile.close();
             }
             mAacFile = new AacFileWriter();
-//            recordPath = AppConstants.RECORD_PATH + "audio_" + lists.get(pos).getName().substring(0, lists.get(pos).getName().lastIndexOf("."))
+//            recordPath = AppConstants.RECORD_PRACTICE_PATH + "audio_" + lists.get(pos).getName().substring(0, lists.get(pos).getName().lastIndexOf("."))
 //                    + AppConstants.AUDIO_FILE_SUFFIX;
             // 这里音频只是练习用，不用保存，所以录音文件可以覆盖
             // 每次录音前先将上次录的音频删除
-            FileUtils.delete(recordPath);
-            recordPath = AppConstants.RECORD_PATH + "audio_" + "learning"
+            FileUtils.delete(AppConstants.RECORD_PRACTICE_PATH + "audio_" + "learning" + AppConstants.AUDIO_FILE_SUFFIX);
+            recordPath = AppConstants.RECORD_PRACTICE_PATH + "audio_" + "learning"
                     + AppConstants.AUDIO_FILE_SUFFIX;
             mAacFile.open(recordPath);
             mAacFile.init(params.getSampleRate());

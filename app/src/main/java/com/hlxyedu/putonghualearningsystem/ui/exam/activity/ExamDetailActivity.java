@@ -151,7 +151,7 @@ public class ExamDetailActivity extends RootFragmentActivity<ExamDetailPresenter
         mRecorder = RecorderManager.getInstance();
         mRecordHandler = new RecordHandler(this);
         //1.需要创建这套题的答题包录音文件夹
-        userDir = AppConstants.RECORD_PATH
+        userDir = AppConstants.RECORD_EXAM_PATH
                 + TimeUtils.getNowString(new SimpleDateFormat("yyyy-MM-dd"))
                 + "&"
                 + examCenterVOS.get(pos).getPaperNo();

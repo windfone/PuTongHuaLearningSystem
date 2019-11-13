@@ -219,6 +219,7 @@
                     android:layout_height="match_parent"
                     android:layout_marginEnd="28dp"
                     android:background="@null"
+                    android:textCursorDrawable="@drawable/my_cursor"
                     android:gravity="center_vertical"
                     />
 
@@ -251,6 +252,7 @@
                     android:layout_height="match_parent"
                     android:layout_marginEnd="28dp"
                     android:background="@null"
+                    android:textCursorDrawable="@drawable/my_cursor"
                     android:gravity="center_vertical"
                     />
 

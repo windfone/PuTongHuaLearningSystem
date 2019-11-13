@@ -60,6 +60,12 @@ dependencies {
     api rootProject.ext.dependencies["glide"]
     annotationProcessor rootProject.ext.dependencies["glide_compiler"]
 
+    // 沉浸式 ImmersionBar
+    // 基础依赖包，必须要依赖
+    api rootProject.ext.dependencies["immersionbar"]
+    // fragment快速实现（可选）
+//    api 'com.gyf.immersionbar:immersionbar-components:3.0.0'
+
     //fragment 管控
     //https://github.com/YoKeyword/Fragmentation/blob/master/README_CN.md
     api rootProject.ext.dependencies["fragmentation"]

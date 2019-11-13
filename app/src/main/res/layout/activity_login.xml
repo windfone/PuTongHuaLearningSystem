@@ -70,6 +70,7 @@
             android:gravity="center_vertical"
             android:hint="@string/please_input_user_name"
             android:paddingStart="47dp"
+            android:textCursorDrawable="@drawable/my_cursor"
             android:singleLine="true"
             tools:ignore="RtlSymmetry" />
 
@@ -109,6 +110,7 @@
                 android:singleLine="true"
                 android:paddingStart="47dp"
                 tools:ignore="RtlSymmetry"
+                android:textCursorDrawable="@drawable/my_cursor"
                 android:inputType="textPassword" />
 
             <android.support.v7.widget.CardView

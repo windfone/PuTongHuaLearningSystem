@@ -14,6 +14,8 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Toast;
 
+import com.gyf.immersionbar.ImmersionBar;
+import com.skyworth.rxqwelibrary.R;
 import com.skyworth.rxqwelibrary.managers.AppManagers;
 import com.umeng.analytics.MobclickAgent;
 
@@ -51,7 +53,12 @@ public abstract class SimpleActivity extends AppCompatActivity {
         AppManagers.getInstance().addActivity(this);
         initEventAndData();
 
-        //设置透明通知栏
+        // 沉浸式
+        // keyboardEnable 解决软键盘与底部输入框冲突问题，默认为false
+        ImmersionBar.with(this)
+                .transparentStatusBar().keyboardEnable(true).init();
+
+       /*//设置透明通知栏
         if (Build.VERSION.SDK_INT >= 21) {
             View decorView = getWindow().getDecorView();
             int option = View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
@@ -60,40 +67,8 @@ public abstract class SimpleActivity extends AppCompatActivity {
             getWindow().setStatusBarColor(Color.TRANSPARENT);
         }
         ActionBar actionBar = getSupportActionBar();
-        actionBar.hide();
-//        transportStatus(this);
+        actionBar.hide();*/
     }
-
-    // 华为平板沉浸式- 设置透明状态栏无效 解决方法
-    /*public static void transportStatus(Activity context) {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-            context.getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
-            if (!isHaveNavigationBar(context))
-                context.getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION);
-        }
-    }
-    public static boolean isHaveNavigationBar(Activity context) {
-
-        boolean isHave = false;
-        Resources rs = context.getResources();
-        int id = rs.getIdentifier("config_showNavigationBar", "bool", "android");
-        if (id > 0) {
-            isHave = rs.getBoolean(id);
-        }
-        try {
-            Class systemPropertiesClass = Class.forName("android.os.SystemProperties");
-            Method m = systemPropertiesClass.getMethod("get", String.class);
-            String navBarOverride = (String) m.invoke(systemPropertiesClass, "qemu.hw.mainkeys");
-            if ("1".equals(navBarOverride)) {
-                isHave = false;
-            } else if ("0".equals(navBarOverride)) {
-                isHave = true;
-            }
-        } catch (Exception e) {
-            Log.w("TAG", e);
-        }
-        return isHave;
-    }*/
 
     protected void onViewCreated() {
 

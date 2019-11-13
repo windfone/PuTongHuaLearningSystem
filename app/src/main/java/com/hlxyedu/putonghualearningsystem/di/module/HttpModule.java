@@ -11,6 +11,7 @@ import com.hlxyedu.putonghualearningsystem.di.qualifier.QBaseUrl;
 import com.hlxyedu.putonghualearningsystem.model.http.api.ApiConstants;
 import com.hlxyedu.putonghualearningsystem.model.http.api.ManageApis;
 import com.hlxyedu.putonghualearningsystem.model.http.api.QBaseApis;
+//import com.skyworth.rxqwelibrary.BuildConfig;
 import com.skyworth.rxqwelibrary.api.Api;
 import com.skyworth.rxqwelibrary.utils.HttpsUtils;
 

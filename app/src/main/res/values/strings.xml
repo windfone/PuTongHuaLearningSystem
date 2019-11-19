@@ -21,6 +21,7 @@
     <string name="permission">为了您能够使用录音功能，需要您同意录音、读取手机存储等权限</string>
 
     <!-- activity_main -->
+    <string name="home">首页</string>
     <string name="online_learning">在线学习</string>
     <string name="exam_center">模考中心</string>
     <string name="classroom_for_famous_teachers">名师课堂</string>

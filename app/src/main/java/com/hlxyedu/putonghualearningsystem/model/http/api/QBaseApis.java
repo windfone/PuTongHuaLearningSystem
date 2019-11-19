@@ -93,7 +93,7 @@ public interface QBaseApis {
     Flowable<HttpResponse<List<VideoVO>>> getTeacherClassList(@Query("typeId") int typeId,@Query("orderBy") int orderBy,
                                                                 @Query("currentPage") int currentPage,@Query("pageSize") int pageSize);
 
-    // 获取 名师课堂 顶部详情
+    // 获取 名师课堂列表详情 上部数据接口
     @GET("browse/selectTeacherLectureDetail")
     Flowable<HttpResponse<VideoVO>> getTeacherClassTopDetails(@Query("browseNum") int browseNum,@Query("teaId") int teaId);
 

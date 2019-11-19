@@ -10,6 +10,7 @@ import com.hlxyedu.putonghualearningsystem.ui.exam.fragment.EShortEssayFragment;
 import com.hlxyedu.putonghualearningsystem.ui.exam.fragment.EWordFragment;
 import com.hlxyedu.putonghualearningsystem.ui.exam.fragment.EZuoWenFragment;
 import com.hlxyedu.putonghualearningsystem.ui.main.fragment.FamousClassroomFragment;
+import com.hlxyedu.putonghualearningsystem.ui.main.fragment.HomeFragment;
 import com.hlxyedu.putonghualearningsystem.ui.main.fragment.OnLineLearningFragment;
 import com.hlxyedu.putonghualearningsystem.ui.main.fragment.ExamCenterFragment;
 import com.hlxyedu.putonghualearningsystem.ui.main.fragment.PersonalCenterFragment;
@@ -76,5 +77,7 @@ public interface FragmentComponent {
     void inject(EZuoWenFragment eZuoWenFragment);
 
     void inject(EScoreFragment eScoreFragment);
+
+    void inject(HomeFragment homeFragment);
 
 }

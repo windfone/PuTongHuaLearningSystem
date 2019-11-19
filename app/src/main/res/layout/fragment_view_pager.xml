@@ -12,17 +12,26 @@
         android:layout_height="70dp"
         android:background="@drawable/icon_online_learn_top_bg">
 
-        <ImageView
-            android:id="@+id/sort_iv"
-            style="@style/textSize_whitefff_13"
+        <LinearLayout
+            android:id="@+id/sort_ll"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_marginTop="25dp"
-            android:layout_marginEnd="25dp"
-            android:src="@drawable/icon_descending_white"
-            android:visibility="gone" />
-        <!--android:text="@string/sort"-->
+            android:layout_marginTop="15dp"
+            android:layout_marginEnd="15dp"
+            android:visibility="gone"
+            android:layout_alignParentEnd="true">
+
+            <ImageView
+                android:id="@+id/sort_iv"
+                style="@style/textSize_whitefff_13"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="12dp"
+                android:src="@drawable/icon_descending_white"
+                />
+            <!--android:text="@string/sort"-->
+
+        </LinearLayout>
 
         <net.lucode.hackware.magicindicator.MagicIndicator
             android:id="@+id/top_indicator"

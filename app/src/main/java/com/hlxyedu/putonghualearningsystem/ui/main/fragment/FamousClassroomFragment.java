@@ -61,11 +61,13 @@ public class FamousClassroomFragment extends RootFragment<FamousClassroomPresent
     @Override
     public void onSuccess(List<TopTitleVO> lists) {
         mTitleDataList = new ArrayList<>();
-        if (lists != null){
-            for (int i = 0; i < lists.size(); i++) {
-                mTitleDataList.add(lists.get(i).getTeType());
-            }
+        if (lists.isEmpty()){
+            return;
         }
+        for (int i = 0; i < lists.size(); i++) {
+            mTitleDataList.add(lists.get(i).getTeType());
+        }
+
         if (findChildFragment(ViewPagerFragment.class) == null) {
             loadRootFragment(R.id.fl_second_container, ViewPagerFragment.newInstance(2, mTitleDataList,lists));
         }

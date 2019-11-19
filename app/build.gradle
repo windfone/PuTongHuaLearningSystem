@@ -173,7 +173,7 @@ dependencies {
     implementation rootProject.ext.dependencies["walle"]
     //ui
     implementation 'com.github.hackware1993:MagicIndicator:1.5.0'
-//    implementation rootProject.ext.dependencies["bgaBanner"]
+    implementation rootProject.ext.dependencies["bgaBanner"]
     implementation rootProject.ext.dependencies["qmui"]
 
 //    implementation 'tv.danmaku.ijk.media:ijkplayer-java:0.8.8'

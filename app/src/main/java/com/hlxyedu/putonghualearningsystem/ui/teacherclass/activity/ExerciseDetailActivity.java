@@ -22,6 +22,7 @@ import com.hlxyedu.putonghualearningsystem.model.http.api.ApiConstants;
 import com.hlxyedu.putonghualearningsystem.ui.teacherclass.adapter.CommentAdapter;
 import com.hlxyedu.putonghualearningsystem.ui.teacherclass.contract.ExerciseDetailContract;
 import com.hlxyedu.putonghualearningsystem.ui.teacherclass.presenter.ExerciseDetailPresenter;
+import com.hlxyedu.putonghualearningsystem.weight.jzvd.JZMediaExo;
 import com.hlxyedu.putonghualearningsystem.weight.jzvd.JzvdStd;
 import com.hlxyedu.putonghualearningsystem.weight.actionbar.XBaseTopBar;
 import com.hlxyedu.putonghualearningsystem.weight.actionbar.XBaseTopBarImp;
@@ -120,9 +121,10 @@ public class ExerciseDetailActivity extends RootActivity<ExerciseDetailPresenter
             mPresenter.getCommentList(videoVO.getTeaId(),count,pageSize);
         }, rcy);
 
-        jz_video.setUp(ApiConstants.HOST + videoVO.getTeaVideoUrl(), "");
+//        jz_video.setUp(ApiConstants.HOST + videoVO.getTeaVideoUrl(), "");
+        jz_video.setUp(ApiConstants.HOST + videoVO.getTeaVideoUrl(),"",JzvdStd.SCREEN_NORMAL, JZMediaExo.class);
         // 只是一种描述，也可以使用 glide picasso等加载封面图，根据项目自己需求
-        Glide.with(this).load(Uri.parse("http://p.qpic.cn/videoyun/0/2449_43b6f696980311e59ed467f22794e792_1/640")).into(jz_video.thumbImageView);
+//        Glide.with(this).load(Uri.parse("http://p.qpic.cn/videoyun/0/2449_43b6f696980311e59ed467f22794e792_1/640")).into(jz_video.thumbImageView);
 //        jz_video.thumbImageView.setImageURI(Uri.parse("http://p.qpic.cn/videoyun/0/2449_43b6f696980311e59ed467f22794e792_1/640"));
         // 设置充满全屏
         jz_video.setVideoImageDisplayType(JzvdStd.VIDEO_IMAGE_DISPLAY_TYPE_FILL_SCROP);

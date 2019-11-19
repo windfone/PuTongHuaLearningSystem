@@ -1,7 +1,6 @@
 package com.hlxyedu.putonghualearningsystem.ui.main.fragment;
 
 import android.os.Bundle;
-import android.os.Parcelable;
 import android.support.annotation.Nullable;
 
 import com.blankj.utilcode.util.ToastUtils;
@@ -41,7 +40,7 @@ public class OnLineLearningFragment extends RootFragment<OnLineLearningPresenter
 
     @Override
     protected int getLayoutId() {
-        return R.layout.fragment_online_learning;
+        return R.layout.fragment_container;
     }
 
     @Override
@@ -54,7 +53,7 @@ public class OnLineLearningFragment extends RootFragment<OnLineLearningPresenter
     @Override
     public void onTopSuccess(List<TopTitleVO> topTitleVOS) {
         mTitleDataList = new ArrayList<>();
-        if (topTitleVOS != null){
+        if (!topTitleVOS.isEmpty()){
             for (int i = 0; i < topTitleVOS.size(); i++) {
                 mTitleDataList.add(topTitleVOS.get(i).getExType());
             }

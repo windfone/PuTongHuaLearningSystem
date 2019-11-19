@@ -13,6 +13,7 @@ import android.view.animation.DecelerateInterpolator;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
 import com.hlxyedu.putonghualearningsystem.R;
@@ -56,6 +57,8 @@ public class ViewPagerFragment extends RootFragment<ViewPagerPresenter> implemen
     ViewPager view_pager;
     @BindView(R.id.sort_iv)
     ImageView sort_iv;
+    @BindView(R.id.sort_ll)
+    LinearLayout sort_ll;
     @BindView(R.id.top_bar_rl)
     RelativeLayout top_bar_rl;
 
@@ -91,10 +94,10 @@ public class ViewPagerFragment extends RootFragment<ViewPagerPresenter> implemen
             mTitleDataList = getArguments().getStringArrayList("titles");
             lists = getArguments().getParcelableArrayList("titleVO");
             if (from == 1) {
-                sort_iv.setVisibility(View.GONE);
+                sort_ll.setVisibility(View.GONE);
             } else if (from == 2) {
-//                sort_iv.setVisibility(View.VISIBLE);
-                top_bar_rl.setVisibility(View.GONE);
+                sort_ll.setVisibility(View.VISIBLE);
+//                top_bar_rl.setVisibility(View.GONE);
             }
         }
         initIndicator();
@@ -151,12 +154,12 @@ public class ViewPagerFragment extends RootFragment<ViewPagerPresenter> implemen
 
     private QMUIListPopup mListPopup;
 
-    @OnClick(R.id.sort_iv)
+    @OnClick(R.id.sort_ll)
     public void onViewClicked() {
         initListPopupIfNeed();
         mListPopup.setAnimStyle(QMUIPopup.ANIM_AUTO);
         mListPopup.setPreferredDirection(QMUIPopup.DIRECTION_BOTTOM);
-        mListPopup.show(sort_iv);
+        mListPopup.show(sort_ll);
     }
 
     private void initListPopupIfNeed() {

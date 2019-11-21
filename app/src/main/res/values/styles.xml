@@ -158,6 +158,11 @@
         <item name="android:textSize">@dimen/textsize_sp_12</item>
     </style>
 
+    <style name="textSize_black353_12">
+        <item name="android:textColor">@color/black353</item>
+        <item name="android:textSize">@dimen/textsize_sp_12</item>
+    </style>
+
     <style name="textSize_blackB5B_12">
         <item name="android:textColor">@color/blackB5B</item>
         <item name="android:textSize">@dimen/textsize_sp_12</item>

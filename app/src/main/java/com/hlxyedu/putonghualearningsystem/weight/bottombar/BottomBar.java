@@ -48,21 +48,21 @@ public class BottomBar extends LinearLayout implements View.OnClickListener{
         LayoutInflater inflater = LayoutInflater.from(context);
         inflater.inflate(R.layout.bottom_bar_bg, this, true);
 
-//        bottom_bar_home = (BottomBarItem) this.findViewById(R.id.bottom_bar_home);
+        bottom_bar_home = (BottomBarItem) this.findViewById(R.id.bottom_bar_home);
         bottom_bar_online_learning = (BottomBarItem) this.findViewById(R.id.bottom_bar_online_learning);
         bottom_bar_exam_center = (BottomBarItem) this.findViewById(R.id.bottom_bar_exam_center);
         bottom_bar_famous_classroom = (BottomBarItem) this.findViewById(R.id.bottom_bar_famous_classroom);
         bottom_bar_personal_center = (BottomBarItem) this.findViewById(R.id.bottom_bar_personal_center);
 
         arrayList = new ArrayList<>();
-//        arrayList.add(bottom_bar_home);
+        arrayList.add(bottom_bar_home);
         arrayList.add(bottom_bar_online_learning);
         arrayList.add(bottom_bar_exam_center);
         arrayList.add(bottom_bar_famous_classroom);
         arrayList.add(bottom_bar_personal_center);
 
 
-//        bottom_bar_home.setOnClickListener(this);
+        bottom_bar_home.setOnClickListener(this);
         bottom_bar_online_learning.setOnClickListener(this);
         bottom_bar_exam_center.setOnClickListener(this);
         bottom_bar_famous_classroom.setOnClickListener(this);

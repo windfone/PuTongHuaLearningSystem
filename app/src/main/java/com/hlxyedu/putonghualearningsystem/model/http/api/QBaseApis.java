@@ -56,7 +56,7 @@ public interface QBaseApis {
     @GET("user/getUserInfo")
     Flowable<HttpResponse<UserVO>> getUserInfo(@Query("userId") int userId);
 
-    // 获取 在线学习 头部标题
+    // 获取 icon_e_learning 头部标题
     @GET("study/selectType")
     Flowable<HttpResponse<List<TopTitleVO>>> getOnLineLearningTitle();
 

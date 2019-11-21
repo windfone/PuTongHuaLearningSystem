@@ -7,15 +7,6 @@
     android:background="@color/whitefff"
     tools:context=".ui.main.activity.MainActivity">
 
-    <!--<com.hlxyedu.putonghualearningsystem.weight.actionbar.MainTopBar
-        android:id="@+id/main_topbar"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/bar_height"
-        app:isShowLeft_x="false"
-        app:isShowRight_x="false"
-        app:middleText_x="@string/nk_APEC"
-        />-->
-
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">

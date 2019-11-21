@@ -60,7 +60,7 @@ public class ViewPagerFragment extends RootFragment<ViewPagerPresenter> implemen
     @BindView(R.id.sort_ll)
     LinearLayout sort_ll;
     @BindView(R.id.top_bar_rl)
-    RelativeLayout top_bar_rl;
+    LinearLayout top_bar_rl;
 
     private ArrayList<String> mTitleDataList;
     private List<TopTitleVO> lists;

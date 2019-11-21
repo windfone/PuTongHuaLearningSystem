@@ -21,16 +21,16 @@
         android:background="@android:color/transparent"
         >
 
-        <!--<com.hlxyedu.putonghualearningsystem.weight.bottombar.BottomBarItem
+        <com.hlxyedu.putonghualearningsystem.weight.bottombar.BottomBarItem
             android:id="@+id/bottom_bar_home"
             android:layout_width="0dp"
             android:layout_height="@dimen/bottombar_height"
             android:layout_weight="1"
             android:layout_gravity="bottom"
-            app:icon_Normal="@drawable/icon_bar_online_learn_normal"
-            app:icon_Selected="@drawable/icon_bar_online_learn_select"
+            app:icon_Normal="@drawable/icon_bar_home_normal"
+            app:icon_Selected="@drawable/icon_bar_home_select"
             app:icon_Text="@string/home"
-            />-->
+            />
 
         <com.hlxyedu.putonghualearningsystem.weight.bottombar.BottomBarItem
             android:id="@+id/bottom_bar_online_learning"

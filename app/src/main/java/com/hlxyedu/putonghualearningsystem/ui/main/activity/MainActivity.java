@@ -9,6 +9,7 @@ import com.hlxyedu.putonghualearningsystem.base.RootFragmentActivity;
 import com.hlxyedu.putonghualearningsystem.ui.main.contract.MainContract;
 import com.hlxyedu.putonghualearningsystem.ui.main.fragment.ExamCenterFragment;
 import com.hlxyedu.putonghualearningsystem.ui.main.fragment.FamousClassroomFragment;
+import com.hlxyedu.putonghualearningsystem.ui.main.fragment.HomeFragment;
 import com.hlxyedu.putonghualearningsystem.ui.main.fragment.OnLineLearningFragment;
 import com.hlxyedu.putonghualearningsystem.ui.main.fragment.PersonalCenterFragment;
 import com.hlxyedu.putonghualearningsystem.ui.main.presenter.MainPresenter;
@@ -26,9 +27,10 @@ public class MainActivity extends RootFragmentActivity<MainPresenter> implements
     public static final int SECOND = 1;
     public static final int THIRD = 2;
     public static final int FOURTH = 3;
+    public static final int FIFTH = 4;
     @BindView(R.id.bottomBar)
     BottomBar mBottomBar;
-    private SupportFragment[] mFragments = new SupportFragment[4];
+    private SupportFragment[] mFragments = new SupportFragment[5];
 
 //    @BindView(R.id.main_topbar)
 //    MainTopBar main_topbar;
@@ -57,23 +59,25 @@ public class MainActivity extends RootFragmentActivity<MainPresenter> implements
 
     @Override
     protected void initEventAndData() {
-        SupportFragment firstFragment = findFragment(OnLineLearningFragment.class);
+        SupportFragment firstFragment = findFragment(HomeFragment.class);
         if (firstFragment == null) {
-            mFragments[FIRST] = OnLineLearningFragment.newInstance();
-            mFragments[SECOND] = ExamCenterFragment.newInstance();
-            mFragments[THIRD] = FamousClassroomFragment.newInstance();
-            mFragments[FOURTH] = PersonalCenterFragment.newInstance();
+            mFragments[FIRST] = HomeFragment.newInstance();
+            mFragments[SECOND] = OnLineLearningFragment.newInstance();
+            mFragments[THIRD] = ExamCenterFragment.newInstance();
+            mFragments[FOURTH] = FamousClassroomFragment.newInstance();
+            mFragments[FIFTH] = PersonalCenterFragment.newInstance();
 
             loadMultipleRootFragment(R.id.fl_tab_container, FIRST,
-                    mFragments[FIRST], mFragments[SECOND], mFragments[THIRD], mFragments[FOURTH]);
+                    mFragments[FIRST], mFragments[SECOND], mFragments[THIRD], mFragments[FOURTH],mFragments[FIFTH]);
         } else {
             // 这里库已经做了Fragment恢复,所有不需要额外的处理了, 不会出现重叠问题
 
             // 这里我们需要拿到mFragments的引用,也可以通过getChildFragmentManager.findFragmentByTag自行进行判断查找(效率更高些),用下面的方法查找更方便些
             mFragments[FIRST] = firstFragment;
-            mFragments[SECOND] = findFragment(ExamCenterFragment.class);
-            mFragments[THIRD] = findFragment(FamousClassroomFragment.class);
-            mFragments[FOURTH] = findFragment(PersonalCenterFragment.class);
+            mFragments[SECOND] = findFragment(OnLineLearningFragment.class);
+            mFragments[THIRD] = findFragment(ExamCenterFragment.class);
+            mFragments[FOURTH] = findFragment(FamousClassroomFragment.class);
+            mFragments[FIFTH] = findFragment(PersonalCenterFragment.class);
         }
 
         initView();

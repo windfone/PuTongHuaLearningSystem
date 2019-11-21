@@ -44,6 +44,18 @@
     <string name="learning_progress">学习进度</string>
     <string name="general_purpose">通用</string>
 
+    <!-- fragment_home-->
+    <string name="exam_registration">考试报名</string>
+    <string name="registration_inquiry">报名查询</string>
+    <string name="admission_ticket">准考证</string>
+    <string name="result_inquiry">成绩查询</string>
+    <string name="e_learning">在线学习</string>
+    <string name="model_test_center">模考中心</string>
+    <string name="teacher_class">名师课堂</string>
+    <string name="certificate_verification">证书验证</string>
+    <string name="basic_learning">基础学习</string>
+    <string name="more">更多</string>
+
     <!-- activity_personal_info-->
     <string name="personal_info">个人信息</string>
     <string name="upload_avatar">上传头像</string>

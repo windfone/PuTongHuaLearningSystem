@@ -1,22 +1,114 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/gray2F5"
     android:orientation="vertical"
     tools:context=".ui.main.fragment.HomeFragment">
 
-    <cn.bingoogolapple.bgabanner.BGABanner
-        android:id="@+id/banner_guide_content"
+    <com.hlxyedu.putonghualearningsystem.weight.actionbar.XBaseTopBar
+        android:id="@+id/xbase_topbar"
         android:layout_width="match_parent"
-        android:layout_height="120dp"
-        app:banner_indicatorGravity="right|bottom"
-        app:banner_pageChangeDuration="5000"
-        app:banner_pointAutoPlayAble="true"
-        app:banner_pointContainerBackground="@android:color/transparent"
-        app:banner_pointDrawable="@drawable/home_banner_selector"
-        app:banner_pointLeftRightMargin="4dp"
-        app:banner_transitionEffect="alpha" />
+        android:layout_height="wrap_content"
+        app:isShowLeft_x="false"
+        app:isShowRight_x="false"
+        app:middleText_x="@string/app_name" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fillViewport="true"
+        android:scrollbars="none">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <cn.bingoogolapple.bgabanner.BGABanner
+                android:id="@+id/banner_guide_content"
+                android:layout_width="match_parent"
+                android:layout_height="125dp"
+                app:banner_indicatorGravity="right|bottom"
+                app:banner_pageChangeDuration="5000"
+                app:banner_pointAutoPlayAble="true"
+                app:banner_pointContainerBackground="@android:color/transparent"
+                app:banner_pointDrawable="@drawable/home_banner_selector"
+                app:banner_pointLeftRightMargin="4dp"
+                app:banner_transitionEffect="alpha" />
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/rcy"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:background="@color/whitefff" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="40dp">
+
+                <TextView
+                    style="@style/textSize_black353_13"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="16dp"
+                    android:text="@string/basic_learning" />
+
+                <LinearLayout
+                    android:id="@+id/ll_more"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_alignParentEnd="true"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        style="@style/textSize_black353_10"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/more" />
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="5dp"
+                        android:layout_marginEnd="18dp"
+                        android:src="@drawable/icon_more_gray" />
+
+                </LinearLayout>
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp">
+
+                <ImageView
+                    android:id="@+id/cover_iv"
+                    android:layout_width="match_parent"
+                    android:layout_height="138dp"
+                    android:background="@mipmap/ic_launcher"
+                    tools:ignore="ContentDescription" />
+
+                <ImageView
+                    android:id="@+id/play_iv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="138dp"
+                    android:layout_centerInParent="true"
+                    android:src="@drawable/icon_video_play"
+                    tools:ignore="ContentDescription" />
+
+            </RelativeLayout>
+
+
+        </LinearLayout>
+
+    </ScrollView>
 
 </LinearLayout>

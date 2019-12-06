@@ -95,9 +95,11 @@ public class LoginActivity extends RootActivity<LoginPresenter> implements Login
         String account = user_name_edit.getText().toString().trim();
         String password = code_edit.getText().toString().trim();
         if (TextUtils.isEmpty(account)) {
+            ToastUtils.showShort("账号不为能空");
             return;
         }
         if (TextUtils.isEmpty(password)) {
+            ToastUtils.showShort("密码不为能空");
             return;
         }
         login_tv.setText(getResources().getString(R.string.logining));

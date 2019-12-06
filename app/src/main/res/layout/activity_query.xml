@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/whitefff"
+    tools:context=".ui.home.activity.QueryActivity">
+
+    <com.hlxyedu.putonghualearningsystem.weight.actionbar.XBaseTopBar
+        android:id="@+id/xbase_topbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:isShowLeft_x="true"
+        app:isShowRight_x="false"
+        app:middleText_x="@string/registration_inquiry" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginStart="15dp"
+        android:layout_marginEnd="15dp">
+
+        <EditText
+            android:id="@+id/input_name_edit"
+            style="@style/textSize_black353_14"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/shape_edit"
+            android:gravity="center_vertical"
+            android:hint="请输入姓名"
+            android:paddingStart="13dp"
+            android:paddingEnd="13dp"
+            android:singleLine="true"
+            android:textCursorDrawable="@drawable/my_cursor" />
+
+        <EditText
+            android:id="@+id/input_ID_edit"
+            style="@style/textSize_black353_14"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_below="@+id/input_name_edit"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/shape_edit"
+            android:gravity="center_vertical"
+            android:hint="请输入证件编号"
+            android:paddingStart="13dp"
+            android:paddingEnd="13dp"
+            android:singleLine="true"
+            android:textCursorDrawable="@drawable/my_cursor" />
+
+        <EditText
+            android:id="@+id/input_ticket_edit"
+            style="@style/textSize_black353_14"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_below="@+id/input_ID_edit"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/shape_edit"
+            android:gravity="center_vertical"
+            android:hint="请输入准考证号"
+            android:paddingStart="13dp"
+            android:paddingEnd="13dp"
+            android:singleLine="true"
+            android:textCursorDrawable="@drawable/my_cursor"
+            android:visibility="gone" />
+
+        <RelativeLayout
+            android:id="@+id/QR_code_rl"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/input_ticket_edit"
+            android:layout_marginTop="7dp"
+            android:padding="3dp"
+            android:visibility="gone">
+
+            <ImageView
+                android:id="@+id/iv"
+                android:layout_width="16dp"
+                android:layout_height="16dp"
+                android:layout_centerVertical="true"
+                app:srcCompat="@drawable/icon_qr" />
+
+            <TextView
+                style="@style/textSize_blackb4b_14"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="7dp"
+                android:layout_toEndOf="@+id/iv"
+                android:text="扫描证书二维码"
+                android:textStyle="bold" />
+
+        </RelativeLayout>
+
+        <Button
+            android:id="@+id/query_btn"
+            style="@style/textSize_whitefff_16"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_alignParentBottom="true"
+            android:layout_marginStart="15dp"
+            android:layout_marginEnd="15dp"
+            android:layout_marginBottom="20dp"
+            android:background="@drawable/blue_btn_bg"
+            android:text="@string/query" />
+
+    </RelativeLayout>
+
+</LinearLayout>

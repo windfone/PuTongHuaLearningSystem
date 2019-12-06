@@ -162,6 +162,8 @@ dependencies {
     implementation 'com.lzx:StarrySkyJava:2.1.9'
     //video
     implementation rootProject.ext.dependencies["jiaozivideoplayer"]
+    //图片选择器
+    implementation rootProject.ext.dependencies["picture-selector"]
 
     //di
     implementation rootProject.ext.dependencies["butterknife"]

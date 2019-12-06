@@ -6,6 +6,8 @@
     <!--bar 高度 -->
     <dimen name="bar_height">44dp</dimen>
 
+    <dimen name="textsize_sp_8">8sp</dimen>
+    <dimen name="textsize_sp_9">9sp</dimen>
     <dimen name="textsize_sp_10">10sp</dimen>
     <dimen name="textsize_sp_11">11sp</dimen>
     <dimen name="textsize_sp_12">12sp</dimen>

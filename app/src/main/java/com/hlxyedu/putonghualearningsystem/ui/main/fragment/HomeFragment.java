@@ -3,16 +3,18 @@ package com.hlxyedu.putonghualearningsystem.ui.main.fragment;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 import com.bumptech.glide.Glide;
+import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.hlxyedu.putonghualearningsystem.R;
 import com.hlxyedu.putonghualearningsystem.base.RootFragment;
-import com.hlxyedu.putonghualearningsystem.model.bean.HomeSortVO;
+import com.hlxyedu.putonghualearningsystem.base.RxBus;
+import com.hlxyedu.putonghualearningsystem.model.event.TabSelectEvent;
+import com.hlxyedu.putonghualearningsystem.ui.home.activity.ExamRegistrationActivity;
+import com.hlxyedu.putonghualearningsystem.ui.home.activity.QueryActivity;
 import com.hlxyedu.putonghualearningsystem.ui.main.adapter.HomeSortAdapter;
 import com.hlxyedu.putonghualearningsystem.ui.main.contract.HomeContract;
 import com.hlxyedu.putonghualearningsystem.ui.main.presenter.HomePresenter;
@@ -23,9 +25,7 @@ import java.util.List;
 import java.util.Map;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
-import butterknife.Unbinder;
 import cn.bingoogolapple.bgabanner.BGABanner;
 
 /**
@@ -45,8 +45,8 @@ public class HomeFragment extends RootFragment<HomePresenter> implements HomeCon
     ImageView play_iv;
 
     private HomeSortAdapter mAdapter;
-    private Map<String,Object> map;
-    private List<Map<String,Object>> listItems = new ArrayList<>();
+    private Map<String, Object> map;
+    private List<Map<String, Object>> listItems = new ArrayList<>();
 
     private ArrayList<String> imgLists = new ArrayList<>();
     private ArrayList<String> titleLists = new ArrayList<>();
@@ -104,40 +104,72 @@ public class HomeFragment extends RootFragment<HomePresenter> implements HomeCon
 
     private void initTopSortView() {
         map = new HashMap<>();
-        map.put("pic",R.drawable.icon_exam_registration);
-        map.put("text","考试报名");
+        map.put("pic", R.drawable.icon_exam_registration);
+        map.put("text", "考试报名");
         listItems.add(map);
         map = new HashMap<>();
-        map.put("pic",R.drawable.icon_registration_inquiry);
-        map.put("text","报名查询");
+        map.put("pic", R.drawable.icon_registration_inquiry);
+        map.put("text", "报名查询");
         listItems.add(map);
         map = new HashMap<>();
-        map.put("pic",R.drawable.icon_admission_ticket);
-        map.put("text","准考证");
+        map.put("pic", R.drawable.icon_admission_ticket);
+        map.put("text", "准考证");
         listItems.add(map);
         map = new HashMap<>();
-        map.put("pic",R.drawable.icon_result_inquiry);
-        map.put("text","成绩查询");
+        map.put("pic", R.drawable.icon_result_inquiry);
+        map.put("text", "成绩查询");
         listItems.add(map);
         map = new HashMap<>();
-        map.put("pic",R.drawable.icon_e_learning);
-        map.put("text","在线学习");
+        map.put("pic", R.drawable.icon_e_learning);
+        map.put("text", "在线学习");
         listItems.add(map);
         map = new HashMap<>();
-        map.put("pic",R.drawable.icon_model_test_center);
-        map.put("text","模考中心");
+        map.put("pic", R.drawable.icon_model_test_center);
+        map.put("text", "模考中心");
         listItems.add(map);
         map = new HashMap<>();
-        map.put("pic",R.drawable.icon_teacher_class);
-        map.put("text","名师课堂");
+        map.put("pic", R.drawable.icon_teacher_class);
+        map.put("text", "名师课堂");
         listItems.add(map);
         map = new HashMap<>();
-        map.put("pic",R.drawable.icon_certificate_verification);
-        map.put("text","证书验证");
+        map.put("pic", R.drawable.icon_certificate_verification);
+        map.put("text", "证书验证");
         listItems.add(map);
-        mAdapter = new HomeSortAdapter(R.layout.item_home_sort,listItems);
-        rcy.setLayoutManager(new GridLayoutManager(mActivity,4));
-        rcy.setAdapter(mAdapter);
+        mAdapter = new HomeSortAdapter(R.layout.item_home_sort, listItems);
+        rcy.setLayoutManager(new GridLayoutManager(mActivity, 4));
+//        rcy.setAdapter(mAdapter);
+        mAdapter.bindToRecyclerView(rcy);
+        mAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+                switch (position) {
+                    case 0:
+                        startActivity(ExamRegistrationActivity.newInstance(mActivity));
+                        break;
+                    case 1:
+                        startActivity(QueryActivity.newInstance(mActivity, 1));
+                        break;
+                    case 2:
+                        startActivity(QueryActivity.newInstance(mActivity, 2));
+                        break;
+                    case 3:
+                        startActivity(QueryActivity.newInstance(mActivity, 3));
+                        break;
+                    case 4:
+                        RxBus.getDefault().post(new TabSelectEvent(TabSelectEvent.CHANGE,1));
+                        break;
+                    case 5:
+                        RxBus.getDefault().post(new TabSelectEvent(TabSelectEvent.CHANGE,2));
+                        break;
+                    case 6:
+                        RxBus.getDefault().post(new TabSelectEvent(TabSelectEvent.CHANGE,3));
+                        break;
+                    case 7:
+                        startActivity(QueryActivity.newInstance(mActivity, 7));
+                        break;
+                }
+            }
+        });
     }
 
     @Override

@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/whitefff"
+    android:orientation="vertical"
+    tools:context=".ui.home.activity.ExamRegistrationActivity">
+
+    <com.hlxyedu.putonghualearningsystem.weight.actionbar.XBaseTopBar
+        android:id="@+id/xbase_topbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:isShowLeft_x="true"
+        app:isShowRight_x="true"
+        app:middleText_x="@string/exam_registration" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fillViewport="true"
+        android:scrollbars="none">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <EditText
+                android:id="@+id/input_name_edit"
+                style="@style/textSize_black353_14"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginStart="15dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="15dp"
+                android:background="@drawable/shape_edit"
+                android:gravity="center_vertical"
+                android:hint="请输入姓名"
+                android:paddingStart="13dp"
+                android:paddingEnd="13dp"
+                android:singleLine="true"
+                android:textCursorDrawable="@drawable/my_cursor" />
+
+            <TextView
+                android:id="@+id/select_sex_tv"
+                style="@style/textSize_black353_14"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginStart="15dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="15dp"
+                android:background="@drawable/shape_edit"
+                android:drawableEnd="@drawable/icon_more_gray"
+                android:gravity="center_vertical"
+                android:hint="请选择性别"
+                android:paddingStart="13dp"
+                android:paddingEnd="13dp" />
+
+            <TextView
+                android:id="@+id/select_national_tv"
+                style="@style/textSize_black353_14"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginStart="15dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="15dp"
+                android:background="@drawable/shape_edit"
+                android:drawableEnd="@drawable/icon_more_gray"
+                android:gravity="center_vertical"
+                android:hint="请选择民族"
+                android:paddingStart="13dp"
+                android:paddingEnd="13dp" />
+
+            <EditText
+                android:id="@+id/input_papers_edit"
+                style="@style/textSize_black353_14"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginStart="15dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="15dp"
+                android:background="@drawable/shape_edit"
+                android:gravity="center_vertical"
+                android:hint="请输入证件编号"
+                android:paddingStart="13dp"
+                android:paddingEnd="13dp"
+                android:singleLine="true"
+                android:textCursorDrawable="@drawable/my_cursor" />
+
+            <TextView
+                android:id="@+id/select_job_tv"
+                style="@style/textSize_black353_14"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginStart="15dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="15dp"
+                android:background="@drawable/shape_edit"
+                android:drawableEnd="@drawable/icon_more_gray"
+                android:gravity="center_vertical"
+                android:hint="请选择职业"
+                android:paddingStart="13dp"
+                android:paddingEnd="13dp" />
+
+            <EditText
+                android:id="@+id/input_unit_edit"
+                style="@style/textSize_black353_14"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginStart="15dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="15dp"
+                android:background="@drawable/shape_edit"
+                android:gravity="center_vertical"
+                android:hint="请填写所在单位"
+                android:paddingStart="13dp"
+                android:paddingEnd="13dp"
+                android:singleLine="true"
+                android:textCursorDrawable="@drawable/my_cursor" />
+
+            <TextView
+                android:id="@+id/select_exam_level_tv"
+                style="@style/textSize_black353_14"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginStart="15dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="15dp"
+                android:background="@drawable/shape_edit"
+                android:drawableEnd="@drawable/icon_more_gray"
+                android:gravity="center_vertical"
+                android:hint="请选择考试级别"
+                android:paddingStart="13dp"
+                android:paddingEnd="13dp" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:paddingBottom="20dp">
+
+                <TextView
+                    android:id="@+id/upload_photo"
+                    style="@style/textSize_blackb4b_14"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="28dp"
+                    android:layout_marginTop="20dp"
+                    android:text="上传照片：" />
+
+                <TextView
+                    style="@style/textSize_blackb4b_8"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/upload_photo"
+                    android:layout_alignStart="@+id/upload_photo"
+                    android:layout_marginTop="8dp"
+                    android:text="建议尺寸：390*567" />
+
+                <RelativeLayout
+                    android:id="@+id/rl"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="40dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_toEndOf="@+id/upload_photo">
+
+                    <ImageView
+                        android:id="@+id/take_pic_iv"
+                        android:layout_width="53dp"
+                        android:layout_height="53dp"
+                        android:background="@drawable/icon_add_image" />
+
+                    <ImageView
+                        android:id="@+id/show_pic_iv"
+                        android:layout_width="100dp"
+                        android:layout_height="145dp"
+                        android:layout_marginTop="20dp"
+                        android:visibility="gone" />
+
+                </RelativeLayout>
+
+                <Button
+                    android:id="@+id/query_btn"
+                    style="@style/textSize_whitefff_16"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:layout_below="@+id/rl"
+                    android:layout_marginStart="15dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginEnd="15dp"
+                    android:background="@drawable/blue_btn_bg"
+                    android:text="@string/next_step" />
+
+            </RelativeLayout>
+
+        </LinearLayout>
+
+    </ScrollView>
+
+</LinearLayout>

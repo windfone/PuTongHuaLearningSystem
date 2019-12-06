@@ -5,6 +5,14 @@ import android.app.Activity;
 
 import com.hlxyedu.putonghualearningsystem.di.module.ActivityModule;
 import com.hlxyedu.putonghualearningsystem.di.scope.ActivityScope;
+import com.hlxyedu.putonghualearningsystem.ui.home.activity.CertificateVerificationQueryActivity;
+import com.hlxyedu.putonghualearningsystem.ui.home.activity.ExamRegistrationActivity;
+import com.hlxyedu.putonghualearningsystem.ui.home.activity.ExamRegistrationNextActivity;
+import com.hlxyedu.putonghualearningsystem.ui.home.activity.GradeQueryActivity;
+import com.hlxyedu.putonghualearningsystem.ui.home.activity.RegistrationIntroductionActivity;
+import com.hlxyedu.putonghualearningsystem.ui.home.activity.QueryActivity;
+import com.hlxyedu.putonghualearningsystem.ui.home.activity.RegistrationQueryActivity;
+import com.hlxyedu.putonghualearningsystem.ui.home.activity.TicketInquiryActivity;
 import com.hlxyedu.putonghualearningsystem.ui.splash.activity.SplashActivity;
 import com.hlxyedu.putonghualearningsystem.ui.exam.activity.ExamDetailActivity;
 import com.hlxyedu.putonghualearningsystem.ui.login.activity.LoginActivity;
@@ -53,4 +61,20 @@ public interface ActivityComponent {
     void inject(OnLineLearnDetailsActivity onLineLearnDetailsActivity);
 
     void inject(ExamDetailActivity examDetailActivity);
+
+    void inject(QueryActivity queryActivity);
+
+    void inject(RegistrationIntroductionActivity registrationIntroductionActivity);
+
+    void inject(ExamRegistrationActivity examRegistrationActivity);
+
+    void inject(GradeQueryActivity gradeQueryActivity);
+
+    void inject(ExamRegistrationNextActivity examRegistrationNextActivity);
+
+    void inject(RegistrationQueryActivity registrationQueryActivity);
+
+    void inject(TicketInquiryActivity ticketInquiryActivity);
+
+    void inject(CertificateVerificationQueryActivity certificateVerificationQueryActivity);
 }

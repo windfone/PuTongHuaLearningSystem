@@ -91,6 +91,26 @@ public class BottomBar extends LinearLayout implements View.OnClickListener{
         arrayList.get(position).setSelected(true);
     }
 
+    public void clickWhichItem(int position){
+        switch (position){
+            case 0:
+                onClick(bottom_bar_home);
+                break;
+            case 1:
+                onClick(bottom_bar_online_learning);
+                break;
+            case 2:
+                onClick(bottom_bar_exam_center);
+                break;
+            case 3:
+                onClick(bottom_bar_famous_classroom);
+                break;
+            case 4:
+                onClick(bottom_bar_personal_center);
+                break;
+        }
+    }
+
     public interface OnTabSelectedListener {
         void onTabSelected(int position, int prePosition);
     }

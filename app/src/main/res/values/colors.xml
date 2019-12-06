@@ -26,13 +26,16 @@
     <color name="blackE3E">#3E3E3E</color>
     <color name="black333">#333333</color>
     <color name="blackB5B">#5D5B5B</color>
+    <color name="blackb4b">#4b4b4b</color>
 
     <!-- 灰色 -->
     <color name="grayDFD">#FDFDFD</color>
     <color name="gray5F5">#F5F5F5</color>
     <color name="grayCEC">#ECECEC</color>
     <color name="gray3E3">#E3E3E3</color>
+    <color name="gray7F7">#F7F7F7</color>
     <color name="gray2F5">#F0F2F5</color>
+    <color name="gray2F2">#F2F2F2</color>
     <color name="grayFDF">#E1DFDF</color>
     <color name="gray1d1">#d1d1d1</color>
     <color name="gray8D8">#d8d8d8</color>

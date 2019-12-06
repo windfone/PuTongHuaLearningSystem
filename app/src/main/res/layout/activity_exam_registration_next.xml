@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/whitefff"
+    android:orientation="vertical"
+    tools:context=".ui.home.activity.ExamRegistrationNextActivity">
+
+    <com.hlxyedu.putonghualearningsystem.weight.actionbar.XBaseTopBar
+        android:id="@+id/xbase_topbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:isShowLeft_x="true"
+        app:isShowRight_x="true"
+        app:middleText_x="@string/exam_registration" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:fillViewport="true"
+        android:scrollbars="none">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:orientation="horizontal"
+                android:paddingStart="15dp"
+                android:paddingEnd="15dp">
+
+                <EditText
+                    android:id="@+id/input_faculty_edit"
+                    style="@style/textSize_black353_14"
+                    android:layout_width="0dp"
+                    android:layout_height="40dp"
+                    android:layout_weight="105"
+                    android:background="@drawable/shape_edit"
+                    android:gravity="center_vertical"
+                    android:hint="请输入院系"
+                    android:paddingStart="13dp"
+                    android:paddingEnd="13dp"
+                    android:singleLine="true"
+                    android:textCursorDrawable="@drawable/my_cursor" />
+
+                <EditText
+                    android:id="@+id/input_class_edit"
+                    style="@style/textSize_black353_14"
+                    android:layout_width="0dp"
+                    android:layout_height="40dp"
+                    android:layout_marginStart="3dp"
+                    android:layout_weight="61"
+                    android:background="@drawable/shape_edit"
+                    android:gravity="center_vertical"
+                    android:hint="请输入班级"
+                    android:paddingStart="13dp"
+                    android:paddingEnd="13dp"
+                    android:singleLine="true"
+                    android:textCursorDrawable="@drawable/my_cursor" />
+
+            </LinearLayout>
+
+            <TextView
+                style="@style/textSize_black353_14"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginStart="15dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="15dp"
+                android:background="@drawable/shape_edit"
+                android:drawableRight="@drawable/icon_more_gray"
+                android:gravity="center_vertical"
+                android:hint="出生年月"
+                android:paddingStart="13dp"
+                android:paddingEnd="13dp" />
+
+            <TextView
+                style="@style/textSize_black353_14"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginStart="15dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="15dp"
+                android:background="@drawable/shape_edit"
+                android:drawableRight="@drawable/icon_more_gray"
+                android:gravity="center_vertical"
+                android:hint="出生地址"
+                android:paddingStart="13dp"
+                android:paddingEnd="13dp" />
+
+            <TextView
+                style="@style/textSize_black353_14"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginStart="15dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="15dp"
+                android:background="@drawable/shape_edit"
+                android:drawableRight="@drawable/icon_more_gray"
+                android:gravity="center_vertical"
+                android:hint="居住地址"
+                android:paddingStart="13dp"
+                android:paddingEnd="13dp" />
+
+            <EditText
+                android:id="@+id/input_mailaddress_edit"
+                style="@style/textSize_black353_14"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginStart="15dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="15dp"
+                android:background="@drawable/shape_edit"
+                android:gravity="center_vertical"
+                android:hint="请填写邮寄地址"
+                android:paddingStart="13dp"
+                android:paddingEnd="13dp"
+                android:singleLine="true"
+                android:textCursorDrawable="@drawable/my_cursor" />
+
+            <EditText
+                android:id="@+id/input_phone_edit"
+                style="@style/textSize_black353_14"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginStart="15dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="15dp"
+                android:background="@drawable/shape_edit"
+                android:gravity="center_vertical"
+                android:hint="请填写联系电话"
+                android:paddingStart="13dp"
+                android:paddingEnd="13dp"
+                android:singleLine="true"
+                android:textCursorDrawable="@drawable/my_cursor" />
+
+            <EditText
+                style="@style/textSize_black353_14"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginStart="15dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="15dp"
+                android:background="@drawable/shape_edit"
+                android:gravity="center_vertical"
+                android:hint="请填写邮政编码"
+                android:paddingStart="13dp"
+                android:paddingEnd="13dp"
+                android:singleLine="true"
+                android:textCursorDrawable="@drawable/my_cursor" />
+
+        </LinearLayout>
+
+    </ScrollView>
+
+    <Button
+        android:id="@+id/query_btn"
+        style="@style/textSize_whitefff_16"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="15dp"
+        android:layout_marginBottom="20dp"
+        android:background="@drawable/blue_btn_bg"
+        android:text="@string/confirm_registration" />
+
+</LinearLayout>

@@ -47,7 +47,9 @@
     <!-- fragment_home-->
     <string name="exam_registration">考试报名</string>
     <string name="registration_inquiry">报名查询</string>
+    <string name="registration_introduction">报名介绍</string>
     <string name="admission_ticket">准考证</string>
+    <string name="admission_ticket_inquiry">准考证查询</string>
     <string name="result_inquiry">成绩查询</string>
     <string name="e_learning">在线学习</string>
     <string name="model_test_center">模考中心</string>
@@ -108,5 +110,35 @@
     <!--fragment_detail_hanzi-->
     <string name="pinyin">拼音</string>
     <string name="bishun">笔顺</string>
+
+    <!--activity_query-->
+    <string name="query">查询</string>
+
+    <string-array name="registration_introduction_content">
+        <item>一、应试者应试时，须携带相关指定证件(二代身份证原件及准考证，学生还应带上有效学生证原件)，否则不予报名测试。 </item>
+        <item>二、应试者应严格按照准考证上指定的报名时间到现场进行报名。如未按时到者，取消测试资格，测试费不予退还。 </item>
+        <item>三、系统支持在线报名、在线支付功能，带有银联标志的支持在线支付，其他需到测试站现场支付测试费，打印准考证。 </item>
+        <item>四、应试者在测试后按规定的时间、地点凭身份证原件及“准考证”领取证书。由他人代领证书的，除交验应试人身份证复印件及“准考证”原件外，还需交验代领者的身份证。 </item>
+        <item>五、考试严禁作弊及代考，一经发现，取消本次测试成绩及一年内的应试资格。 </item>
+    </string-array>
+
+    <!--activity_registration_query-->
+    <string name="candidate_name">考生姓名：</string>
+    <string name="ID_number">证件编号：</string>
+    <string name="registration_status">报名状态：</string>
+    <string name="payment_instructions">缴费须知：</string>
+
+    <!--activity_ticket_inquiry-->
+    <string name="sex_">性&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;别：</string>
+    <string name="nation_">民&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;族：</string>
+    <string name="photo_">照&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;片：</string>
+    <string name="job_">从事职业：</string>
+    <string name="unit_">所在单位：</string>
+    <string name="admission_tickets_">准考证号：</string>
+    <string name="level_">报考级别：</string>
+    <string name="grade_">考试成绩：</string>
+
+    <string name="next_step">下一步</string>
+    <string name="confirm_registration">确定报名</string>
 
 </resources>

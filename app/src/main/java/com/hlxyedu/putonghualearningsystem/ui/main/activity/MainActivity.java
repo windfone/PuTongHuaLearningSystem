@@ -68,7 +68,7 @@ public class MainActivity extends RootFragmentActivity<MainPresenter> implements
             mFragments[FIFTH] = PersonalCenterFragment.newInstance();
 
             loadMultipleRootFragment(R.id.fl_tab_container, FIRST,
-                    mFragments[FIRST], mFragments[SECOND], mFragments[THIRD], mFragments[FOURTH],mFragments[FIFTH]);
+                    mFragments[FIRST], mFragments[SECOND], mFragments[THIRD], mFragments[FOURTH], mFragments[FIFTH]);
         } else {
             // 这里库已经做了Fragment恢复,所有不需要额外的处理了, 不会出现重叠问题
 
@@ -130,4 +130,10 @@ public class MainActivity extends RootFragmentActivity<MainPresenter> implements
     public void responeError(String errorMsg) {
 
     }
+
+    @Override
+    public void changeSelTab(int which) {
+        mBottomBar.clickWhichItem(which);
+    }
+
 }

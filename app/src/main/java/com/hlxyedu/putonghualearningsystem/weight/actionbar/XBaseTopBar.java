@@ -162,6 +162,7 @@ public class XBaseTopBar extends RelativeLayout implements View.OnClickListener{
                 break;
             case R.id.right_iv:
                 rightListener.right();
+                xBaseTopBarImp.right();
                 break;
         }
     }

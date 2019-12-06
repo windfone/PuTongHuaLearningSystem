@@ -1,6 +1,7 @@
 package com.hlxyedu.putonghualearningsystem.ui.main.adapter;
 
 import android.support.annotation.Nullable;
+import android.util.Log;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -33,10 +34,9 @@ public class HomeSortAdapter extends BaseQuickAdapter<Map<String,Object>, BaseVi
         helper.setText(R.id.tv_type,String.valueOf(item.get("text")));
         ImageView imageView = helper.getView(R.id.iv_type);
         Glide.with(mContext).load(item.get("pic")).into(imageView);
-        LinearLayout linearLayout = (LinearLayout) helper.itemView;
+       /* LinearLayout linearLayout = (LinearLayout) helper.itemView;
         linearLayout.setOnClickListener(v -> {
-
-        });
+        });*/
     }
 
 }

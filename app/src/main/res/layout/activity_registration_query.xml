@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/gray2F2"
+    android:orientation="vertical"
+    tools:context=".ui.home.activity.RegistrationQueryActivity">
+
+    <com.hlxyedu.putonghualearningsystem.weight.actionbar.XBaseTopBar
+        android:id="@+id/xbase_topbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:isShowLeft_x="true"
+        app:isShowRight_x="false"
+        app:middleText_x="@string/registration_inquiry" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/whitefff"
+        android:paddingStart="32dp"
+        android:paddingTop="17dp"
+        android:paddingBottom="17dp">
+
+        <TextView
+            android:id="@+id/name_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/candidate_name"
+            android:textSize="15sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/candidate_name_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toEndOf="@+id/name_tv"
+            android:text="张小名"
+            android:textSize="15sp" />
+
+        <TextView
+            android:id="@+id/id_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/name_tv"
+            android:layout_marginTop="20dp"
+            android:text="@string/ID_number"
+            android:textSize="15sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/ID_number_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/id_tv"
+            android:layout_toEndOf="@+id/id_tv"
+            android:text="@string/candidate_name"
+            android:textSize="15sp" />
+
+        <TextView
+            android:id="@+id/statu_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/id_tv"
+            android:layout_marginTop="20dp"
+            android:text="@string/registration_status"
+            android:textSize="15sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/registration_status_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/statu_tv"
+            android:layout_toEndOf="@+id/statu_tv"
+            android:text="@string/candidate_name"
+            android:textSize="15sp" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="13dp"
+        android:background="@color/whitefff"
+        android:paddingStart="32dp"
+        android:paddingTop="17dp"
+        android:paddingEnd="32dp">
+
+        <TextView
+            android:id="@+id/payment_instructions_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/payment_instructions"
+            android:textSize="15sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/money_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toEndOf="@+id/payment_instructions_tv"
+            android:text="请携带现金到线下任意报名网点缴费"
+            android:textSize="15sp" />
+
+        <TextView
+            android:id="@+id/registration_outlets_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/money_tv"
+            android:layout_alignStart="@+id/money_tv"
+            android:layout_marginTop="15dp"
+            android:text="报名网点：和田一中\n&#8195;&#8195;&#8195;&#8195;&#8195;和田一中\n&#8195;&#8195;&#8195;&#8195;&#8195;和田一中"
+            android:textSize="15sp" />
+
+        <TextView
+            android:id="@+id/payment_details_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/registration_outlets_tv"
+            android:layout_alignStart="@+id/money_tv"
+            android:layout_marginTop="15dp"
+            android:text="缴费详情：证书费：10元\n&#8195;&#8195;&#8195;&#8195;&#8195;快递费：12元\n&#8195;&#8195;&#8195;&#8195;&#8195;培训费：2999元\n&#8195;&#8195;&#8195;&#8195;&#8195;资料费：150元\n&#8195;&#8195;&#8195;&#8195;&#8195;教材费：399元"
+            android:textSize="15sp" />
+
+    </RelativeLayout>
+
+</LinearLayout>

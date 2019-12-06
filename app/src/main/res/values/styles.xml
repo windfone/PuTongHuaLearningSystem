@@ -8,6 +8,16 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <style name="NoActionBar" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+
+        <!-- 设置activity切换动画 -->
+        <item name="android:windowAnimationStyle">@style/activityAnimation</item>
+    </style>
+
     <style name="Theme.Splash" parent="AppTheme">
         <item name="android:windowBackground">@drawable/icon_splash</item>
     </style>
@@ -128,6 +138,11 @@
         <item name="android:textSize">@dimen/textsize_sp_14</item>
     </style>
 
+    <style name="textSize_blackb4b_14">
+        <item name="android:textColor">@color/blackb4b</item>
+        <item name="android:textSize">@dimen/textsize_sp_14</item>
+    </style>
+
     <style name="textSize_blackB5B_14">
         <item name="android:textColor">@color/blackB5B</item>
         <item name="android:textSize">@dimen/textsize_sp_14</item>
@@ -186,6 +201,11 @@
     <style name="textSize_gray1d1_10">
         <item name="android:textColor">@color/gray1d1</item>
         <item name="android:textSize">@dimen/textsize_sp_10</item>
+    </style>
+
+    <style name="textSize_blackb4b_8">
+        <item name="android:textColor">@color/blackb4b</item>
+        <item name="android:textSize">@dimen/textsize_sp_8</item>
     </style>
 
 </resources>

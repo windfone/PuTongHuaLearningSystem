@@ -64,7 +64,7 @@ public class PersonalCenterFragment extends RootFragment<PersonalCenterPresenter
     @Override
     protected void initEventAndData() {
         xbase_topbar.setxBaseTopBarImp(this);
-        xbase_topbar.setLeftImg(ContextCompat.getDrawable(mActivity,R.drawable.icon_scan));
+        xbase_topbar.setLeftImg(ContextCompat.getDrawable(mActivity,R.drawable.icon_camera_white));
 
         mPresenter.getUserInfo(2);
     }

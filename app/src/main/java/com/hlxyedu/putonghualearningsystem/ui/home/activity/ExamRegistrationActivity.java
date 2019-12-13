@@ -115,7 +115,7 @@ public class ExamRegistrationActivity extends RootActivity<ExamRegistrationPrese
 
     }
 
-    @OnClick({R.id.select_sex_tv, R.id.select_national_tv, R.id.select_job_tv, R.id.select_exam_level_tv, R.id.take_pic_iv, R.id.query_btn})
+    @OnClick({R.id.select_sex_tv, R.id.select_national_tv, R.id.select_job_tv, R.id.select_exam_level_tv, R.id.take_pic_iv, R.id.show_pic_iv,R.id.query_btn})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.select_sex_tv:
@@ -131,6 +131,7 @@ public class ExamRegistrationActivity extends RootActivity<ExamRegistrationPrese
                 showExamLevelDialog();
                 break;
             case R.id.take_pic_iv:
+            case R.id.show_pic_iv:
 
                 openCamera();
 

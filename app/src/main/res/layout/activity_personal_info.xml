@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical"
     android:background="@color/whitefff"
     android:focusable="true"
     android:focusableInTouchMode="true"
+    android:orientation="vertical"
     tools:context=".ui.personal.activity.PersonalInfoActivity">
 
     <com.hlxyedu.putonghualearningsystem.weight.actionbar.XBaseTopBar
@@ -32,8 +32,8 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
                 android:background="@color/gray5F5"
+                android:orientation="vertical"
                 android:paddingBottom="13dp">
 
                 <ImageView
@@ -42,8 +42,7 @@
                     android:layout_height="88dp"
                     android:layout_gravity="center_horizontal"
                     android:layout_marginTop="12dp"
-                    android:src="@drawable/icon_headportrait"
-                    />
+                    android:src="@drawable/icon_headportrait" />
 
                 <TextView
                     android:id="@+id/name_tv"
@@ -52,8 +51,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
                     android:layout_marginTop="5dp"
-                    android:text="@string/upload_avatar"
-                    />
+                    android:text="@string/upload_avatar" />
 
             </LinearLayout>
 
@@ -67,9 +65,8 @@
                     style="@style/textSize_black353_14"
                     android:layout_width="74dp"
                     android:layout_height="wrap_content"
-                    android:text="@string/name"
                     android:layout_marginStart="28dp"
-                    />
+                    android:text="@string/name" />
 
                 <EditText
                     android:id="@+id/input_name_edit"
@@ -80,29 +77,27 @@
                     android:background="@null"
                     android:gravity="center_vertical"
                     android:hint="请输入姓名"
-                    />
+                    android:singleLine="true" />
 
             </LinearLayout>
 
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:background="@color/gray3E3"
-                />
+                android:background="@color/gray3E3" />
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
-                android:orientation="horizontal"
-                android:gravity="center_vertical">
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
 
                 <TextView
                     style="@style/textSize_black353_14"
                     android:layout_width="74dp"
                     android:layout_height="wrap_content"
-                    android:text="@string/sex"
                     android:layout_marginStart="28dp"
-                    />
+                    android:text="@string/sex" />
 
                 <RadioGroup
                     android:layout_width="wrap_content"
@@ -114,17 +109,15 @@
                         style="@style/textSize_black353_14"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/man"
-                        />
+                        android:text="@string/man" />
 
                     <RadioButton
                         android:id="@+id/woman_rb"
+                        style="@style/textSize_black353_14"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="40dp"
-                        style="@style/textSize_black353_14"
-                        android:text="@string/woman"
-                        />
+                        android:text="@string/woman" />
 
                 </RadioGroup>
 
@@ -133,8 +126,7 @@
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:background="@color/gray3E3"
-                />
+                android:background="@color/gray3E3" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -146,9 +138,8 @@
                     style="@style/textSize_black353_14"
                     android:layout_width="74dp"
                     android:layout_height="wrap_content"
-                    android:text="@string/date_of_birth"
                     android:layout_marginStart="28dp"
-                    />
+                    android:text="@string/date_of_birth" />
 
                 <TextView
                     android:id="@+id/date_of_birth_tv"
@@ -156,16 +147,14 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_marginEnd="28dp"
-                    android:gravity="center_vertical"
-                    />
+                    android:gravity="center_vertical" />
 
             </LinearLayout>
 
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:background="@color/gray3E3"
-                />
+                android:background="@color/gray3E3" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -177,9 +166,8 @@
                     style="@style/textSize_black353_14"
                     android:layout_width="74dp"
                     android:layout_height="wrap_content"
-                    android:text="@string/district"
                     android:layout_marginStart="28dp"
-                    />
+                    android:text="@string/district" />
 
                 <TextView
                     android:id="@+id/district_tv"
@@ -187,16 +175,14 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_marginEnd="28dp"
-                    android:gravity="center_vertical"
-                    />
+                    android:gravity="center_vertical" />
 
             </LinearLayout>
 
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:background="@color/gray3E3"
-                />
+                android:background="@color/gray3E3" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -208,9 +194,8 @@
                     style="@style/textSize_black353_14"
                     android:layout_width="74dp"
                     android:layout_height="wrap_content"
-                    android:text="@string/area"
                     android:layout_marginStart="28dp"
-                    />
+                    android:text="@string/area" />
 
                 <EditText
                     android:id="@+id/area_edit"
@@ -219,17 +204,16 @@
                     android:layout_height="match_parent"
                     android:layout_marginEnd="28dp"
                     android:background="@null"
-                    android:textCursorDrawable="@drawable/my_cursor"
                     android:gravity="center_vertical"
-                    />
+                    android:singleLine="true"
+                    android:textCursorDrawable="@drawable/my_cursor" />
 
             </LinearLayout>
 
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:background="@color/gray3E3"
-                />
+                android:background="@color/gray3E3" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -241,9 +225,8 @@
                     style="@style/textSize_black353_14"
                     android:layout_width="74dp"
                     android:layout_height="wrap_content"
-                    android:text="@string/affiliation"
                     android:layout_marginStart="28dp"
-                    />
+                    android:text="@string/affiliation" />
 
                 <EditText
                     android:id="@+id/affiliation_edit"
@@ -252,17 +235,16 @@
                     android:layout_height="match_parent"
                     android:layout_marginEnd="28dp"
                     android:background="@null"
-                    android:textCursorDrawable="@drawable/my_cursor"
                     android:gravity="center_vertical"
-                    />
+                    android:singleLine="true"
+                    android:textCursorDrawable="@drawable/my_cursor" />
 
             </LinearLayout>
 
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:background="@color/gray3E3"
-                />
+                android:background="@color/gray3E3" />
 
             <!--<View
                 android:layout_width="match_parent"
@@ -281,7 +263,6 @@
         android:layout_height="49dp"
         android:background="@color/grayADA"
         android:gravity="center"
-        android:text="@string/save"
-        />
+        android:text="@string/save" />
 
 </LinearLayout>

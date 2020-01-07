@@ -1,14 +1,18 @@
 package com.hlxyedu.putonghualearningsystem.weight.bottombar;
 
 import android.content.Context;
+import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
+import com.blankj.utilcode.util.ToastUtils;
 import com.hlxyedu.putonghualearningsystem.R;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * 作者：weidingqiang on 2018/12/15 10:32
@@ -18,15 +22,7 @@ import java.util.ArrayList;
 
 public class BottomBar extends LinearLayout implements View.OnClickListener{
 
-    private BottomBarItem bottom_bar_home;
-
-    private BottomBarItem bottom_bar_online_learning;
-
-    private BottomBarItem bottom_bar_exam_center;
-
-    private BottomBarItem bottom_bar_famous_classroom;
-
-    private BottomBarItem bottom_bar_personal_center;
+    private LinearLayout containers_ll;
 
     private int position;
 
@@ -48,25 +44,28 @@ public class BottomBar extends LinearLayout implements View.OnClickListener{
         LayoutInflater inflater = LayoutInflater.from(context);
         inflater.inflate(R.layout.bottom_bar_bg, this, true);
 
-        bottom_bar_home = (BottomBarItem) this.findViewById(R.id.bottom_bar_home);
-        bottom_bar_online_learning = (BottomBarItem) this.findViewById(R.id.bottom_bar_online_learning);
-        bottom_bar_exam_center = (BottomBarItem) this.findViewById(R.id.bottom_bar_exam_center);
-        bottom_bar_famous_classroom = (BottomBarItem) this.findViewById(R.id.bottom_bar_famous_classroom);
-        bottom_bar_personal_center = (BottomBarItem) this.findViewById(R.id.bottom_bar_personal_center);
+        containers_ll = this.findViewById(R.id.containers_ll);
 
         arrayList = new ArrayList<>();
-        arrayList.add(bottom_bar_home);
-        arrayList.add(bottom_bar_online_learning);
-        arrayList.add(bottom_bar_exam_center);
-        arrayList.add(bottom_bar_famous_classroom);
-        arrayList.add(bottom_bar_personal_center);
+    }
 
+    public void initBottomBar(int screenWidth,Context context,List<String> navigations,List<Integer> drawables){
+        if (navigations.size() != drawables.size()) {
+            ToastUtils.showShort("导航栏设置错误");
+            return;
+        }
 
-        bottom_bar_home.setOnClickListener(this);
-        bottom_bar_online_learning.setOnClickListener(this);
-        bottom_bar_exam_center.setOnClickListener(this);
-        bottom_bar_famous_classroom.setOnClickListener(this);
-        bottom_bar_personal_center.setOnClickListener(this);
+        BottomBarItem bottomBarItem;
+        for (int i = 0; i < navigations.size(); i++) {
+            //循环创建底部标签
+            bottomBarItem = new BottomBarItem(context);
+            bottomBarItem.setContentAndDrawable(getResources().getDrawable(drawables.get(i)),navigations.get(i));
+
+            LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(screenWidth/navigations.size(), ViewGroup.LayoutParams.MATCH_PARENT);
+            bottomBarItem.setOnClickListener(this);
+            containers_ll.addView(bottomBarItem, layoutParams);
+            arrayList.add(bottomBarItem);
+        }
     }
 
     @Override
@@ -92,23 +91,7 @@ public class BottomBar extends LinearLayout implements View.OnClickListener{
     }
 
     public void clickWhichItem(int position){
-        switch (position){
-            case 0:
-                onClick(bottom_bar_home);
-                break;
-            case 1:
-                onClick(bottom_bar_online_learning);
-                break;
-            case 2:
-                onClick(bottom_bar_exam_center);
-                break;
-            case 3:
-                onClick(bottom_bar_famous_classroom);
-                break;
-            case 4:
-                onClick(bottom_bar_personal_center);
-                break;
-        }
+          onClick(arrayList.get(position));
     }
 
     public interface OnTabSelectedListener {

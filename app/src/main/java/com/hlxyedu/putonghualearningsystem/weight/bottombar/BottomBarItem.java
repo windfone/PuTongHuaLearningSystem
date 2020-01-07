@@ -66,11 +66,11 @@ public class BottomBarItem  extends LinearLayout {
     public void setSelected(boolean selected) {
         super.setSelected(selected);
         if (selected) {
-            mIcon.setImageDrawable(sicon);
+//            mIcon.setImageDrawable(sicon);
 
             mTvTitle.setTextColor(ContextCompat.getColor(mContext, R.color.blueEDE));
         } else {
-            mIcon.setImageDrawable(icon);
+//            mIcon.setImageDrawable(icon);
             mTvTitle.setTextColor(ContextCompat.getColor(mContext, R.color.blackE3E));
         }
     }
@@ -96,5 +96,10 @@ public class BottomBarItem  extends LinearLayout {
             unMsg_tv.setVisibility(VISIBLE);
         }
         unMsg_tv.setText(count+"");
+    }
+
+    public void setContentAndDrawable(Drawable drawable,String text){
+        mIcon.setImageDrawable(drawable);
+        mTvTitle.setText(text);
     }
 }

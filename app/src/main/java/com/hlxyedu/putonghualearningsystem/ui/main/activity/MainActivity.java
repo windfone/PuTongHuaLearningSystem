@@ -15,6 +15,9 @@ import com.hlxyedu.putonghualearningsystem.ui.main.fragment.PersonalCenterFragme
 import com.hlxyedu.putonghualearningsystem.ui.main.presenter.MainPresenter;
 import com.hlxyedu.putonghualearningsystem.weight.bottombar.BottomBar;
 
+import java.util.Arrays;
+import java.util.List;
+
 import butterknife.BindView;
 import me.yokeyword.fragmentation.SupportFragment;
 
@@ -31,7 +34,10 @@ public class MainActivity extends RootFragmentActivity<MainPresenter> implements
     @BindView(R.id.bottomBar)
     BottomBar mBottomBar;
     private SupportFragment[] mFragments = new SupportFragment[5];
-
+    List<String> navigations = Arrays.asList("首页","在线学习","模考中心","名师课堂","个人中心");
+    List<Integer> bottomIcons = Arrays.asList(R.drawable.icon_bar_selector_home,R.drawable.icon_bar_selector_online_learning,
+                                            R.drawable.icon_bar_selector_exam_center,R.drawable.icon_bar_selector_famous_classroom,
+                                            R.drawable.icon_bar_selector_personal_center);
 //    @BindView(R.id.main_topbar)
 //    MainTopBar main_topbar;
 
@@ -59,6 +65,10 @@ public class MainActivity extends RootFragmentActivity<MainPresenter> implements
 
     @Override
     protected void initEventAndData() {
+        //设置宽高
+        int screenWidth = getWindowManager().getDefaultDisplay().getWidth();
+        mBottomBar.initBottomBar(screenWidth,MainActivity.this,navigations,bottomIcons);
+
         SupportFragment firstFragment = findFragment(HomeFragment.class);
         if (firstFragment == null) {
             mFragments[FIRST] = HomeFragment.newInstance();

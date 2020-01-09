@@ -14,5 +14,9 @@ public interface GeneralPurposeContract {
     }
 
     interface Presenter extends BasePresenter<View> {
+
+        boolean isLogin();
+
+        void clearLoginInfo();
     }
 }

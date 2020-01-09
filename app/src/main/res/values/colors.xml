@@ -21,6 +21,10 @@
     <color name="blueFD6">#432FD6</color>
     <color name="blue3f1">#4363F1</color>
 
+    <!--红色-->
+    <color name="red">#F44336</color>
+    <color name="redDark">#D32F2F</color>
+
     <!-- 黑色 -->
     <color name="black353">#ff535353</color>
     <color name="blackE3E">#3E3E3E</color>

@@ -77,6 +77,8 @@
     <string name="feedback">意见反馈</string>
     <string name="about_us">关于我们</string>
     <string name="enter_us">加入我们</string>
+    <string name="exit_login">退出登录</string>
+    <string name="is_exits">是否退出当前账号？</string>
 
     <!-- activity_about_us-->
 

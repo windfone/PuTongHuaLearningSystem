@@ -73,7 +73,7 @@
                 android:layout_height="30dp"
                 android:layout_alignParentEnd="true"
                 android:layout_marginEnd="14dp"
-                android:background="@color/blue0F8"
+                android:background="@drawable/blue_btn_bg"
                 android:text="@string/pinyin" />
 
         </RelativeLayout>
@@ -89,7 +89,7 @@
                 android:layout_width="80dp"
                 android:layout_height="30dp"
                 android:layout_marginStart="14dp"
-                android:background="@color/blue0F8"
+                android:background="@drawable/blue_btn_bg"
                 android:text="@string/bishun"
                 />
 

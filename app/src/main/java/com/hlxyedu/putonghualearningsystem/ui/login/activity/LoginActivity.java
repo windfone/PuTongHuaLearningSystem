@@ -2,14 +2,16 @@ package com.hlxyedu.putonghualearningsystem.ui.login.activity;
 
 import android.content.Context;
 import android.content.Intent;
-import android.os.Bundle;
+import android.text.Editable;
 import android.text.TextUtils;
+import android.text.TextWatcher;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.blankj.utilcode.util.StringUtils;
 import com.blankj.utilcode.util.ToastUtils;
 import com.hlxyedu.putonghualearningsystem.R;
 import com.hlxyedu.putonghualearningsystem.base.RootActivity;
@@ -19,7 +21,6 @@ import com.hlxyedu.putonghualearningsystem.ui.login.presenter.LoginPresenter;
 import com.hlxyedu.putonghualearningsystem.ui.main.activity.MainActivity;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 /**
@@ -70,6 +71,7 @@ public class LoginActivity extends RootActivity<LoginPresenter> implements Login
     @Override
     protected void initEventAndData() {
 
+        setLoginBtnState();
     }
 
     @Override
@@ -104,10 +106,10 @@ public class LoginActivity extends RootActivity<LoginPresenter> implements Login
         }
         login_tv.setText(getResources().getString(R.string.logining));
         login_rl.setEnabled(false);
-        mPresenter.login(account,password);
+        mPresenter.login(account, password);
     }
 
-    @OnClick({R.id.login_rl,R.id.wechat_login_iv, R.id.qq_login_iv, R.id.alipay_login_iv, R.id.jump_login_tv})
+    @OnClick({R.id.login_rl, R.id.wechat_login_iv, R.id.qq_login_iv, R.id.alipay_login_iv, R.id.jump_login_tv})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.jump_login_tv:
@@ -125,4 +127,48 @@ public class LoginActivity extends RootActivity<LoginPresenter> implements Login
         }
     }
 
+    private void setLoginBtnState() {
+        login_rl.setEnabled(false);
+        user_name_edit.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                if (s.toString().trim().length() > 0 && !StringUtils.isTrimEmpty(code_edit.getText().toString())) {
+                    login_rl.setEnabled(true);
+                } else {
+                    login_rl.setEnabled(false);
+                }
+            }
+        });
+
+        code_edit.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                if (s.toString().trim().length() > 0 && !StringUtils.isTrimEmpty(user_name_edit.getText().toString())) {
+                    login_rl.setEnabled(true);
+                } else {
+                    login_rl.setEnabled(false);
+                }
+            }
+        });
+    }
 }

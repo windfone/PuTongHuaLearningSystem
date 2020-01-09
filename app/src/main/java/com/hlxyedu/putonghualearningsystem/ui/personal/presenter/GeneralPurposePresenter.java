@@ -27,4 +27,15 @@ public class GeneralPurposePresenter extends RxPresenter<GeneralPurposeContract.
     private void registerEvent() {
 
     }
+
+    @Override
+    public boolean isLogin() {
+        return mDataManager.getLoginStatus();
+    }
+
+    @Override
+    public void clearLoginInfo() {
+        mDataManager.clearLoginInfo();
+    }
+
 }

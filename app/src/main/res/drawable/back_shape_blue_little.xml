@@ -3,7 +3,8 @@
     android:shape="rectangle">
 
     <!-- 填充的颜色 -->
-    <solid android:color="@color/blue0ED" />
+    <solid android:color="@color/blueFD6" />
+
 
     <!-- android:radius 圆角的半径 -->
     <corners

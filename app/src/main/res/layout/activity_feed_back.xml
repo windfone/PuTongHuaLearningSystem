@@ -50,10 +50,10 @@
 
             <Button
                 android:id="@+id/commit_btn"
-                style="@style/textSize_blackE3E_14"
+                style="@style/textSize_whitefff_15"
                 android:layout_width="match_parent"
                 android:layout_height="49dp"
-                android:background="@color/gray5F5"
+                android:background="@drawable/blue_btn_bg"
                 android:text="@string/commit"
                 />
 

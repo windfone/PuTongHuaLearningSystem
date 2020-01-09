@@ -1,9 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<shape xmlns:android="http://schemas.android.com/apk/res/android">
-
-    <gradient
-        android:startColor="#432FD6"
-        android:endColor="#4470F8"
-        />
-
-</shape>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:drawable="@drawable/blue_btn_shape_enable" android:state_enabled="false" />
+    <item android:drawable="@drawable/blue_btn_shape_select" android:state_pressed="true" />
+    <item android:drawable="@drawable/blue_btn_shape_normal" />
+</selector>

@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/whitefff"
     android:orientation="vertical"
     tools:context=".ui.personal.activity.GeneralPurposeActivity">
@@ -194,5 +194,23 @@
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:background="@color/gray3E3" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <Button
+            android:id="@+id/exit_btn"
+            style="@style/textSize_whitefff_16"
+            android:layout_width="match_parent"
+            android:layout_height="49dp"
+            android:layout_alignParentBottom="true"
+            android:layout_marginStart="35dp"
+            android:layout_marginEnd="35dp"
+            android:layout_marginBottom="50dp"
+            android:text="@string/exit_login"
+            android:theme="@style/RedExitButtonStyle" />
+
+    </RelativeLayout>
 
 </LinearLayout>

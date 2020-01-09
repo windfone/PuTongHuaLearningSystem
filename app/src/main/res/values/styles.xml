@@ -42,6 +42,10 @@
         <item name="android:windowCloseOnTouchOutside">true</item>
     </style>
 
+    <style name="RedExitButtonStyle" parent="ThemeOverlay.AppCompat">
+        <item name="colorButtonNormal">@android:color/holo_red_light</item>
+    </style>
+
     <!-- 字体从大到小排列 -->
     <style name="textSize_black353_40">
         <item name="android:textColor">@color/black353</item>
